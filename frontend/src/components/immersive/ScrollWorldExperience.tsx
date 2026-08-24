@@ -349,7 +349,7 @@ export const ScrollWorldExperience: React.FC = () => {
               index === activeFrameIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: `url('${frame.imageSrc}')`,
+              backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}${frame.imageSrc}')`,
               filter: 'brightness(0.85) contrast(1.08) saturate(1.05)',
               transform: `scale(${1.02 + scrollProgress * 0.04}) translate(${mousePos.x * 6}px, ${mousePos.y * 6}px)`
             }}
