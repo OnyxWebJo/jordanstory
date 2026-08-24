@@ -1,5 +1,5 @@
 import { ReviewFormClient } from '@/components/reviews/ReviewFormClient';
-import { INITIAL_COMPLETED_BOOKINGS } from '@/data/reviewsStore';
+import { INITIAL_COMPLETED_BOOKINGS } from '@/data/reviewRequestsData';
 
 interface ReviewPageProps {
   params: Promise<{ token: string }>;
