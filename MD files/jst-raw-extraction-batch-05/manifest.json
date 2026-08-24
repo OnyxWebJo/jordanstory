@@ -1,0 +1,30 @@
+{
+  "batch": "05",
+  "status": "RAW_EXTRACTION",
+  "attraction_count": 16,
+  "fully_or_partially_extracted": [
+    "Ajloun Castle",
+    "Al-Karak Castle",
+    "Dana Village",
+    "Jerash",
+    "Aqaba thin-page",
+    "Contact/business data"
+  ],
+  "retry_queue": [
+    "Baptism Site",
+    "Dead Sea",
+    "Desert Castle",
+    "Madaba",
+    "Petra",
+    "Wadi Rum",
+    "Umm Qais"
+  ],
+  "content_inventory_count": 3,
+  "important_findings": [
+    "Live navigation confirms 16 attraction entities.",
+    "Ajloun exposes four gallery images; Karak three; Dana five; Jerash four.",
+    "Contact page exposes office address and separate WhatsApp +962-796-600-360.",
+    "Aqaba attraction page is currently thin and should be substantially rebuilt.",
+    "Current blog has useful Petra/Jordan topical content worth preserving and improving."
+  ]
+}

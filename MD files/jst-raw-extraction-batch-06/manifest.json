@@ -1,0 +1,13 @@
+{
+  "batch": "06",
+  "status": "SOURCE_RECOVERY_AND_REWRITE_GATE",
+  "files": [
+    "01-rendered-destination-retry.md",
+    "02-custom-tour-rendered-recovery.md",
+    "04-jordan-story-brand-evidence.md",
+    "03-booking-form-canonical-raw.md",
+    "05-global-conflict-register.json",
+    "06-pre-rewrite-handoff.md"
+  ],
+  "next_phase": "Rendered media/form extraction, then cleaned EN content + DE localization."
+}

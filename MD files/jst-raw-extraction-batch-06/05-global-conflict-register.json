@@ -1,0 +1,73 @@
+{
+  "generated": "2026-08-22",
+  "status": "PRE_REWRITE_VERIFICATION",
+  "items": [
+    {
+      "type": "availability",
+      "pages": [
+        "Baptism Site & Dead Sea",
+        "Dead Sea & Wadi Mujib",
+        "Madaba & Mount Nebo",
+        "Madaba, Mount Nebo & Dead Sea",
+        "Jerash/Ajloun variants",
+        "Desert Castles"
+      ],
+      "issue": "Price/booking UI may coexist with 'The tour is not available yet.'",
+      "action": "Replace with explicit admin availability status."
+    },
+    {
+      "type": "duration",
+      "page": "Jordan & Holy Land Tour 1",
+      "issue": "7 Days / 6 Nights label but retrieved itinerary omits a Day 3 section and visible sequence ends Day 6.",
+      "action": "Business verification before rewrite."
+    },
+    {
+      "type": "duration",
+      "page": "Jordan Story Classic Tour 2",
+      "issue": "7 Days / 5 Nights is unusual and needs accommodation-count verification.",
+      "action": "Verify."
+    },
+    {
+      "type": "discount",
+      "page": "Jordan & Holy Land Tour 3",
+      "issue": "20% off / From $1,000 but no verified base price captured.",
+      "action": "Do not publish percentage discount without base-price evidence."
+    },
+    {
+      "type": "cross_border",
+      "pages": [
+        "Jordan & Holy Land Tour 1",
+        "Jordan & Holy Land Tour 2",
+        "Jordan & Holy Land Tour 3",
+        "Islamic Jordan & Jerusalem Tour"
+      ],
+      "issue": "Legacy visa/border/bus/entrance-fee claims are time-sensitive.",
+      "action": "Reverify operationally before launch."
+    },
+    {
+      "type": "religious_historical",
+      "pages": [
+        "Islamic tours",
+        "Biblical tours",
+        "Baptism Site",
+        "Mount Nebo"
+      ],
+      "issue": "Religious and historical claims require source-aware wording.",
+      "action": "Editorial verification."
+    },
+    {
+      "type": "geo_fact",
+      "pages": [
+        "Dead Sea-related pages"
+      ],
+      "issue": "Legacy pages use about 385m below sea level.",
+      "action": "Update from authoritative current reference during rewrite."
+    },
+    {
+      "type": "media_duplicate",
+      "page": "Trip to Petra Jordan 1 Day",
+      "issue": "Petra The Rose City 5 appears twice in gallery.",
+      "action": "Preserve legacy order evidence but deduplicate stored binary."
+    }
+  ]
+}

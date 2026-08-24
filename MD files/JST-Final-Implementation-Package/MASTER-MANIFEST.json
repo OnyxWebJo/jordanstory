@@ -1,0 +1,30 @@
+{
+  "project": "Jordan Story Tours Redesign",
+  "package_status": "IMPLEMENTATION_READY_WITH_VERIFICATION_GATES",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "frontend": "Next.js",
+  "database": "MySQL",
+  "hosting": "shared hosting",
+  "brand_experience": "Jordan Story / Siq -> Treasury -> Wadi Rum",
+  "included_previous_content_batches": [
+    "JST-Content-Production-Batch-07.zip",
+    "JST-Content-Production-Batch-08.zip",
+    "JST-Content-Production-Batch-09.zip",
+    "JST-Content-Production-Batch-10.zip",
+    "JST-Content-Production-Batch-11.zip"
+  ],
+  "sections": [
+    "content",
+    "SEO/AEO/GEO",
+    "admin",
+    "media",
+    "forms",
+    "technical",
+    "AI agent",
+    "launch checklists"
+  ],
+  "note": "No unresolved legacy fact is fabricated; verification register is authoritative for remaining launch blockers."
+}

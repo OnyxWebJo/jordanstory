@@ -1,0 +1,69 @@
+{
+  "batch": "03",
+  "status": "RAW_EXTRACTION",
+  "tour_count": 5,
+  "records": [
+    {
+      "slug": "trip-to-petra-jordan",
+      "title": "Trip to Petra Jordan 1 Day",
+      "source_url": "https://jordanstorytours.com/tour/trip-to-petra-jordan/",
+      "price": 225,
+      "gallery_count": 4,
+      "conflicts": [
+        "Gallery contains a repeated 'Petra The Rose City 5' entry; binary/source deduplication required.",
+        "Historical copy contains claims that should be fact-checked during SEO rewrite rather than copied verbatim."
+      ]
+    },
+    {
+      "slug": "baptism-site-dead-sea",
+      "title": "Baptism Site & Dead Sea",
+      "source_url": "https://jordanstorytours.com/tour/baptism-site-dead-sea/",
+      "price": 115,
+      "gallery_count": 0,
+      "conflicts": [
+        "Visible From $115 price conflicts with booking-area unavailability.",
+        "Legacy Dead Sea elevation claim of about 385m below sea level should not be copied without current verification.",
+        "Religious wording around baptism must be edited carefully and sourced appropriately."
+      ]
+    },
+    {
+      "slug": "dead-sea-wadi-mujib",
+      "title": "Dead Sea & Wadi Mujib",
+      "source_url": "https://jordanstorytours.com/tour/dead-sea-wadi-mujib/",
+      "price": 150,
+      "gallery_count": 0,
+      "conflicts": [
+        "Visible From $150 price conflicts with booking-area unavailability.",
+        "Legacy copy says visitors can book a 2- or 3-hour canyon tour; seasonal opening, trail availability, age/safety rules and fees must be verified before publication.",
+        "Dead Sea elevation statement requires updating/verification."
+      ]
+    },
+    {
+      "slug": "wadi-rum-and-petra-tour-from-amman",
+      "title": "Wadi Rum and Petra tour from Amman",
+      "source_url": "https://jordanstorytours.com/tour/wadi-rum-and-petra-tour-from-amman/",
+      "price": 275,
+      "gallery_count": 0,
+      "conflicts": [
+        "Very long single-day route should be presented with realistic duration/early-start expectations.",
+        "Legacy historical wording about Roman control of Petra's water supply should be fact-checked.",
+        "A published review exists; review provenance/authenticity should be preserved and verified before migration."
+      ]
+    },
+    {
+      "slug": "amman-aqaba-amman",
+      "title": "Amman – Aqaba – Amman",
+      "source_url": "https://jordanstorytours.com/tour/amman-aqaba-amman/",
+      "price": 300,
+      "gallery_count": 4,
+      "conflicts": [
+        "Legacy copy contains grammar/factual wording that should be rewritten, including 'only cost in Jordan'.",
+        "Diving/snorkeling are described as experiences but are not listed as included; new page must not imply they are included."
+      ]
+    }
+  ],
+  "pending_day_tours": [
+    "Jordan Tours from Amman"
+  ],
+  "note": "Current live inventory cross-check shows 11 day tours total; Batch 02 + Batch 03 cover 10, with Jordan Tours from Amman pending exact detail-page extraction."
+}

@@ -1,0 +1,11 @@
+﻿origin,destination,vehicle,capacity,price,currency,status
+QAIA Airport,Amman,Car,1-3,50,USD,LEGACY_VERIFY
+QAIA Airport,Dead Sea,Car,1-3,100,USD,LEGACY_VERIFY
+QAIA Airport,Aqaba,Car,1-3,250,USD,LEGACY_VERIFY
+QAIA Airport,King Hussein Bridge,Car,1-3,80,USD,LEGACY_VERIFY
+QAIA Airport,Petra,Car,1-3,200,USD,LEGACY_VERIFY
+QAIA Airport,Amman,Van,1-6,80,USD,LEGACY_VERIFY
+QAIA Airport,Dead Sea,Van,1-6,150,USD,LEGACY_VERIFY
+QAIA Airport,Aqaba,Van,1-6,400,USD,LEGACY_VERIFY
+QAIA Airport,King Hussein Bridge,Van,1-6,150,USD,LEGACY_VERIFY
+QAIA Airport,Petra,Van,1-6,300,USD,LEGACY_VERIFY

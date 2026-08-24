@@ -1,0 +1,60 @@
+{
+  "source": "https://jordanstorytours.com",
+  "status": "PARTIAL_LIVE_EXTRACTION",
+  "core_fields": [
+    {
+      "key": "full_name",
+      "label": "Full Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "nationality",
+      "label": "Nationality",
+      "type": "text_or_select_needs_dom_verification",
+      "required": true
+    },
+    {
+      "key": "email",
+      "label": "Email Address",
+      "type": "email",
+      "required": true
+    },
+    {
+      "key": "phone",
+      "label": "Phone No.",
+      "type": "tel",
+      "required": true
+    },
+    {
+      "key": "travel_date",
+      "label": "Travel Date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "key": "persons",
+      "label": "No. of Persons",
+      "type": "number_or_select_needs_dom_verification",
+      "required": true
+    },
+    {
+      "key": "enquiry",
+      "label": "Your Enquiry",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "key": "terms_privacy",
+      "label": "I agree with Terms of Service and Privacy Statement",
+      "type": "checkbox",
+      "required": true
+    }
+  ],
+  "observations": [
+    "Multiple day-tour pages expose Booking Form and Enquiry Form labels.",
+    "Several pages display 'The tour is not available yet.' before Proceed Booking.",
+    "Dropdown option values, if dynamically generated in browser DOM, still require exact extraction/verification.",
+    "Tour-specific fields have not yet been assumed; they must be extracted individually."
+  ]
+}

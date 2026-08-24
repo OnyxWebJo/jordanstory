@@ -1,0 +1,22 @@
+{
+  "batch": "11",
+  "phase": "DAY_TOUR_PRODUCTION",
+  "completed_pairs": [
+    "Jerash & Ajloun Day Tour",
+    "Jerash, Ajloun & Umm Qais Day Tour",
+    "Madaba & Mount Nebo Day Tour",
+    "Madaba, Mount Nebo & Dead Sea Day Tour",
+    "Desert Castles Day Tour from Amman"
+  ],
+  "languages": [
+    "en",
+    "de"
+  ],
+  "remaining_day_tour_blocker": "Jordan Tours from Amman detail page still requires reliable rendered-source recovery.",
+  "next": [
+    "multi-day tour production",
+    "category landing page full copy",
+    "remaining destination gaps",
+    "media migration final spec"
+  ]
+}

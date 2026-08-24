@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #F7F4EE; /* Parchment / Warm Ivory */
+    --foreground: #1A1615; /* Deep Desert Charcoal */
+
+    /* Jordan Story Luxury Palette */
+    --sandstone: #A85F43;
+    --deep-charcoal: #1A1615;
+    --warm-parchment: #F7F4EE;
+    --sun-gold: #C69C6D;
+    --sunset-orange: #D97757;
+    --night-sky: #0F1318;
+  }
+
+  html, body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    touch-action: pan-y;
+    overflow-x: clip;
+  }
+
+  /* Cinematic Editorial Headlines */
+  h1, h2, h3, .font-serif-cinematic {
+    font-family: Georgia, "Playfair Display", Didot, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@theme inline {
+  --color-sandstone: #A85F43;
+  --color-deep-charcoal: #1A1615;
+  --color-parchment: #F7F4EE;
+  --color-sun-gold: #C69C6D;
+  --color-sunset: #D97757;
+  --color-night-sky: #0F1318;
+}
+
+/* Custom Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1A1615;
+}
+::-webkit-scrollbar-thumb {
+  background: #A85F43;
+  border-radius: 3px;
+}

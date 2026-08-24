@@ -1,0 +1,36 @@
+{
+  "tour": "budget-tour-3",
+  "status": "DOWNLOADED",
+  "assets": [
+    {
+      "order": 1,
+      "label": "Amman-1",
+      "source_url": "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
+      "local_path": "media/budget-tour-3/Amman-1.jpg"
+    },
+    {
+      "order": 2,
+      "label": "Mount Nebo Holy Place",
+      "source_url": "https://jordanstorytours.com/content/uploads/2021/01/Mount-Nebo-Holy-Place.jpg",
+      "local_path": "media/budget-tour-3/Mount-Nebo-Holy-Place.jpg"
+    },
+    {
+      "order": 3,
+      "label": "Madaba-mosaics",
+      "source_url": "https://jordanstorytours.com/content/uploads/2021/01/Madaba-mosaics.jpg",
+      "local_path": "media/budget-tour-3/Madaba-mosaics.jpg"
+    },
+    {
+      "order": 4,
+      "label": "Wadi Rum",
+      "source_url": "https://jordanstorytours.com/content/uploads/2021/01/Wadi-Rum-e1609923097997.jpg",
+      "local_path": "media/budget-tour-3/Wadi-Rum.jpg"
+    },
+    {
+      "order": 5,
+      "label": "Wadi Rum desert in Jordan",
+      "source_url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel.jpg",
+      "local_path": "media/budget-tour-3/wadi-rum-travel.jpg"
+    }
+  ]
+}

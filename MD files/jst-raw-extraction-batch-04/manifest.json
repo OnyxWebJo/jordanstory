@@ -1,0 +1,20 @@
+{
+  "batch": "04",
+  "status": "RAW_EXTRACTION",
+  "outputs": [
+    "jordan-tours-from-amman.md",
+    "transportations.md",
+    "transportation-price-matrix.csv",
+    "destination-amman-city.md",
+    "destination-citadel-jebel-al-qalaa.md",
+    "destination-mount-nebo.md",
+    "blog-seo-discovery.md"
+  ],
+  "important_findings": [
+    "Jordan Tours from Amman confirmed at From $100 / 1 Day, but detail fetch must be retried rather than invented.",
+    "Transportation page exposes a legacy car/van price matrix that should become editable admin data.",
+    "A second transportation table has ambiguous vehicle headers and is intentionally not guessed.",
+    "Destination pages include reusable galleries that must join the automated media migration.",
+    "Existing SEO articles should be migrated and improved, not discarded."
+  ]
+}

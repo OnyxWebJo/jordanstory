@@ -1,0 +1,35 @@
+{
+  "batch": "08",
+  "phase": "PRODUCTION_CONTENT",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "destinations": [
+    "Wadi Rum",
+    "Dead Sea",
+    "Amman",
+    "Jerash"
+  ],
+  "files": [
+    "01-wadi-rum-en.md",
+    "02-wadi-rum-de.md",
+    "03-dead-sea-en.md",
+    "04-dead-sea-de.md",
+    "05-amman-en.md",
+    "06-amman-de.md",
+    "07-jerash-en.md",
+    "08-jerash-de.md",
+    "09-internal-link-entity-map.md"
+  ],
+  "next": [
+    "Madaba",
+    "Mount Nebo",
+    "Ajloun",
+    "Karak",
+    "Aqaba",
+    "Dana",
+    "tour-page content template",
+    "day-tour rewrites"
+  ]
+}

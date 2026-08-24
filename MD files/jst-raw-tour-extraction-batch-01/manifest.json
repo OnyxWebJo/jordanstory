@@ -1,0 +1,103 @@
+{
+  "batch": "01",
+  "status": "PARTIAL_RAW_EXTRACTION",
+  "tour_count": 11,
+  "booking_fields": [
+    "Full Name*",
+    "Nationality.*",
+    "Email Address*",
+    "Phone No.*",
+    "Travel Date*",
+    "No. of Persons*",
+    "Your Enquiry*",
+    "Terms of Service and Privacy Statement consent"
+  ],
+  "records": [
+    {
+      "slug": "budget-tour-1",
+      "title": "Budget Tour 1",
+      "source_url": "https://jordanstorytours.com/tour/budget-tour-1/",
+      "conflicts": []
+    },
+    {
+      "slug": "budget-tour-2",
+      "title": "Budget Tour 2",
+      "source_url": "https://jordanstorytours.com/tour/budget-tour-2/",
+      "conflicts": []
+    },
+    {
+      "slug": "budget-tour-4",
+      "title": "Budget Tour 4",
+      "source_url": "https://jordanstorytours.com/tour/budget-tour-4/",
+      "conflicts": [
+        "Raw extraction of remaining itinerary/inclusions/exclusions/gallery still pending."
+      ]
+    },
+    {
+      "slug": "jordan-story-classic-tour-1",
+      "title": "Jordan Story Classic Tour 1",
+      "source_url": "https://jordanstorytours.com/tour/jordan-story-classic-tour-1/",
+      "conflicts": [
+        "Page states 'Availability: Always' — must be business-verified before migration."
+      ]
+    },
+    {
+      "slug": "jordan-story-classic-tour-2",
+      "title": "Jordan Story Classic Tour 2",
+      "source_url": "https://jordanstorytours.com/tour/jordan-story-classic-tour-2/",
+      "conflicts": [
+        "Duration '7 Days 5 Nights' is structurally unusual and requires verification against full itinerary/accommodation count."
+      ]
+    },
+    {
+      "slug": "jordan-luxury-tour-2",
+      "title": "Jordan Luxury Tour 2",
+      "source_url": "https://jordanstorytours.com/tour/jordan-luxury-tour-2/",
+      "conflicts": [
+        "Full itinerary and package inclusions still being extracted."
+      ]
+    },
+    {
+      "slug": "jordan-luxury-tour-3",
+      "title": "Jordan Luxury Tour 3",
+      "source_url": "https://jordanstorytours.com/tour/jordan-luxury-tour-3/",
+      "conflicts": [
+        "Tour summary lists Jerash, Aqaba, Petra, Wadi Rum and Al Shoubak; remaining itinerary must be extracted to verify all are actually included."
+      ]
+    },
+    {
+      "slug": "islamic-with-historical",
+      "title": "Islamic Tour",
+      "source_url": "https://jordanstorytours.com/tour/islamic-with-historical/",
+      "conflicts": [
+        "Religious/historical claims require careful editorial verification before SEO rewrite."
+      ]
+    },
+    {
+      "slug": "islamic-historical-tour-1",
+      "title": "Islamic & Historical Tour",
+      "source_url": "https://jordanstorytours.com/tour/islamic-historical-tour-1/",
+      "conflicts": [
+        "Religious/historical claims require source-sensitive rewriting."
+      ]
+    },
+    {
+      "slug": "islamic-tour-jordan-jerusalem-3",
+      "title": "Islamic Jordan & Jerusalem Tour",
+      "source_url": "https://jordanstorytours.com/tour/islamic-tour-jordan-jerusalem-3/",
+      "conflicts": [
+        "Cross-border, visa, border and religious claims must be reverified before publication."
+      ]
+    },
+    {
+      "slug": "jordan-holy-land-tour-1",
+      "title": "Jordan & Holy Land Tour 1",
+      "source_url": "https://jordanstorytours.com/tour/jordan-holy-land-tour-1/",
+      "conflicts": [
+        "Page says 7 Days 6 Nights but visible itinerary contains only Day 1 through Day 6.",
+        "Day 6 text says 'start your 5th day'.",
+        "Cross-border operational fees/rules require current verification."
+      ]
+    }
+  ]
+}

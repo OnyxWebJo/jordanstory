@@ -1,0 +1,24 @@
+{
+  "batch": "07",
+  "phase": "PRODUCTION_CONTENT",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "outputs": [
+    "content production framework",
+    "English homepage draft",
+    "German homepage draft",
+    "English Petra destination draft",
+    "German Petra destination draft"
+  ],
+  "protected_fact_rule": "Commercial and disputed facts remain governed by raw extraction/verification datasets.",
+  "next": [
+    "Wadi Rum EN/DE",
+    "Dead Sea EN/DE",
+    "Amman EN/DE",
+    "Jerash EN/DE",
+    "tour-page SEO templates",
+    "internal linking/entity map"
+  ]
+}

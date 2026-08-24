@@ -1,0 +1,17 @@
+﻿id,title,source_url,status
+amman-city,Amman City,https://jordanstorytours.com/amman-city/,EXTRACTED_BATCH_04
+ajloun-castle,Ajloun Castle,https://jordanstorytours.com/ajloun-castle/,RAW_EXTRACTED
+al-karak-castle,Al- Karak Castle,https://jordanstorytours.com/al-karak-castle/,RAW_EXTRACTED
+aqaba,Aqaba,https://jordanstorytours.com/aqaba/,THIN_PAGE_CONFIRMED
+baptism-site,Baptism site of Jesus Christ,https://jordanstorytours.com/baptism-site-of-jesus-christ/,FETCH_RETRY
+citadel,Citadel (Jebel Al Qala’a),https://jordanstorytours.com/citadel-jebel-al-qalaa/,EXTRACTED_BATCH_04
+dana-village,Dana Village,https://jordanstorytours.com/dana-village/,RAW_EXTRACTED
+dead-sea,Dead Sea,https://jordanstorytours.com/dead-sea/,FETCH_RETRY
+desert-castle,Desert Castle,https://jordanstorytours.com/desert-castle/,FETCH_RETRY
+jerash,Jerash,https://jordanstorytours.com/jerash/,RAW_EXTRACTED
+madaba,Madaba,https://jordanstorytours.com/madaba/,FETCH_RETRY
+mount-nebo,Mount Nebo,https://jordanstorytours.com/mount-nebo/,EXTRACTED_BATCH_04
+petra,Petra (The Rose City),https://jordanstorytours.com/petra-the-rose-city/,FETCH_RETRY
+wadi-rum,Wadi Rum,https://jordanstorytours.com/wadi-rum/,FETCH_RETRY
+umm-qais,Umm Qais,https://jordanstorytours.com/umm-qais/,FETCH_RETRY
+jerusalem,Jerusalem,https://jordanstorytours.com/jerusalem/,INVENTORY_CONFIRMED

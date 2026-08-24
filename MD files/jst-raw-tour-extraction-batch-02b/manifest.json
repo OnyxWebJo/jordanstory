@@ -1,0 +1,115 @@
+{
+  "batch": "02",
+  "status": "RAW_EXTRACTION",
+  "tour_count": 9,
+  "source_site": "https://jordanstorytours.com",
+  "records": [
+    {
+      "slug": "budget-tour-3",
+      "title": "Budget Tour 3",
+      "source_url": "https://jordanstorytours.com/tour/budget-tour-3/",
+      "gallery_count": 5,
+      "price": null,
+      "availability_message": null,
+      "conflicts": [
+        "Legacy itinerary links use jordanstory.tours and must be remapped to current canonical destination URLs.",
+        "Visa inclusion requires current business verification before publication."
+      ]
+    },
+    {
+      "slug": "jordan-luxury-tour-1",
+      "title": "Jordan Luxury Tour 1",
+      "source_url": "https://jordanstorytours.com/tour/jordan-luxury-tour-1/",
+      "gallery_count": 26,
+      "price": null,
+      "availability_message": null,
+      "conflicts": [
+        "Exact luxury hotel identities and current guarantee status require verification."
+      ]
+    },
+    {
+      "slug": "jordan-holy-land-tour-2",
+      "title": "Jordan & Holy Land Tour 2",
+      "source_url": "https://jordanstorytours.com/tour/jordan-holy-land-tour-2/",
+      "gallery_count": 24,
+      "price": null,
+      "availability_message": null,
+      "conflicts": [
+        "Visa price, border exit taxes, border bus fee and entrance-fee estimate are time-sensitive and must be reverified.",
+        "Cross-border requirements must not be republished from legacy text without current confirmation."
+      ]
+    },
+    {
+      "slug": "jordan-holy-land-tour-3",
+      "title": "Jordan & Holy Land Tour 3",
+      "source_url": "https://jordanstorytours.com/tour/jordan-holy-land-tour-3/",
+      "gallery_count": 21,
+      "price": 1000,
+      "availability_message": null,
+      "conflicts": [
+        "Live page advertises 20% off and From $1,000 but extracted content does not expose a verified original/base price.",
+        "Day 2 copy incorrectly calls itself the 1st day.",
+        "Cross-border fees and procedures require current verification."
+      ]
+    },
+    {
+      "slug": "jerash-ajlun",
+      "title": "Jerash & Ajlun",
+      "source_url": "https://jordanstorytours.com/tour/jerash-ajlun/",
+      "gallery_count": 9,
+      "price": null,
+      "availability_message": "The tour is not available yet.",
+      "conflicts": [
+        "Proceed Booking appears while page also says the tour is not available yet.",
+        "No visible starting price extracted."
+      ]
+    },
+    {
+      "slug": "jerash-ajlun-um-qais",
+      "title": "Jerash, Ajlun & Um Qais",
+      "source_url": "https://jordanstorytours.com/tour/jerash-ajlun-um-qais/",
+      "gallery_count": 12,
+      "price": 140,
+      "availability_message": "The tour is not available yet.",
+      "conflicts": [
+        "From $140 is shown while booking area says the tour is not available yet."
+      ]
+    },
+    {
+      "slug": "madaba-mount-nebo",
+      "title": "Madaba & Mount Nebo",
+      "source_url": "https://jordanstorytours.com/tour/madaba-mount-nebo/",
+      "gallery_count": 5,
+      "price": 75,
+      "availability_message": "The tour is not available yet.",
+      "conflicts": [
+        "From $75 is shown while booking area says the tour is not available yet.",
+        "Religious/historical claims require source-aware review."
+      ]
+    },
+    {
+      "slug": "madaba-mount-nebo-dead-sea",
+      "title": "Madaba, Mount Nebo & Dead Sea",
+      "source_url": "https://jordanstorytours.com/tour/madaba-mount-nebo-dead-sea/",
+      "gallery_count": 9,
+      "price": 135,
+      "availability_message": "The tour is not available yet.",
+      "conflicts": [
+        "From $135 is shown while booking area says the tour is not available yet.",
+        "Legacy Dead Sea elevation statement should be reverified rather than copied."
+      ]
+    },
+    {
+      "slug": "amman-desert-castle-amman",
+      "title": "Amman – Desert Castle – Amman",
+      "source_url": "https://jordanstorytours.com/tour/amman-desert-castle-amman/",
+      "gallery_count": 0,
+      "price": 135,
+      "availability_message": "The tour is not available yet.",
+      "conflicts": [
+        "From $135 is shown while booking area says the tour is not available yet.",
+        "Historical construction/ruler statements should be fact-checked during rewrite."
+      ]
+    }
+  ]
+}

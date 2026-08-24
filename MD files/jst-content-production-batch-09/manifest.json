@@ -1,0 +1,23 @@
+{
+  "batch": "09",
+  "phase": "PRODUCTION_CONTENT",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "destination_pages": [
+    "Madaba",
+    "Mount Nebo",
+    "Ajloun Castle",
+    "Karak Castle",
+    "Aqaba",
+    "Dana"
+  ],
+  "tour_system": "Tour Page Production Template added",
+  "next": [
+    "Day-tour EN/DE rewrites",
+    "multi-day tour EN/DE rewrites",
+    "tour category landing pages",
+    "schema/metadata map"
+  ]
+}

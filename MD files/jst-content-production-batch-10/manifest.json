@@ -1,0 +1,30 @@
+{
+  "batch": "10",
+  "phase": "DAY_TOUR_PRODUCTION",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "tour_pairs": [
+    "Petra Day Tour from Amman",
+    "Petra & Wadi Rum Tour from Amman",
+    "Baptism Site & Dead Sea Day Tour",
+    "Dead Sea & Wadi Mujib Day Tour",
+    "Aqaba Day Tour from Amman"
+  ],
+  "protected_source_files": [
+    "trip-to-petra-jordan.md",
+    "wadi-rum-and-petra-tour-from-amman.md",
+    "baptism-site-dead-sea.md",
+    "dead-sea-wadi-mujib.md",
+    "amman-aqaba-amman.md"
+  ],
+  "next": [
+    "Jerash & Ajloun EN/DE",
+    "Jerash, Ajloun & Umm Qais EN/DE",
+    "Madaba & Mount Nebo EN/DE",
+    "Madaba, Mount Nebo & Dead Sea EN/DE",
+    "Desert Castles EN/DE",
+    "Jordan Tours from Amman after detail recovery"
+  ]
+}

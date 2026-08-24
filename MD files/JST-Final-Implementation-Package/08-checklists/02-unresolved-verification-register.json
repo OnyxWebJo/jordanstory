@@ -1,0 +1,13 @@
+{
+  "status": "IMPLEMENTATION_READY_WITH_VERIFICATION_GATES",
+  "must_resolve_before_final_launch": [
+    "Rendered source recovery: Petra, Wadi Rum, Dead Sea, Madaba, Umm Qais, Baptism Site, Desert Castle destination originals.",
+    "Exact legacy Customize Your Tour form schema/options.",
+    "Exact control types/options for legacy Nationality and No. of Persons fields.",
+    "Full high-resolution media URL resolution/download across all pages.",
+    "Jordan Tours from Amman individual detail page.",
+    "Business verification of prices, availability, contact details, visa/border fees.",
+    "Additional multi-day tours not present in the locally retained raw extraction files must be source-extracted before production copy is generated."
+  ],
+  "rule": "These are launch blockers for the affected data/pages, not permission to invent content."
+}
