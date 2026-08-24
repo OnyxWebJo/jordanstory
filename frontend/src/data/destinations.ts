@@ -30,11 +30,11 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Kommen Sie um 06:00 Uhr zur Öffnung, um den Siq ohne Menschenmassen zu fotografieren.", "Tragen Sie feste Wanderschuhe für die 800 Stufen zum Kloster.", "Kaufen Sie vorab den Jordan Pass, um 50 JOD Eintrittsgeld zu sparen."]
     },
     bestTimeToVisit: { en: "March to May & September to November", de: "März bis Mai & September bis November" },
-    image: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/12/Petra-travel-e1608043798711-600x600.jpg"
     ]
   },
   {
@@ -55,11 +55,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Buchen Sie ein Martian Dome Camp mit Panorama-Glasdach zum Sternegucken.", "Bringen Sie eine warme Jacke für kühle Wüstennächte mit.", "Genießen Sie das traditionelle Zarb-Erdboden-BBQ."]
     },
     bestTimeToVisit: { en: "October to April", de: "Oktober bis April" },
-    image: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel-600x600.jpg"
     ]
   },
   {
@@ -80,11 +79,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Rasieren Sie sich nicht 24 Stunden vor dem Bad im Toten Meer.", "Beschränken Sie das Schweben auf 15-20 Minuten pro Badegang.", "Duschen Sie sich direkt danach mit Süßwasser ab."]
     },
     bestTimeToVisit: { en: "Year-Round (Best Sept to May)", de: "Ganzjährig (Beste Zeit Sept bis Mai)" },
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg"
     ]
   },
   {
@@ -105,11 +103,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Testen Sie die berühmte Flüster-Akustik im Südtheater.", "Besuchen Sie Jerash im Frühling, wenn grüne Hügel die Säulen umgeben."]
     },
     bestTimeToVisit: { en: "March to May", de: "März bis Mai" },
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg"
     ]
   },
   {
@@ -130,11 +126,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Probieren Sie frischen Falafel bei Hashem in der Innenstadt.", "Genießen Sie warme Kunafa bei Habibah Sweets."]
     },
     bestTimeToVisit: { en: "Spring & Autumn", de: "Frühling & Herbst" },
-    image: "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1578895210405-907db48a7812?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg"
     ]
   },
   {
@@ -148,93 +142,39 @@ export const DESTINATIONS_FULL: DestinationData[] = [
     },
     highlights: {
       en: ["St. George Church 6th-century Holy Land Mosaic", "Madaba Archaeological Park", "Local Byzantine mosaic workshops"],
-      de: ["St.-Georgs-Kirche mit der Mosaikkarte", "Archäologischer Park Madaba", "Traditionelle Mosaik-Werkstätten"]
+      de: ["St.-Georgs-Kirche Mosaikkarte", "Archäologischer Park Madaba", "Byzantinische Mosaik-Werkstätten"]
     },
     insiderTips: {
-      en: ["Combine Madaba with Mount Nebo and the Baptism Site on a single day trip."],
-      de: ["Kombinieren Sie Madaba mit dem Berg Nebo und der Taufstelle an einem Tag."]
+      en: ["Combine your visit with Mount Nebo located just 15 minutes away."],
+      de: ["Kombinieren Sie Ihren Besuch mit dem nur 15 Minuten entfernten Berg Nebo."]
     },
     bestTimeToVisit: { en: "Year-Round", de: "Ganzjährig" },
-    image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "mount-nebo",
-    slug: { en: "mount-nebo", de: "berg-nebo" },
-    name: { en: "Mount Nebo", de: "Berg Nebo" },
-    tagline: { en: "Moses' Sanctuary & Panoramic Holy Land Views", de: "Mose Heiligtum & Panorama auf das Heilige Land" },
-    description: {
-      en: "The sacred mountain where Prophet Moses viewed the Promised Land before his death, offering views across the Jordan Valley, Dead Sea, and Jerusalem.",
-      de: "Der heilige Berg, von dem aus Prophet Mose das Gelobte Land erblickte, mit Blick über das Jordantal und das Tote Meer."
-    },
-    highlights: {
-      en: ["Brazen Serpent Monument sculpture", "Memorial Church of Moses Byzantine mosaics", "Clear day views of Jerusalem & Bethlehem spire"],
-      de: ["Skulptur der Ehernen Schlange", "Gedächtniskirche des Mose mit Mosaiken", "Blick bei klarer Sicht auf Jerusalem"]
-    },
-    insiderTips: {
-      en: ["Look through the telescope viewer on clear mornings to spot the Mount of Olives in Jerusalem."],
-      de: ["Nutzen Sie morgens das Aussichtsfernrohr, um den Ölberg in Jerusalem zu sehen."]
-    },
-    bestTimeToVisit: { en: "Spring & Autumn mornings", de: "Frühlings- & Herbstmorgen" },
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "ajloun",
-    slug: { en: "ajloun", de: "ajloun" },
-    name: { en: "Ajloun Castle", de: "Burg Ajloun" },
-    tagline: { en: "Islamic Fortress Built Against Crusader Invasions", de: "Islamische Festung zum Schutz gegen die Kreuzfahrer" },
-    description: {
-      en: "Built in 1184 AD by Saladin's nephew to guard iron mines and trade routes between Jordan and Syria.",
-      de: "Errichtet 1184 n. Chr. von Saladins Neffen zum Schutz der Handelswege und Eisenminen."
-    },
-    highlights: {
-      en: ["Ajloun Castle towers & drawbridge", "Pine forest cable car ride (Ajloun Teleferique)", "Ajloun Forest Nature Reserve hiking"],
-      de: ["Burgtürme & Zugbrücke", "Ajloun Seilbahn über Nadelwälder", "Naturreservat Ajloun"]
-    },
-    insiderTips: {
-      en: ["Ride the Ajloun Teleferique cable car over pine forests for panoramic valley views."],
-      de: ["Fahren Sie mit der Ajloun-Seilbahn über grüne Pinienwälder."]
-    },
-    bestTimeToVisit: { en: "March to October", de: "März bis Oktober" },
-    image: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg"
     ]
   },
   {
     id: "aqaba",
     slug: { en: "aqaba", de: "aqaba" },
-    name: { en: "Aqaba & Red Sea", de: "Aqaba & Rotes Meer" },
-    tagline: { en: "Jordan's Red Sea Coastal Paradise", de: "Jordaniens Küstenparadies am Roten Meer" },
+    name: { en: "Aqaba — Red Sea Coast", de: "Aqaba — Rotes Meer Küste" },
+    tagline: { en: "Coral Reefs, Beach Resorts & Watersports", de: "Korallenriffe, Strand-Resorts & Wassersport" },
     description: {
-      en: "Jordan's southern seaside city offering coral reef diving, yacht sailing, beach resorts, and seafood dining.",
-      de: "Jordaniens Küstenstadt im Süden mit Korallenriff-Tauchen, Jachtausflügen und Strandresorts."
+      en: "Jordan's coastal window on the Red Sea, offering world-class scuba diving, coral reefs, year-round warm sunshine, and luxury beach resorts.",
+      de: "Jordaniens Küstenfenster zum Roten Meer mit erstklassigen Tauchplätzen, Korallenriffen und Luxus-Resorts."
     },
     highlights: {
-      en: ["Red Sea coral snorkeling & scuba diving", "Glass-bottom boat tours", "Tala Bay luxury beach resorts", "Fresh seafood at Aqaba harbor"],
-      de: ["Schnorcheln & Tauchen im Roten Meer", "Glasbodenboot-Touren", "Strandresorts in der Tala Bay", "Frischer Fisch am Hafen"]
+      en: ["Scuba diving and coral reef snorkeling", "Private sunset yacht cruises", "Japanese Garden reef dive site", "Duty-free seaside shopping"],
+      de: ["Tauchen und Schnorcheln an Korallenriffen", "Private Jachtausfahrt bei Sonnenuntergang", "Tauchplatz Japanese Garden", "Zollfreies Einkaufen am Meer"]
     },
     insiderTips: {
-      en: ["Visit Japanese Garden coral reef for world-class snorkeling.", "Enjoy a sunset Red Sea dinner cruise."],
-      de: ["Schnorcheln Sie am Japanese Garden Korallenriff.", "Erleben Sie eine Abendessen-Bootsfahrt bei Sonnenuntergang."]
+      en: ["Take a glass-bottom boat tour to view coral reefs without getting wet."],
+      de: ["Machen Sie eine Fahrt mit dem Glasbodenboot, um die Riffe trocken zu beobachten."]
     },
     bestTimeToVisit: { en: "October to May", de: "Oktober bis Mai" },
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    image: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80"
+      "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg"
     ]
   }
 ];

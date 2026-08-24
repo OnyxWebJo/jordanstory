@@ -15,7 +15,7 @@ const STORIES = [
       en: 'Immerse yourself in thousands of years of Nabataean and Roman history carved into pink sandstone.',
       de: 'Tauchen Sie ein in die tausendjährige Geschichte der Nabatäer und Römer.'
     },
-    image: 'https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg',
   },
   {
     id: 'desert',
@@ -26,7 +26,7 @@ const STORIES = [
       en: 'Traverse reddish dunes in 4x4 Jeeps and sleep beneath Martian starlit skies in luxury domes.',
       de: 'Durchqueren Sie rote Dünen in 4x4 Jeeps und schlafen Sie unter dem Wüsten-Sternenhimmel.'
     },
-    image: 'https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg',
   },
   {
     id: 'sacred',
@@ -37,7 +37,7 @@ const STORIES = [
       en: 'Walk through Holy Land sanctuaries, Byzantine mosaics, and the sacred River Jordan banks.',
       de: 'Wandeln Sie auf biblischen Pfaden, sehen Sie Mosaike und den heiligen Jordan-Fluss.'
     },
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg',
   },
   {
     id: 'luxury',
@@ -48,7 +48,7 @@ const STORIES = [
       en: 'Chauffeured executive vehicle transfers, private guides, and Dead Sea spa retreats.',
       de: 'Chauffeur-Service im Luxusfahrzeug, private Reiseleiter und Totes Meer Spa-Entspannung.'
     },
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg',
   }
 ];
 
