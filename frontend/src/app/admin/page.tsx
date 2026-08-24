@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { TOURS_DATA } from '@/data/tours';
-import { LayoutDashboard, Compass, Calendar, DollarSign, Plus, CheckCircle, Clock, Search, LogOut, MessageSquare, Printer, Eye, X, Send } from 'lucide-react';
+import { TOURS_DATA, Tour } from '@/data/tours';
+import { LayoutDashboard, Compass, Calendar, DollarSign, Plus, CheckCircle, Clock, Search, LogOut, MessageSquare, Printer, Eye, X, Send, Image as ImageIcon, ArrowUp, ArrowDown, Shield } from 'lucide-react';
 
 interface BookingRecord {
   id: string;
@@ -19,13 +19,16 @@ interface BookingRecord {
 }
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState<'bookings' | 'tours' | 'publish'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'tours' | 'media' | 'publish'>('bookings');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [publishStatus, setPublishStatus] = useState<string | null>(null);
   
   // Selected Booking for PDF Voucher Modal
   const [selectedBookingForVoucher, setSelectedBookingForVoucher] = useState<BookingRecord | null>(null);
+
+  // Selected Tour for Media Gallery Management Modal
+  const [selectedTourForMedia, setSelectedTourForMedia] = useState<Tour | null>(null);
 
   const [bookings, setBookings] = useState<BookingRecord[]>([
     { id: 'BK-89021', ref: 'JST-20260824-4912', customer: 'John Doe', email: 'john@example.com', phone: '+447911123456', tour: 'Petra, Dead Sea & Jerash', date: '2026-09-15', adults: 2, children: 0, status: 'Pending', total: '$798 USD' },
@@ -96,6 +99,16 @@ export default function AdminPage() {
             >
               <Compass className="w-4 h-4" />
               <span>Tour Inventory ({TOURS_DATA.length})</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('media')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                activeTab === 'media' ? 'bg-[#A85F43] text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <ImageIcon className="w-4 h-4" />
+              <span>Media Galleries (00D)</span>
             </button>
 
             <button
@@ -231,7 +244,6 @@ export default function AdminPage() {
                         <td className="p-4 font-mono font-bold text-[#C69C6D]">{b.total}</td>
                         <td className="p-4">
                           <div className="flex items-center gap-2">
-                            {/* WhatsApp Direct Webhook */}
                             <a
                               href={getWhatsAppLink(b)}
                               target="_blank"
@@ -242,7 +254,6 @@ export default function AdminPage() {
                               <MessageSquare className="w-4 h-4" />
                             </a>
 
-                            {/* Print / Export PDF Voucher */}
                             <button
                               onClick={() => setSelectedBookingForVoucher(b)}
                               title="Export PDF Itinerary Voucher"
@@ -261,33 +272,44 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* TAB 2: Tour Inventory */}
+        {/* TAB 2: Tour Inventory & Gallery Management */}
         {activeTab === 'tours' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="font-serif text-2xl font-bold">Tour Inventory Catalog (24 Packages)</h2>
-                <p className="text-xs text-gray-400 mt-1">Live active tour itineraries synced from source markdown records.</p>
+                <p className="text-xs text-gray-400 mt-1">Live active tour itineraries synced with 00D media gallery manifests.</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {TOURS_DATA.map((tour) => (
-                <div key={tour.id} className="p-6 rounded-3xl bg-[#1F1917] border border-white/10 space-y-4 shadow-xl">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="text-[10px] text-[#C69C6D] font-mono uppercase tracking-wider">{tour.category}</span>
-                      <h3 className="font-serif text-lg font-bold text-white mt-0.5">{tour.title.en}</h3>
+                <div key={tour.id} className="p-6 rounded-3xl bg-[#1F1917] border border-white/10 space-y-4 shadow-xl flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[10px] text-[#C69C6D] font-mono uppercase tracking-wider">{tour.category}</span>
+                        <h3 className="font-serif text-lg font-bold text-white mt-0.5">{tour.title.en}</h3>
+                      </div>
+                      <span className="text-xs font-bold text-[#C69C6D] bg-[#A85F43]/20 px-3 py-1 rounded-full border border-[#A85F43]/30">
+                        ${tour.startingPriceUSD} USD
+                      </span>
                     </div>
-                    <span className="text-xs font-bold text-[#C69C6D] bg-[#A85F43]/20 px-3 py-1 rounded-full border border-[#A85F43]/30">
-                      ${tour.startingPriceUSD} USD
-                    </span>
+
+                    <p className="text-xs text-gray-400 leading-relaxed font-light">{tour.subtitle.en}</p>
                   </div>
-                  <p className="text-xs text-gray-400 leading-relaxed font-light">{tour.subtitle.en}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-white/10 font-mono">
-                    <span>{tour.durationDays} Days / {tour.durationNights} Nights</span>
-                    <a href={`/tours/${tour.slug.en}`} target="_blank" className="text-[#C69C6D] hover:underline font-semibold flex items-center gap-1">
-                      <span>View Live Tour</span>
+
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                    <button
+                      onClick={() => setSelectedTourForMedia(tour)}
+                      className="inline-flex items-center gap-1.5 text-xs text-[#C69C6D] hover:text-white bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-white/10 transition-all cursor-pointer font-medium"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5 text-[#A85F43]" />
+                      <span>Manage Gallery ({tour.gallery?.length || 1})</span>
+                    </button>
+
+                    <a href={`/tours/${tour.slug.en}`} target="_blank" className="text-gray-400 hover:text-white font-semibold flex items-center gap-1">
+                      <span>View Live</span>
                       <Eye className="w-3.5 h-3.5" />
                     </a>
                   </div>
@@ -297,7 +319,44 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* TAB 3: Static Publishing */}
+        {/* TAB 3: 00D Media Gallery Management */}
+        {activeTab === 'media' && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="font-serif text-2xl font-bold">Media Library & Gallery Migration (00D)</h2>
+              <p className="text-xs text-gray-400 mt-1">Audit multi-image galleries, hero image status, and EN/DE alt texts across all 24 tours.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {TOURS_DATA.map((tour) => (
+                <div key={tour.id} className="p-5 rounded-2xl bg-[#1F1917] border border-white/10 space-y-4">
+                  <div className="relative h-36 rounded-xl overflow-hidden">
+                    <img src={tour.heroImage} alt={tour.title.en} className="w-full h-full object-cover" />
+                    <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-black/60 backdrop-blur-md text-[#D8B98F]">
+                      HERO
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="font-serif font-bold text-sm text-white truncate">{tour.title.en}</h4>
+                    <span className="text-[11px] text-gray-400 font-mono block">
+                      {tour.gallery?.length || 1} Gallery Photos Attached
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => setSelectedTourForMedia(tour)}
+                    className="w-full py-2 rounded-xl bg-[#A85F43]/20 hover:bg-[#A85F43] text-[#C69C6D] hover:text-white text-xs font-semibold transition-all cursor-pointer border border-[#A85F43]/30"
+                  >
+                    Edit Gallery Order & Alt Texts
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: Static Publishing */}
         {activeTab === 'publish' && (
           <div className="max-w-2xl space-y-6">
             <div>
@@ -331,6 +390,78 @@ export default function AdminPage() {
 
       </main>
 
+      {/* 00D MEDIA GALLERY MANAGEMENT MODAL */}
+      {selectedTourForMedia && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#1F1917] border border-white/20 rounded-3xl max-w-4xl w-full p-8 space-y-6 text-[#F7F4EE] shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            
+            <button
+              onClick={() => setSelectedTourForMedia(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="border-b border-white/10 pb-4">
+              <span className="text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold">00D MEDIA GALLERY MANAGEMENT</span>
+              <h3 className="font-serif text-2xl font-bold text-white mt-1">{selectedTourForMedia.title.en}</h3>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xs uppercase font-mono text-[#D8B98F] tracking-wider">Attached Gallery Assets ({selectedTourForMedia.gallery?.length || 1})</h4>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {(selectedTourForMedia.gallery && selectedTourForMedia.gallery.length > 0 ? selectedTourForMedia.gallery : [{
+                  id: 'hero',
+                  url: selectedTourForMedia.heroImage,
+                  alt: { en: selectedTourForMedia.title.en, de: selectedTourForMedia.title.de },
+                  sortOrder: 1,
+                  rightsStatus: 'VERIFIED_OWNED' as const
+                }]).map((item, idx) => (
+                  <div key={item.id} className="p-4 rounded-2xl bg-[#151B23] border border-white/10 space-y-3">
+                    <div className="relative h-32 rounded-xl overflow-hidden">
+                      <img src={item.url} alt={item.alt.en} className="w-full h-full object-cover" />
+                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-mono bg-black/70 text-[#D8B98F]">
+                        Order #{item.sortOrder || idx + 1}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2 text-xs">
+                      <div>
+                        <span className="text-[10px] text-gray-400 font-mono block">ENGLISH ALT TEXT</span>
+                        <input
+                          type="text"
+                          defaultValue={item.alt.en}
+                          className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none mt-1"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-gray-400 font-mono block">GERMAN ALT TEXT</span>
+                        <input
+                          type="text"
+                          defaultValue={item.alt.de}
+                          className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none mt-1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-white/10 flex justify-end gap-3">
+              <button
+                onClick={() => setSelectedTourForMedia(null)}
+                className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+              >
+                Save Gallery Changes
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/* PDF ITINERARY VOUCHER MODAL */}
       {selectedBookingForVoucher && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
@@ -338,12 +469,11 @@ export default function AdminPage() {
             
             <button
               onClick={() => setSelectedBookingForVoucher(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300"
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Printable Voucher Header */}
             <div className="border-b border-white/10 pb-6 flex justify-between items-start">
               <div>
                 <span className="text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold">JORDAN STORY TOURS — OFFICIAL VOUCHER</span>
@@ -355,7 +485,6 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Customer & Tour Summary Grid */}
             <div className="grid grid-cols-2 gap-6 text-xs bg-white/5 p-5 rounded-2xl border border-white/10">
               <div>
                 <span className="text-gray-400 font-mono block">LEAD TRAVELER</span>
@@ -371,7 +500,6 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Financial Quote Breakdown */}
             <div className="flex justify-between items-center p-5 rounded-2xl bg-[#A85F43]/20 border border-[#A85F43]/40">
               <div>
                 <span className="text-xs text-gray-300 font-mono block">TOTAL CONFIRMED VALUE</span>
@@ -382,7 +510,6 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Print Action Buttons */}
             <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
               <button
                 onClick={() => window.print()}

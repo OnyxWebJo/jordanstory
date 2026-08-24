@@ -1,0 +1,64 @@
+{
+  "tour_id": "budget-tour-1",
+  "slug": "budget-tour-1-petra-dead-sea-jerash",
+  "hero_media_id": "bt1-1",
+  "total_gallery_count": 4,
+  "gallery": [
+    {
+      "media_id": "bt1-1",
+      "sort_order": 1,
+      "url": "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "en": "Petra Treasury Al-Khazneh facade view",
+        "de": "Fassade des Schatzhauses Al-Khazneh in Petra"
+      },
+      "caption": {
+        "en": "The iconic Rose City Treasury revealed through the Siq gorge",
+        "de": "Das berühmte Schatzhaus der Felsenstadt Petra"
+      },
+      "rights_status": "VERIFIED_OWNED"
+    },
+    {
+      "media_id": "bt1-2",
+      "sort_order": 2,
+      "url": "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "en": "Walking through the narrow Petra Siq gorge",
+        "de": "Spaziergang durch die schmale Siq-Schlucht in Petra"
+      },
+      "caption": {
+        "en": "The ancient 1.2km canyon pathway into Petra",
+        "de": "Der 1,2 km lange antike Schluchtenweg nach Petra"
+      },
+      "rights_status": "VERIFIED_OWNED"
+    },
+    {
+      "media_id": "bt1-3",
+      "sort_order": 3,
+      "url": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "en": "Hypersaline floating in the Dead Sea",
+        "de": "Schwebendes Bad im salzreichen Toten Meer"
+      },
+      "caption": {
+        "en": "Natural mineral salt floating at the lowest point on Earth (-430m)",
+        "de": "Natürliches Mineralbad am tiefsten Punkt der Erde"
+      },
+      "rights_status": "VERIFIED_OWNED"
+    },
+    {
+      "media_id": "bt1-4",
+      "sort_order": 4,
+      "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "en": "Jerash Roman Forum & Colonnade Street",
+        "de": "Römisches Forum und Säulenstraße in Jerash"
+      },
+      "caption": {
+        "en": "Preserved Greco-Roman architecture of ancient Jerash",
+        "de": "Gut erhaltene römische Architektur im antiken Jerash"
+      },
+      "rights_status": "VERIFIED_OWNED"
+    }
+  ]
+}

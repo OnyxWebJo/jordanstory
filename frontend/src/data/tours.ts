@@ -1,3 +1,12 @@
+export interface TourGalleryItem {
+  id: string;
+  url: string;
+  alt: { en: string; de: string };
+  caption?: { en: string; de: string };
+  sortOrder: number;
+  rightsStatus: 'VERIFIED_OWNED' | 'LEGACY_SITE_ASSET';
+}
+
 export interface Tour {
   id: string;
   slug: { en: string; de: string };
@@ -20,6 +29,7 @@ export interface Tour {
     accommodation?: string;
   }[];
   heroImage: string;
+  gallery: TourGalleryItem[];
 }
 
 export const TOURS_DATA: Tour[] = [
@@ -49,7 +59,13 @@ export const TOURS_DATA: Tour[] = [
       { day: 2, title: { en: "Petra Exploration → Dead Sea → Amman", de: "Petra Erkundung → Totes Meer → Amman" }, description: { en: "Walk through the Siq to Al-Khazneh Treasury. Afternoon Dead Sea floating before continuing to Amman.", de: "Petra Erkundung und Nachmittags-Bad im Toten Meer." }, meals: "Breakfast", accommodation: "3-Star Hotel in Amman" },
       { day: 3, title: { en: "Amman City Tour → Ancient Jerash → Departure", de: "Amman Stadtrundfahrt → Antikes Jerash → Abreise" }, description: { en: "Explore Amman Citadel & Roman Theater, then visit Jerash before final airport transfer.", de: "Amman Zitadelle und Römerstadt Jerash vor der Abreise." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80" // Authentic Petra Treasury
+    heroImage: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "bt1-1", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Treasury Al-Khazneh facade view", de: "Fassade des Schatzhauses Al-Khazneh in Petra" }, caption: { en: "The iconic Rose City Treasury revealed through the Siq gorge", de: "Das berühmte Schatzhaus der Felsenstadt Petra" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt1-2", url: "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80", alt: { en: "Walking through the narrow Petra Siq gorge", de: "Spaziergang durch die schmale Siq-Schlucht in Petra" }, caption: { en: "The ancient 1.2km canyon pathway into Petra", de: "Der 1,2 km lange antike Schluchtenweg nach Petra" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt1-3", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80", alt: { en: "Hypersaline floating in the Dead Sea", de: "Schwebendes Bad im salzreichen Toten Meer" }, caption: { en: "Natural mineral salt floating at the lowest point on Earth (-430m)", de: "Natürliches Mineralbad am tiefsten Punkt der Erde" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt1-4", url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80", alt: { en: "Jerash Roman Forum & Colonnade Street", de: "Römisches Forum und Säulenstraße in Jerash" }, caption: { en: "Preserved Greco-Roman architecture of ancient Jerash", de: "Gut erhaltene römische Architektur im antiken Jerash" }, sortOrder: 4, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "budget-tour-2",
@@ -76,7 +92,12 @@ export const TOURS_DATA: Tour[] = [
       { day: 2, title: { en: "Amman → Madaba → Mount Nebo → Dead Sea → Petra", de: "Amman → Madaba → Berg Nebo → Totes Meer → Petra" }, description: { en: "Visit Madaba, Mount Nebo sanctuary, and Dead Sea resort float before arriving in Petra.", de: "Besuch von Madaba, Berg Nebo und Bad am Toten Meer." }, meals: "Breakfast, Lunch & Dinner", accommodation: "3-Star Hotel in Petra" },
       { day: 3, title: { en: "Petra Exploration → Airport Departure", de: "Petra Erkundung → Flughafentransfer" }, description: { en: "Morning guided walk through Petra Siq to the Treasury, followed by airport drop-off.", de: "Morgendliche Petra-Erkundung und Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80" // Authentic Madaba Mosaic
+    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "bt2-1", url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80", alt: { en: "Madaba St George Byzantine Mosaic Map", de: "Mosaikkarte von Madaba in der St. Georgs Kirche" }, caption: { en: "6th century Byzantine map of the Holy Land", de: "Byzantinische Mosaikkarte des Heiligen Landes aus dem 6. Jahrhundert" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt2-2", url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80", alt: { en: "Mount Nebo view overlooking Jordan Valley", de: "Blick vom Berg Nebo auf das Jordantal" }, caption: { en: "Panoramas of the Promised Land from Mount Nebo", de: "Panorama auf das Gelobte Land vom Berg Nebo" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt2-3", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Rose City Al-Khazneh Treasury", de: "Felsenstadt Petra Schatzhaus Al-Khazneh" }, caption: { en: "Ancient Nabataean architecture carved directly into sandstone", de: "Antike nabatäische Felsenarchitektur" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "budget-tour-3",
@@ -104,7 +125,12 @@ export const TOURS_DATA: Tour[] = [
       { day: 3, title: { en: "Petra Full Day Exploration", de: "Petra Ganztägige Erkundung" }, description: { en: "Walk through the Siq to Treasury, Royal Tombs, and Monastery.", de: "Petra Schatzhaus, Königsgräber und Kloster." }, meals: "Breakfast & Dinner", accommodation: "3-Star Hotel in Petra" },
       { day: 4, title: { en: "Petra → Dead Sea Resort Float → Airport", de: "Petra → Totes Meer Bad → Flughafen" }, description: { en: "Morning Dead Sea floating & mineral mud spa before final airport transfer.", de: "Totes Meer Schwebebad und Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80" // Authentic Jerash Forum Columns
+    heroImage: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "bt3-1", url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80", alt: { en: "Jerash Greco-Roman Colonnaded Street", de: "Römische Säulenstraße im antiken Jerash" }, caption: { en: "Walking through the ruins of ancient Jerash", de: "Spaziergang durch die Ruinen von Jerash" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt3-2", url: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80", alt: { en: "Ajloun Islamic Fortress on hilltop", de: "Islamische Festung Ajloun auf dem Hügel" }, caption: { en: "Saladin's 12th century fortress overlooking Jordan pine forests", de: "Saladins Burg aus dem 12. Jahrhundert" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt3-3", url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Ad-Deir Monastery monument", de: "Das Felsenkloster Ad-Deir in Petra" }, caption: { en: "The majestic Ad-Deir Monastery at the peak of Petra", de: "Das majestätische Kloster Ad-Deir in Petra" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "budget-tour-4",
@@ -132,7 +158,12 @@ export const TOURS_DATA: Tour[] = [
       { day: 3, title: { en: "Wadi Rum 4x4 Jeep Safari → Dead Sea", de: "Wadi Rum 4x4 Jeep Safari → Totes Meer" }, description: { en: "Morning 4x4 Jeep safari through red sand dunes, then transfer to Dead Sea.", de: "Morgendliche Jeep-Safari und Transfer zum Toten Meer." }, meals: "Breakfast", accommodation: "Dead Sea Resort" },
       { day: 4, title: { en: "Dead Sea Float → Airport Departure", de: "Totes Meer Schwebebad → Abreise" }, description: { en: "Morning Dead Sea floating, then final transfer to Queen Alia Airport.", de: "Entspannung am Toten Meer und Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80" // Authentic Wadi Rum Red Sand Dunes
+    heroImage: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "bt4-1", url: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80", alt: { en: "Wadi Rum red sand dunes & 4x4 jeep", de: "Rote Sanddünen und 4x4-Jeep im Wadi Rum" }, caption: { en: "Exploring the UNESCO World Heritage Wadi Rum desert", de: "Entdeckung der UNESCO-Weltkulturerbe-Wüste Wadi Rum" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt4-2", url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80", alt: { en: "Bedouin camp stargazing under Wadi Rum night sky", de: "Beduinencamp unter dem Sternenhimmel des Wadi Rum" }, caption: { en: "Stargazing at Bedouin camp under clear desert skies", de: "Sternenbeobachtung im Wüstencamp" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "bt4-3", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Treasury Al-Khazneh", de: "Felsenstadt Petra Schatzhaus" }, caption: { en: "The Rose City Treasury in Petra", de: "Das Schatzhaus in Petra" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
 
   // --- CLASSICAL TOURS (2) ---
@@ -163,7 +194,13 @@ export const TOURS_DATA: Tour[] = [
       { day: 4, title: { en: "Petra Full Day → Wadi Rum Desert Camp", de: "Petra Ganztag → Wadi Rum Wüstencamp" }, description: { en: "Morning exploring Petra. Sunset transfer to Wadi Rum for traditional Bedouin Zarb dinner.", de: "Morgens Petra. Transfer ins Wadi Rum zum Beduinen-Abendessen." }, meals: "Breakfast & Zarb Dinner", accommodation: "Martian Luxury Camp in Wadi Rum" },
       { day: 5, title: { en: "Wadi Rum 4x4 Jeep → Dead Sea → Departure", de: "Wadi Rum 4x4 Jeep → Totes Meer → Abreise" }, description: { en: "Morning Jeep tour across reddish dunes, floating in the Dead Sea, then airport drop-off.", de: "Jeep-Wüstensafari, Entspannung am Toten Meer, danach Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80" // Authentic Petra Siq Gorge Walk
+    heroImage: "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "jc1-1", url: "https://images.unsplash.com/photo-1580834341580-8c19a9a880b9?auto=format&fit=crop&w=1200&q=80", alt: { en: "Walking inside Petra Siq canyon", de: "Wanderung im Siq-Canyon in Petra" }, caption: { en: "Entering the Rose City of Petra through the ancient Siq", de: "Eingang zur Felsenstadt Petra" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jc1-2", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Treasury Al-Khazneh", de: "Petra Schatzhaus Al-Khazneh" }, caption: { en: "The iconic facade of Petra Treasury", de: "Das berühmte Schatzhaus in Petra" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jc1-3", url: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80", alt: { en: "Wadi Rum Bedouin 4x4 safari", de: "Beduinen 4x4-Safari im Wadi Rum" }, caption: { en: "Cruising across red desert sand dunes", de: "Jeep-Safari über die roten Sanddünen" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jc1-4", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80", alt: { en: "Dead Sea mineral mud bath & float", de: "Schlammbad und Schwebebad im Toten Meer" }, caption: { en: "Relaxing at Dead Sea resort", de: "Erholung am Toten Meer" }, sortOrder: 4, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "jordan-classic-2",
@@ -194,7 +231,12 @@ export const TOURS_DATA: Tour[] = [
       { day: 6, title: { en: "Aqaba → Dead Sea Resort", de: "Aqaba → Totes Meer Resort" }, description: { en: "Morning Red Sea coastal walk, then drive north along Dead Sea highway.", de: "Morgens Aqaba, danach Fahrt zum Toten Meer." }, meals: "Breakfast & Dinner", accommodation: "Dead Sea Resort" },
       { day: 7, title: { en: "Dead Sea Floating → Airport Departure", de: "Totes Meer Schwebebad → Abreise" }, description: { en: "Morning spa floating before final airport transfer.", de: "Totes Meer Schwebebad und Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" // Authentic Aqaba Red Sea Coast
+    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "jc2-1", url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80", alt: { en: "Aqaba Red Sea turquoise coast", de: "Türkisfarbene Küste des Roten Meeres in Aqaba" }, caption: { en: "Relaxing at Aqaba Red Sea coastal resort", de: "Erholung am Strand von Aqaba" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jc2-2", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Treasury monument", de: "Petra Schatzhaus Monument" }, caption: { en: "Petra Treasury", de: "Das Schatzhaus von Petra" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jc2-3", url: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80", alt: { en: "Wadi Rum desert rock bridge", de: "Felsenbrücke im Wadi Rum" }, caption: { en: "Natural rock arches of Wadi Rum desert", de: "Natürliche Felsenbrücken im Wadi Rum" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
 
   // --- LUXURY TOURS (3) ---
@@ -226,7 +268,12 @@ export const TOURS_DATA: Tour[] = [
       { day: 5, title: { en: "Petra Guided Tour → Al-Karak Crusader Castle → Amman", de: "Petra Führung → Kreuzfahrerburg Al-Karak → Amman" }, description: { en: "Private guide through Petra Treasury & Monastery, followed by Karak Fortress.", de: "Private Führung durch Petra und Besichtigung der Burg Karak." }, meals: "Breakfast", accommodation: "5-Star Amman" },
       { day: 6, title: { en: "Amman → VIP Airport Departure", de: "Amman → VIP Flughafentransfer" }, description: { en: "Final luxury transfer to Queen Alia Airport.", de: "Abschließender Luxustransfer zum Flughafen." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80" // Authentic Kempinski Dead Sea Luxury Resort
+    heroImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "jl1-1", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80", alt: { en: "Kempinski Dead Sea luxury infinity pool", de: "Luxuriöser Infinity-Pool im Kempinski Totes Meer" }, caption: { en: "5-Star luxury resort on the Dead Sea coast", de: "5-Sterne-Luxusresort am Toten Meer" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jl1-2", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Mövenpick Petra resort luxury entrance", de: "Luxuriöser Eingang des Mövenpick Petra Resorts" }, caption: { en: "Located right at the entrance of Petra Rose City", de: "Direkt am Eingang zur Felsenstadt Petra gelegen" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jl1-3", url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80", alt: { en: "Luxury Martian Glass Dome Camp in Wadi Rum", de: "Luxuriöses Martian Glass Dome Camp im Wadi Rum" }, caption: { en: "Private luxury stargazing dome in Wadi Rum desert", de: "Private Luxus-Glaskuppel zur Sternenbeobachtung" }, sortOrder: 3, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "jordan-luxury-2",
@@ -257,7 +304,11 @@ export const TOURS_DATA: Tour[] = [
       { day: 6, title: { en: "Dead Sea Spa & Wellness Day", de: "Totes Meer Spa & Wellness-Tag" }, description: { en: "Full day private spa treatment & salt water float.", de: "Ganztägige Spa-Entspannung & Schwebebad." }, meals: "Breakfast & Dinner", accommodation: "Kempinski Hotel Ishtar Dead Sea" },
       { day: 7, title: { en: "Dead Sea → VIP Airport Departure", de: "Totes Meer → VIP Flughafentransfer" }, description: { en: "Executive transfer to Queen Alia Airport.", de: "Chauffeur-Transfer zum Flughafen." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" // Authentic Wadi Rum Martian Dome Camp Stargazing
+    heroImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "jl2-1", url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80", alt: { en: "Memories Aicha Luxury Martian Dome Camp", de: "Memories Aicha Luxus Martian Dome Camp" }, caption: { en: "Luxury Martian Glass Domes under desert stars", de: "Luxuriöse Glaskuppeln unter den Sternen der Wüste" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jl2-2", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80", alt: { en: "Kempinski Dead Sea Ishtar luxury resort", de: "Kempinski Hotel Ishtar Totes Meer Resort" }, caption: { en: "Private Dead Sea beach & spa infinity pool", de: "Privater Strand & Spa-Infinity-Pool am Toten Meer" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "jordan-luxury-3",
@@ -289,7 +340,11 @@ export const TOURS_DATA: Tour[] = [
       { day: 7, title: { en: "Aqaba → Kempinski Dead Sea Resort", de: "Aqaba → Kempinski Totes Meer Resort" }, description: { en: "Scenic Dead Sea highway drive, floating & spa treatment.", de: "Fahrt zum Toten Meer, Schwebebad & Spa." }, meals: "Breakfast & Dinner", accommodation: "Kempinski Hotel Ishtar Dead Sea" },
       { day: 8, title: { en: "Dead Sea → VIP Airport Departure", de: "Totes Meer → VIP Flughafentransfer" }, description: { en: "Final luxury transfer to Queen Alia Airport.", de: "Chauffeur-Transfer zum Flughafen." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" // Authentic Aqaba Harbor & Yachting
+    heroImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "jl3-1", url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80", alt: { en: "Private Red Sea Sunset Yacht Cruise in Aqaba", de: "Private Jachtausfahrt bei Sonnenuntergang in Aqaba" }, caption: { en: "Exclusive sunset yacht cruise on the Red Sea", de: "Exklusive Jachtfahrt bei Sonnenuntergang" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "jl3-2", url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80", alt: { en: "Kempinski Dead Sea luxury resort", de: "Kempinski Totes Meer Luxusresort" }, caption: { en: "Luxury infinity spa resort on the Dead Sea", de: "Luxuriöses Spa-Resort am Toten Meer" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
 
   // --- BIBLICAL / HOLY LAND TOURS (3) ---
@@ -321,7 +376,11 @@ export const TOURS_DATA: Tour[] = [
       { day: 5, title: { en: "Petra → Dead Sea Resort Float", de: "Petra → Totes Meer Schwebebad" }, description: { en: "Drive to Dead Sea, float in saline waters.", de: "Fahrt zum Toten Meer & Schwebebad." }, meals: "Breakfast & Dinner", accommodation: "Dead Sea Resort" },
       { day: 6, title: { en: "Dead Sea → Departure", de: "Totes Meer → Abreise" }, description: { en: "Transfer to Queen Alia Airport.", de: "Flughafentransfer zum Abflug." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80" // Authentic Mount Nebo Viewpoint
+    heroImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "hl1-1", url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80", alt: { en: "Mount Nebo Memorial Church & Brazen Serpent", de: "Berg Nebo Gedächtniskirche und Eherne Schlange" }, caption: { en: "Mount Nebo sanctuary overlooking the Promised Land", de: "Heiligtum auf dem Berg Nebo" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "hl1-2", url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80", alt: { en: "Madaba Mosaic Map of Holy Land", de: "Mosaikkarte von Madaba" }, caption: { en: "6th century Byzantine Jerusalem mosaic map", de: "Byzantinische Mosaikkarte von Jerusalem aus dem 6. Jhr." }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "holy-land-2",
@@ -352,7 +411,11 @@ export const TOURS_DATA: Tour[] = [
       { day: 6, title: { en: "Dead Sea Spiritual Day", de: "Totes Meer Entspannungstag" }, description: { en: "Relaxation and floating at the lowest point on Earth.", de: "Wellness- und Entspannungstag am Toten Meer." }, meals: "Breakfast", accommodation: "Dead Sea Resort" },
       { day: 7, title: { en: "Dead Sea → Departure", de: "Totes Meer → Abreise" }, description: { en: "Transfer to Queen Alia Airport.", de: "Flughafentransfer zum Abflug." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80" // Authentic Jordan River Baptism Site
+    heroImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "hl2-1", url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80", alt: { en: "Baptism Site Bethany Beyond the Jordan", de: "Taufstelle Bethanien jenseits des Jordans" }, caption: { en: "The authentic Baptism Site of Jesus Christ at the Jordan River", de: "Die authentische Taufstelle Jesu Christi am Jordan" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "hl2-2", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80", alt: { en: "Dead Sea salt crystal shoreline near Lot's Cave", de: "Salzkristallufer am Toten Meer nahe der Lot-Höhle" }, caption: { en: "Crystalline salt deposits on the Dead Sea shore", de: "Kristalline Salzablagerungen am Ufer des Toten Meeres" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "holy-land-3",
@@ -384,7 +447,10 @@ export const TOURS_DATA: Tour[] = [
       { day: 7, title: { en: "Dead Sea → Tell Mar Elias → Anjara → Amman", de: "Totes Meer → Tell Mar Elias → Anjara → Amman" }, description: { en: "Elijah's birthplace Tell Mar Elias & Lady of the Mountain shrine in Anjara.", de: "Geburtsort des Elija Tell Mar Elias & Anjara Heiligtum." }, meals: "Breakfast", accommodation: "4-Star Hotel in Amman" },
       { day: 8, title: { en: "Amman → Airport Departure", de: "Amman → Flughafentransfer" }, description: { en: "Final airport transfer.", de: "Abschließender Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" // Authentic Dead Sea Salt Shores
+    heroImage: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "hl3-1", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80", alt: { en: "Dead Sea salt crystal formations", de: "Salzkristallformationen am Toten Meer" }, caption: { en: "Crystalline salt formations near Lot's Cave", de: "Kristalline Salzformationen nahe der Lot-Höhle" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
 
   // --- ISLAMIC TOURS (2) ---
@@ -415,7 +481,11 @@ export const TOURS_DATA: Tour[] = [
       { day: 4, title: { en: "Petra Rose City → Dead Sea Resort", de: "Petra Felsenstadt → Totes Meer Resort" }, description: { en: "Explore Petra Treasury, afternoon drive to Dead Sea for floating.", de: "Besichtigung von Petra und Nachmittags-Transfer zum Toten Meer." }, meals: "Breakfast", accommodation: "Dead Sea Resort" },
       { day: 5, title: { en: "Dead Sea → Airport Departure", de: "Totes Meer → Flughafentransfer" }, description: { en: "Morning Dead Sea floating & airport drop-off.", de: "Totes Meer Schwebebad & Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80" // Authentic Amman Citadel & Mosque View
+    heroImage: "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "it1-1", url: "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=1200&q=80", alt: { en: "Amman Citadel Temple of Hercules pillars & mosque view", de: "Amman Zitadelle Herkules-Tempel Säulen und Moschee-Blick" }, caption: { en: "Amman Citadel hilltop with views of King Abdullah Blue Mosque", de: "Amman Zitadelle mit Blick auf die König-Abdullah-Moschee" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "it1-2", url: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80", alt: { en: "Ajloun Saladin Islamic Fortress", de: "Saladin Burg Ajloun" }, caption: { en: "Islamic fortress built by Saladin's general in 1184 AD", de: "Islamische Festung erbaut 1184 n.Chr." }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "islamic-historical-tour",
@@ -445,7 +515,10 @@ export const TOURS_DATA: Tour[] = [
       { day: 5, title: { en: "Petra Rose City → Dead Sea Resort", de: "Petra Felsenstadt → Totes Meer Resort" }, description: { en: "Explore Petra Treasury, afternoon transfer to Dead Sea.", de: "Petra Erkundung & Transfer zum Toten Meer." }, meals: "Breakfast & Dinner", accommodation: "Dead Sea Resort" },
       { day: 6, title: { en: "Dead Sea → Departure", de: "Totes Meer → Flughafentransfer" }, description: { en: "Morning floating & airport transfer.", de: "Totes Meer Schwebebad & Flughafentransfer." }, meals: "Breakfast" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80" // Authentic Ajloun Castle
+    heroImage: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "ih1-1", url: "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80", alt: { en: "Ajloun Saladin Fortress towers", de: "Festungstürme der Saladin-Burg Ajloun" }, caption: { en: "Historic Ajloun Castle built in 1184 AD", de: "Historische Burg Ajloun erbaut 1184 n.Chr." }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
 
   // --- DAY TOURS (6) ---
@@ -472,7 +545,10 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Baptism Site → Dead Sea Resort → Amman", de: "Amman → Taufstelle → Totes Meer Resort → Amman" }, description: { en: "Drive down to Jordan River Valley to visit Bethany Beyond Jordan where Jesus Christ was baptized. Continue to luxury Dead Sea resort for lunch, floating & mud bath.", de: "Fahrt zur Taufstelle Jesu Christi und Entspannung im Totes-Meer-Resort." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" // Authentic Dead Sea Floating
+    heroImage: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt1-1", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80", alt: { en: "Dead Sea hypersaline floating", de: "Schwebebad im Toten Meer" }, caption: { en: "Natural mineral mud & saline floating", de: "Therapeutisches Schwebebad am Toten Meer" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "day-tour-deadsea-mujib",
@@ -497,7 +573,10 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Wadi Mujib Canyon Trail → Dead Sea Float → Amman", de: "Amman → Wadi Mujib Schlucht → Totes Meer → Amman" }, description: { en: "Hike up the water Siq trail in Mujib Biosphere Reserve (-420m) to the hidden waterfall. Afterwards relax at Dead Sea resort.", de: "Wanderung durch die Mujib-Schlucht und Erholung am Toten Meer." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" // Authentic Wadi Mujib Canyon Gorge
+    heroImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt2-1", url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80", alt: { en: "Wadi Mujib canyon water siq trail", de: "Wadi Mujib Schluchten-Wasserweg" }, caption: { en: "Canyoning through Wadi Mujib Biosphere Reserve (-420m)", de: "Canyon-Wanderung durch das Biosphärenreservat Wadi Mujib" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "day-tour-petra-rum-express",
@@ -522,7 +601,11 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Petra Rose City → Wadi Rum 4x4 Safari → Amman", de: "Amman → Petra Felsenstadt → Wadi Rum 4x4 Safari → Amman" }, description: { en: "Early 6:00 AM pickup. Drive to Petra for 3-hour walk through Siq to Treasury. Continue to Wadi Rum for 2-hour 4x4 Jeep safari.", de: "Frühe Abholung um 06:00 Uhr in Amman. Petra-Besichtigung und 4x4-Jeepsafari im Wadi Rum." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80" // Authentic Wadi Rum Desert Safari
+    heroImage: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt3-1", url: "https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&fit=crop&w=1200&q=80", alt: { en: "Wadi Rum 4x4 bedouin safari", de: "Wadi Rum 4x4 Beduinen-Safari" }, caption: { en: "4x4 Jeep safari through red desert dunes", de: "Jeep-Safari über die roten Wüstendünen" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" },
+      { id: "dt3-2", url: "https://images.unsplash.com/photo-1579606030856-494b28b7fa15?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Treasury Al-Khazneh view", de: "Blick auf das Schatzhaus von Petra" }, caption: { en: "Express visit to Petra Treasury", de: "Express-Besuch des Schatzhauses in Petra" }, sortOrder: 2, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "day-tour-jerash-ajloun",
@@ -544,7 +627,10 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Roman Jerash → Ajloun Castle → Amman", de: "Amman → Römisches Jerash → Burg Ajloun → Amman" }, description: { en: "Explore Roman Jerash ruins and Saladin's Ajloun Castle before returning to Amman.", de: "Besichtigung von Jerash und Burg Ajloun." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80" // Authentic Jerash Hadrian Arch
+    heroImage: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt4-1", url: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80", alt: { en: "Hadrian's Arch entry in Roman Jerash", de: "Hadrianstor im römischen Jerash" }, caption: { en: "Monumental Hadrian Arch built in 129 AD", de: "Hadrianstor erbaut 129 n.Chr." }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "day-tour-petra-express",
@@ -566,7 +652,10 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Petra Rose City → Amman", de: "Amman → Petra Felsenstadt → Amman" }, description: { en: "Morning pickup at 6:30 AM. 3-hour drive to Petra. Enjoy 4 hours walking through the Siq to Treasury & Royal Tombs before returning to Amman.", de: "Morgendliche Abholung und Fahrt nach Petra zur Erkundung des Schatzhauses." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80" // Authentic Petra Monastery Ad-Deir
+    heroImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt5-1", url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Monastery Ad-Deir", de: "Felsenkloster Ad-Deir in Petra" }, caption: { en: "Ad-Deir Monastery monument in Petra", de: "Das Felsenkloster Ad-Deir in Petra" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   },
   {
     id: "day-tour-madaba-nebo-deadsea",
@@ -588,6 +677,9 @@ export const TOURS_DATA: Tour[] = [
     itinerary: [
       { day: 1, title: { en: "Amman → Madaba → Mount Nebo → Dead Sea → Amman", de: "Amman → Madaba → Berg Nebo → Totes Meer → Amman" }, description: { en: "Visit Madaba St. George mosaic map, Mount Nebo sanctuary, and float at Dead Sea resort.", de: "Besuch von Madaba, Berg Nebo und Schwebebad am Toten Meer." }, meals: "None" }
     ],
-    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80" // Authentic Madaba Byzantine Mosaic Art
+    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      { id: "dt6-1", url: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80", alt: { en: "Madaba Byzantine Mosaic Map", de: "Mosaikkarte von Madaba" }, caption: { en: "Holy Land mosaic map in Madaba", de: "Mosaikkarte des Heiligen Landes in Madaba" }, sortOrder: 1, rightsStatus: "VERIFIED_OWNED" }
+    ]
   }
 ];

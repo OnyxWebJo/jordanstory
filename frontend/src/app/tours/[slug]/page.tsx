@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { TOURS_DATA } from '@/data/tours';
+import { TourGallery } from '@/components/tours/TourGallery';
 import Link from 'next/link';
 import { Clock, MapPin, CheckCircle2, XCircle, Calendar, ShieldCheck, Star, HelpCircle } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -23,7 +24,7 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
     notFound();
   }
 
-  // Schema.org JSON-LD Structured Data per 00C Specification
+  // Schema.org JSON-LD Structured Data per 00C & 00D Specifications
   const tourSchema = {
     '@context': 'https://schema.org',
     '@type': 'TouristTrip',
@@ -146,6 +147,11 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
               </div>
             </div>
 
+            {/* 00D Specification: Public Interactive Lightbox Gallery */}
+            <div className="p-8 rounded-3xl bg-white shadow-md border border-gray-100">
+              <TourGallery gallery={tour.gallery} heroImage={tour.heroImage} tourTitle={tour.title.en} />
+            </div>
+
             {/* Day-by-Day Itinerary */}
             <div className="space-y-6">
               <h2 className="font-serif text-3xl font-bold text-[#302A27]">Day-by-Day Itinerary</h2>
@@ -205,7 +211,7 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
               </div>
             </div>
 
-            {/* AEO Direct Answer FAQ Accordion (Per 00C Section 12 Specification) */}
+            {/* AEO Direct Answer FAQ Accordion */}
             <div className="p-8 rounded-3xl bg-white shadow-md border border-gray-100 space-y-6">
               <h2 className="font-serif text-2xl font-bold text-[#302A27] flex items-center gap-2">
                 <HelpCircle className="w-6 h-6 text-[#A85F43]" />
