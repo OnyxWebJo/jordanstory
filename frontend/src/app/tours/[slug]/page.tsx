@@ -2,7 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { TOURS_DATA } from '@/data/tours';
 import Link from 'next/link';
-import { Clock, MapPin, CheckCircle2, XCircle, Calendar, ShieldCheck, Star } from 'lucide-react';
+import { Clock, MapPin, CheckCircle2, XCircle, Calendar, ShieldCheck, Star, HelpCircle } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 interface TourDetailProps {
@@ -23,8 +23,68 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
     notFound();
   }
 
+  // Schema.org JSON-LD Structured Data per 00C Specification
+  const tourSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: tour.title.en,
+    description: tour.subtitle.en,
+    image: tour.heroImage,
+    touristType: [tour.category, tour.storyCollection],
+    offers: {
+      '@type': 'Offer',
+      price: tour.startingPriceUSD,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    itinerary: tour.itinerary.map((day) => ({
+      '@type': 'City',
+      name: day.title.en,
+      description: day.description.en,
+    })),
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Jordan Story Tours',
+      url: 'https://jordanstorytours.com',
+      telephone: '+962790000000',
+    },
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What is included in the ${tour.title.en}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `This tour package includes private transfers with an English-speaking driver, ${tour.durationNights} nights accommodation, daily breakfast, and visa assistance.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Can I customize the itinerary for ${tour.title.en}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes! All Jordan Story private tours can be customized with extra nights in Petra or Wadi Rum, upgraded hotel tiers, or special requests.',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F4EFE7]">
+      {/* Schema.org JSON-LD Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(tourSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <Header currentLocale="en" />
 
       <main className="flex-1">
@@ -142,6 +202,30 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+
+            {/* AEO Direct Answer FAQ Accordion (Per 00C Section 12 Specification) */}
+            <div className="p-8 rounded-3xl bg-white shadow-md border border-gray-100 space-y-6">
+              <h2 className="font-serif text-2xl font-bold text-[#302A27] flex items-center gap-2">
+                <HelpCircle className="w-6 h-6 text-[#A85F43]" />
+                <span>Frequently Asked Questions</span>
+              </h2>
+
+              <div className="space-y-4">
+                <div className="p-5 rounded-2xl bg-[#F4EFE7]/50 border border-gray-200/60 space-y-2">
+                  <h3 className="font-bold text-sm text-[#302A27]">How do I book this tour?</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Click the "Book This Tour Now" button to select your start date and hotel preferences. You will receive an instant quote and reference code with free cancellation flexibility.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-[#F4EFE7]/50 border border-gray-200/60 space-y-2">
+                  <h3 className="font-bold text-sm text-[#302A27]">Is entry visa assistance provided?</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Yes! Jordan Story Tours assists with free visa procurement for eligible nationalities upon airport arrival.
+                  </p>
+                </div>
               </div>
             </div>
 
