@@ -408,6 +408,8 @@ export default function AdminPage() {
               )}
             </div>
           </div>
+        )}
+
         {/* 00E POST-TOUR REVIEWS MANAGEMENT TAB */}
         {activeTab === 'reviews' && (
           <div className="space-y-8">
