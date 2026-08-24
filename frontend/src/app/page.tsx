@@ -4,6 +4,7 @@ import { ScrollWorldExperience } from '@/components/immersive/ScrollWorldExperie
 import { InteractiveMap } from '@/components/immersive/InteractiveMap';
 import { StoryCollections } from '@/components/home/StoryCollections';
 import { FeaturedTours } from '@/components/home/FeaturedTours';
+import { Testimonials } from '@/components/home/Testimonials';
 import Link from 'next/link';
 import { ShieldCheck, Compass, Award, Star, HelpCircle, CheckCircle2 } from 'lucide-react';
 
@@ -50,6 +51,9 @@ export default function HomePage() {
 
         {/* Interactive Jordan Topological Map */}
         <InteractiveMap />
+
+        {/* Verified Customer Testimonials & Reviews */}
+        <Testimonials />
 
         {/* AEO / Answer Engine Direct-Answer Section (`00A.md` Section 46) */}
         <section className="py-20 bg-[#F7F4EE] border-t border-gray-300">

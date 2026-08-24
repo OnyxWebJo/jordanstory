@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Compass, Globe, Menu, X } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useCurrency, Currency } from '@/context/CurrencyContext';
 
 interface HeaderProps {
   currentLocale?: 'en' | 'de';
@@ -11,6 +12,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
   const { locale, setLocale } = useLanguage();
+  const { currency, setCurrency } = useCurrency();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -93,8 +95,26 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           </Link>
         </nav>
 
-        {/* Right Action Group: Language Switcher & Book Now */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right Action Group: Currency Switcher, Language Switcher & Book Now */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Currency Switcher Pill */}
+          <div className="flex items-center gap-1 bg-white/10 px-2.5 py-1.5 rounded-full border border-white/10 text-xs font-mono">
+            {(['USD', 'EUR', 'JOD'] as Currency[]).map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setCurrency(c)}
+                className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
+                  currency === c 
+                    ? 'bg-[#C69C6D] text-black font-bold shadow-md' 
+                    : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {c === 'USD' ? '$' : c === 'EUR' ? '€' : 'JOD'}
+              </button>
+            ))}
+          </div>
+
           {/* Language Switcher Pill */}
           <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 text-xs font-mono">
             <Globe className="w-3.5 h-3.5 text-[#C69C6D]" />

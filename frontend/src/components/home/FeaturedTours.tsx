@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { TOURS_DATA } from '@/data/tours';
 import { Clock, Star, ArrowRight, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 // Top 6 Curated Featured Tour IDs for the Homepage
 const FEATURED_HOMEPAGE_IDS = [
@@ -18,6 +19,7 @@ const FEATURED_HOMEPAGE_IDS = [
 
 export const FeaturedTours: React.FC = () => {
   const { locale } = useLanguage();
+  const { formatPrice } = useCurrency();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const categories = [
@@ -150,7 +152,7 @@ export const FeaturedTours: React.FC = () => {
                       {locale === 'de' ? 'Ab Preis' : 'Starting From'}
                     </span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-2xl font-bold font-serif text-[#1A1615]">${tour.startingPriceUSD}</span>
+                      <span className="text-2xl font-bold font-serif text-[#1A1615]">{formatPrice(tour.startingPriceUSD)}</span>
                       <span className="text-xs text-gray-500 font-light">{locale === 'de' ? '/ Person' : '/ person'}</span>
                     </div>
                   </div>

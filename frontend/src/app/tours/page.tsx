@@ -7,9 +7,11 @@ import { TOURS_DATA } from '@/data/tours';
 import Link from 'next/link';
 import { Clock, Star, MapPin, Check, Search, Compass, ShieldCheck, Filter } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 export default function ToursPage() {
   const { locale } = useLanguage();
+  const { formatPrice } = useCurrency();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -157,7 +159,7 @@ export default function ToursPage() {
                         {locale === 'de' ? 'Ab Preis' : 'Starting From'}
                       </span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-serif text-[#1A1615]">${tour.startingPriceUSD}</span>
+                        <span className="text-2xl font-bold font-serif text-[#1A1615]">{formatPrice(tour.startingPriceUSD)}</span>
                         <span className="text-xs text-gray-500 font-light">{locale === 'de' ? '/ Person' : '/ person'}</span>
                       </div>
                     </div>

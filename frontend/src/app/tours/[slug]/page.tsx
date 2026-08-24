@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { TOURS_DATA } from '@/data/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
+import { TourPriceDisplay } from '@/components/tours/TourPriceDisplay';
 import Link from 'next/link';
 import { Clock, MapPin, CheckCircle2, XCircle, Calendar, ShieldCheck, Star, HelpCircle } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -238,13 +239,9 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
           </div>
 
           {/* Right Sidebar Booking Widget */}
-          <div className="space-y-6">
-            <div className="sticky top-28 p-8 rounded-3xl bg-[#151B23] text-[#F4EFE7] border border-[#A85F43]/30 shadow-2xl space-y-6">
-              <div>
-                <span className="text-xs text-gray-400 block">Starting Price per Person</span>
-                <div className="font-serif text-4xl font-bold text-[#D8B98F] mt-1">${tour.startingPriceUSD} USD</div>
-                <span className="text-xs text-gray-400 block mt-1">Private AC Vehicle + Hotel + Driver</span>
-              </div>
+            <div className="space-y-6">
+              <div className="sticky top-28 p-8 rounded-3xl bg-[#151B23] text-[#F4EFE7] border border-[#A85F43]/30 shadow-2xl space-y-6">
+                <TourPriceDisplay priceUSD={tour.startingPriceUSD} />
 
               <div className="space-y-3 pt-4 border-t border-gray-800 text-xs text-gray-300">
                 <div className="flex items-center gap-2">
