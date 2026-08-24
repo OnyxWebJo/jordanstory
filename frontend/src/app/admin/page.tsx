@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TOURS_DATA, Tour } from '@/data/tours';
 import { LayoutDashboard, Compass, Calendar, DollarSign, Plus, CheckCircle, Clock, Search, LogOut, MessageSquare, Printer, Eye, X, Send, Image as ImageIcon, ArrowUp, ArrowDown, Shield } from 'lucide-react';
+
+import { ReviewsStoreService, ReviewRequest, UserSubmittedReview, WHATSAPP_TEMPLATES, ReviewLocale } from '@/data/reviewsStore';
 
 interface BookingRecord {
   id: string;
@@ -19,7 +21,7 @@ interface BookingRecord {
 }
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState<'bookings' | 'tours' | 'media' | 'publish'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'tours' | 'media' | 'reviews' | 'publish'>('bookings');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [publishStatus, setPublishStatus] = useState<string | null>(null);
@@ -29,6 +31,16 @@ export default function AdminPage() {
 
   // Selected Tour for Media Gallery Management Modal
   const [selectedTourForMedia, setSelectedTourForMedia] = useState<Tour | null>(null);
+
+  // 00E Reviews State
+  const [reviewRequests, setReviewRequests] = useState<ReviewRequest[]>([]);
+  const [submittedReviews, setSubmittedReviews] = useState<UserSubmittedReview[]>([]);
+  const [copiedToken, setCopiedToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    setReviewRequests(ReviewsStoreService.getRequests());
+    setSubmittedReviews(ReviewsStoreService.getReviews());
+  }, [activeTab]);
 
   const [bookings, setBookings] = useState<BookingRecord[]>([
     { id: 'BK-89021', ref: 'JST-20260824-4912', customer: 'John Doe', email: 'john@example.com', phone: '+447911123456', tour: 'Petra, Dead Sea & Jerash', date: '2026-09-15', adults: 2, children: 0, status: 'Pending', total: '$798 USD' },
@@ -109,6 +121,16 @@ export default function AdminPage() {
             >
               <ImageIcon className="w-4 h-4" />
               <span>Media Galleries (00D)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('reviews')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                activeTab === 'reviews' ? 'bg-[#A85F43] text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Post-Tour Reviews (00E)</span>
             </button>
 
             <button
@@ -385,6 +407,181 @@ export default function AdminPage() {
                 </div>
               )}
             </div>
+          </div>
+        {/* 00E POST-TOUR REVIEWS MANAGEMENT TAB */}
+        {activeTab === 'reviews' && (
+          <div className="space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">00E — Verified Post-Tour Reviews</h2>
+                <p className="text-gray-400 text-xs sm:text-sm font-light mt-1">
+                  Generate secure WhatsApp review requests for completed bookings and moderate traveler submissions.
+                </p>
+              </div>
+
+              {/* Dynamic Overall Calculated Rating Badge */}
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl">
+                <span className="font-mono text-xs text-gray-400">Calculated Rating:</span>
+                <span className="font-serif text-2xl font-bold text-[#C69C6D]">
+                  {ReviewsStoreService.getCalculatedAggregateRating().average} ★
+                </span>
+                <span className="text-xs text-gray-400">
+                  ({ReviewsStoreService.getCalculatedAggregateRating().count} Verified Reviews)
+                </span>
+              </div>
+            </div>
+
+            {/* Completed Bookings Review Request Generator */}
+            <div className="bg-[#1F1917] border border-white/10 rounded-2xl p-6 space-y-6">
+              <div className="flex items-center justify-between">
+                <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
+                  <Send className="w-5 h-5 text-[#A85F43]" />
+                  <span>Send Review Request (Completed Tours)</span>
+                </h3>
+                <span className="text-xs font-mono text-[#C69C6D]">booking.status = COMPLETED</span>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b border-white/10 text-gray-400 font-mono">
+                      <th className="py-3 px-4">Booking Ref</th>
+                      <th className="py-3 px-4">Customer</th>
+                      <th className="py-3 px-4">Language</th>
+                      <th className="py-3 px-4">Tour Name</th>
+                      <th className="py-3 px-4">Review Status</th>
+                      <th className="py-3 px-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {reviewRequests.map((req) => {
+                      const reviewUrl = `http://localhost:3000/review/${req.token}`;
+                      const waTemplate = WHATSAPP_TEMPLATES[req.locale](req.customerName, req.tourName, reviewUrl);
+                      const cleanPhone = req.customerPhone.replace(/[^0-9]/g, '');
+                      const waHref = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waTemplate)}`;
+
+                      return (
+                        <tr key={req.id} className="hover:bg-white/5 transition-colors">
+                          <td className="py-4 px-4 font-mono text-[#C69C6D] font-bold">{req.bookingId}</td>
+                          <td className="py-4 px-4">
+                            <span className="font-semibold text-white block">{req.customerName}</span>
+                            <span className="text-[10px] text-gray-400 block font-mono">{req.customerPhone}</span>
+                          </td>
+                          <td className="py-4 px-4 font-mono uppercase text-xs">
+                            <span className="px-2 py-0.5 rounded bg-white/10 text-white font-bold">{req.locale}</span>
+                          </td>
+                          <td className="py-4 px-4 max-w-xs truncate text-gray-300">{req.tourName}</td>
+                          <td className="py-4 px-4">
+                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
+                              req.status === 'APPROVED' ? 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30' :
+                              req.status === 'SUBMITTED' ? 'bg-blue-400/20 text-blue-400 border border-blue-400/30' :
+                              req.status === 'SENT' ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30' :
+                              'bg-gray-400/20 text-gray-400 border border-gray-400/30'
+                            }`}>
+                              {req.status}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4 text-right space-x-2">
+                            <a
+                              href={waHref}
+                              target="_blank"
+                              rel="noreferrer"
+                              onClick={() => {
+                                ReviewsStoreService.markSent(req.id);
+                                setReviewRequests(ReviewsStoreService.getRequests());
+                              }}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] transition-all"
+                            >
+                              <MessageSquare className="w-3.5 h-3.5" />
+                              <span>WhatsApp</span>
+                            </a>
+
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(reviewUrl);
+                                setCopiedToken(req.token);
+                                setTimeout(() => setCopiedToken(null), 2000);
+                              }}
+                              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-gray-300 font-medium text-[11px] transition-all"
+                            >
+                              {copiedToken === req.token ? '✓ Copied' : 'Copy Link'}
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Traveler Submitted Reviews Moderation Table */}
+            <div className="bg-[#1F1917] border border-white/10 rounded-2xl p-6 space-y-6">
+              <div className="flex items-center justify-between">
+                <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-[#C69C6D]" />
+                  <span>Review Moderation Queue ({submittedReviews.length})</span>
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                {submittedReviews.map((rev) => (
+                  <div key={rev.id} className="p-6 rounded-2xl bg-[#151B23] border border-white/10 space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-base">{rev.displayName}</span>
+                          <span className="text-xs text-gray-400 font-mono">({rev.displayCountry || 'Verified'})</span>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-400/20 text-emerald-400">Verified Traveler</span>
+                        </div>
+                        <span className="text-xs text-[#C69C6D] font-mono block mt-0.5">{rev.tourName}</span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1 text-[#C69C6D]">
+                          {[...Array(rev.rating)].map((_, i) => (
+                            <span key={i}>★</span>
+                          ))}
+                        </div>
+
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
+                          rev.moderationStatus === 'APPROVED' ? 'bg-emerald-400/20 text-emerald-400' :
+                          rev.moderationStatus === 'REJECTED' ? 'bg-rose-400/20 text-rose-400' :
+                          'bg-amber-400/20 text-amber-400'
+                        }`}>
+                          {rev.moderationStatus}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-300 text-sm italic">"{rev.reviewBody}"</p>
+
+                    <div className="pt-2 flex justify-end gap-3">
+                      <button
+                        onClick={() => {
+                          ReviewsStoreService.moderateReview(rev.id, 'APPROVED');
+                          setSubmittedReviews(ReviewsStoreService.getReviews());
+                        }}
+                        className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer transition-all"
+                      >
+                        Approve & Publish Publicly
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          ReviewsStoreService.moderateReview(rev.id, 'REJECTED');
+                          setSubmittedReviews(ReviewsStoreService.getReviews());
+                        }}
+                        className="px-4 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white font-bold text-xs cursor-pointer transition-all"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         )}
 
