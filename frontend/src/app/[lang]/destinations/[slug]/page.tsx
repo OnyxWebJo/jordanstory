@@ -177,7 +177,7 @@ export default async function LocalizedDestinationDetailPage({ params }: Props) 
             {dest.aeoFaqs && dest.aeoFaqs.length > 0 && (
               <div className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm space-y-6">
                 <h2 className="font-serif text-2xl font-bold text-[#151B23]">
-                  {locale === 'de' ? 'Häufig gestellte Fragen (AEO Answers)' : locale === 'fr' ? 'Foire Aux Questions' : locale === 'it' ? 'Domande Frequenti' : 'Frequently Asked Questions (Traveler AEO)'}
+                  {locale === 'de' ? 'Häufig gestellte Fragen' : locale === 'fr' ? 'Foire Aux Questions' : locale === 'it' ? 'Domande Frequenti' : 'Frequently Asked Questions'}
                 </h2>
                 <div className="space-y-4">
                   {dest.aeoFaqs.map((faq, idx) => {
