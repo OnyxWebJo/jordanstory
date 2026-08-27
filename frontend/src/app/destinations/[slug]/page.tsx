@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   const paths: { slug: string }[] = [];
   DESTINATIONS_FULL.forEach(dest => {
     paths.push({ slug: dest.slug.en });
-    if (dest.slug.de !== dest.slug.en) {
+    if (dest.slug.de && dest.slug.de !== dest.slug.en) {
       paths.push({ slug: dest.slug.de });
     }
   });
@@ -37,7 +37,7 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
   const visitingTours = TOURS_DATA.filter(tour => {
     const routeLower = tour.route.map(r => r.toLowerCase());
     const destNameEnLower = dest.name.en.toLowerCase();
-    const destNameDeLower = dest.name.de.toLowerCase();
+    const destNameDeLower = (dest.name.de || dest.name.en).toLowerCase();
     const destIdLower = dest.id.toLowerCase();
 
     return routeLower.some(r => 

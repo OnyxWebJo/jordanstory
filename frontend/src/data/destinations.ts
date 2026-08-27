@@ -1,12 +1,21 @@
+export interface DestinationFaqItem {
+  question: { en: string; de?: string; fr?: string; it?: string };
+  answer: { en: string; de?: string; fr?: string; it?: string };
+}
+
 export interface DestinationData {
   id: string;
-  slug: { en: string; de: string };
-  name: { en: string; de: string };
-  tagline: { en: string; de: string };
-  description: { en: string; de: string };
-  highlights: { en: string[]; de: string[] };
-  insiderTips: { en: string[]; de: string[] };
-  bestTimeToVisit: { en: string; de: string };
+  slug: { en: string; de?: string; fr?: string; it?: string };
+  name: { en: string; de?: string; fr?: string; it?: string };
+  tagline: { en: string; de?: string; fr?: string; it?: string };
+  description: { en: string; de?: string; fr?: string; it?: string };
+  highlights: { en: string[]; de?: string[]; fr?: string[]; it?: string[] };
+  insiderTips: { en: string[]; de?: string[]; fr?: string[]; it?: string[] };
+  bestTimeToVisit: { en: string; de?: string; fr?: string; it?: string };
+  historyContext?: { en?: string; de?: string; fr?: string; it?: string };
+  howItFits?: { en?: string; de?: string; fr?: string; it?: string };
+  timeNeeded?: { en?: string; de?: string; fr?: string; it?: string };
+  aeoFaqs?: DestinationFaqItem[];
   image: string;
   gallery: string[];
 }
@@ -30,6 +39,36 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       de: ["Kommen Sie um 06:00 Uhr zur Öffnung, um den Siq ohne Menschenmassen zu fotografieren.", "Tragen Sie feste Wanderschuhe für die 800 Stufen zum Kloster.", "Kaufen Sie vorab den Jordan Pass, um 50 JOD Eintrittsgeld zu sparen."]
     },
     bestTimeToVisit: { en: "March to May & September to November", de: "März bis Mai & September bis November" },
+    aeoFaqs: [
+      {
+        question: {
+          en: "How many days should I spend in Petra?",
+          de: "Wie viele Tage sollte man für Petra einplanen?",
+          fr: "Combien de jours faut-il pour visiter Pétra ?",
+          it: "Quanti giorni servono per visitare Petra?"
+        },
+        answer: {
+          en: "We recommend spending at least 1 to 2 full days in Petra to explore the 1.2km Siq gorge, Al-Khazneh (The Treasury), the Royal Tombs, and climb the 800 steps up to Ad-Deir (The Monastery).",
+          de: "Wir empfehlen mindestens 1 bis 2 volle Tage für Petra, um den 1,2 km langen Siq, das Schatzhaus Al-Khazneh, die Königsgräber und das Kloster Ad-Deir entspannt zu besichtigen.",
+          fr: "Nous recommandons au moins 1 à 2 jours complets pour explorer le Siq, le Trésor (Al-Khazneh), les Tombeaux Royaux et monter jusqu'au Monastère.",
+          it: "Consigliamo di dedicare almeno 1 o 2 giorni interi a Petra per percorrere il Siq, ammirare il Tesoro (Al-Khazneh), le Tombe Reali e salire al Monastero."
+        }
+      },
+      {
+        question: {
+          en: "Can Petra and Wadi Rum be visited on the same tour?",
+          de: "Kann man Petra und Wadi Rum auf derselben Reise kombinieren?",
+          fr: "Pétra et Wadi Rum peuvent-ils être visités lors du même circuit ?",
+          it: "È possibile visitare Petra e Wadi Rum nello stesso tour?"
+        },
+        answer: {
+          en: "Yes, Petra and Wadi Rum are located just 2 hours apart in southern Jordan and form the highlight pair of almost all Jordan Story itineraries.",
+          de: "Ja, Petra und Wadi Rum liegen nur 2 Stunden voneinander entfernt im Süden Jordaniens und bilden den Höhepunkt fast aller Rundreisen.",
+          fr: "Oui, Pétra et le Wadi Rum ne sont séparés que de 2 heures de route et constituent le duo incontournable des itinéraires en Jordanie.",
+          it: "Sì, Petra e il Wadi Rum distano solo 2 ore di auto e costituiscono la coppia principale di quasi tutti gli itinerari in Giordania."
+        }
+      }
+    ],
     image: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
     gallery: [
       "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
