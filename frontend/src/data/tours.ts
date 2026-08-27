@@ -30,6 +30,7 @@ export interface Tour {
   }[];
   heroImage: string;
   gallery: TourGalleryItem[];
+  masterTourId?: string;
   entranceFeesStatus?: 'INCLUDED' | 'EXCLUDED' | 'PARTIALLY_INCLUDED' | 'CONDITIONAL';
   driverGuideType?: 'ENGLISH_SPEAKING_DRIVER' | 'DRIVER_AND_LOCAL_GUIDES' | 'PRIVATE_TOUR_GUIDE';
   mealsSummary?: { en: string; de: string; fr?: string; it?: string };
