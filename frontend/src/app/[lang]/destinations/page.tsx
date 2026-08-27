@@ -124,10 +124,10 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
 
                     <Link
                       href={`/${locale}/destinations/${slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#A85F43] hover:text-[#D97757] group-hover:translate-x-1 transition-transform"
+                      className="px-4 py-2 rounded-full bg-[#1A1615] hover:bg-[#A85F43] text-white text-xs font-semibold transition-all shadow-md group-hover:shadow-xl flex items-center gap-1.5"
                     >
                       <span>{locale === 'de' ? 'Reiseführer' : locale === 'fr' ? 'Guide Complet' : locale === 'it' ? 'Guida Completa' : 'Full Guide'}</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>
