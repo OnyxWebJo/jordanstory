@@ -1,16 +1,16 @@
-# Italian SEO & Keyword Architecture Map (IT)
+# Master Italian SEO Keyword Ownership Map (00N / 00O Audit)
 
-**Project:** Jordan Story Tours
-**Spec:** 00G Section 8, 9 & 10 (Italian Search Research & Intent Map)
+**Strategia:** Ricerca parole chiave nativa in italiano e mappa di pertinenza.
 
-| URL | Page | Page Type | Primary Query | Secondary Queries | Question Queries (AEO) | Intent | SERP Title | H1 Heading | Status |
-|---|---|---|---|---|---|---|---|---|---|
-| `/it/` | Home | Homepage | tour Giordania | viaggio in Giordania, tour privato Giordania | Come organizzare un viaggio privato in Giordania? | Commercial | Tour Giordania & Viaggi Privati Su Misura — Jordan Story Tours | Come Inizierà la Tua Storia in Giordania? | Active |
-| `/it/tour` | Catalogo Tour | Catalog | tour Giordania 7 giorni | tour Giordania 8 giorni, itinerario Petra e Wadi Rum | Quanto costa un tour privato in Giordania con autista? | Commercial | Tour Privati in Giordania — Itinerari ed Offerte | Itinerari Privati Su Misura in Giordania | Active |
-| `/it/destinazioni` | Guida Destinazioni | Hub | destinazioni Giordania | cosa vedere in Giordania, Petra Mar Morto Wadi Rum | Quali sono le tappe imperdibili in Giordania? | Informational | Guida Destinazioni in Giordania — Petra, Wadi Rum e Mar Morto | Esplora le Meraviglie della Giordania | Active |
-| `/it/destinazioni/petra` | Guida Petra | Destination | Petra Giordania | escursione Petra da Amman, visita guidata Petra | Quanti giorni servono per visitare Petra? | Informational / Commercial | Tour Privato e Guida per Petra — Città Rosa della Giordania | Petra — La Meravigliosa Città scolpita nella Roccia | Active |
-| `/it/destinazioni/wadi-rum` | Deserto di Wadi Rum | Destination | Wadi Rum Giordania | campo tendato di lusso Wadi Rum, safari 4x4 | Conviene dormire nel deserto di Wadi Rum? | Informational / Commercial | Safari 4x4 e Campi di Lusso a Wadi Rum — Giordania | Wadi Rum — La Valle della Luna | Active |
-| `/it/destinazioni/mar-morto` | Mar Morto | Destination | Mar Morto Giordania | fare il bagno nel Mar Morto, punto più basso della terra | Si può nuotare nel Mar Morto in Giordania? | Informational | Mar Morto Giordania — Relax e Benessere a -430 Metri | Il Mar Morto — Il Punto Più Basso della Terra | Active |
-| `/it/tour/jordan-story-classic-tour-1` | Tour 1 | Product | tour Giordania 5 giorni | tour privato Petra e Wadi Rum 5 giorni | C'è la possibilità di avere una guida in italiano? | Transactional | Tour Privato 5 Giorni in Giordania — Petra e Wadi Rum | Jordan Story Classic 1 — Spedizione di 5 Giorni | Active |
-| `/it/tour/jordan-luxury-tour-1` | Tour Lusso | Product | viaggio lusso Giordania | tour 7 giorni dome di lusso Wadi Rum | Dove dormire a Wadi Rum nei luxury bubble dome? | Transactional | Viaggio di Lusso 7 Giorni in Giordania — Hotel 5 Stelle e Dome | Jordan Luxury Tour 1 — Esperienza di Lusso e Dome | Active |
-| `/it/prenotazione` | Calcolatore | Booking | prenotare tour privato Giordania | preventivo viaggio Giordania su misura | Come richiedere un preventivo personalizzato per la Giordania? | Transactional | Prenotazione Tour Privato in Giordania — Calcolatore Preventivo | Crea il Tuo Viaggio Personalizzato in Giordania | Active |
+| URL | Page Type | Primary Query (IT) | Secondary Query Cluster | Primary Intent | Proposed Title (IT) | Proposed H1 (IT) | Schema Type |
+|-----|-----------|--------------------|-------------------------|----------------|---------------------|------------------|-------------|
+| `/it` | Homepage | `tour Giordania` | `viaggio in Giordania, tour privato Giordania` | Commercial Brand | Jordan Story Tours — Tour Operator Ufficiale per Tour Privati in Giordania | Ogni viaggio inizia con una storia | TravelAgency |
+| `/it/tours` | Tours Catalog | `viaggio Giordania pacchetti` | `tour organizzati Giordania, itinerari Petra` | Commercial Browse | Tour Privati in Giordania (2026) — Petra, Wadi Rum e Mar Morto | Tour Privati ed Escursioni in Giordania | CollectionPage |
+| `/it/destinations` | Destinations Hub | `destinazioni Giordania` | `cosa vedere in Giordania, luoghi di interesse Giordania` | Informational Hub | Destinazioni e Luoghi di Interesse in Giordania (2026) | Destinazioni e Attrazioni | ItemList |
+| `/it/booking` | Booking Wizard | `prenotare tour Giordania` | `viaggio su misura Giordania preventivo` | Transactional | Prenota Tour Privato Giordania — Calcolatore Viaggio Istantaneo | Richiesta Viaggio Personalizzato | Service |
+| `/it/tours/budget-tour-1-petra-dead-sea-jerash` | Tour Detail | `tour Petra Mar Morto 3 giorni` | `escursione Petra Jerash 3 giorni` | Product Spec | Tour Budget 1 — Petra, Mar Morto e Jerash (3 Giorni) | Tour Budget 1 | Product |
+| `/it/tours/jordan-story-classic-tour-1` | Tour Detail | `tour Giordania 5 giorni` | `itinerario classico Giordania 5 giorni` | Product Spec | Tour Classico 1 — 5 Giorni Highlights del Regno | Tour Classico 1 | Product |
+| `/it/tours/jordan-luxury-tour-1` | Tour Detail | `viaggio di lusso Giordania cupole marziane` | `Wadi Rum luxury camp Mar Morto` | Product Spec | Viaggio di Lusso 1 — 5 Giorni Cupole Marziane e Spa Mar Morto | Viaggio di Lusso 1 | Product |
+| `/it/destinations/petra` | Destination Guide | `Petra Giordania` | `guida Petra la citta rosa, Tesoro di Petra` | Entity Guide | Petra — Guida alla Città Rosa della Giordania | Petra — La Città Rosa | TouristAttraction |
+| `/it/destinations/wadi-rum` | Destination Guide | `Wadi Rum Giordania` | `deserto Wadi Rum campo beduino, safari 4x4 Wadi Rum` | Entity Guide | Deserto del Wadi Rum — Guida di Viaggio | Deserto del Wadi Rum | TouristAttraction |
+| `/it/destinations/dead-sea` | Destination Guide | `Mar Morto Giordania` | `bagno Mar Morto, punto piu basso della terra` | Entity Guide | Il Mar Morto — Guida di Viaggio | Il Mar Morto | TouristAttraction |

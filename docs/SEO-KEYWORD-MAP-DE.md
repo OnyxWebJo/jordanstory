@@ -1,16 +1,16 @@
-# German SEO & Keyword Architecture Map (DE)
+# Master German SEO Keyword Ownership Map (00K Audit)
 
-**Project:** Jordan Story Tours
-**Spec:** 00G Section 5 & 10 (German Search Research & Intent Map)
+**Strategie:** Native deutsche Reisebegriffe & Einzigartige Zielseiten-Zuordnung.
 
-| URL | Page | Page Type | Primary Query | Secondary Queries | Question Queries (AEO) | Intent | SERP Title | H1 Heading | Status |
-|---|---|---|---|---|---|---|---|---|---|
-| `/de/` | Startseite | Homepage | Jordanien Rundreise | Jordanien Privatreise, Jordanien Reiseveranstalter | Wie reist man am besten durch Jordanien? | Commercial | Jordanien Rundreise & Privatreisen — Jordan Story Tours | Ihre Geschichte in Jordanien Beginnt Hier | Active |
-| `/de/touren` | Rundreisen Katalog | Catalog | Jordanien Rundreise 7 Tage | Jordanien Rundreise 8 Tage, Petra und Wadi Rum Rundreise | Was kostet eine 7-tägige Jordanien Rundreise? | Commercial | Jordanien Rundreisen & Private Touren — Angebote & Pakete | Maßgeschneiderte Jordanien Rundreisen | Active |
-| `/de/reiseziele` | Reiseziele Übersicht | Hub | Jordanien Reiseziele | Sehenswürdigkeiten Jordanien, Petra Wadi Rum Totes Meer | Was muss man in Jordanien gesehen haben? | Informational | Die Schönsten Reiseziele in Jordanien — Reiseführer | Entdecken Sie die Wunder von Jordanien | Active |
-| `/de/reiseziele/petra` | Petra Reiseführer | Destination | Petra Jordanien | Petra Tour ab Amman, Felsenstadt Petra Führung | Wie viel Zeit braucht man für Petra? | Informational / Commercial | Petra Jordanien Privatreise & Ausflug ab Amman — Reiseführer | Petra — Die Antike Felsenstadt der Nabatäer | Active |
-| `/de/reiseziele/wadi-rum` | Wadi Rum Wüste | Destination | Wadi Rum Tour | Wadi Rum Martian Dome, Wüstencamp Jordanien | Ist eine Übernachtung in Wadi Rum sinnvoll? | Informational / Commercial | Wadi Rum Wüstencamp & Luxus Safari — Jordanien | Wadi Rum — Die Wüste der Mondlandschaften | Active |
-| `/de/reiseziele/totes-meer` | Totes Meer | Destination | Totes Meer Jordanien | Baden im Toten Meer, Tiefster Punkt der Erde | Kann man im Toten Meer schwimmen? | Informational | Totes Meer Jordanien — Wellness & Baden auf -430m | Das Tote Meer — Tiefster Punkt der Erde | Active |
-| `/de/touren/jordan-story-classic-tour-1` | Tour 1 | Product | Jordanien Rundreise 5 Tage | Petra Wadi Rum 5 Tage Privatreise | Ist ein deutschsprachiger Reiseleiter dabei? | Transactional | 5 Tage Jordanien Klassische Rundreise — Petra & Wadi Rum | Jordan Story Classic 1 — 5 Tage Expedition | Active |
-| `/de/touren/jordan-luxury-tour-1` | Luxus Tour | Product | Jordanien Luxusreise | Martian Dome Wadi Rum Luxus Rundreise | Wo übernachtet man in Wadi Rum im Luxuscamp? | Transactional | 7 Tage Jordanien Luxusreise — 5-Sterne Hotels & Wüstendomes | Jordan Luxury Tour 1 — 5-Sterne Luxus & Wüsten-Domes | Active |
-| `/de/buchung` | Rechner & Angebot | Booking | Jordanien Reise buchen | Individuelle Jordanien Reise zusammenstellen | Wie fordere ich ein persönliches Angebot an? | Transactional | Private Jordanien Rundreise Buchen — Rechner & Angebot | Planen Sie Ihre Individuelle Jordanien Reise | Active |
+| URL | Page Type | Primary Query (DE) | Secondary Query Cluster | Primary Intent | Proposed Title (DE) | Proposed H1 (DE) | Schema Type |
+|-----|-----------|--------------------|-------------------------|----------------|---------------------|------------------|-------------|
+| `/de` | Homepage | `Jordanien Rundreise` | `Jordanien Privatreise, individuelle Jordanien Rundreise` | Commercial Brand | Jordan Story Tours — Offizieller Veranstalter für Private Jordanien Reisen | Jede Reise beginnt mit einer Geschichte | TravelAgency |
+| `/de/tours` | Tours Catalog | `Jordanien Rundreisen Angebote` | `Jordanien Reiseveranstalter, Privatreisen Jordanien` | Commercial Browse | Private Jordanien Rundreisen (2026) — Petra, Wadi Rum & Totes Meer | Private Rundreisen & Ausflüge | CollectionPage |
+| `/de/destinations` | Destinations Hub | `Jordanien Reiseziele` | `Sehenswürdigkeiten Jordanien, Schönste Orte Jordanien` | Informational Hub | Jordanien Reiseziele & Sehenswürdigkeiten (2026) | Jordanien Reiseziele & Highlights | ItemList |
+| `/de/booking` | Booking Wizard | `Jordanien Rundreise buchen` | `Jordanien Reise individuell zusammenstellen` | Transactional | Private Jordanien Rundreise Buchen — Sofort-Reisekostenrechner | Individuelle Reiseanfrage | Service |
+| `/de/tours/budget-tour-1-petra-dead-sea-jerash` | Tour Detail | `Petra Totes Meer 3 Tage Tour` | `Jordanien Kurzreise 3 Tage` | Product Spec | Budget-Tour 1 — Petra, Totes Meer & Jerash (3 Tage) | Budget-Tour 1 | Product |
+| `/de/tours/jordan-story-classic-tour-1` | Tour Detail | `Jordanien Rundreise 5 Tage` | `Jordanien Highlights 5 Tage Privatreise` | Product Spec | Jordanien Klassik Tour 1 — 5 Tage Königreich Highlights | Jordanien Klassik Tour 1 | Product |
+| `/de/tours/jordan-luxury-tour-1` | Tour Detail | `Jordanien Luxusreise Wadi Rum` | `Wadi Rum Luxus Camp Tour, 5 Sterne Jordanien` | Product Spec | Jordanien Luxusreise 1 — 5 Tage Martian Domes & Totes Meer Spa | Jordanien Luxusreise 1 | Product |
+| `/de/destinations/petra` | Destination Guide | `Petra Jordanien` | `Petra Felsenstadt Reiseführer, Schatzhaus Petra` | Entity Guide | Petra — Rosa-Rote Felsenstadt Reiseführer | Petra — Die Rosa-Rote Felsenstadt | TouristAttraction |
+| `/de/destinations/wadi-rum` | Destination Guide | `Wadi Rum Jordanien` | `Wadi Rum Wüsten-Camp, Wüstensafari Jordanien` | Entity Guide | Wadi Rum Wüsten-Reiseführer | Wadi Rum Wüste | TouristAttraction |
+| `/de/destinations/dead-sea` | Destination Guide | `Totes Meer Jordanien` | `Totes Meer Baden, Tiefster Punkt der Erde` | Entity Guide | Totes Meer Reiseführer | Totes Meer | TouristAttraction |
