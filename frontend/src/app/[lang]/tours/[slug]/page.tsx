@@ -15,7 +15,10 @@ export function generateStaticParams() {
   const params: { lang: string; slug: string }[] = [];
   LOCALES.forEach((lang) => {
     TOURS_DATA.forEach((tour) => {
-      params.push({ lang, slug: tour.slug.en });
+      const slugs = Array.from(new Set(Object.values(tour.slug).filter(Boolean)));
+      slugs.forEach((slug) => {
+        params.push({ lang, slug });
+      });
     });
   });
   return params;
@@ -28,7 +31,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
   const validLocale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const tour = TOURS_DATA.find((t) => t.slug.en === slug || t.slug.de === slug);
+  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
 
   if (!tour) return {};
 
@@ -46,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LocalizedTourDetailPage({ params }: Props) {
   const { lang, slug } = await params;
   const locale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const tour = TOURS_DATA.find((t) => t.slug.en === slug || t.slug.de === slug);
+  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
 
   if (!tour) notFound();
 

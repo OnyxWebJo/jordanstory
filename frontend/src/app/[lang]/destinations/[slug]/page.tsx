@@ -15,7 +15,10 @@ export function generateStaticParams() {
   const params: { lang: string; slug: string }[] = [];
   LOCALES.forEach((lang) => {
     DESTINATIONS_FULL.forEach((d) => {
-      params.push({ lang, slug: d.slug.en });
+      const slugs = Array.from(new Set(Object.values(d.slug).filter(Boolean)));
+      slugs.forEach((slug) => {
+        params.push({ lang, slug });
+      });
     });
   });
   return params;
@@ -28,7 +31,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
   const validLocale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const dest = DESTINATIONS_FULL.find((d) => d.slug.en === slug || d.slug.de === slug);
+  const dest = DESTINATIONS_FULL.find((d) => Object.values(d.slug).includes(slug));
 
   if (!dest) return {};
 
@@ -46,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LocalizedDestinationDetailPage({ params }: Props) {
   const { lang, slug } = await params;
   const locale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const dest = DESTINATIONS_FULL.find((d) => d.slug.en === slug || d.slug.de === slug);
+  const dest = DESTINATIONS_FULL.find((d) => Object.values(d.slug).includes(slug));
 
   if (!dest) notFound();
 
