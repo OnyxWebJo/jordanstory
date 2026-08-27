@@ -261,27 +261,43 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
               </h2>
 
               <div className="space-y-4">
-                <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
-                  <h3 className="font-bold text-sm text-[#151B23]">
-                    {locale === 'de' ? 'Wie buche ich diese Reise?' : locale === 'fr' ? 'Comment réserver ce circuit ?' : locale === 'it' ? 'Come posso prenotare questo tour?' : 'How do I book this tour?'}
-                  </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    {locale === 'de'
-                      ? 'Klicken Sie auf "Jetzt Buchen", um Ihr gewünschtes Reisedatum und Ihre Hotelkategorie zu wählen. Sie erhalten umgehend eine Bestätigung mit flexiblen Stornierungsbedingungen.'
-                      : 'Cliquez sur "Réserver Ce Circuit" pour sélectionner vos dates et votre niveau d\'hôtel. Vous recevrez une confirmation avec annulation gratuite.'}
-                  </p>
-                </div>
+                {tour.faqs && tour.faqs.length > 0 ? (
+                  tour.faqs.map((faq, idx) => {
+                    const qText = getLocalizedText(faq.question, locale);
+                    const aText = getLocalizedText(faq.answer, locale);
 
-                <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
-                  <h3 className="font-bold text-sm text-[#151B23]">
-                    {locale === 'de' ? 'Wird eine kostenlose Visum-Unterstützung angeboten?' : locale === 'fr' ? 'L\'assistance visa est-elle incluse ?' : locale === 'it' ? 'È inclusa l\'assistenza per il visto?' : 'Is entry visa assistance provided?'}
-                  </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    {locale === 'de'
-                      ? 'Ja! Jordan Story Tours unterstützt berechtigte Reisende bei der kostenlosen Visumbeschaffung direkt bei der Ankunft am Flughafen Amman.'
-                      : 'Oui ! Jordan Story Tours vous assiste pour l\'obtention du visa gratuit à l\'arrivée à l\'aéroport d\'Amman.'}
-                  </p>
-                </div>
+                    return (
+                      <div key={idx} className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
+                        <h3 className="font-bold text-sm text-[#151B23]">{qText}</h3>
+                        <p className="text-xs text-gray-600 leading-relaxed font-light">{aText}</p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <>
+                    <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
+                      <h3 className="font-bold text-sm text-[#151B23]">
+                        {locale === 'de' ? 'Wie buche ich diese Reise?' : locale === 'fr' ? 'Comment réserver ce circuit ?' : locale === 'it' ? 'Come posso prenotare questo tour?' : 'How do I book this tour?'}
+                      </h3>
+                      <p className="text-xs text-gray-600 leading-relaxed font-light">
+                        {locale === 'de'
+                          ? 'Klicken Sie auf "Reise Anfragen", um Ihr gewünschtes Reisedatum und Ihre Hotelkategorie zu wählen. Sie erhalten umgehend eine Bestätigung mit flexiblen Stornierungsbedingungen.'
+                          : 'Click "Request Booking" to select your preferred dates and hotel level. You will receive a confirmation with flexible terms.'}
+                      </p>
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
+                      <h3 className="font-bold text-sm text-[#151B23]">
+                        {locale === 'de' ? 'Wird eine kostenlose Visum-Unterstützung angeboten?' : locale === 'fr' ? 'L\'assistance visa est-elle incluse ?' : locale === 'it' ? 'È inclusa l\'assistenza per il visto?' : 'Is entry visa assistance provided?'}
+                      </h3>
+                      <p className="text-xs text-gray-600 leading-relaxed font-light">
+                        {locale === 'de'
+                          ? 'Ja! Jordan Story Tours unterstützt berechtigte Reisende bei der kostenlosen Visumbeschaffung direkt bei der Ankunft am Flughafen Amman.'
+                          : 'Yes! Jordan Story Tours assists eligible travelers with free visa processing upon arrival at Amman Airport.'}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
