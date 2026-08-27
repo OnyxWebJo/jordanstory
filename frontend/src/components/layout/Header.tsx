@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Compass, Globe, Menu, X } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCurrency, Currency } from '@/context/CurrencyContext';
@@ -13,8 +14,19 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
   const { locale, setLocale } = useLanguage();
   const { currency, setCurrency } = useCurrency();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const getSwitchedPath = (targetLang: string) => {
+    if (!pathname) return `/${targetLang}`;
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments.length > 0 && ['en', 'de', 'fr', 'it'].includes(segments[0])) {
+      segments[0] = targetLang;
+      return '/' + segments.join('/');
+    }
+    return `/${targetLang}`;
+  };
 
   // Initialize from prop once if provided, otherwise respect global LanguageContext
   useEffect(() => {
@@ -115,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <React.Fragment key={lang}>
                 {idx > 0 && <span className="text-white/20">•</span>}
                 <Link
-                  href={`/${lang}`}
+                  href={getSwitchedPath(lang)}
                   onClick={() => setLocale(lang)}
                   className={`px-1.5 py-0.5 rounded uppercase transition-all cursor-pointer ${
                     locale === lang 
@@ -146,7 +158,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
               const target = next[locale] || 'en';
               setLocale(target);
-              window.location.href = `/${target}`;
+              window.location.href = getSwitchedPath(target);
             }}
             className="px-2.5 py-1 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md"
           >

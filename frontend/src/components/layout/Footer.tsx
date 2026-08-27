@@ -2,12 +2,24 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Compass, ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
 import { getVerifiedLicenseDisplay, CANONICAL_BUSINESS_RECORD } from '@/data/businessRecord';
 import { useLanguage } from '@/context/LanguageContext';
 
 export const Footer: React.FC = () => {
   const { locale, setLocale } = useLanguage();
+  const pathname = usePathname();
+
+  const getSwitchedPath = (targetLang: string) => {
+    if (!pathname) return `/${targetLang}`;
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments.length > 0 && ['en', 'de', 'fr', 'it'].includes(segments[0])) {
+      segments[0] = targetLang;
+      return '/' + segments.join('/');
+    }
+    return `/${targetLang}`;
+  };
   return (
     <footer className="bg-[#1A1615] text-[#F7F4EE] pt-20 pb-12 border-t border-white/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -98,7 +110,7 @@ export const Footer: React.FC = () => {
               <React.Fragment key={lang}>
                 {idx > 0 && <span className="text-gray-700">•</span>}
                 <Link
-                  href={`/${lang}`}
+                  href={getSwitchedPath(lang)}
                   onClick={() => setLocale(lang)}
                   className={`uppercase transition-colors cursor-pointer ${
                     locale === lang ? 'text-[#C69C6D] font-bold' : 'text-gray-400 hover:text-white'
