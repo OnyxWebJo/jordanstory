@@ -30,6 +30,10 @@ export interface Tour {
   }[];
   heroImage: string;
   gallery: TourGalleryItem[];
+  entranceFeesStatus?: 'INCLUDED' | 'EXCLUDED' | 'PARTIALLY_INCLUDED' | 'CONDITIONAL';
+  driverGuideType?: 'ENGLISH_SPEAKING_DRIVER' | 'DRIVER_AND_LOCAL_GUIDES' | 'PRIVATE_TOUR_GUIDE';
+  mealsSummary?: { en: string; de: string; fr?: string; it?: string };
+  parityStatus?: 'PARITY_VERIFIED' | 'NEEDS_OWNER_DECISION';
 }
 
 export const TOURS_DATA: Tour[] = [
