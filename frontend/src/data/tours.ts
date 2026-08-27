@@ -279,6 +279,36 @@ export const TOURS_DATA: Tour[] = [
       { id: "bt4-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum Bedouin desert camp", de: "Beduinencamp im Wadi Rum" }, caption: { en: "Original legacy media: Wadi Rum Camp", de: "Originales Medien-Asset: Wadi Rum Camp" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt4-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel-600x600.jpg", alt: { en: "Wadi Rum red dunes", de: "Rote Dünen im Wadi Rum" }, caption: { en: "Original legacy media: Wadi Rum Red Dunes", de: "Originales Medien-Asset: Wadi Rum Dünen" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt4-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury facade", de: "Fassade des Schatzhauses in Petra" }, caption: { en: "Original legacy media: Petra Rose City", de: "Originales Medien-Asset: Petra" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What makes Budget Tour 4's desert experience special?",
+          de: "Was macht das Wüstenerlebnis der Budget-Tour 4 besonders?",
+          fr: "Qu'est-ce qui rend l'expérience dans le désert du Circuit Budget 4 spéciale ?",
+          it: "Cosa rende speciale l'esperienza nel deserto del Tour Budget 4?"
+        },
+        answer: {
+          en: "Budget Tour 4 includes an authentic overnight stay in a Wadi Rum Bedouin camp under the stars, a 2-hour 4x4 Jeep Safari across red dunes, and a traditional underground Zarb BBQ dinner.",
+          de: "Die Budget-Tour 4 beinhaltet eine authentische Übernachtung im Beduinencamp unter Sternen, eine 2-Stunden 4x4 Jeep-Safari und ein traditionelles Zarb-BBQ.",
+          fr: "Le Circuit Budget 4 inclut une nuitée authentique dans un campement bedouin au Wadi Rum sous les étoiles, un safari 4x4 de 2h et un dîner Zarb.",
+          it: "Il Tour Budget 4 include un pernottamento in campo beduino sotto le stelle nel Wadi Rum, un safari in 4x4 di 2 ore e una cena Zarb."
+        }
+      },
+      {
+        question: {
+          en: "What type of camp accommodation is provided in Wadi Rum?",
+          de: "Welche Unterkunft im Wüstencamp wird im Wadi Rum bereitgestellt?",
+          fr: "Quel type d'hébergement est fourni au campement du Wadi Rum ?",
+          it: "Che tipo di alloggio è previsto nel campo nel Wadi Rum?"
+        },
+        answer: {
+          en: "You will stay in a comfortable Bedouin tent equipped with private bathroom facilities, hot water showers, and clean bedding.",
+          de: "Sie übernachten in einem komfortablen Beduinenzelt mit eigenem Bad, Warmwasserdusche und sauberen Betten.",
+          fr: "Vous séjournerez dans une tente bédouine confortable équipée d'une salle de bain privée avec eau chaude et de literie propre.",
+          it: "Soggiornerai in una confortevole tenda beduina dotata di bagno privato con doccia calda e biancheria pulita."
+        }
+      }
     ]
   },
 
@@ -315,6 +345,36 @@ export const TOURS_DATA: Tour[] = [
       { id: "jc1-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg", alt: { en: "Petra Treasury Al-Khazneh original site photo", de: "Original-Foto des Schatzhauses in Petra" }, caption: { en: "Original legacy media: Petra Rose City entrance", de: "Originales Medien-Asset: Eingang zur Felsenstadt Petra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jc1-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum desert camp", de: "Wadi Rum Beduinencamp" }, caption: { en: "Original legacy media: Wadi Rum Night Stay", de: "Originales Medien-Asset: Übernachtung im Wadi Rum" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jc1-3", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral floating", de: "Baden im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What destinations are included in the 5-Day Classic Jordan Tour?",
+          de: "Welche Reiseziele sind in der 5-Tage Klassik Jordanien Tour enthalten?",
+          fr: "Quelles destinations sont incluses dans le Circuit Classique 5 Jours ?",
+          it: "Quali destinazioni sono incluse nel Tour Classico di 5 Giorni?"
+        },
+        answer: {
+          en: "This complete 5-day itinerary covers Amman, Jerash, Ajloun Castle, Madaba, Mount Nebo, full day in Petra Rose City, overnight Wadi Rum Bedouin camp, and Dead Sea floating.",
+          de: "Dieses 5-Tage-Programm umfasst Amman, Jerash, Burg Ajloun, Madaba, Berg Nebo, Petra, Beduinencamp in Wadi Rum und das Tote Meer.",
+          fr: "Ce circuit de 5 jours couvre Amman, Gérasa, Ajloun, Madaba, Mont Nébo, Pétra, le désert du Wadi Rum et la Mer Morte.",
+          it: "Questo itinerario di 5 giorni copre Amman, Jerash, Ajloun, Madaba, Monte Nebo, Petra, Wadi Rum e Mar Morto."
+        }
+      },
+      {
+        question: {
+          en: "What hotel category is provided for the Classic Series?",
+          de: "Welche Hotelkategorie wird für die Klassik-Serie angeboten?",
+          fr: "Quelle catégorie d'hôtel est fournie pour la Série Classique ?",
+          it: "Quale categoria di hotel è prevista per la Serie Classica?"
+        },
+        answer: {
+          en: "You will stay in handpicked 4-star hotels in Amman and Petra, plus a desert camp in Wadi Rum.",
+          de: "Sie übernachten in ausgewählten 4-Sterne-Hotels in Amman und Petra sowie in einem Wüstencamp im Wadi Rum.",
+          fr: "Vous séjournerez dans des hôtels 4 étoiles sélectionnés à Amman et Pétra, ainsi que dans un campement au Wadi Rum.",
+          it: "Soggiornerai in hotel 4 stelle selezionati ad Amman e Petra, oltre al campo beduino nel Wadi Rum."
+        }
+      }
     ]
   },
 
@@ -352,6 +412,36 @@ export const TOURS_DATA: Tour[] = [
       { id: "jc2-1", url: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg", alt: { en: "Aqaba Red Sea coast", de: "Strand von Aqaba am Roten Meer" }, caption: { en: "Original legacy media: Aqaba Red Sea Resort", de: "Originales Medien-Asset: Aqaba am Roten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jc2-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum camp stay", de: "Wadi Rum Beduinencamp" }, caption: { en: "Original legacy media: Wadi Rum Camp", de: "Originales Medien-Asset: Wadi Rum Camp" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jc2-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg", alt: { en: "Petra Rose City entrance", de: "Eingang zur Felsenstadt Petra" }, caption: { en: "Original legacy media: Petra Rose City", de: "Originales Medien-Asset: Petra" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What makes the 7-Day Classic Expedition the ultimate Jordan itinerary?",
+          de: "Was macht die 7-Tage Klassik Expedition zur ultimativen Jordanien-Reise?",
+          fr: "Qu'est-ce qui fait du Circuit Classique 7 Jours l'itinéraire ultime en Jordanie ?",
+          it: "Cosa rende il Tour Classico di 7 Giorni l'itinerario perfetto per la Giordania?"
+        },
+        answer: {
+          en: "This 7-day program covers the complete country from the Roman ruins of Jerash in the north to the Red Sea coastal resort of Aqaba in the south, plus Petra, Wadi Rum Bedouin camp, and Dead Sea.",
+          de: "Dieses 7-Tage-Programm deckt das gesamte Land vom römischen Jerash im Norden bis nach Aqaba am Roten Meer im Süden ab, inklusive Petra, Wadi Rum und Totem Meer.",
+          fr: "Ce circuit de 7 jours couvre tout le pays, de Gérasa au nord jusqu'à la Mer Rouge à Aqaba au sud, ainsi que Pétra, le Wadi Rum et la Mer Morte.",
+          it: "Questo itinerario di 7 giorni copre l'intero paese, dalle rovine di Jerash al nord fino ad Aqaba sul Mar Rosso al sud, inclusi Petra, Wadi Rum e Mar Morto."
+        }
+      },
+      {
+        question: {
+          en: "Is Red Sea coastal access included in Aqaba?",
+          de: "Ist der Zugang zum Roten Meer in Aqaba enthalten?",
+          fr: "L'accès à la Mer Rouge à Aqaba est-il inclus ?",
+          it: "L'accesso al Mar Rosso ad Aqaba è incluso?"
+        },
+        answer: {
+          en: "Yes, night 5 is spent at a 4-star beach resort in Aqaba with direct Red Sea beach access and optional snorkeling tours.",
+          de: "Ja, Nacht 5 verbringen Sie in einem 4-Sterne-Strandresort in Aqaba mit direktem Zugang zum Roten Meer.",
+          fr: "Oui, la 5ème nuit se passe dans un complexe balnéaire 4 étoiles à Aqaba avec accès direct à la plage.",
+          it: "Sì, la quinta notte si trascorre in un resort 4 stelle ad Aqaba con accesso diretto alla spiaggia del Mar Rosso."
+        }
+      }
     ]
   },
 
@@ -388,6 +478,36 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "jl1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea luxury resort floating", de: "Luxuriöses Schwebebad im Toten Meer" }, caption: { en: "Original legacy media: Luxury Dead Sea resort float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jl1-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Mövenpick Petra luxury location", de: "Luxuriöse Lage in Petra" }, caption: { en: "Original legacy media: Petra Luxury Tour", de: "Originales Medien-Asset: Petra Luxustour" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "Which 5-star luxury hotels are included on Luxury Tour 1?",
+          de: "Welche 5-Sterne-Luxushotels sind in der Luxus-Tour 1 enthalten?",
+          fr: "Quels hôtels 5 étoiles de luxe sont inclus dans le Circuit Luxe 1 ?",
+          it: "Quali hotel 5 stelle di lusso sono inclusi nel Tour Lusso 1?"
+        },
+        answer: {
+          en: "You stay at Mövenpick Resort Petra right at the entrance of Petra, Kempinski Hotel Ishtar Dead Sea, and St. Regis or Four Seasons Amman.",
+          de: "Sie übernachten im Mövenpick Resort Petra direkt am Eingang von Petra, im Kempinski Hotel Ishtar am Toten Meer und im St. Regis / Four Seasons Amman.",
+          fr: "Vous séjournerez au Mövenpick Resort Pétra à l'entrée du site, au Kempinski Hotel Ishtar à la Mer Morte et au St. Regis ou Four Seasons Amman.",
+          it: "Soggiornerai al Mövenpick Resort Petra direttamente all'ingresso di Petra, al Kempinski Hotel Ishtar sul Mar Morto e al St. Regis ad Amman."
+        }
+      },
+      {
+        question: {
+          en: "Are all site entrance fees and private guides included?",
+          de: "Sind alle Eintrittsgelder und privaten Reiseleiter enthalten?",
+          fr: "Tous les droits d'entrée et guides privés sont-ils inclus ?",
+          it: "Tutti i biglietti d'ingresso e le guide private sono inclusi?"
+        },
+        answer: {
+          en: "Yes, all entrance tickets, private licensed local guides in Petra and Jerash, and VIP resort passes are fully included.",
+          de: "Ja, alle Eintrittskarten, private lizenzierte Reiseleiter in Petra und Jerash sowie VIP-Resortpässe sind vollständig enthalten.",
+          fr: "Oui, tous les billets d'entrée, guides locaux privés à Pétra et Jérash, et accès VIP au complexe sont entièrement inclus.",
+          it: "Sì, tutti i biglietti d'ingresso, le guide locali private a Petra e Jerash e gli accessi VIP ai resort sono inclusi."
+        }
+      }
     ]
   },
   {
@@ -423,6 +543,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "jl2-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum luxury desert camp", de: "Luxuriöses Wüstencamp im Wadi Rum" }, caption: { en: "Original legacy media: Luxury Wadi Rum Camp", de: "Originales Medien-Asset: Luxuscamp Wadi Rum" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jl2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Kempinski Dead Sea luxury float", de: "Luxuriöses Bad im Toten Meer" }, caption: { en: "Original legacy media: Kempinski Spa Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What desert camp is included in Wadi Rum on Luxury Tour 2?",
+          de: "Welches Wüstencamp ist im Wadi Rum auf der Luxus-Tour 2 enthalten?",
+          fr: "Quel campement est inclus au Wadi Rum dans le Circuit Luxe 2 ?",
+          it: "Quale campo è incluso nel Wadi Rum nel Tour Lusso 2?"
+        },
+        answer: {
+          en: "You stay in a luxury Martian Bubble Dome at Memories Aicha Luxury Camp featuring a glass ceiling for star-gazing, air-conditioning, and private bathroom.",
+          de: "Sie übernachten in einem luxuriösen Martian Bubble Dome im Memories Aicha Luxury Camp mit Glasdach für die Sternenbeobachtung und eigenem Bad.",
+          fr: "Vous séjournerez dans un Dôme Martien de luxe au Memories Aicha Camp avec plafond en verre pour observer les étoiles, climatisation et salle de bain.",
+          it: "Soggiornerai in un Martian Bubble Dome di lusso al Memories Aicha Camp con soffitto in vetro per osservare le stelle, aria condizionata e bagno privato."
+        }
+      }
     ]
   },
   {
@@ -459,6 +595,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "jl3-1", url: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg", alt: { en: "Aqaba Red Sea coast", de: "Küste des Roten Meeres in Aqaba" }, caption: { en: "Original legacy media: Aqaba Red Sea Yachting", de: "Originales Medien-Asset: Aqaba am Roten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "jl3-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum Martian camp", de: "Wadi Rum Luxus-Camp" }, caption: { en: "Original legacy media: Wadi Rum Martian Dome", de: "Originales Medien-Asset: Martian Dome" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What exclusive VIP experience highlights the 8-Day Royal Luxury Tour?",
+          de: "Welches exklusive VIP-Erlebnis sticht auf der 8-Tage Royal Luxus Tour hervor?",
+          fr: "Quelle expérience VIP exclusive caractérise le Circuit Royale Luxe de 8 Jours ?",
+          it: "Quale esperienza VIP esclusiva caratterizza il Tour Lusso Reale di 8 Giorni?"
+        },
+        answer: {
+          en: "Luxury Tour 3 includes a private sunset yacht cruise on the Red Sea in Aqaba, VIP airport lounge concierge assistance, 5-star Mövenpick, Kempinski, and Al Manara luxury resorts.",
+          de: "Die Luxus-Tour 3 beinhaltet eine private Jachtausfahrt bei Sonnenuntergang im Roten Meer in Aqaba, VIP-Flughafen-Concierge und 5-Sterne-Luxusresorts.",
+          fr: "Le Circuit Luxe 3 inclut une croisière privée en yacht au coucher du soleil à Aqaba, un service concierge VIP à l'aéroport et des resorts 5 étoiles.",
+          it: "Il Tour Lusso 3 include una crociera privata in yacht al tramonto ad Aqaba, servizio concierge VIP all'aeroporto e resort 5 stelle."
+        }
+      }
     ]
   },
 
@@ -495,6 +647,36 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "hl1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site of Jesus Christ", de: "Taufstelle Jesu Christi" }, caption: { en: "Original legacy media: Jordan River Baptism Site", de: "Originales Medien-Asset: Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "hl1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea float near Mount Nebo", de: "Totes Meer Schwebebad" }, caption: { en: "Original legacy media: Dead Sea Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "Which sacred Holy Land pilgrimage sites are visited?",
+          de: "Welche heiligen Stätten des Heiligen Landes werden besucht?",
+          fr: "Quels sites sacrés de Terre Sainte sont visités ?",
+          it: "Quali luoghi sacri della Terra Santa si visitano?"
+        },
+        answer: {
+          en: "This sacred trail visits Bethany Beyond the Jordan (Baptism Site of Jesus Christ), Mount Nebo (where Moses viewed the Promised Land), Madaba St. George Mosaic Map, and Petra Rose City.",
+          de: "Dieser heilige Pfad führt zur Taufstelle Jesu Christi am Jordan, zum Berg Nebo, zur Mosaikkarte in Madaba und nach Petra.",
+          fr: "Ce parcours sacré visite Béthanie au-delà du Jourdain (site du baptême de Jésus), le Mont Nébo, Madaba et Pétra.",
+          it: "Questo percorso sacro visita Betania oltre il Giordano (sito del battesimo di Gesù), il Monte Nebo, Madaba e Petra."
+        }
+      },
+      {
+        question: {
+          en: "Are official holy site permits included?",
+          de: "Sind offizielle Eintrittsgenehmigungen für die heiligen Stätten enthalten?",
+          fr: "Les autorisations officielles pour les sites sacrés sont-elles incluses ?",
+          it: "Sono inclusi i permessi ufficiali per i luoghi sacri?"
+        },
+        answer: {
+          en: "Yes, official entry permits to Bethany Beyond the Jordan and Mount Nebo sanctuary are included along with specialized guides.",
+          de: "Ja, offizielle Eintrittsgenehmigungen für Bethanien am Jordan und den Berg Nebo sowie fachkundige Führer sind enthalten.",
+          fr: "Oui, les autorisations d'accès officielles à Béthanie et au Mont Nébo sont incluses avec des guides spécialisés.",
+          it: "Sì, i permessi d'ingresso ufficiali per Betania e il Monte Nebo sono inclusi insieme a guide specializzate."
+        }
+      }
     ]
   },
   {
@@ -523,13 +705,28 @@ export const TOURS_DATA: Tour[] = [
       { day: 3, title: { en: "Amman → Machaerus (Mukawir) → Petra", de: "Amman → Machaerus (Mukawir) → Petra" }, description: { en: "Visit Herod's fortress where John the Baptist was imprisoned, drive to Petra.", de: "Besichtigung der Festung Machaerus und Weiterfahrt nach Petra." }, meals: "Breakfast & Dinner", accommodation: "4-Star Hotel in Petra" },
       { day: 4, title: { en: "Petra Full Day Biblical Exploration", de: "Petra Ganztägige Erkundung" }, description: { en: "Walk through the Siq to the Treasury, Royal Tombs, and Aaron's Tomb viewpoint.", de: "Besichtigung des Schatzhauses, der Königsgräber und des Aaron-Berges." }, meals: "Breakfast", accommodation: "4-Star Hotel in Petra" },
       { day: 5, title: { en: "Petra → Lot's Cave → Dead Sea", de: "Petra → Höhle des Lot → Totes Meer" }, description: { en: "Visit Lot's Cave overlooking the Dead Sea, float in the mineral waters.", de: "Besichtigung der Höhle des Lot und Entspannung am Toten Meer." }, meals: "Breakfast & Dinner", accommodation: "Dead Sea Resort" },
-      { day: 6, title: { en: "Dead Sea Spiritual Day", de: "Totes Meer Entspannungstag" }, description: { en: "Relaxation and floating at the lowest point on Earth.", de: "Wellness- und Entspannungstag am Toten Meer." }, meals: "Breakfast", accommodation: "Dead Sea Resort" },
       { day: 7, title: { en: "Dead Sea → Departure", de: "Totes Meer → Abreise" }, description: { en: "Transfer to Queen Alia Airport.", de: "Flughafentransfer zum Abflug." }, meals: "Breakfast" }
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
       { id: "hl2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site Bethany Beyond the Jordan", de: "Taufstelle Bethanien am Jordan" }, caption: { en: "Original legacy media: Jordan River Baptism Site", de: "Originales Medien-Asset: Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "hl2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral water", de: "Totes Meer Mineralwasser" }, caption: { en: "Original legacy media: Dead Sea Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What additional sacred sites are visited on Holy Land Tour 2?",
+          de: "Welche zusätzlichen heiligen Stätten werden auf der Heiliges Land Tour 2 besucht?",
+          fr: "Quels sites sacrés supplémentaires sont visités lors du Circuit Terre Sainte 2 ?",
+          it: "Quali altri luoghi sacri si visitano nel Tour Terra Santa 2?"
+        },
+        answer: {
+          en: "Holy Land Tour 2 includes Machaerus (Mukawir) where John the Baptist was imprisoned, plus Lot's Cave sanctuary overlooking the Dead Sea.",
+          de: "Die Heiliges Land Tour 2 beinhaltet Machaerus (Mukawir), wo Johannes der Täufer inhaftiert war, sowie die Höhle des Lot am Toten Meer.",
+          fr: "Le Circuit Terre Sainte 2 inclut Machéronte (Mukawir) où Jean le Baptiste fut emprisonné et la grotte de Loth à la Mer Morte.",
+          it: "Il Tour Terra Santa 2 include Macheronte (Mukawir) dove fu imprigionato San Giovanni Battista e la grotta di Lot sul Mar Morto."
+        }
+      }
     ]
   },
   {
@@ -566,6 +763,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "hl3-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea float near Lot's Cave", de: "Bad im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "hl3-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site am Jordan", de: "Taufstelle am Jordan" }, caption: { en: "Original legacy media: Jordan River", de: "Originales Medien-Asset: Jordan-Fluss" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What makes the 8-Day Holy Land Tour the complete Jordan pilgrimage?",
+          de: "Was macht die 8-Tage Heiliges Land Tour zur vollständigen Jordanien-Pilgerreise?",
+          fr: "Qu'est-ce qui fait du Circuit Terre Sainte de 8 Jours le pèlerinage le plus complet ?",
+          it: "Cosa rende il Tour Terra Santa di 8 Giorni il pellegrinaggio più completo?"
+        },
+        answer: {
+          en: "It encompasses Tell Mar Elias (birthplace of Prophet Elijah), Anjara Lady of the Mountain sanctuary, Bethany Baptism Site, Mt Nebo, Machaerus, Lot's Cave, and Petra.",
+          de: "Die Reise umfasst Tell Mar Elias (Geburtsort des Propheten Elija), Anjara, Bethanien am Jordan, Berg Nebo, Machaerus, Höhle des Lot und Petra.",
+          fr: "Il englobe Tell Mar Elias (lieu de naissance du prophète Élie), le sanctuaire d'Anjara, Béthanie, le Mont Nébo, Machéronte, la grotte de Loth et Pétra.",
+          it: "Comprende Tell Mar Elias (luogo di nascita del profeta Elia), il santuario di Anjara, Betania, il Monte Nebo, Macheronte, la grotta di Lot e Petra."
+        }
+      }
     ]
   },
 
@@ -601,6 +814,36 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "it1-1", url: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg", alt: { en: "Islamic Heritage Dome of the Rock shrine", de: "Islamisches Erbe Felsendom Heiligtum" }, caption: { en: "Original legacy media: Islamic & Historical Tours", de: "Originales Medien-Asset: Islamische Touren" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "it1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg", alt: { en: "Qasr Amra Desert Castle", de: "Wüstenschloss Qasr Amra" }, caption: { en: "Original legacy media: UNESCO Desert Castle", de: "Originales Medien-Asset: Wüstenschloss" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "Which Sahaba (Companions) shrines are visited?",
+          de: "Welche Schrein-Stätten der Sahaba (Gefährten) werden besucht?",
+          fr: "Quels sanctuaires des Sahaba (Compagnons) sont visités ?",
+          it: "Quali santuari dei Sahaba (Compagni) si visitano?"
+        },
+        answer: {
+          en: "The tour visits the tombs of Abu Ubaidah Amer Ibn Al-Jarrah, Muath Ibn Jabal, Shurahbil Ibn Hasana, and Ja'far Ibn Abi Talib at Mutah.",
+          de: "Die Tour besucht die Gräber von Abu Ubaidah, Muath Ibn Jabal, Shurahbil und Ja'far Ibn Abi Talib in Mu'tah.",
+          fr: "Le circuit visite les tombeaux d'Abu Ubaidah, Muath Ibn Jabal, Shurahbil et Ja'far Ibn Abi Talib à Mutah.",
+          it: "Il tour visita le tombe di Abu Ubaidah, Muath Ibn Jabal, Shurahbil e Ja'far Ibn Abi Talib a Mutah."
+        }
+      },
+      {
+        question: {
+          en: "Are all meals 100% Halal certified?",
+          de: "Sind alle Mahlzeiten 100% Halal-zertifiziert?",
+          fr: "Tous les repas sont-ils certifiés 100% Halal ?",
+          it: "Tutti i pasti sono certificati 100% Halal?"
+        },
+        answer: {
+          en: "Yes, all included breakfasts and dinners served across hotels and local restaurants are 100% Halal certified.",
+          de: "Ja, alle enthaltenen Mahlzeiten in den Hotels und Restaurants sind 100% Halal-zertifiziert.",
+          fr: "Oui, tous les repas inclus servis dans les hôtels et restaurants sont certifiés 100% Halal.",
+          it: "Sì, tutti i pasti inclusi serviti in hotel e ristoranti sono certificati 100% Halal."
+        }
+      }
     ]
   },
 
@@ -636,6 +879,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "ih1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg", alt: { en: "Qasr Amra Desert Castle panorama", de: "Panorama des Wüstenschlosses Qasr Amra" }, caption: { en: "Original legacy media: Qasr Amra UNESCO Desert Castle", de: "Originales Medien-Asset: Wüstenschloss Qasr Amra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "ih1-2", url: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg", alt: { en: "Dome of the Rock Islamic Heritage", de: "Felsendom Islamisches Erbe" }, caption: { en: "Original legacy media: Islamic Shrines", de: "Originales Medien-Asset: Islamische Heiligtümer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What historical Islamic fortresses are featured?",
+          de: "Welche historischen islamischen Festungen werden besichtig?",
+          fr: "Quelles forteresses islamiques historiques sont présentées ?",
+          it: "Quali fortezze storiche islamiche sono incluse?"
+        },
+        answer: {
+          en: "Ajloun Castle (Qal'at Ar-Rabad), built in 1184 AD by Saladin's nephew Izz Al-Din Usama to defend against Crusader forces.",
+          de: "Burg Ajloun (1184 n. Chr. von Saladins Neffen erbaut), um die Region gegen die Kreuzfahrer zu verteidigen.",
+          fr: "Le château d'Ajloun (construit en 1184 par le neveu de Saladin pour se défendre contre les Croisés).",
+          it: "Il Castello di Ajloun (costruito nel 1184 dal nipote di Saladino per difendersi dai Crociati)."
+        }
+      }
     ]
   },
 
@@ -657,7 +916,7 @@ export const TOURS_DATA: Tour[] = [
     route: ["Amman", "Baptism Site", "Dead Sea", "Amman"],
     inclusions: {
       en: ["Private AC vehicle with driver", "Hotel pickup and drop-off in Amman", "Dead Sea Resort Entry & Shower Pass", "Mineral Mud Experience"],
-      de: ["Klimatisiertes Fahrzeug mit Fahrer", "Hotelabholung & Rücktransfer in Amman", "Totes Meer Resort Tageskarte", "Schlammbad-Erlebnis"]
+      de: ["Klimatisierte Fahrzeug mit Fahrer", "Hotelabholung & Rücktransfer in Amman", "Totes Meer Resort Tageskarte", "Schlammbad-Erlebnis"]
     },
     exclusions: { en: ["Baptism site entrance fee", "Lunch & drinks", "Tips"], de: ["Eintritt Taufstelle", "Mittagessen", "Trinkgelder"] },
     itinerary: [
@@ -665,8 +924,23 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
-      { id: "dt1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site of Jesus Christ", de: "Taufstelle Jesu Christi" }, caption: { en: "Original legacy media: Jordan River Baptism Site", de: "Originales Medien-Asset: Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "dt1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral water", de: "Mineralwasser am Toten Meer" }, caption: { en: "Original legacy media: Dead Sea Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+      { id: "dt1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site of Jesus Christ", de: "Taufstelle Jesu Christi" }, caption: { en: "Original legacy media: Jordan River Baptism Site", de: "Originales Medien-Asset: Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What amenities are included at the Dead Sea resort on this day trip?",
+          de: "Welche Annehmlichkeiten sind beim Tagesausflug im Totes-Meer-Resort enthalten?",
+          fr: "Quels équipements sont inclus au complexe de la Mer Morte ?",
+          it: "Quali servizi sono inclusi nel resort del Mar Morto?"
+        },
+        answer: {
+          en: "The excursion includes private beach resort entry, freshwater swimming pools, showers, towel service, and therapeutic mineral mud.",
+          de: "Der Tagesausflug beinhaltet den Strandzugang im Resort, Süßwasserpools, Duschen, Handtücher und mineralischen Heilschlamm.",
+          fr: "L'excursion inclut l'accès à la plage privée du complexe, les piscines d'eau douce, douches, serviettes et boue minérale.",
+          it: "La gita include l'accesso alla spiaggia privata del resort, piscine d'acqua dolce, docce, teli mare e fango minerale."
+        }
+      }
     ]
   },
 
@@ -697,6 +971,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "dt2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea water floating", de: "Baden im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "dt2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea spa resort", de: "Totes Meer Spa Resort" }, caption: { en: "Original legacy media: Dead Sea Resort", de: "Originales Medien-Asset: Dead Sea Resort" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What should I wear and bring for the Wadi Mujib canyon trail?",
+          de: "Was sollte ich für die Wadi Mujib Schluchten-Wanderung anziehen und mitbringen?",
+          fr: "Que dois-je porter et apporter pour la randonnée dans le canyon du Wadi Mujib ?",
+          it: "Cosa dovrei indossare e portare per l'escursione nel canyon del Wadi Mujib?"
+        },
+        answer: {
+          en: "Bring quick-drying water shoes, swimwear, change of dry clothes, and a waterproof phone pouch. Life jackets are provided on site.",
+          de: "Bringen Sie schnelltrocknende Wasserschuhe, Badebekleidung, Wechselkleidung und eine wasserdichte Handytasche mit. Schwimmwesten werden bereitgestellt.",
+          fr: "Apportez des chaussures d'eau à séchage rapide, un maillot de bain, des vêtements de rechange et une pochette étanche. Les gilets de sauvetage sont fournis.",
+          it: "Porta scarpe da acqua ad asciugatura rapida, costume da bagno, cambio e custodia impermeabile. I giubbotti di salvataggio sono forniti."
+        }
+      }
     ]
   },
 
@@ -727,6 +1017,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "dt3-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum desert camp safari", de: "Wadi Rum Beduinen-Safari" }, caption: { en: "Original legacy media: Wadi Rum 4x4 Safari", de: "Originales Medien-Asset: Wadi Rum Safari" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "dt3-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury", de: "Schatzhaus von Petra" }, caption: { en: "Original legacy media: Petra Rose City", de: "Originales Medien-Asset: Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "Can both Petra and Wadi Rum be comfortably visited in 1 day from Amman?",
+          de: "Können Petra und Wadi Rum an einem Tag ab Amman bequem besucht werden?",
+          fr: "Peut-on visiter Pétra et le Wadi Rum confortablement en 1 jour depuis Amman ?",
+          it: "Si possono visitare Petra e Wadi Rum in 1 solo giorno da Amman?"
+        },
+        answer: {
+          en: "Yes, with early 6:00 AM pickup and private chauffeur, you get 3 full hours at Petra Treasury and a 2-hour 4x4 Jeep safari in Wadi Rum before returning to Amman.",
+          de: "Ja, mit Abholung um 06:00 Uhr und rechzeitiger Fahrt haben Sie 3 Stunden in Petra und eine 2-Stunden Jeep-Safari im Wadi Rum.",
+          fr: "Oui, avec un départ à 06h00 en chauffeur privé, vous profitez de 3h à Pétra et de 2h de safari en 4x4 dans le Wadi Rum.",
+          it: "Sì, partendo alle 06:00 in auto privata, avrai 3 ore a Petra e un safari di 2 ore nel Wadi Rum."
+        }
+      }
     ]
   },
 
@@ -753,6 +1059,22 @@ export const TOURS_DATA: Tour[] = [
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
     gallery: [
       { id: "dt4-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Hadrian Arch entry in Roman Jerash", de: "Hadrianstor im römischen Jerash" }, caption: { en: "Original legacy media: Roman Jerash", de: "Originales Medien-Asset: Römisches Jerash" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "How long is the drive from Amman to Jerash and Ajloun?",
+          de: "Wie lange dauert die Fahrt von Amman nach Jerash und Ajloun?",
+          fr: "Combien de temps dure le trajet d'Amman à Jérash et Ajloun ?",
+          it: "Quanto distano Jerash e Ajloun da Amman?"
+        },
+        answer: {
+          en: "Jerash is just 45 minutes north of Amman, and Ajloun Castle is another 30 minutes through pine-forested hills.",
+          de: "Jerash ist nur 45 Minuten nördlich von Amman gelegen, und Burg Ajloun weitere 30 Minuten entfernt.",
+          fr: "Jérash est à seulement 45 minutes au nord d'Amman, et le château d'Ajloun à 30 minutes de plus.",
+          it: "Jerash si trova a soli 45 minuti a nord di Amman, e il Castello di Ajloun a ulteriori 30 minuti."
+        }
+      }
     ]
   },
 
@@ -780,6 +1102,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "dt5-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury Al-Khazneh facade", de: "Fassade des Schatzhauses in Petra" }, caption: { en: "Original legacy media: Petra Rose City Treasury", de: "Originales Medien-Asset: Schatzhaus von Petra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "dt5-2", url: "https://jordanstorytours.com/content/uploads/2020/12/Petra-travel-e1608043798711-600x600.jpg", alt: { en: "Petra sandstone valley", de: "Felsental in Petra" }, caption: { en: "Original legacy media: Petra Valley", de: "Originales Medien-Asset: Petra Tal" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What is the recommended departure time for the Petra Day Tour from Amman?",
+          de: "Wann ist die beste Abfahrtszeit für den Petra-Tagesausflug ab Amman?",
+          fr: "Quelle est l'heure de départ recommandée pour l'excursion d'un jour à Pétra ?",
+          it: "A che ora è consigliato partire da Amman per il tour di un giorno a Petra?"
+        },
+        answer: {
+          en: "We recommend a 6:00 AM departure from Amman to arrive at Petra by 9:00 AM before heavy midday tour buses and sun peak.",
+          de: "Wir empfehlen die Abfahrt um 06:00 Uhr morgens in Amman, um um 09:00 Uhr in Petra anzukommen.",
+          fr: "Nous recommandons un départ à 06h00 d'Amman pour arriver à Pétra vers 09h00 avant la foule.",
+          it: "Consigliamo di partire alle 06:00 da Amman per arrivare a Petra alle 09:00 prima dei grandi gruppi."
+        }
+      }
     ]
   },
 
@@ -807,6 +1145,22 @@ export const TOURS_DATA: Tour[] = [
     gallery: [
       { id: "dt6-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea floating", de: "Bad im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea resort float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "dt6-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea salt shore", de: "Salzstrand am Toten Meer" }, caption: { en: "Original legacy media: Dead Sea Shore", de: "Originales Medien-Asset: Totes Meer Strand" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What is the key highlights order on this 1-day trip?",
+          de: "Was ist die Reihenfolge der Highlights auf diesem Tagesausflug?",
+          fr: "Quel est l'ordre des étapes sur cet itinéraire d'un jour ?",
+          it: "Qual è l'ordine delle tappe in questo tour di un giorno?"
+        },
+        answer: {
+          en: "You visit Madaba St. George Church first, followed by Mount Nebo sanctuary, and end the afternoon floating at Dead Sea beach resort.",
+          de: "Sie besuchen zuerst die St.-Georgs-Kirche in Madaba, danach den Berg Nebo und verbringen den Nachmittag am Toten Meer.",
+          fr: "Vous visitez l'église Saint-Georges à Madaba, puis le Mont Nébo, et terminez à la Mer Morte.",
+          it: "Si visita prima la Chiesa di San Giorgio a Madaba, poi il Monte Nebo, e si conclude al Mar Morto."
+        }
+      }
     ]
   }
 ];
