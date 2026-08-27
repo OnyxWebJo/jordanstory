@@ -42,11 +42,11 @@ export const Footer: React.FC = () => {
               Popular Tours
             </h4>
             <ul className="space-y-2 text-xs text-gray-400 font-light">
-              <li><Link href="/tours/jordan-story-classic-tour-1" className="hover:text-white transition-colors">Jordan Classic 5-Day</Link></li>
-              <li><Link href="/tours/jordan-luxury-tour-1" className="hover:text-white transition-colors">Luxury Martian Domes 7-Day</Link></li>
-              <li><Link href="/tours/budget-tour-1-petra-dead-sea-jerash" className="hover:text-white transition-colors">Petra & Dead Sea 3-Day</Link></li>
-              <li><Link href="/tours?category=Day%20Tour" className="hover:text-white transition-colors">Wadi Rum 4x4 Jeep Safari</Link></li>
-              <li><Link href="/booking" className="hover:text-white transition-colors">Custom Private Trip Quote</Link></li>
+              <li><Link href={`/${locale}/tours/jordan-story-classic-tour-1`} className="hover:text-white transition-colors">Jordan Classic 5-Day</Link></li>
+              <li><Link href={`/${locale}/tours/jordan-luxury-tour-1`} className="hover:text-white transition-colors">Luxury Martian Domes 7-Day</Link></li>
+              <li><Link href={`/${locale}/tours/budget-tour-1-petra-dead-sea-jerash`} className="hover:text-white transition-colors">Petra & Dead Sea 3-Day</Link></li>
+              <li><Link href={`/${locale}/tours`} className="hover:text-white transition-colors">Wadi Rum 4x4 Jeep Safari</Link></li>
+              <li><Link href={`/${locale}/booking`} className="hover:text-white transition-colors">Custom Private Trip Quote</Link></li>
             </ul>
           </div>
 
@@ -56,11 +56,11 @@ export const Footer: React.FC = () => {
               Destinations
             </h4>
             <ul className="space-y-2 text-xs text-gray-400 font-light">
-              <li><Link href="/destinations/petra" className="hover:text-white transition-colors">Petra (Rose City)</Link></li>
-              <li><Link href="/destinations/wadi-rum" className="hover:text-white transition-colors">Wadi Rum Desert</Link></li>
-              <li><Link href="/destinations/dead-sea" className="hover:text-white transition-colors">Dead Sea (-430m)</Link></li>
-              <li><Link href="/destinations/jerash" className="hover:text-white transition-colors">Jerash Roman Ruins</Link></li>
-              <li><Link href="/destinations" className="hover:text-white transition-colors">All Destination Guides</Link></li>
+              <li><Link href={`/${locale}/destinations/petra`} className="hover:text-white transition-colors">Petra (Rose City)</Link></li>
+              <li><Link href={`/${locale}/destinations/wadi-rum`} className="hover:text-white transition-colors">Wadi Rum Desert</Link></li>
+              <li><Link href={`/${locale}/destinations/dead-sea`} className="hover:text-white transition-colors">Dead Sea (-430m)</Link></li>
+              <li><Link href={`/${locale}/destinations/jerash`} className="hover:text-white transition-colors">Jerash Roman Ruins</Link></li>
+              <li><Link href={`/${locale}/destinations`} className="hover:text-white transition-colors">All Destination Guides</Link></li>
             </ul>
           </div>
 
@@ -97,15 +97,15 @@ export const Footer: React.FC = () => {
             {(['en', 'de', 'fr', 'it'] as const).map((lang, idx) => (
               <React.Fragment key={lang}>
                 {idx > 0 && <span className="text-gray-700">•</span>}
-                <button
-                  type="button"
+                <Link
+                  href={`/${lang}`}
                   onClick={() => setLocale(lang)}
                   className={`uppercase transition-colors cursor-pointer ${
                     locale === lang ? 'text-[#C69C6D] font-bold' : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   {lang}
-                </button>
+                </Link>
               </React.Fragment>
             ))}
           </div>

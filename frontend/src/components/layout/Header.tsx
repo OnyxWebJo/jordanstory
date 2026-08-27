@@ -50,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
         }`}
       >
         {/* Brand Logo & Ministry Badge */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href={`/${locale}`} className="flex items-center gap-3 group">
           <div className="w-9 h-9 rounded-full bg-[#A85F43] flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
             <Compass className="w-5 h-5 text-[#F7F4EE]" />
           </div>
@@ -67,24 +67,24 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 text-xs sm:text-sm font-medium tracking-wide">
           <Link 
-            href="/tours" 
+            href={`/${locale}/tours`} 
             className="text-[#F7F4EE]/90 hover:text-[#C69C6D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#C69C6D] hover:after:w-full after:transition-all"
           >
-            {locale === 'de' ? 'Rundreisen' : 'Tour Packages'}
+            {locale === 'de' ? 'Rundreisen' : locale === 'fr' ? 'Circuits' : locale === 'it' ? 'I Nostri Tour' : 'Tour Packages'}
           </Link>
 
           <Link 
-            href="/destinations" 
+            href={`/${locale}/destinations`} 
             className="text-[#F7F4EE]/90 hover:text-[#C69C6D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#C69C6D] hover:after:w-full after:transition-all"
           >
-            {locale === 'de' ? 'Reiseziele' : 'Destinations'}
+            {locale === 'de' ? 'Reiseziele' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations'}
           </Link>
 
           <Link 
-            href="/#map" 
+            href={`/${locale}#map`} 
             className="text-[#F7F4EE]/90 hover:text-[#C69C6D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#C69C6D] hover:after:w-full after:transition-all"
           >
-            {locale === 'de' ? 'Interaktive Karte' : 'Interactive Map'}
+            {locale === 'de' ? 'Interaktive Karte' : locale === 'fr' ? 'Carte Interactive' : locale === 'it' ? 'Mappa Interattiva' : 'Interactive Map'}
           </Link>
         </nav>
 
@@ -114,8 +114,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
             {(['en', 'de', 'fr', 'it'] as const).map((lang, idx) => (
               <React.Fragment key={lang}>
                 {idx > 0 && <span className="text-white/20">•</span>}
-                <button
-                  type="button"
+                <Link
+                  href={`/${lang}`}
                   onClick={() => setLocale(lang)}
                   className={`px-1.5 py-0.5 rounded uppercase transition-all cursor-pointer ${
                     locale === lang 
@@ -124,14 +124,14 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
                   }`}
                 >
                   {lang}
-                </button>
+                </Link>
               </React.Fragment>
             ))}
           </div>
 
           {/* Book Now Button */}
           <Link
-            href="/booking"
+            href={`/${locale}/booking`}
             className="px-5 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs transition-all shadow-xl hover:scale-105 active:scale-95"
           >
             {locale === 'de' ? 'Privattour Buchen' : locale === 'fr' ? 'Réserver un Voyage Privé' : locale === 'it' ? 'Prenota Tour Privato' : 'Book Private Tour'}
@@ -144,7 +144,9 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
             type="button"
             onClick={() => {
               const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
-              setLocale(next[locale] || 'en');
+              const target = next[locale] || 'en';
+              setLocale(target);
+              window.location.href = `/${target}`;
             }}
             className="px-2.5 py-1 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md"
           >
@@ -168,27 +170,27 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
       {isMobileMenuOpen && (
         <div className="md:hidden mt-3 mx-2 p-6 rounded-3xl bg-[#1A1615]/95 backdrop-blur-2xl border border-white/10 shadow-2xl text-[#F7F4EE] space-y-4 relative z-50 animate-fade-in">
           <Link 
-            href="/tours" 
+            href={`/${locale}/tours`} 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-3 text-base font-medium border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D]"
           >
-            {locale === 'de' ? 'Rundreisen & Pakete' : 'Tour Packages'}
+            {locale === 'de' ? 'Rundreisen & Pakete' : locale === 'fr' ? 'Nos Circuits' : locale === 'it' ? 'I Nostri Tour' : 'Tour Packages'}
           </Link>
 
           <Link 
-            href="/destinations" 
+            href={`/${locale}/destinations`} 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-3 text-base font-medium border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D]"
           >
-            {locale === 'de' ? 'Reiseziele in Jordanien' : 'Destinations'}
+            {locale === 'de' ? 'Reiseziele in Jordanien' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations'}
           </Link>
 
           <Link 
-            href="/booking" 
+            href={`/${locale}/booking`} 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-3 text-base font-medium text-[#C69C6D] hover:text-white"
           >
-            {locale === 'de' ? 'Individuelle Reise Buchen' : 'Book Custom Private Tour'}
+            {locale === 'de' ? 'Individuelle Reise Buchen' : locale === 'fr' ? 'Réserver Sur Mesure' : locale === 'it' ? 'Prenota Su Misura' : 'Book Custom Private Tour'}
           </Link>
         </div>
       )}
