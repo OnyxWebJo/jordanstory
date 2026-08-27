@@ -12,7 +12,7 @@ interface TourGalleryProps {
 }
 
 export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, tourTitle }) => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   // Combine hero with gallery items if needed
@@ -60,7 +60,7 @@ export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, to
           >
             <img
               src={img.url}
-              alt={img.alt[locale] || tourTitle}
+              alt={getLocalized(img.alt) || tourTitle}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -70,7 +70,7 @@ export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, to
             </div>
             {img.caption && (
               <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent text-white text-[11px] truncate">
-                {img.caption[locale]}
+                {getLocalized(img.caption)}
               </div>
             )}
           </div>
@@ -115,15 +115,15 @@ export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, to
             <div className="relative max-h-[75vh] w-full flex items-center justify-center overflow-hidden rounded-2xl border border-white/10">
               <img
                 src={images[lightboxIndex].url}
-                alt={images[lightboxIndex].alt[locale] || tourTitle}
+                alt={getLocalized(images[lightboxIndex].alt) || tourTitle}
                 className="max-h-[75vh] w-auto max-w-full object-contain"
               />
             </div>
 
             <div className="text-center space-y-1 text-white max-w-xl">
-              <p className="text-sm font-medium">{images[lightboxIndex].alt[locale]}</p>
+              <p className="text-sm font-medium">{getLocalized(images[lightboxIndex].alt)}</p>
               {images[lightboxIndex].caption && (
-                <p className="text-xs text-gray-400 font-light">{images[lightboxIndex].caption[locale]}</p>
+                <p className="text-xs text-gray-400 font-light">{getLocalized(images[lightboxIndex].caption)}</p>
               )}
               <span className="text-[11px] font-mono text-[#D8B98F] block pt-1">
                 Photo {lightboxIndex + 1} of {images.length}

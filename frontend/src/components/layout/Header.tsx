@@ -7,7 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useCurrency, Currency } from '@/context/CurrencyContext';
 
 interface HeaderProps {
-  currentLocale?: 'en' | 'de';
+  currentLocale?: 'en' | 'de' | 'fr' | 'it';
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
 
   // Initialize from prop once if provided, otherwise respect global LanguageContext
   useEffect(() => {
-    if (currentLocale && (currentLocale === 'en' || currentLocale === 'de')) {
+    if (currentLocale && (currentLocale === 'en' || currentLocale === 'de' || currentLocale === 'fr' || currentLocale === 'it')) {
       // Only initial sync if explicitly passed from URL/props
       const stored = localStorage.getItem('jordan_story_locale');
       if (!stored) {
@@ -86,13 +86,6 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           >
             {locale === 'de' ? 'Interaktive Karte' : 'Interactive Map'}
           </Link>
-
-          <Link 
-            href="/admin" 
-            className="text-[#F7F4EE]/90 hover:text-[#C69C6D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#C69C6D] hover:after:w-full after:transition-all"
-          >
-            {locale === 'de' ? 'Verwaltung' : 'Operations Admin'}
-          </Link>
         </nav>
 
         {/* Right Action Group: Currency Switcher, Language Switcher & Book Now */}
@@ -115,32 +108,25 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
             ))}
           </div>
 
-          {/* Language Switcher Pill */}
-          <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 text-xs font-mono">
-            <Globe className="w-3.5 h-3.5 text-[#C69C6D]" />
-            <button
-              type="button"
-              onClick={() => setLocale('en')}
-              className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                locale === 'en' 
-                  ? 'bg-[#A85F43] text-white font-bold shadow-md' 
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              EN
-            </button>
-            <span className="text-white/30">|</span>
-            <button
-              type="button"
-              onClick={() => setLocale('de')}
-              className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                locale === 'de' 
-                  ? 'bg-[#A85F43] text-white font-bold shadow-md' 
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              DE
-            </button>
+          {/* Language Switcher Pill (4 Locales) */}
+          <div className="flex items-center gap-1 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 text-xs font-mono">
+            <Globe className="w-3.5 h-3.5 text-[#C69C6D] mr-1" />
+            {(['en', 'de', 'fr', 'it'] as const).map((lang, idx) => (
+              <React.Fragment key={lang}>
+                {idx > 0 && <span className="text-white/20">•</span>}
+                <button
+                  type="button"
+                  onClick={() => setLocale(lang)}
+                  className={`px-1.5 py-0.5 rounded uppercase transition-all cursor-pointer ${
+                    locale === lang 
+                      ? 'bg-[#A85F43] text-white font-bold shadow-md' 
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {lang}
+                </button>
+              </React.Fragment>
+            ))}
           </div>
 
           {/* Book Now Button */}
@@ -148,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
             href="/booking"
             className="px-5 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs transition-all shadow-xl hover:scale-105 active:scale-95"
           >
-            {locale === 'de' ? 'Privattour Buchen' : 'Book Private Tour'}
+            {locale === 'de' ? 'Privattour Buchen' : locale === 'fr' ? 'Réserver un Voyage Privé' : locale === 'it' ? 'Prenota Tour Privato' : 'Book Private Tour'}
           </Link>
         </div>
 
@@ -156,10 +142,13 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
         <div className="flex items-center gap-2 md:hidden">
           <button
             type="button"
-            onClick={() => setLocale(locale === 'en' ? 'de' : 'en')}
-            className="px-2.5 py-1 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold shadow-md"
+            onClick={() => {
+              const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
+              setLocale(next[locale] || 'en');
+            }}
+            className="px-2.5 py-1 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md"
           >
-            {locale === 'en' ? 'DE 🇩🇪' : 'EN 🇬🇧'}
+            {locale.toUpperCase()} 🌐
           </button>
 
           <button
@@ -197,17 +186,9 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           <Link 
             href="/booking" 
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-3 text-base font-medium border-b border-white/10 text-[#C69C6D] hover:text-white"
+            className="block py-3 text-base font-medium text-[#C69C6D] hover:text-white"
           >
             {locale === 'de' ? 'Individuelle Reise Buchen' : 'Book Custom Private Tour'}
-          </Link>
-
-          <Link 
-            href="/admin" 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-3 text-base font-medium text-[#F7F4EE] hover:text-[#C69C6D]"
-          >
-            {locale === 'de' ? 'Verwaltungs-Dashboard' : 'Operations Admin Dashboard'}
           </Link>
         </div>
       )}

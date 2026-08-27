@@ -78,6 +78,9 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[#151B23] text-[#F4EFE7] flex flex-col md:flex-row">
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       
       {/* Admin Sidebar */}
       <aside className="w-full md:w-64 bg-[#1F1917] border-r border-[#A85F43]/30 p-6 flex flex-col justify-between">

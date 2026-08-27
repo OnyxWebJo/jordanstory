@@ -10,7 +10,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useCurrency } from '@/context/CurrencyContext';
 
 export default function ToursPage() {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const { formatPrice } = useCurrency();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -28,8 +28,8 @@ export default function ToursPage() {
   const filteredTours = TOURS_DATA.filter((tour) => {
     const matchesCategory = selectedCategory === 'All' || tour.category === selectedCategory;
     const matchesSearch =
-      tour.title[locale].toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tour.subtitle[locale].toLowerCase().includes(searchQuery.toLowerCase()) ||
+      getLocalized(tour.title).toLowerCase().includes(searchQuery.toLowerCase()) ||
+      getLocalized(tour.subtitle).toLowerCase().includes(searchQuery.toLowerCase()) ||
       tour.route.some((r) => r.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
@@ -108,7 +108,7 @@ export default function ToursPage() {
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={tour.heroImage}
-                    alt={tour.title[locale]}
+                    alt={getLocalized(tour.title)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
@@ -138,11 +138,11 @@ export default function ToursPage() {
                 <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
                   <div className="space-y-3">
                     <h3 className="font-serif text-2xl font-bold text-[#1A1615] group-hover:text-[#A85F43] transition-colors leading-snug">
-                      {tour.title[locale]}
+                      {getLocalized(tour.title)}
                     </h3>
 
                     <p className="text-gray-600 text-xs sm:text-sm font-light line-clamp-2 leading-relaxed">
-                      {tour.subtitle[locale]}
+                      {getLocalized(tour.subtitle)}
                     </p>
 
                     {/* Route Pins */}
@@ -165,7 +165,7 @@ export default function ToursPage() {
                     </div>
 
                     <Link
-                      href={`/tours/${tour.slug[locale]}`}
+                      href={`/tours/${getLocalized(tour.slug)}`}
                       className="px-5 py-2.5 rounded-full bg-[#1A1615] hover:bg-[#A85F43] text-white text-xs font-semibold transition-all shadow-md group-hover:shadow-xl"
                     >
                       {locale === 'de' ? 'Details Ansehen' : 'View Program'}

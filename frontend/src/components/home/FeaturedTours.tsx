@@ -18,7 +18,7 @@ const FEATURED_HOMEPAGE_IDS = [
 ];
 
 export const FeaturedTours: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const { formatPrice } = useCurrency();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -94,7 +94,7 @@ export const FeaturedTours: React.FC = () => {
               <div className="relative h-64 overflow-hidden">
                 <img
                   src={tour.heroImage}
-                  alt={tour.title[locale]}
+                  alt={getLocalized(tour.title)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 
@@ -125,15 +125,15 @@ export const FeaturedTours: React.FC = () => {
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
                 <div className="space-y-3">
                   <h3 className="font-serif text-2xl font-bold text-[#1A1615] group-hover:text-[#A85F43] transition-colors leading-snug">
-                    {tour.title[locale]}
+                    {getLocalized(tour.title)}
                   </h3>
 
                   <p className="text-gray-600 text-xs sm:text-sm font-light line-clamp-2 leading-relaxed">
-                    {tour.subtitle[locale]}
+                    {getLocalized(tour.subtitle)}
                   </p>
 
                   <div className="pt-2 flex flex-wrap gap-1.5">
-                    {tour.highlights[locale].slice(0, 3).map((hl, i) => (
+                    {(getLocalized(tour.highlights) || []).slice(0, 3).map((hl: string, i: number) => (
                       <span
                         key={i}
                         className="inline-flex items-center gap-1 text-[11px] font-medium bg-[#F7F4EE] text-gray-700 px-2.5 py-1 rounded-md border border-gray-200"
@@ -158,7 +158,7 @@ export const FeaturedTours: React.FC = () => {
                   </div>
 
                   <Link
-                    href={`/tours/${tour.slug[locale]}`}
+                    href={`/tours/${getLocalized(tour.slug)}`}
                     className="px-5 py-2.5 rounded-full bg-[#1A1615] hover:bg-[#A85F43] text-white text-xs font-semibold transition-all shadow-md group-hover:shadow-xl"
                   >
                     {locale === 'de' ? 'Details Ansehen' : 'View Details'}

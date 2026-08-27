@@ -6,7 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { REVIEWS_DATA } from '@/data/reviews';
 
 export const Testimonials: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
 
   return (
     <section className="py-24 bg-[#1A1615] text-[#F7F4EE] relative overflow-hidden">
@@ -68,12 +68,12 @@ export const Testimonials: React.FC = () => {
 
                 {/* Tour Name Badge */}
                 <span className="inline-block text-[11px] font-mono text-[#C69C6D] bg-[#C69C6D]/10 px-3 py-1 rounded-full border border-[#C69C6D]/20">
-                  {review.tourName[locale]}
+                  {getLocalized(review.tourName)}
                 </span>
 
                 {/* Comment Content */}
                 <p className="text-gray-300 text-sm sm:text-base font-light italic leading-relaxed">
-                  "{review.comment[locale]}"
+                  "{getLocalized(review.comment)}"
                 </p>
               </div>
 

@@ -2,13 +2,18 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export type Locale = 'en' | 'de';
+export type Locale = 'en' | 'de' | 'fr' | 'it';
+
+export function getLocalizedText<T>(obj: { en: T; de?: T; fr?: T; it?: T } | undefined | null, locale: Locale): T {
+  if (!obj) return '' as unknown as T;
+  return obj[locale] || obj.en;
+}
 
 interface LanguageContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
-  getLocalized: <T>(obj: { en: T; de: T }) => T;
+  getLocalized: <T>(obj: { en: T; de?: T; fr?: T; it?: T }) => T;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -18,7 +23,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   useEffect(() => {
     const saved = localStorage.getItem('jordan_story_locale') as Locale;
-    if (saved && (saved === 'en' || saved === 'de')) {
+    if (saved && (saved === 'en' || saved === 'de' || saved === 'fr' || saved === 'it')) {
       setLocaleState(saved);
     }
   }, []);
@@ -29,12 +34,17 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   const toggleLocale = () => {
-    setLocale(locale === 'en' ? 'de' : 'en');
+    const nextLocale: Record<Locale, Locale> = {
+      en: 'de',
+      de: 'fr',
+      fr: 'it',
+      it: 'en',
+    };
+    setLocale(nextLocale[locale] || 'en');
   };
 
-  const getLocalized = <T,>(obj: { en: T; de: T }): T => {
-    if (!obj) return '' as unknown as T;
-    return obj[locale] || obj.en;
+  const getLocalized = <T,>(obj: { en: T; de?: T; fr?: T; it?: T }): T => {
+    return getLocalizedText(obj, locale);
   };
 
   return (

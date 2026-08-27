@@ -53,7 +53,7 @@ const STORIES = [
 ];
 
 export const StoryCollections: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
 
   return (
     <section className="py-24 bg-[#F7F4EE] text-[#1A1615]">
@@ -85,11 +85,11 @@ export const StoryCollections: React.FC = () => {
               <div className="lg:col-span-4 space-y-2">
                 <span className="font-mono text-sm text-[#C69C6D] font-semibold">{story.number}</span>
                 <h3 className="font-serif text-3xl font-bold text-[#1A1615] group-hover:text-[#A85F43] transition-colors">
-                  {story.name[locale]}
+                  {getLocalized(story.name)}
                 </h3>
-                <span className="text-xs text-[#A85F43] font-semibold block">{story.subtitle[locale]}</span>
+                <span className="text-xs text-[#A85F43] font-semibold block">{getLocalized(story.subtitle)}</span>
                 <p className="text-gray-600 text-xs sm:text-sm font-light pt-2 max-w-sm">
-                  {story.description[locale]}
+                  {getLocalized(story.description)}
                 </p>
                 <div className="pt-4">
                   <Link
@@ -106,7 +106,7 @@ export const StoryCollections: React.FC = () => {
               <div className="lg:col-span-8 h-72 sm:h-96 rounded-3xl overflow-hidden relative shadow-lg border border-gray-200">
                 <img
                   src={story.image}
-                  alt={story.name[locale]}
+                  alt={getLocalized(story.name)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />

@@ -198,7 +198,7 @@ const EXTRACTED_FRAMES: InternalScene[] = [
 ];
 
 export const ScrollWorldExperience: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -379,28 +379,28 @@ export const ScrollWorldExperience: React.FC = () => {
             {/* Chapter Eyebrow */}
             {copy.eyebrow && (
               <span className="inline-block text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold bg-[#1A1615]/70 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/10 shadow-lg">
-                {copy.eyebrow[locale]}
+                {getLocalized(copy.eyebrow)}
               </span>
             )}
 
             {/* Display Headline */}
             {copy.headline && (
               <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl font-extrabold text-[#F7F4EE] tracking-tight leading-tight drop-shadow-2xl">
-                {copy.headline[locale]}
+                {getLocalized(copy.headline)}
               </h1>
             )}
 
             {/* Supporting Line */}
             {copy.supportingLine && (
               <p className="text-lg sm:text-2xl text-[#C69C6D] font-serif italic drop-shadow-md">
-                {copy.supportingLine[locale]}
+                {getLocalized(copy.supportingLine)}
               </p>
             )}
 
             {/* Description Paragraph */}
             {copy.description && (
               <p className="text-xs sm:text-base text-[#F7F4EE]/90 max-w-xl mx-auto font-light leading-relaxed drop-shadow-md">
-                {copy.description[locale]}
+                {getLocalized(copy.description)}
               </p>
             )}
 
@@ -411,7 +411,7 @@ export const ScrollWorldExperience: React.FC = () => {
                   href={copy.ctaLink || '/tours'}
                   className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs sm:text-sm shadow-2xl transition-all hover:scale-105 flex items-center gap-2"
                 >
-                  <span>{copy.ctaText[locale]}</span>
+                  <span>{getLocalized(copy.ctaText)}</span>
                   <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -424,7 +424,7 @@ export const ScrollWorldExperience: React.FC = () => {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none">
           {scrollProgress < 0.08 && (
             <span className="text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-semibold">
-              {copy?.prompt ? copy.prompt[locale] : (locale === 'de' ? 'Scrollen zum Starten ↓' : 'Scroll to begin ↓')}
+              {copy?.prompt ? getLocalized(copy.prompt) : (locale === 'de' ? 'Scrollen zum Starten ↓' : 'Scroll to begin ↓')}
             </span>
           )}
           <ArrowDown className="w-4 h-4 text-[#C69C6D] animate-bounce" />

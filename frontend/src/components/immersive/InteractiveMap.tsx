@@ -83,7 +83,7 @@ const MAP_NODES = [
 ];
 
 export const InteractiveMap: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const [selectedRoute, setSelectedRoute] = useState<TourRoutePreset>(ROUTE_PRESETS[0]);
   const [activeNode, setActiveNode] = useState(MAP_NODES[5]); // Default Petra
 
@@ -121,7 +121,7 @@ export const InteractiveMap: React.FC = () => {
                   : 'bg-white/5 border-white/10 text-gray-300 hover:border-[#A85F43]/50 hover:text-white'
               }`}
             >
-              {preset.title[locale]}
+              {getLocalized(preset.title)}
             </button>
           ))}
         </div>
@@ -136,7 +136,7 @@ export const InteractiveMap: React.FC = () => {
             <div className="flex items-center justify-between text-xs font-mono border-b border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-2 text-[#C69C6D]">
                 <Navigation className="w-4 h-4" />
-                <span>{selectedRoute.title[locale]}</span>
+                <span>{getLocalized(selectedRoute.title)}</span>
               </div>
 
               <div className="flex items-center gap-4 text-gray-400">

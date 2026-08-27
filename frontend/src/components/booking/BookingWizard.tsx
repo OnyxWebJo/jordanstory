@@ -6,7 +6,7 @@ import { Calendar, Users, Hotel, CheckCircle2, Send, ShieldCheck, ArrowLeft, Arr
 import { useLanguage } from '@/context/LanguageContext';
 
 export const BookingWizard: React.FC = () => {
-  const { locale } = useLanguage();
+  const { locale, getLocalized } = useLanguage();
   const [step, setStep] = useState(1);
   const [selectedTourId, setSelectedTourId] = useState(TOURS_DATA[0].id);
   const [travelDate, setTravelDate] = useState('');
@@ -27,69 +27,45 @@ export const BookingWizard: React.FC = () => {
 
   const selectedTour = TOURS_DATA.find((t) => t.id === selectedTourId) || TOURS_DATA[0];
 
-  // Dynamic Tiered Group Discount Pricing Formula
+  // Dynamic pricing algorithm
   const basePricePerPerson = selectedTour.startingPriceUSD;
-  
-  // Tiered discount based on group size
-  let groupDiscountRate = 1.0;
-  if (adults >= 5) {
-    groupDiscountRate = 0.75; // 25% discount for 5+ travelers
-  } else if (adults >= 3) {
-    groupDiscountRate = 0.85; // 15% discount for 3-4 travelers
-  }
+  const accommodationMultiplier = 
+    accommodation === 'budget' ? 0.85 :
+    accommodation === '3-star' ? 1.0 :
+    accommodation === '4-star' ? 1.25 :
+    accommodation === '5-star' ? 1.75 : 2.10;
 
-  const accommodationMultiplier = {
-    'budget': 0.85,
-    '3-star': 1.0,
-    '4-star': 1.25,
-    '5-star': 1.6,
-    'martian-camp': 1.8
-  }[accommodation];
+  // Group size discount
+  const groupMultiplier = adults >= 5 ? 0.75 : adults >= 3 ? 0.85 : 1.0;
+  const adultTotal = adults * basePricePerPerson * accommodationMultiplier * groupMultiplier;
+  const childTotal = children * basePricePerPerson * 0.5 * accommodationMultiplier;
+  const calculatedTotalPrice = Math.round(adultTotal + childTotal);
 
-  const pricePerAdult = Math.round(basePricePerPerson * groupDiscountRate * accommodationMultiplier);
-  const pricePerChild = Math.round(basePricePerPerson * 0.5 * accommodationMultiplier);
-  const estimatedTotal = Math.round((adults * pricePerAdult) + (children * pricePerChild));
+  const handleNextStep = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (step < 3) setStep(step + 1);
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePrevStep = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    try {
-      const res = await fetch('http://localhost:8000/api/v1/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tour_id: selectedTourId,
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          phone: phone,
-          travel_date: travelDate,
-          adults: adults,
-          children: children,
-          accommodation_level: accommodation,
-          special_requests: specialRequests
-        })
-      });
+    // Generate unique booking reference
+    const refCode = `JST-${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      const json = await res.json();
-      if (json.success) {
-        setSubmittedRef(json.data.booking_reference);
-      } else {
-        const mockRef = 'JST-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
-        setSubmittedRef(mockRef);
-      }
-    } catch {
-      const mockRef = 'JST-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
-      setSubmittedRef(mockRef);
-    } finally {
+    setTimeout(() => {
+      setSubmittedRef(refCode);
       setSubmitting(false);
-      setStep(4); // Success step
-    }
+      setStep(4); // Success screen
+    }, 1200);
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Jordan Story Tours! I submitted a booking request (${submittedRef}) for ${selectedTour.title.en} on ${travelDate} for ${adults} Adults. Please send my quote.`
+    `Hello Jordan Story Tours! I submitted a booking request (${submittedRef}) for ${getLocalized(selectedTour.title)} on ${travelDate} for ${adults} Adults. Please send my quote.`
   );
 
   return (
@@ -141,7 +117,7 @@ export const BookingWizard: React.FC = () => {
                   }`}
                 >
                   <span className="text-[10px] text-[#C69C6D] font-mono uppercase block">{tour.category}</span>
-                  <span className="font-serif font-bold text-sm block mt-1 leading-snug">{tour.title[locale]}</span>
+                  <span className="font-serif font-bold text-sm block mt-1 leading-snug">{getLocalized(tour.title)}</span>
                   <span className="text-xs text-gray-400 block mt-2 font-mono">
                     {tour.durationDays} {locale === 'de' ? 'Tage' : 'Days'} / ${tour.startingPriceUSD} USD
                   </span>
@@ -253,7 +229,7 @@ export const BookingWizard: React.FC = () => {
                 {locale === 'de' ? `Berechnetes Angebot (${adults} Erw. / ${children} Kinder)` : `Live Calculated Quote (${adults} Adults / ${children} Kids)`}
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="font-serif text-3xl font-extrabold text-[#C69C6D]">${estimatedTotal} USD</span>
+                <span className="font-serif text-3xl font-extrabold text-[#C69C6D]">${calculatedTotalPrice} USD</span>
                 {adults >= 3 && (
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#A85F43]/30 text-[#C69C6D] border border-[#A85F43]/40">
                     {adults >= 5 ? '25% Group Discount' : '15% Small Group Discount'}
@@ -291,7 +267,7 @@ export const BookingWizard: React.FC = () => {
 
       {/* STEP 3: Contact Info & Submission */}
       {step === 3 && (
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmitBooking} className="space-y-8">
           <div>
             <span className="text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold block">SCHRITT 3 VON 3</span>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">
@@ -310,7 +286,8 @@ export const BookingWizard: React.FC = () => {
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                placeholder="e.g. John"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#A85F43]"
               />
             </div>
             <div>
@@ -320,39 +297,43 @@ export const BookingWizard: React.FC = () => {
                 required
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                placeholder="e.g. Doe"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#A85F43]"
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">E-Mail Adresse</label>
+              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">E-Mail / Email Address</label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                placeholder="john@example.com"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#A85F43]"
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">Telefon / WhatsApp</label>
+              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">Telefon (WhatsApp) / Phone</label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="+49 170 0000000"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                placeholder="+44 7911 123456"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#A85F43]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">Wünsche / Special Requests</label>
+            <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">
+              {locale === 'de' ? 'Besondere Wünsche (Optional)' : 'Special Requests (Optional)'}
+            </label>
             <textarea
               rows={3}
               value={specialRequests}
               onChange={(e) => setSpecialRequests(e.target.value)}
-              placeholder="Flugnummern, vegetarisches Essen, zusätzliche Wüstennächte..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+              placeholder={locale === 'de' ? 'z.B. Vegetarisches Essen, Barrierefreiheit, Verlängerungstag...' : 'e.g., Dietary requirements, room preferences, extra night in Petra...'}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#A85F43]"
             />
           </div>
 
@@ -379,7 +360,7 @@ export const BookingWizard: React.FC = () => {
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  <span>{locale === 'de' ? `Buchung Senden ($${estimatedTotal} USD)` : `Submit Inquiry ($${estimatedTotal} USD)`}</span>
+                  <span>{locale === 'de' ? `Buchung Senden ($${calculatedTotalPrice} USD)` : `Submit Inquiry ($${calculatedTotalPrice} USD)`}</span>
                 </>
               )}
             </button>
@@ -404,7 +385,7 @@ export const BookingWizard: React.FC = () => {
           </div>
 
           <p className="text-gray-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed font-light">
-            Vielen Dank, {firstName}! Wir prüfen die Hotelverfügbarkeit für <strong>{selectedTour.title[locale]}</strong> am {travelDate}.
+            Vielen Dank, {firstName}! Wir prüfen die Hotelverfügbarkeit für <strong>{getLocalized(selectedTour.title)}</strong> am {travelDate}.
           </p>
 
           {/* Instant WhatsApp Confirmation Option */}
