@@ -261,43 +261,54 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
               </h2>
 
               <div className="space-y-4">
-                {tour.faqs && tour.faqs.length > 0 ? (
-                  tour.faqs.map((faq, idx) => {
-                    const qText = getLocalizedText(faq.question, locale);
-                    const aText = getLocalizedText(faq.answer, locale);
+                {(() => {
+                  const displayFaqs = (tour.faqs && tour.faqs.length > 0)
+                    ? tour.faqs.map(faq => ({
+                        question: getLocalizedText(faq.question, locale),
+                        answer: getLocalizedText(faq.answer, locale)
+                      }))
+                    : [
+                        {
+                          question: locale === 'de'
+                            ? `Welche Hauptattraktionen werden auf der Reise "${title}" besucht?`
+                            : locale === 'fr'
+                            ? `Quels sites principaux sont visités lors du circuit "${title}" ?`
+                            : locale === 'it'
+                            ? `Quali attrazioni principali si visitano nel tour "${title}"?`
+                            : `What key landmarks are visited on the "${title}" itinerary?`,
+                          answer: locale === 'de'
+                            ? `Diese ${tour.durationDays}-Tage-Reise führt Sie durch ${tour.route.join(', ')} mit privatem Chauffeur-Transfer.`
+                            : locale === 'fr'
+                            ? `Ce circuit de ${tour.durationDays} jours vous emmène à travers ${tour.route.join(', ')} avec transport privé.`
+                            : locale === 'it'
+                            ? `Questo itinerario di ${tour.durationDays} giorni ti porta attraverso ${tour.route.join(', ')} con autista privato.`
+                            : `This ${tour.durationDays}-day tour explores ${tour.route.join(', ')} with dedicated private AC transportation.`
+                        },
+                        {
+                          question: locale === 'de'
+                            ? `Was ist im Preis dieser Reise enthalten?`
+                            : locale === 'fr'
+                            ? `Qu'est-ce qui est inclus dans le tarif de ce circuit ?`
+                            : locale === 'it'
+                            ? `Cosa è incluso nel prezzo di questo tour?`
+                            : `What is included in the price of this tour?`,
+                          answer: locale === 'de'
+                            ? `Enthalten sind private Transfers mit englischsprachigem Fahrer, Hotelübernachtungen, tägliches Frühstück und Visum-Unterstützung bei Ankunft.`
+                            : locale === 'fr'
+                            ? `Sont inclus : les transferts privés avec chauffeur, l'hébergement à l'hôtel, le petit-déjeuner quotidien et l'assistance visa.`
+                            : locale === 'it'
+                            ? `Sono inclusi i trasferimenti privati con autista, il pernottamento in hotel, la colazione giornaliera e l'assistenza per il visto.`
+                            : `Included are private AC transfers with an English-speaking driver, hotel accommodations, daily breakfast, and airport entry visa assistance.`
+                        }
+                      ];
 
-                    return (
-                      <div key={idx} className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
-                        <h3 className="font-bold text-sm text-[#151B23]">{qText}</h3>
-                        <p className="text-xs text-gray-600 leading-relaxed font-light">{aText}</p>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <>
-                    <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
-                      <h3 className="font-bold text-sm text-[#151B23]">
-                        {locale === 'de' ? 'Wie buche ich diese Reise?' : locale === 'fr' ? 'Comment réserver ce circuit ?' : locale === 'it' ? 'Come posso prenotare questo tour?' : 'How do I book this tour?'}
-                      </h3>
-                      <p className="text-xs text-gray-600 leading-relaxed font-light">
-                        {locale === 'de'
-                          ? 'Klicken Sie auf "Reise Anfragen", um Ihr gewünschtes Reisedatum und Ihre Hotelkategorie zu wählen. Sie erhalten umgehend eine Bestätigung mit flexiblen Stornierungsbedingungen.'
-                          : 'Click "Request Booking" to select your preferred dates and hotel level. You will receive a confirmation with flexible terms.'}
-                      </p>
+                  return displayFaqs.map((faq, idx) => (
+                    <div key={idx} className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
+                      <h3 className="font-bold text-sm text-[#151B23]">{faq.question}</h3>
+                      <p className="text-xs text-gray-600 leading-relaxed font-light">{faq.answer}</p>
                     </div>
-
-                    <div className="p-5 rounded-2xl bg-[#F7F4EE]/60 border border-gray-200/60 space-y-2">
-                      <h3 className="font-bold text-sm text-[#151B23]">
-                        {locale === 'de' ? 'Wird eine kostenlose Visum-Unterstützung angeboten?' : locale === 'fr' ? 'L\'assistance visa est-elle incluse ?' : locale === 'it' ? 'È inclusa l\'assistenza per il visto?' : 'Is entry visa assistance provided?'}
-                      </h3>
-                      <p className="text-xs text-gray-600 leading-relaxed font-light">
-                        {locale === 'de'
-                          ? 'Ja! Jordan Story Tours unterstützt berechtigte Reisende bei der kostenlosen Visumbeschaffung direkt bei der Ankunft am Flughafen Amman.'
-                          : 'Yes! Jordan Story Tours assists eligible travelers with free visa processing upon arrival at Amman Airport.'}
-                      </p>
-                    </div>
-                  </>
-                )}
+                  ));
+                })()}
               </div>
             </div>
 

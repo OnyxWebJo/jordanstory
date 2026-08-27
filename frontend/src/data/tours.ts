@@ -74,6 +74,50 @@ export const TOURS_DATA: Tour[] = [
       { id: "bt1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral floating", de: "Schwebendes Bad im salzreichen Toten Meer" }, caption: { en: "Original legacy media: Floating at the Dead Sea", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt1-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Roman Forum & Colonnade", de: "Römisches Forum in Jerash" }, caption: { en: "Original legacy media: Ancient Roman Jerash", de: "Originales Medien-Asset: Römisches Jerash" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt1-4", url: "https://images.unsplash.com/photo-1579606032824-2c70034a7138?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Monastery Ad-Deir facade", de: "Fassade des Klosters Ad-Deir in Petra" }, caption: { en: "High-resolution view of Petra Monastery", de: "Hochauflösende Ansicht des Klosters in Petra" }, sortOrder: 4, rightsStatus: "VERIFIED_OWNED" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What key landmarks are visited on Budget Tour 1?",
+          de: "Welche Hauptsehenswürdigkeiten werden auf der Budget-Tour 1 besucht?",
+          fr: "Quels sont les sites majeurs visités lors du Circuit Budget 1 ?",
+          it: "Quali monumenti si visitano nel Tour Budget 1?"
+        },
+        answer: {
+          en: "Budget Tour 1 covers Jordan's essential trio in 3 days: the ancient rose city of Petra, floating in the mineral-rich Dead Sea, and the Roman ruins of Jerash, along with Amman Citadel.",
+          de: "Die Budget-Tour 1 umfasst Jordaniens wichtigste Highlights in 3 Tagen: die Felsenstadt Petra, das Tote Meer, Jerash und die Zitadelle von Amman.",
+          fr: "Le Circuit Budget 1 couvre le trio incontournable en 3 jours : la cité rose de Pétra, la Mer Morte et les ruines romaines de Gérasa.",
+          it: "Il Tour Budget 1 copre il trio fondamentale in 3 giorni: l'antica città di Petra, il Mar Morto e le rovine romane di Jerash."
+        }
+      },
+      {
+        question: {
+          en: "What driver and vehicle setup is provided?",
+          de: "Welches Fahrzeug und welcher Fahrer stehen zur Verfügung?",
+          fr: "Quel type de véhicule et de chauffeur est fourni ?",
+          it: "Che tipo di veicolo e autista sono previsti?"
+        },
+        answer: {
+          en: "You travel in a private, air-conditioned vehicle with a dedicated English-speaking driver throughout the entire 3-day itinerary.",
+          de: "Sie reisen in einem privaten, klimatisierten Fahrzeug mit einem erfahrenen englischsprachigen Fahrer während der gesamten 3 Tage.",
+          fr: "Vous voyagerez dans un véhicule privé et climatisé avec un chauffeur anglophone dédié pendant les 3 jours.",
+          it: "Viaggerai in un veicolo privato climatizzato con un autista esperto parlante inglese per tutti i 3 giorni."
+        }
+      },
+      {
+        question: {
+          en: "Are entrance fees included in the starting price?",
+          de: "Sind Eintrittsgelder im Startpreis enthalten?",
+          fr: "Les droits d'entrée sont-ils inclus dans le prix de départ ?",
+          it: "I biglietti d'ingresso sono inclusi nel prezzo di partenza?"
+        },
+        answer: {
+          en: "Entrance fees to Petra and Jerash are excluded from the base price. We strongly recommend purchasing the Jordan Pass online prior to arrival to cover all site entries and visa fees.",
+          de: "Eintrittsgelder für Petra und Jerash sind nicht im Grundpreis enthalten. Wir empfehlen den vorherigen Kauf des Jordan Pass.",
+          fr: "Les billets d'entrée à Pétra et Jérash ne sont pas inclus. Nous recommandons d'acheter le Jordan Pass avant le départ.",
+          it: "I biglietti per Petra e Jerash sono esclusi dal prezzo base. Consigliamo di acquistare il Jordan Pass prima dell'arrivo."
+        }
+      }
     ]
   },
 
@@ -107,6 +151,36 @@ export const TOURS_DATA: Tour[] = [
       { id: "bt2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea floating resort experience", de: "Baden im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea resort float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt2-2", url: "https://jordanstorytours.com/content/uploads/2020/12/Petra-travel-e1608043798711-600x600.jpg", alt: { en: "Petra Rose City landscape", de: "Felsenstadt Petra" }, caption: { en: "Original legacy media: Petra sandstone carvings", de: "Originales Medien-Asset: Felsenstadt Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt2-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Roman Forum", de: "Forum in Jerash" }, caption: { en: "Original legacy media: Jerash Forum", de: "Originales Medien-Asset: Jerash Forum" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "How does Budget Tour 2 differ from Budget Tour 1?",
+          de: "Wie unterscheidet sich die Budget-Tour 2 von der Budget-Tour 1?",
+          fr: "Quelle est la différence entre le Circuit Budget 2 et le Circuit Budget 1 ?",
+          it: "Come si differenzia il Tour Budget 2 dal Tour Budget 1?"
+        },
+        answer: {
+          en: "Budget Tour 2 adds Madaba (the Mosaic City) and Mount Nebo to the itinerary, plus an included resort lunch at the Dead Sea.",
+          de: "Die Budget-Tour 2 erweitert das Programm um Madaba (Mosaikstadt) und den Berg Nebo sowie ein inbegriffenes Resort-Mittagessen am Toten Meer.",
+          fr: "Le Circuit Budget 2 ajoute Madaba (la cité des mosaïques) et le Mont Nébo, ainsi qu'un déjeuner inclus à la Mer Morte.",
+          it: "Il Tour Budget 2 include Madaba (la città dei mosaici) e il Monte Nebo, oltre a un pranzo incluso al Mar Morto."
+        }
+      },
+      {
+        question: {
+          en: "Which meals are included on Budget Tour 2?",
+          de: "Welche Mahlzeiten sind bei der Budget-Tour 2 enthalten?",
+          fr: "Quels repas sont inclus dans le Circuit Budget 2 ?",
+          it: "Quali pasti sono inclusi nel Tour Budget 2?"
+        },
+        answer: {
+          en: "Daily breakfast at your hotel, a resort lunch at the Dead Sea on Day 2, and dinner in Petra on Day 1 are included.",
+          de: "Tägliches Frühstück im Hotel, ein Resort-Mittagessen am Toten Meer an Tag 2 sowie ein Abendessen in Petra an Tag 1 sind enthalten.",
+          fr: "Le petit-déjeuner quotidien, un déjeuner au complexe de la Mer Morte au Jour 2 et le dîner à Pétra au Jour 1 sont inclus.",
+          it: "La colazione giornaliera, il pranzo al resort del Mar Morto al Giorno 2 e la cena a Petra al Giorno 1 sono inclusi."
+        }
+      }
     ]
   },
 
@@ -141,6 +215,36 @@ export const TOURS_DATA: Tour[] = [
       { id: "bt3-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Greco-Roman Colonnade", de: "Römische Säulenstraße in Jerash" }, caption: { en: "Original legacy media: Roman Jerash", de: "Originales Medien-Asset: Jerash" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt3-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury", de: "Schatzhaus in Petra" }, caption: { en: "Original legacy media: Petra Rose City", de: "Originales Medien-Asset: Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
       { id: "bt3-3", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea floating", de: "Baden im Toten Meer" }, caption: { en: "Original legacy media: Dead Sea Float", de: "Originales Medien-Asset: Bad im Toten Meer" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+    ],
+    faqs: [
+      {
+        question: {
+          en: "What highlights are covered on the 4-Day Northern & Southern Tour?",
+          de: "Welche Highlights werden auf der 4-Tages-Tour durch Norden und Süden abgedeckt?",
+          fr: "Quels sont les temps forts couverts par ce circuit de 4 jours ?",
+          it: "Quali attrazioni principali copre questo tour di 4 giorni?"
+        },
+        answer: {
+          en: "Budget Tour 3 explores Roman Jerash, Ajloun Crusader Castle, Madaba mosaics, Mount Nebo, a full day inside Petra, and Dead Sea resort floating.",
+          de: "Die Budget-Tour 3 erkundet Jerash, Burg Ajloun, Madaba, Berg Nebo, einen vollen Tag in Petra und das Tote Meer.",
+          fr: "Le Circuit Budget 3 explore Gérasa, le château d'Ajloun, Madaba, le Mont Nébo, une journée complète à Pétra et la baignade à la Mer Morte.",
+          it: "Il Tour Budget 3 esplora Jerash, il Castello di Ajloun, Madaba, il Monte Nebo, una giornata intera a Petra e il bagno nel Mar Morto."
+        }
+      },
+      {
+        question: {
+          en: "How much walking is required in Petra and Jerash?",
+          de: "Wie viel Fußweg ist in Petra und Jerash erforderlich?",
+          fr: "Combien de marche est nécessaire à Pétra et Jérash ?",
+          it: "Quanta camminata è richiesta a Petra e Jerash?"
+        },
+        answer: {
+          en: "Moderate walking is expected: approximately 4-5 hours of walking inside Petra Rose City and 2 hours across Jerash Roman ruins.",
+          de: "Moderate Fußwege: ca. 4-5 Stunden in Petra und 2 Stunden in den römischen Ruinen von Jerash.",
+          fr: "Marche modérée : environ 4 à 5 heures de marche à Pétra et 2 heures dans les ruines romaines de Jérash.",
+          it: "Camminata moderata: circa 4-5 ore a Petra e 2 ore tra le rovine romane di Jerash."
+        }
+      }
     ]
   },
 
