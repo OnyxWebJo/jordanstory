@@ -79,6 +79,7 @@ export default async function LocalizedToursPage({ params }: Props) {
             {TOURS_DATA.map((tour) => {
               const localizedTitle = getLocalizedText(tour.title, locale);
               const localizedSubtitle = getLocalizedText(tour.subtitle, locale);
+              const tourSlug = getLocalizedText(tour.slug, locale) || tour.slug.en;
 
               return (
                 <div
@@ -128,7 +129,7 @@ export default async function LocalizedToursPage({ params }: Props) {
                       </div>
 
                       <Link
-                        href={`/${locale}/tours/${tour.slug}`}
+                        href={`/${locale}/tours/${tourSlug}`}
                         className="px-4 py-2 rounded-full bg-[#151B23] hover:bg-[#A85F43] text-white text-xs font-semibold transition-colors"
                       >
                         {locale === 'de' ? 'Details Ansehen' : locale === 'fr' ? 'Voir Détails' : locale === 'it' ? 'Vedi Dettagli' : 'View Details'}

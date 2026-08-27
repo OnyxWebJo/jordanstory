@@ -158,10 +158,10 @@ export const FeaturedTours: React.FC = () => {
                   </div>
 
                   <Link
-                    href={`/tours/${getLocalized(tour.slug)}`}
+                    href={`/${locale}/tours/${getLocalized(tour.slug)}`}
                     className="px-5 py-2.5 rounded-full bg-[#1A1615] hover:bg-[#A85F43] text-white text-xs font-semibold transition-all shadow-md group-hover:shadow-xl"
                   >
-                    {locale === 'de' ? 'Details Ansehen' : 'View Details'}
+                    {locale === 'de' ? 'Details Ansehen' : locale === 'fr' ? 'Voir Détails' : locale === 'it' ? 'Vedi Dettagli' : 'View Details'}
                   </Link>
                 </div>
 
