@@ -95,6 +95,14 @@ function BookingWizardContent() {
     `Hello Jordan Story Tours! I submitted a booking request (${submittedRef}) for ${getLocalized(selectedTour.title)} on ${travelDate} for ${adults} Adults. Please send my quote.`
   );
 
+  // Put selected tour first in the available tours list
+  const sortedTours = React.useMemo(() => {
+    const selected = TOURS_DATA.find((t) => t.id === selectedTourId);
+    if (!selected) return TOURS_DATA;
+    const rest = TOURS_DATA.filter((t) => t.id !== selectedTourId);
+    return [selected, ...rest];
+  }, [selectedTourId]);
+
   return (
     <div className="max-w-4xl mx-auto bg-[#1A1615] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl text-[#F7F4EE]">
       
@@ -140,7 +148,7 @@ function BookingWizardContent() {
               {locale === 'de' ? 'Verfügbare Rundreisen' : locale === 'fr' ? 'Circuits Disponibles' : locale === 'it' ? 'Tour Disponibili' : 'Available Tour Packages'}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-h-[300px] overflow-y-auto pr-1 scrollbar-thin">
-              {TOURS_DATA.map((tour) => (
+              {sortedTours.map((tour) => (
                 <button
                   type="button"
                   key={tour.id}
