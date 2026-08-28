@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import Link from 'next/link';
 import { Clock, Star, MapPin, Check, Search, Compass, ShieldCheck, Filter } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -155,13 +155,9 @@ export default function ToursPage() {
                   {/* Price & CTA */}
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] uppercase font-mono tracking-wider text-gray-400 block">
-                        {locale === 'de' ? 'Ab Preis' : 'Starting From'}
+                      <span className="text-xl font-bold font-serif text-[#1A1615]">
+                        {getTourPriceDisplay(tour, locale)}
                       </span>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-serif text-[#1A1615]">{formatPrice(tour.startingPriceUSD)}</span>
-                        <span className="text-xs text-gray-500 font-light">{locale === 'de' ? '/ Person' : '/ person'}</span>
-                      </div>
                     </div>
 
                     <Link

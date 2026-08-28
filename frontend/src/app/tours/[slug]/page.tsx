@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay, getTourCtaDisplay } from '@/data/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourPriceDisplay } from '@/components/tours/TourPriceDisplay';
 import Link from 'next/link';
@@ -241,7 +241,12 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
           {/* Right Sidebar Booking Widget */}
             <div className="space-y-6">
               <div className="sticky top-28 p-8 rounded-3xl bg-[#151B23] text-[#F4EFE7] border border-[#A85F43]/30 shadow-2xl space-y-6">
-                <TourPriceDisplay priceUSD={tour.startingPriceUSD} />
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-[#D8B98F] font-mono block">Private Tour Price</span>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="font-serif text-3xl font-extrabold text-[#D8B98F]">{getTourPriceDisplay(tour, 'en')}</span>
+                  </div>
+                </div>
 
               <div className="space-y-3 pt-4 border-t border-gray-800 text-xs text-gray-300">
                 <div className="flex items-center gap-2">
@@ -258,7 +263,7 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
                 href={`/booking?tour=${tour.id}`}
                 className="w-full block text-center py-4 rounded-full bg-[#A85F43] hover:bg-[#8B4B34] text-white font-bold text-sm shadow-xl transition-all hover:scale-105"
               >
-                Book This Tour Now
+                {getTourCtaDisplay(tour, 'en')}
               </Link>
             </div>
           </div>

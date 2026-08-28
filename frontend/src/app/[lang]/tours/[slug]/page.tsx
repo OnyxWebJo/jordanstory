@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay, getTourCtaDisplay } from '@/data/tours';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Clock, MapPin, CheckCircle2, XCircle, ShieldCheck, Star, HelpCircle, Calendar } from 'lucide-react';
@@ -30,16 +30,16 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
-  const validLocale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
+  const validLocale = (LOCALES.includes(lang as any) ? lang : 'en') as Locale;
 
+  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
   if (!tour) return {};
 
   const title = getLocalizedText(tour.title, validLocale);
   const subtitle = getLocalizedText(tour.subtitle, validLocale);
 
   return buildLocaleMetadata({
-    title: `${title} (${tour.durationDays} Days)`,
+    title: `${title} — Jordan Story Tours`,
     description: subtitle,
     path: `/tours/${slug}`,
     locale: validLocale,
@@ -48,10 +48,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LocalizedTourDetailPage({ params }: Props) {
   const { lang, slug } = await params;
-  const locale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
-  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
+  const locale = (LOCALES.includes(lang as any) ? lang : 'en') as Locale;
 
-  if (!tour) notFound();
+  const tour = TOURS_DATA.find((t) => Object.values(t.slug).includes(slug));
+  if (!tour) {
+    notFound();
+  }
 
   const title = getLocalizedText(tour.title, locale);
   const subtitle = getLocalizedText(tour.subtitle, locale);
@@ -60,24 +62,27 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
   const exclusionsList = getLocalizedText(tour.exclusions, locale) || [];
 
   // Product & Tour JSON-LD Schema
-  const jsonLd = {
+  const jsonLd: any = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     'name': title,
     'description': subtitle,
     'image': tour.heroImage,
-    'offers': {
-      '@type': 'Offer',
-      'priceCurrency': 'USD',
-      'price': tour.startingPriceUSD,
-      'availability': 'https://schema.org/InStock',
-      'url': `https://jordanstorytours.com/${locale}/tours/${slug}`,
-    },
     'brand': {
       '@type': 'Brand',
       'name': 'Jordan Story Tours',
     },
   };
+
+  if (tour.startingPriceUSD && tour.priceMode !== 'QUOTATION') {
+    jsonLd.offers = {
+      '@type': 'Offer',
+      'priceCurrency': 'USD',
+      'price': tour.startingPriceUSD,
+      'availability': 'https://schema.org/InStock',
+      'url': `https://jordanstorytours.com/${locale}/tours/${slug}`,
+    };
+  }
 
   const faqJsonLd = {
     '@context': 'https://schema.org',
@@ -327,8 +332,9 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
                   {locale === 'de' ? 'Private Rundreise' : locale === 'fr' ? 'Tarif Circuit Privé' : locale === 'it' ? 'Tariffa Tour Privato' : 'Private Tour Price'}
                 </span>
                 <div className="flex items-baseline gap-2 mt-1">
-                  <span className="font-serif text-4xl font-extrabold text-[#D8B98F]">${tour.startingPriceUSD}</span>
-                  <span className="text-xs text-gray-400">USD / {locale === 'de' ? 'Person' : 'person'}</span>
+                  <span className="font-serif text-3xl font-extrabold text-[#D8B98F]">
+                    {getTourPriceDisplay(tour, locale)}
+                  </span>
                 </div>
               </div>
 
@@ -347,7 +353,7 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
                 href={`/${locale}/booking?tour=${tour.id}`}
                 className="w-full block text-center py-4 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-sm uppercase tracking-wider transition-all shadow-xl hover:scale-105"
               >
-                {locale === 'de' ? 'Jetzt Anfragen & Buchen' : locale === 'fr' ? 'Réserver Ce Circuit' : locale === 'it' ? 'Prenota Questo Tour' : 'Book This Tour'}
+                {getTourCtaDisplay(tour, locale)}
               </Link>
             </div>
           </div>

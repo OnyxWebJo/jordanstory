@@ -2,8 +2,9 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, Star, MapPin, Search } from 'lucide-react';
 import { buildLocaleMetadata, generateStaticLocaleParams } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
@@ -120,11 +121,8 @@ export default async function LocalizedToursPage({ params }: Props) {
 
                     <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                       <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-mono block">
-                          {locale === 'de' ? 'Ab Preis' : locale === 'fr' ? 'À partir de' : locale === 'it' ? 'Da' : 'Starting From'}
-                        </span>
-                        <span className="font-serif text-xl font-bold text-[#151B23]">
-                          ${tour.startingPriceUSD} <span className="text-xs font-sans text-gray-500 font-normal">USD</span>
+                        <span className="font-serif text-lg font-bold text-[#151B23]">
+                          {getTourPriceDisplay(tour, locale)}
                         </span>
                       </div>
 

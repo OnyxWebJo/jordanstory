@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { DESTINATIONS_FULL } from '@/data/destinations';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MapPin, Clock, Calendar, CheckCircle2, Lightbulb, ArrowRight, Star } from 'lucide-react';
@@ -238,7 +238,7 @@ export default async function LocalizedDestinationDetailPage({ params }: Props) 
                         </div>
 
                         <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-                          <span className="font-serif font-bold text-[#151B23] text-lg">${t.startingPriceUSD} USD</span>
+                          <span className="font-serif font-bold text-[#151B23] text-base">{getTourPriceDisplay(t, locale)}</span>
                           <Link
                             href={`/${locale}/tours/${tourSlug}`}
                             className="px-3.5 py-1.5 rounded-full bg-[#151B23] hover:bg-[#A85F43] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1"

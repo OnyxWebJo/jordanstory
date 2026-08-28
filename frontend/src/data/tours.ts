@@ -7,6 +7,9 @@ export interface TourGalleryItem {
   rightsStatus: 'VERIFIED_OWNED' | 'LEGACY_SITE_ASSET';
 }
 
+export type PriceMode = 'FIXED' | 'FROM' | 'QUOTATION';
+export type BookingMode = 'DIRECT_BOOKING' | 'QUOTATION';
+
 export interface Tour {
   id: string;
   slug: { en: string; de?: string; fr?: string; it?: string };
@@ -16,7 +19,10 @@ export interface Tour {
   storyCollection: string;
   durationDays: number;
   durationNights: number;
-  startingPriceUSD: number;
+  priceMode: PriceMode;
+  bookingMode: BookingMode;
+  startingPriceUSD?: number | null;
+  currency?: string;
   highlights: { en: string[]; de?: string[]; fr?: string[]; it?: string[] };
   route: string[];
   inclusions: { en: string[]; de?: string[]; fr?: string[]; it?: string[] };
@@ -41,6 +47,36 @@ export interface Tour {
   }[];
 }
 
+
+export function getTourPriceDisplay(tour: Tour, locale: string = 'en'): string {
+  if (tour.priceMode === 'QUOTATION' || tour.startingPriceUSD === undefined || tour.startingPriceUSD === null) {
+    if (locale === 'de') return 'Preis anfragen';
+    if (locale === 'fr') return 'Demander un devis';
+    if (locale === 'it') return 'Richiedi un preventivo';
+    return 'Request a Quote';
+  }
+  if (tour.priceMode === 'FROM') {
+    if (locale === 'de') return `Ab ${tour.startingPriceUSD} USD`;
+    if (locale === 'fr') return `À partir de ${tour.startingPriceUSD} USD`;
+    if (locale === 'it') return `Da ${tour.startingPriceUSD} USD`;
+    return `From ${tour.startingPriceUSD} USD`;
+  }
+  return `${tour.startingPriceUSD} USD`;
+}
+
+export function getTourCtaDisplay(tour: Tour, locale: string = 'en'): string {
+  if (tour.bookingMode === 'QUOTATION' || tour.priceMode === 'QUOTATION') {
+    if (locale === 'de') return 'Preis Anfragen';
+    if (locale === 'fr') return 'Demander un Devis';
+    if (locale === 'it') return 'Richiedi un Preventivo';
+    return 'Request a Quote';
+  }
+  if (locale === 'de') return 'Jetzt Anfragen & Buchen';
+  if (locale === 'fr') return 'Réserver Ce Circuit';
+  if (locale === 'it') return 'Prenota Questo Tour';
+  return 'Book This Tour';
+}
+
 export const TOURS_DATA: Tour[] = [
   // --- BUDGET TOURS (4) ---
   {
@@ -52,7 +88,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Essential Story",
     durationDays: 3,
     durationNights: 2,
-    startingPriceUSD: 399,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Full day exploring Petra Rose City", "Floating in the mineral-rich Dead Sea", "Walk through Roman Jerash"],
       de: ["Ganztägige Erkundung von Petra", "Baden im mineralreichen Toten Meer", "Spaziergang durch das römische Jerash"],
@@ -139,7 +177,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Essential Story",
     durationDays: 3,
     durationNights: 2,
-    startingPriceUSD: 449,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Amman Citadel & Roman Jerash", "Madaba Mosaic Map & Mount Nebo", "Petra Treasury & Dead Sea Lunch Float"],
       de: ["Zitadelle von Amman & Römisches Jerash", "Mosaikkarte von Madaba & Berg Nebo", "Petra Schatzhaus & Totes Meer Mittagessen"],
@@ -211,7 +251,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Essential Story",
     durationDays: 4,
     durationNights: 3,
-    startingPriceUSD: 520,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Jerash Roman Ruins & Ajloun Castle", "Madaba Mosaics & Mount Nebo Viewpoint", "Full Day Petra Exploration", "Dead Sea Floating Resort"],
       de: ["Römisches Jerash & Festung Ajloun", "Mosaike in Madaba & Berg Nebo", "Ganzer Tag in Petra", "Totes Meer Schwebebad"],
@@ -284,7 +326,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Desert Story",
     durationDays: 4,
     durationNights: 3,
-    startingPriceUSD: 560,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Bedouin Camp overnight under stars", "2-Hour 4x4 Jeep Safari in Wadi Rum", "Full day in Petra Rose City", "Dead Sea Floating"],
       de: ["Übernachtung im Beduinencamp", "2-Stunden 4x4-Jeepsafari im Wadi Rum", "Ganzer Tag in Petra", "Baden im Toten Meer"],
@@ -358,7 +402,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Complete Story",
     durationDays: 5,
     durationNights: 4,
-    startingPriceUSD: 699,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Amman Citadel & downtown historic tour", "Petra Rose City Treasury exploration", "Madaba St. George Mosaic Map & Mount Nebo view", "Dead Sea relaxation & Roman Jerash ruins"],
       de: ["Zitadelle von Amman & historische Altstadt", "Felsenstadt Petra & Schatzhaus", "Mosaikkarte von Madaba & Berg Nebo", "Entspannung am Toten Meer & Römisches Jerash"],
@@ -431,7 +477,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Grand Story",
     durationDays: 7,
     durationNights: 6,
-    startingPriceUSD: 899,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Full day Petra Treasury & Monastery", "Wadi Rum 4x4 Jeep Safari & Martian Camp", "Dead Sea Floating & Aqaba Red Sea Coastal Resort", "Jerash, Ajloun, Madaba & Mount Nebo"],
       de: ["Ganzer Tag in Petra", "Wadi Rum 4x4 Jeep Safari & Beduinencamp", "Totes Meer & Aqaba Rotes Meer Strandresort", "Jerash, Ajloun, Madaba & Berg Nebo"],
@@ -508,7 +556,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Luxury Story",
     durationDays: 6,
     durationNights: 5,
-    startingPriceUSD: 1450,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Private chauffeur in executive vehicle", "5-Star Mövenpick Petra & Kempinski Dead Sea", "Private licensed guide in Petra & Jerash", "Gourmet dining & Dead Sea spa treatments"],
       de: ["Privater Chauffeur im Luxusfahrzeug", "5-Sterne Mövenpick Petra & Kempinski Totes Meer", "Privater lizenzierter Reiseleiter", "Gourmet-Dinner & Totes Meer Spa"],
@@ -581,7 +631,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Luxury Story",
     durationDays: 7,
     durationNights: 6,
-    startingPriceUSD: 1650,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["5-Star Luxury Hotels & Glass Martian Dome", "Executive Chauffeur Mercedes / GMC vehicle", "Private licensed guide in Petra, Jerash & Amman", "All entrances, VIP transfers & gourmet meals"],
       de: ["5-Sterne Luxushotels & Glas-Martian-Dome", "Chauffeur im Luxusfahrzeug (Mercedes/GMC)", "Privater Reiseleiter in Petra, Jerash & Amman", "Alle Eintritte, VIP-Transfers & Gourmet-Verpflegung"],
@@ -641,7 +693,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Luxury Story",
     durationDays: 8,
     durationNights: 7,
-    startingPriceUSD: 1990,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Private Red Sea Sunset Yacht Cruise in Aqaba", "5-Star Resorts (Kempinski Dead Sea, Mövenpick Petra, Al Manara Aqaba)", "Private Chauffeur & Personal Tour Concierge", "All entrances, gourmet meals & VIP airport lounge access"],
       de: ["Private Jachtausfahrt bei Sonnenuntergang im Roten Meer", "5-Sterne Resorts in Petra, Aqaba & Totem Meer", "Chauffeur & persönlicher Reise-Concierge", "Alle Eintritte, Gourmet-Dinner & VIP Lounge Access"],
@@ -703,7 +757,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Sacred Story",
     durationDays: 6,
     durationNights: 5,
-    startingPriceUSD: 950,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Baptism Site of Jesus Christ (Bethany Beyond Jordan)", "Mount Nebo Sanctuary where Moses saw the Promised Land", "Madaba St. George 6th century Mosaic Map", "Petra Rose City & Dead Sea float"],
       de: ["Taufstelle Jesu Christi am Jordan", "Berg Nebo Heiligtum des Mose", "Mosaikkarte von Madaba in der St.-Georgs-Kirche", "Petra Felsenstadt & Totes Meer"],
@@ -776,7 +832,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Sacred Story",
     durationDays: 7,
     durationNights: 6,
-    startingPriceUSD: 1100,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Baptism Site of Jesus Christ (Bethany Beyond the Jordan)", "Mount Nebo Sanctuary & Brazen Serpent", "Madaba St. George Mosaic Map", "Petra & Dead Sea exploration"],
       de: ["Taufstelle Jesu Christi (Bethanien jenseits des Jordans)", "Berg Nebo & Eherne Schlange", "Mosaikkarte von Madaba in der St.-Georgs-Kirche", "Petra & Totes Meer"],
@@ -835,7 +893,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Sacred Story",
     durationDays: 8,
     durationNights: 7,
-    startingPriceUSD: 1250,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
+    startingPriceUSD: 1000,
     highlights: {
       en: ["Baptism Site of Jesus Christ (Bethany)", "Mount Nebo Sanctuary & Brazen Serpent", "Machaerus (Mukawir) Herod's Palace Ruins", "Lot's Cave & Sanctuary at Dead Sea"],
       de: ["Taufstelle Jesu Christi in Bethanien", "Berg Nebo & Eherne Schlange", "Palastruinen von Machaerus", "Höhle des Lot am Toten Meer"],
@@ -898,7 +958,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Sacred Story",
     durationDays: 5,
     durationNights: 4,
-    startingPriceUSD: 650,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Tombs of Sahaba (Abu Ubaidah, Muath Ibn Jabal, Shurahbil)", "Battlefield of Mu'tah shrine & tombs of Ja'far Ibn Abi Talib", "King Abdullah Blue Mosque & Citadel", "Petra & Dead Sea float"],
       de: ["Gräber der Sahaba (Abu Ubaidah, Muath Ibn Jabal)", "Schlachtfeld von Mu'tah & Grab von Ja'far Ibn Abi Talib", "König-Abdullah-Moschee & Zitadelle", "Petra & Totes Meer"],
@@ -971,7 +1033,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Sacred Story",
     durationDays: 6,
     durationNights: 5,
-    startingPriceUSD: 780,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Ajloun Castle built by Saladin's nephew (1184 AD)", "Tombs of Sahaba & Prophet Shoaib Shrine", "Petra Rose City & Dead Sea Float", "Desert Castles Qasr Amra & Qasr Al-Kharanah"],
       de: ["Burg Ajloun (1184 n.Chr. von Saladins Neffen erbaut)", "Gräber der Sahaba & Shoaib Heiligtum", "Petra Felsenstadt & Totes Meer", "Wüstenschlösser Qasr Amra"],
@@ -1032,6 +1096,8 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Day Story",
     durationDays: 1,
     durationNights: 0,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
     startingPriceUSD: 115,
     highlights: {
       en: ["Baptism Site of Jesus Christ (Bethany Beyond the Jordan)", "Jordan River holy water bank", "Dead Sea resort day pass & floating", "Therapeutic black mud bath"],
@@ -1086,6 +1152,8 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Adventure Story",
     durationDays: 1,
     durationNights: 0,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
     startingPriceUSD: 150,
     highlights: {
       en: ["Wadi Mujib Siq Trail canyoning water trek", "Natural freshwater waterfall pool swim", "Dead Sea resort floating pass", "Black mud spa massage"],
@@ -1141,6 +1209,8 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Express Story",
     durationDays: 1,
     durationNights: 0,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
     startingPriceUSD: 275,
     highlights: {
       en: ["Guided walk through Petra Siq & Treasury reveal", "2-Hour 4x4 Bedouin Jeep Safari across red dunes", "Desert sunset view over Wadi Rum mountains", "Executive AC private vehicle"],
@@ -1196,7 +1266,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Day Story",
     durationDays: 1,
     durationNights: 0,
-    startingPriceUSD: 120,
+    priceMode: "QUOTATION",
+    bookingMode: "QUOTATION",
+    startingPriceUSD: null,
     highlights: {
       en: ["Roman Jerash Oval Forum & Hadrian Arch", "Ajloun Fortress built by Saladin nephew (1184 AD)", "Pine forest views of Jordan Valley"],
       de: ["Römisches Jerash Ovales Forum & Hadrianstor", "Burg Ajloun (1184 n. Chr.)", "Blick auf das Jordantal"],
@@ -1250,7 +1322,9 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Express Story",
     durationDays: 1,
     durationNights: 0,
-    startingPriceUSD: 180,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
+    startingPriceUSD: 225,
     highlights: {
       en: ["Full 4-hour exploration inside Petra", "Walk through 1.2km Siq canyon gorge", "Al-Khazneh Treasury reveal", "Royal Tombs & Roman Colonnade"],
       de: ["4 Stunden Erkundung in Petra", "Spaziergang durch den 1,2 km Siq", "Das Schatzhaus Al-Khazneh", "Königsgräber"],
@@ -1305,6 +1379,8 @@ export const TOURS_DATA: Tour[] = [
     storyCollection: "Day Story",
     durationDays: 1,
     durationNights: 0,
+    priceMode: "FROM",
+    bookingMode: "DIRECT_BOOKING",
     startingPriceUSD: 135,
     highlights: {
       en: ["Madaba St. George 6th century Holy Land mosaic map", "Mount Nebo sanctuary & Promised Land view", "Dead Sea resort floating & mineral black mud"],

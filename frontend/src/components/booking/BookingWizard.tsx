@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { TOURS_DATA } from '@/data/tours';
+import { TOURS_DATA, getTourPriceDisplay, getTourCtaDisplay } from '@/data/tours';
 import { Calendar, Users, Hotel, CheckCircle2, Send, ShieldCheck, ArrowLeft, ArrowRight, Loader2, MessageSquare, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -51,7 +51,7 @@ function BookingWizardContent() {
   const selectedTour = TOURS_DATA.find((t) => t.id === selectedTourId) || TOURS_DATA[0];
 
   // Dynamic pricing calculation
-  const basePricePerPerson = selectedTour.startingPriceUSD;
+  const basePricePerPerson = selectedTour.startingPriceUSD || 0;
   const accommodationMultiplier = 
     accommodation === 'budget' ? 0.85 :
     accommodation === '3-star' ? 1.0 :
@@ -162,7 +162,7 @@ function BookingWizardContent() {
                   <span className="text-[10px] text-[#C69C6D] font-mono uppercase block">{tour.category}</span>
                   <span className="font-serif font-bold text-sm block mt-1 leading-snug">{getLocalized(tour.title)}</span>
                   <span className="text-xs text-gray-400 block mt-2 font-mono">
-                    {formatDurationText(tour.durationDays)} / ${tour.startingPriceUSD} USD
+                    {formatDurationText(tour.durationDays)} • {getTourPriceDisplay(tour, locale)}
                   </span>
                 </button>
               ))}
