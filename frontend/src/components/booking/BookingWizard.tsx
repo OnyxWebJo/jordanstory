@@ -1,15 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { TOURS_DATA } from '@/data/tours';
 import { Calendar, Users, Hotel, CheckCircle2, Send, ShieldCheck, ArrowLeft, ArrowRight, Loader2, MessageSquare, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { CANONICAL_BUSINESS_RECORD } from '@/data/businessRecord';
 
-export const BookingWizard: React.FC = () => {
+function BookingWizardContent() {
   const { locale, getLocalized } = useLanguage();
+  const searchParams = useSearchParams();
+  const tourQueryParam = searchParams.get('tour') || searchParams.get('tourId');
+
+  // Match tour by id or localized slug
+  const initialTour = TOURS_DATA.find((t) => {
+    if (!tourQueryParam) return false;
+    if (t.id === tourQueryParam) return true;
+    return Object.values(t.slug).includes(tourQueryParam);
+  });
+
   const [step, setStep] = useState(1);
-  const [selectedTourId, setSelectedTourId] = useState(TOURS_DATA[0].id);
+  const [selectedTourId, setSelectedTourId] = useState(initialTour ? initialTour.id : TOURS_DATA[0].id);
   const [travelDate, setTravelDate] = useState('');
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
@@ -25,6 +35,18 @@ export const BookingWizard: React.FC = () => {
   // Form state
   const [submitting, setSubmitting] = useState(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (tourQueryParam) {
+      const match = TOURS_DATA.find((t) => {
+        if (t.id === tourQueryParam) return true;
+        return Object.values(t.slug).includes(tourQueryParam);
+      });
+      if (match) {
+        setSelectedTourId(match.id);
+      }
+    }
+  }, [tourQueryParam]);
 
   const selectedTour = TOURS_DATA.find((t) => t.id === selectedTourId) || TOURS_DATA[0];
 
@@ -460,5 +482,17 @@ export const BookingWizard: React.FC = () => {
       )}
 
     </div>
+  );
+}
+
+export const BookingWizard: React.FC = () => {
+  return (
+    <Suspense fallback={
+      <div className="max-w-4xl mx-auto bg-[#1A1615] border border-white/10 rounded-3xl p-10 text-center text-gray-400 font-mono text-sm">
+        Loading Booking Wizard...
+      </div>
+    }>
+      <BookingWizardContent />
+    </Suspense>
   );
 };
