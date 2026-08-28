@@ -141,15 +141,17 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
             <div className="flex flex-wrap items-center gap-6 pt-4 text-xs sm:text-sm text-[#D8B98F]">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#A85F43]" />
-                <span>{tour.durationDays} {locale === 'de' ? 'Tage' : locale === 'fr' ? 'Jours' : locale === 'it' ? 'Giorni' : 'Days'} / {tour.durationNights} {locale === 'de' ? 'Nächte' : locale === 'fr' ? 'Nuits' : locale === 'it' ? 'Notti' : 'Nights'}</span>
+                <span>
+                  {tour.durationDays} {locale === 'de' ? (tour.durationDays === 1 ? 'Tag' : 'Tage') : locale === 'fr' ? (tour.durationDays === 1 ? 'Jour' : 'Jours') : locale === 'it' ? (tour.durationDays === 1 ? 'Giorno' : 'Giorni') : (tour.durationDays === 1 ? 'Day' : 'Days')} / {tour.durationNights} {locale === 'de' ? (tour.durationNights === 1 ? 'Nacht' : 'Nächte') : locale === 'fr' ? (tour.durationNights === 1 ? 'Nuit' : 'Nuits') : locale === 'it' ? (tour.durationNights === 1 ? 'Notte' : 'Notti') : (tour.durationNights === 1 ? 'Night' : 'Nights')}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#A85F43]" />
                 <span>{tour.route.join(' → ')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-[#A85F43] fill-[#A85F43]" />
-                <span>5.0 (Verified Reviews)</span>
+                <ShieldCheck className="w-4 h-4 text-[#A85F43]" />
+                <span>{locale === 'de' ? 'Lizensierter Reiseveranstalter' : locale === 'fr' ? 'Voyagiste Agréé' : locale === 'it' ? 'Tour Operator Autorizzato' : 'Licensed Tour Operator'}</span>
               </div>
             </div>
           </div>

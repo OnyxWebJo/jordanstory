@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Compass, ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
-import { getVerifiedLicenseDisplay, CANONICAL_BUSINESS_RECORD } from '@/data/businessRecord';
+import { Compass, ShieldCheck, Phone, Mail, MapPin, MessageSquare } from 'lucide-react';
+import { getVerifiedRegistrationDisplay, CANONICAL_BUSINESS_RECORD } from '@/data/businessRecord';
 import { useLanguage } from '@/context/LanguageContext';
 
 export const Footer: React.FC = () => {
@@ -20,6 +20,19 @@ export const Footer: React.FC = () => {
     }
     return `/${targetLang}`;
   };
+
+  const footerHeadings = {
+    tours: { en: 'Popular Tours', de: 'Beliebte Touren', fr: 'Circuits Populaires', it: 'Tour Popolari' },
+    destinations: { en: 'Destinations', de: 'Reiseziele', fr: 'Destinations', it: 'Destinazioni' },
+    contact: { en: 'Contact Us', de: 'Kontakt', fr: 'Contactez-nous', it: 'Contattaci' },
+    desc: {
+      en: 'Licensed tour operator specializing in custom private tours, desert safaris, and cultural itineraries across Jordan.',
+      de: 'Lizensierter Reiseveranstalter spezialisiert auf maßgeschneiderte Privatreisen, Wüstensafaris und Kulturreisen in Jordanien.',
+      fr: 'Voyagiste agréé spécialisé dans les circuits privés sur mesure, les safaris dans le désert et les itinéraires culturels en Jordanie.',
+      it: 'Tour operator autorizzato specializzato in tour privati su misura, safari nel deserto e itinerari culturali in Giordania.'
+    }
+  };
+
   return (
     <footer className="bg-[#1A1615] text-[#F7F4EE] pt-20 pb-12 border-t border-white/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -39,25 +52,25 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-gray-400 text-xs sm:text-sm font-light max-w-sm leading-relaxed">
-              Licensed tour operator specializing in custom private tours, desert safaris, and cultural itineraries across Jordan.
+              {footerHeadings.desc[locale] || footerHeadings.desc.en}
             </p>
 
             <div className="pt-2 flex items-center gap-3 text-xs font-mono text-[#C69C6D]">
               <ShieldCheck className="w-4 h-4 text-[#A85F43]" />
-              <span>{getVerifiedLicenseDisplay('en')}</span>
+              <span>{getVerifiedRegistrationDisplay(locale)}</span>
             </div>
           </div>
 
           {/* Column 2: Quick Links */}
           <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold text-[#F7F4EE] tracking-wide uppercase font-mono text-xs text-[#C69C6D]">
-              Popular Tours
+              {footerHeadings.tours[locale] || footerHeadings.tours.en}
             </h4>
             <ul className="space-y-2 text-xs text-gray-400 font-light">
               <li><Link href={`/${locale}/tours/jordan-story-classic-tour-1`} className="hover:text-white transition-colors">Jordan Classic 5-Day</Link></li>
-              <li><Link href={`/${locale}/tours/jordan-luxury-tour-1`} className="hover:text-white transition-colors">Luxury Martian Domes 7-Day</Link></li>
+              <li><Link href={`/${locale}/tours/jordan-luxury-tour-1`} className="hover:text-white transition-colors">Jordan Luxury 6-Day</Link></li>
               <li><Link href={`/${locale}/tours/budget-tour-1-petra-dead-sea-jerash`} className="hover:text-white transition-colors">Petra & Dead Sea 3-Day</Link></li>
-              <li><Link href={`/${locale}/tours`} className="hover:text-white transition-colors">Wadi Rum 4x4 Jeep Safari</Link></li>
+              <li><Link href={`/${locale}/tours/day-tour-3-wadi-rum-petra`} className="hover:text-white transition-colors">Wadi Rum & Petra Day Tour</Link></li>
               <li><Link href={`/${locale}/booking`} className="hover:text-white transition-colors">Custom Private Trip Quote</Link></li>
             </ul>
           </div>
@@ -65,34 +78,38 @@ export const Footer: React.FC = () => {
           {/* Column 3: Destinations */}
           <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold text-[#F7F4EE] tracking-wide uppercase font-mono text-xs text-[#C69C6D]">
-              Destinations
+              {footerHeadings.destinations[locale] || footerHeadings.destinations.en}
             </h4>
             <ul className="space-y-2 text-xs text-gray-400 font-light">
               <li><Link href={`/${locale}/destinations/petra`} className="hover:text-white transition-colors">Petra (Rose City)</Link></li>
               <li><Link href={`/${locale}/destinations/wadi-rum`} className="hover:text-white transition-colors">Wadi Rum Desert</Link></li>
-              <li><Link href={`/${locale}/destinations/dead-sea`} className="hover:text-white transition-colors">Dead Sea (-430m)</Link></li>
+              <li><Link href={`/${locale}/destinations/dead-sea`} className="hover:text-white transition-colors">Dead Sea</Link></li>
               <li><Link href={`/${locale}/destinations/jerash`} className="hover:text-white transition-colors">Jerash Roman Ruins</Link></li>
-              <li><Link href={`/${locale}/destinations`} className="hover:text-white transition-colors">All Destination Guides</Link></li>
+              <li><Link href={`/${locale}/destinations`} className="hover:text-white transition-colors">All Destinations</Link></li>
             </ul>
           </div>
 
           {/* Column 4: Contact & Operations */}
           <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold text-[#F7F4EE] tracking-wide uppercase font-mono text-xs text-[#C69C6D]">
-              Contact Us
+              {footerHeadings.contact[locale] || footerHeadings.contact.en}
             </h4>
             <ul className="space-y-2.5 text-xs text-gray-400 font-light">
-              <li className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#A85F43]" />
-                <span>{CANONICAL_BUSINESS_RECORD.city}, {CANONICAL_BUSINESS_RECORD.country}</span>
+              <li className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#A85F43] shrink-0 mt-0.5" />
+                <span>{CANONICAL_BUSINESS_RECORD.address}</span>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#A85F43]" />
-                <span>{CANONICAL_BUSINESS_RECORD.email}</span>
+                <Phone className="w-3.5 h-3.5 text-[#A85F43] shrink-0" />
+                <a href={`tel:${CANONICAL_BUSINESS_RECORD.phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">{CANONICAL_BUSINESS_RECORD.phone}</a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#A85F43]" />
-                <span>{CANONICAL_BUSINESS_RECORD.email}</span>
+                <MessageSquare className="w-3.5 h-3.5 text-[#A85F43] shrink-0" />
+                <a href={CANONICAL_BUSINESS_RECORD.socialProfiles.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp: {CANONICAL_BUSINESS_RECORD.whatsapp}</a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#A85F43] shrink-0" />
+                <a href={`mailto:${CANONICAL_BUSINESS_RECORD.email}`} className="hover:text-white transition-colors">{CANONICAL_BUSINESS_RECORD.email}</a>
               </li>
             </ul>
           </div>
