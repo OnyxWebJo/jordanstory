@@ -171,21 +171,25 @@ function BookingWizardContent() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">
-                {locale === 'de' ? 'Reisedatum' : locale === 'fr' ? 'Date de Départ' : locale === 'it' ? 'Data di Partenza' : 'Start Travel Date'}
+              <label className="text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2 flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#A85F43]" />
+                <span>{locale === 'de' ? 'Reisedatum' : locale === 'fr' ? 'Date de Départ' : locale === 'it' ? 'Data di Partenza' : 'Start Travel Date'}</span>
               </label>
-              <input
-                type="date"
-                required
-                value={travelDate}
-                onChange={(e) => setTravelDate(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
-              />
+              <div className="relative">
+                <input
+                  type="date"
+                  required
+                  value={travelDate}
+                  onChange={(e) => setTravelDate(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43] focus:ring-1 focus:ring-[#A85F43] [color-scheme:dark] accent-[#A85F43]"
+                />
+              </div>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">
-                {locale === 'de' ? 'Erwachsene (12+ Jahre)' : locale === 'fr' ? 'Adultes (12+ ans)' : locale === 'it' ? 'Adulti (12+ anni)' : 'Adults (12+ yrs)'}
+              <label className="text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2 flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#A85F43]" />
+                <span>{locale === 'de' ? 'Erwachsene (12+ Jahre)' : locale === 'fr' ? 'Adultes (12+ ans)' : locale === 'it' ? 'Adulti (12+ anni)' : 'Adults (12+ yrs)'}</span>
               </label>
               <input
                 type="number"
@@ -193,13 +197,14 @@ function BookingWizardContent() {
                 max="20"
                 value={adults}
                 onChange={(e) => setAdults(parseInt(e.target.value) || 1)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43] focus:ring-1 focus:ring-[#A85F43]"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2">
-                {locale === 'de' ? 'Kinder (Unter 12 Jahre)' : locale === 'fr' ? 'Enfants (-12 ans)' : locale === 'it' ? 'Bambini (-12 anni)' : 'Children (Under 12)'}
+              <label className="text-xs uppercase tracking-wider text-[#C69C6D] font-mono font-semibold mb-2 flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#A85F43]" />
+                <span>{locale === 'de' ? 'Kinder (Unter 12 Jahre)' : locale === 'fr' ? 'Enfants (-12 ans)' : locale === 'it' ? 'Bambini (-12 anni)' : 'Children (Under 12)'}</span>
               </label>
               <input
                 type="number"
@@ -207,7 +212,7 @@ function BookingWizardContent() {
                 max="10"
                 value={children}
                 onChange={(e) => setChildren(parseInt(e.target.value) || 0)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43]"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#A85F43] focus:ring-1 focus:ring-[#A85F43]"
               />
             </div>
           </div>
