@@ -11,7 +11,7 @@ export default function DestinationsPage() {
 
       <main className="flex-1">
         {/* Banner Section */}
-        <section className="bg-[#1A1615] text-[#F7F4EE] py-24 border-b border-white/10 relative overflow-hidden">
+        <section className="bg-[#1A1615] text-[#F7F4EE] pt-36 pb-20 border-b border-white/10 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 relative z-10">
             <span className="text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold block">
               OFFICIAL DESTINATION GUIDES

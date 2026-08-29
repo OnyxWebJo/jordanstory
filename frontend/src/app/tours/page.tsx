@@ -40,7 +40,7 @@ export default function ToursPage() {
 
       <main className="flex-1">
         {/* Editorial Banner Header */}
-        <section className="bg-[#151B23] text-[#F4EFE7] py-20 border-b border-[#A85F43]/30 relative overflow-hidden">
+        <section className="bg-[#151B23] text-[#F4EFE7] pt-36 pb-20 border-b border-[#A85F43]/30 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center relative z-10">
             <span className="text-xs uppercase tracking-widest text-[#D8B98F] font-mono font-semibold block">
               {locale === 'de' ? 'OFFIZIELLER JORDANIE-REISEKATALOG' : 'OFFICIAL JORDAN TOURIST & GUIDED PROGRAMS'}

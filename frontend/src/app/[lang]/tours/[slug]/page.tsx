@@ -122,7 +122,7 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-[#151B23] text-[#F7F4EE] py-20 border-b border-[#A85F43]/30 overflow-hidden">
+        <section className="relative bg-[#151B23] text-[#F7F4EE] pt-36 pb-20 border-b border-[#A85F43]/30 overflow-hidden">
           <div className="absolute inset-0 opacity-40">
             <img src={tour.heroImage} alt={title} className="w-full h-full object-cover" />
           </div>
