@@ -48,7 +48,7 @@ export default async function LocalizedBookingPage({ params }: Props) {
     <div className="min-h-screen flex flex-col bg-[#151B23]">
       <Header currentLocale={locale} />
 
-      <main className="flex-1 pt-36 pb-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <main className="flex-1 pt-32 sm:pt-36 pb-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <BookingWizard />
       </main>
 

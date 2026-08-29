@@ -8,7 +8,7 @@ export default function BookingPage() {
     <div className="min-h-screen flex flex-col bg-[#F4EFE7]">
       <Header currentLocale="en" />
 
-      <main className="flex-1 pt-36 pb-16 px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 pt-32 sm:pt-36 pb-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="max-w-4xl mx-auto text-center mb-12 space-y-4">
           <span className="text-xs uppercase tracking-widest text-[#A85F43] font-semibold">
             Instant Quote & Direct Booking
