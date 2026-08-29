@@ -297,7 +297,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     "id": "bt2-3",
-    "url": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
     "alt": {
       "en": "Amman Citadel",
       "de": "Zitadelle Amman",
@@ -407,7 +407,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     "id": "bt3-2",
-    "url": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/Madaba-mosaics.jpg",
     "alt": {
       "en": "Madaba Mosaic",
       "de": "Mosaik Madaba",
@@ -2430,11 +2430,11 @@ export const TOURS_DATA: Tour[] = [
       "accommodation": "Return to Amman Hotel"
     }
   ],
-  "heroImage": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg",
   "gallery": [
     {
       "id": "dac-1",
-      "url": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+      "url": "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg",
       "alt": {
         "en": "Qasr Kharana desert palace facade",
         "de": "Fassade des Wüstenpalasts Qasr Kharana",
@@ -2585,11 +2585,11 @@ export const TOURS_DATA: Tour[] = [
       "accommodation": "Drop-off at Aqaba Resort or Return to Amman"
     }
   ],
-  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Aqaba-beach-700x500.jpg",
+  "heroImage": "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg",
   "gallery": [
     {
       "id": "daq-1",
-      "url": "https://jordanstorytours.com/content/uploads/2021/01/Aqaba-beach-700x500.jpg",
+      "url": "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg",
       "alt": {
         "en": "Aqaba Red Sea beach resort",
         "de": "Strandresort in Aqaba am Roten Meer",
@@ -2742,11 +2742,11 @@ export const TOURS_DATA: Tour[] = [
       "accommodation": "Return to Amman Hotel"
     }
   ],
-  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+  "heroImage": "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
   "gallery": [
     {
       "id": "dju-1",
-      "url": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+      "url": "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
       "alt": {
         "en": "Umm Qais Roman basalt ruins overlooking Galilee",
         "de": "Römische Basaltruinen von Umm Qais mit Blick auf Genezareth",
@@ -2898,11 +2898,11 @@ export const TOURS_DATA: Tour[] = [
       "accommodation": "Return to Amman Hotel"
     }
   ],
-  "heroImage": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Madaba-mosaics.jpg",
   "gallery": [
     {
       "id": "dmn-1",
-      "url": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+      "url": "https://jordanstorytours.com/content/uploads/2021/01/Madaba-mosaics.jpg",
       "alt": {
         "en": "Madaba mosaic map St George church",
         "de": "Mosaikkarte in der St.-Georgs-Kirche Madaba",
@@ -3053,11 +3053,11 @@ export const TOURS_DATA: Tour[] = [
       "accommodation": "Return to Amman Hotel"
     }
   ],
-  "heroImage": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
   "gallery": [
     {
       "id": "dam-1",
-      "url": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+      "url": "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
       "alt": {
         "en": "Amman Citadel Temple of Hercules pillars",
         "de": "Säulen des Herkules-Tempels auf der Zitadelle von Amman",

@@ -608,7 +608,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   "gallery": [
       "/images/destinations/mount-nebo.jpg",
       "https://jordanstorytours.com/content/uploads/2021/01/Mount-Nebo-Holy-Place.jpg",
-      "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg"
+      "https://jordanstorytours.com/content/uploads/2021/01/Madaba-mosaics.jpg"
     ]
 },
   {
@@ -983,9 +983,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
   "gallery": [
-      "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
       "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
       "https://jordanstorytours.com/content/uploads/2021/01/Amman-2-e1610268250604-300x217.jpg"
     ]
@@ -1172,9 +1172,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg",
   "gallery": [
-      "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg",
       "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg"
     ]
 },
@@ -1266,9 +1266,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+  "image": "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
   "gallery": [
-      "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
       "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg"
     ]
 },
