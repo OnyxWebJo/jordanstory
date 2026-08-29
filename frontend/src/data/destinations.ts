@@ -889,10 +889,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
+  "image": "/images/destinations/karak-castle.jpg",
   "gallery": [
-      "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
-      "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
+      "/images/destinations/karak-castle.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg"
     ]
 },
   {
