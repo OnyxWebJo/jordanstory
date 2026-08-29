@@ -20,7 +20,7 @@ export default function DestinationsPage() {
               Jordan Destinations & Landmarks
             </h1>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto font-light">
-              Explore the 9 world-class ancient wonders, desert wildernesses, and mineral wellness spas across Jordan.
+              Explore all {DESTINATIONS_FULL.length} world-class ancient wonders, desert wildernesses, and mineral wellness spas across Jordan.
             </p>
           </div>
         </section>

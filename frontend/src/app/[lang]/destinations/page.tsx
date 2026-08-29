@@ -63,12 +63,12 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
             </h1>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto font-light">
               {locale === 'de'
-                ? 'Erkunden Sie antike Weltwunder, rote Wüstenlandschaften und das Heilende Tote Meer.'
+                ? `Erkunden Sie ${DESTINATIONS_FULL.length} antike Weltwunder, rote Wüstenlandschaften und heilige Stätten.`
                 : locale === 'fr'
-                ? 'Découvrez les merveilles antiques, les paysages du désert et la Mer Morte.'
+                ? `Découvrez les ${DESTINATIONS_FULL.length} merveilles antiques, paysages du désert et sites sacrés.`
                 : locale === 'it'
-                ? 'Esplora le meraviglie antiche della Giordania, il deserto del Wadi Rum e il Mar Morto.'
-                : 'Explore the 9 world-class ancient wonders, desert wildernesses, and mineral wellness spas across Jordan.'}
+                ? `Esplora le ${DESTINATIONS_FULL.length} meraviglie antiche della Giordania, il deserto del Wadi Rum e i luoghi santi.`
+                : `Explore all ${DESTINATIONS_FULL.length} world-class ancient wonders, desert wildernesses, and sacred heritage landmarks across Jordan.`}
             </p>
           </div>
         </section>

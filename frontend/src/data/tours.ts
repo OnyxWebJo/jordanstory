@@ -1426,4 +1426,784 @@ export const TOURS_DATA: Tour[] = [
       }
     ]
   }
+,
+  {
+  "id": "day-tour-amman-desert-castles",
+  "slug": {
+    "en": "amman-desert-castles-day-tour",
+    "de": "amman-wuestenschloesser-tagestour",
+    "fr": "excursion-chateaux-du-desert-amman",
+    "it": "tour-castelli-del-deserto-amman"
+  },
+  "title": {
+    "en": "Amman & Eastern Desert Castles Day Tour",
+    "de": "Amman & Östliche Wüstenschlösser Tagestour",
+    "fr": "Excursion d'un Jour — Amman & Châteaux du Désert",
+    "it": "Tour di una Giornata — Amman e Castelli del Deserto"
+  },
+  "subtitle": {
+    "en": "Explore Umayyad Desert Palaces: Qasr Amra, Qasr Kharana & Azraq Castle",
+    "de": "Erkunden Sie umayyadische Wüstenpaläste: Qasr Amra, Qasr Kharana & Festung Azraq",
+    "fr": "Explorez les palais omeyyades du désert : Qasr Amra, Qasr Kharana & château d'Azraq",
+    "it": "Esplora i palazzi omayyadi del deserto: Qasr Amra, Qasr Kharana e fortezza di Azraq"
+  },
+  "category": "Day Tour",
+  "storyCollection": "Historical Story",
+  "durationDays": 1,
+  "durationNights": 0,
+  "priceMode": "FROM",
+  "bookingMode": "DIRECT_BOOKING",
+  "startingPriceUSD": 135,
+  "highlights": {
+    "en": [
+      "UNESCO World Heritage Qasr Amra fresco paintings",
+      "Formidable 8th-century Qasr Kharana fortress",
+      "Historic basalt fortress at Azraq Oasis"
+    ],
+    "de": [
+      "UNESCO-Weltkulturerbe Qasr Amra mit antiken Fresken",
+      "Improwisante Festung Qasr Kharana aus dem 8. Jahrhundert",
+      "Historische Basaltburg in der Oase Azraq"
+    ],
+    "fr": [
+      "Fresques antiques du château de Qasr Amra classé UNESCO",
+      "Impressionnante forteresse de Qasr Kharana du VIIIe siècle",
+      "Château en basalte historique de l'oasis d'Azraq"
+    ],
+    "it": [
+      "Affreschi antichi di Qasr Amra patrimonio UNESCO",
+      "Imponente fortezza di Qasr Kharana dell'VIII secolo",
+      "Castello in basalto storico nell'oasi di Azraq"
+    ]
+  },
+  "route": [
+    "Amman",
+    "Qasr Kharana",
+    "Qasr Amra",
+    "Azraq Castle"
+  ],
+  "inclusions": {
+    "en": [
+      "Private AC vehicle with English-speaking driver",
+      "Hotel pickup and drop-off in Amman",
+      "Bottled mineral water during excursion"
+    ],
+    "de": [
+      "Privates Klimafahrzeug mit englischsprachigem Fahrer",
+      "Hotelabholung und Rückfahrt in Amman",
+      "Mineralwasser während des Ausflugs"
+    ],
+    "fr": [
+      "Véhicule privé climatisé avec chauffeur anglophone",
+      "Prise en charge et retour à l'hôtel à Amman",
+      "Eau minérale en bouteille pendant l'excursion"
+    ],
+    "it": [
+      "Veicolo privato climatizzato con autista parlante inglese",
+      "Pick-up e drop-off dall'hotel ad Amman",
+      "Acqua minerale in bottiglia durante l'escursione"
+    ]
+  },
+  "exclusions": {
+    "en": [
+      "Site entrance fees (or Jordan Pass)",
+      "Personal expenses and tips",
+      "Meals and beverages"
+    ],
+    "de": [
+      "Eintrittsgelder (oder Jordan Pass)",
+      "Persönliche Ausgaben und Trinkgelder",
+      "Mahlzeiten und Getränke"
+    ],
+    "fr": [
+      "Frais d'entrée sur les sites (ou Jordan Pass)",
+      "Dépenses personnelles et pourboires",
+      "Repas et boissons"
+    ],
+    "it": [
+      "Biglietti d'ingresso ai siti (o Jordan Pass)",
+      "Spese personali e mance",
+      "Pasti e bevande"
+    ]
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "title": {
+        "en": "Amman → Desert Castles → Amman",
+        "de": "Amman → Wüstenschlösser → Amman",
+        "fr": "Amman → Châteaux du Désert → Amman",
+        "it": "Amman → Castelli del Deserto → Amman"
+      },
+      "description": {
+        "en": "Morning departure from Amman east towards the Syrian desert. Visit Qasr Kharana, Qasr Amra UNESCO frescoes, and Azraq Castle before returning to Amman.",
+        "de": "Morgendliche Fahrt von Amman östlich in die Wüste. Besichtigung von Qasr Kharana, den UNESCO-Fresken in Qasr Amra und der Festung Azraq vor der Rückfahrt.",
+        "fr": "Départ d'Amman vers l'est dans le désert. Visite de Qasr Kharana, des fresques UNESCO de Qasr Amra et du château d'Azraq avant le retour à Amman.",
+        "it": "Partenza al mattino da Amman verso est nel deserto. Visita di Qasr Kharana, degli affreschi UNESCO di Qasr Amra e del castello di Azraq prima del rientro."
+      },
+      "meals": "Water included",
+      "accommodation": "Return to Amman Hotel"
+    }
+  ],
+  "heroImage": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+  "gallery": [
+    {
+      "id": "dac-1",
+      "url": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+      "alt": {
+        "en": "Qasr Kharana desert palace facade",
+        "de": "Fassade des Wüstenpalasts Qasr Kharana",
+        "fr": "Façade du palais du désert Qasr Kharana",
+        "it": "Facciata del palazzo del deserto Qasr Kharana"
+      },
+      "caption": {
+        "en": "Qasr Kharana fortress exterior",
+        "de": "Aussenansicht der Festung Qasr Kharana",
+        "fr": "Extérieur de la forteresse Qasr Kharana",
+        "it": "Esterno della fortezza Qasr Kharana"
+      },
+      "sortOrder": 1,
+      "rightsStatus": "LEGACY_SITE_ASSET"
+    }
+  ],
+  "faqs": [
+    {
+      "question": {
+        "en": "How far are the Desert Castles from Amman?",
+        "de": "Wie weit sind die Wüstenschlösser von Amman entfernt?",
+        "fr": "À quelle distance sont les châteaux du désert d'Amman ?",
+        "it": "Quanto distano i castelli del deserto da Amman?"
+      },
+      "answer": {
+        "en": "The Desert Castles are located between 60 km and 100 km east of Amman, making this a comfortable 4 to 5 hour day excursion.",
+        "de": "Die Wüstenschlösser liegen 60 bis 100 km östlich von Amman, was den Ausflug zu einer angenehmen 4- bis 5-Stunden-Tour macht.",
+        "fr": "Les châteaux du désert se trouvent entre 60 km et 100 km à l'est d'Amman, formant un circuit parfait de 4 à 5 heures.",
+        "it": "I castelli del deserto si trovano tra 60 km e 100 km a est di Amman, per un'escursione ideale di 4-5 ore."
+      }
+    }
+  ]
+},
+  {
+  "id": "day-tour-amman-aqaba",
+  "slug": {
+    "en": "amman-to-aqaba-red-sea-day-tour",
+    "de": "amman-nach-aqaba-rotes-meer-tagestour",
+    "fr": "excursion-amman-aqaba-mer-rouge",
+    "it": "tour-da-amman-ad-aqaba-mar-rosso"
+  },
+  "title": {
+    "en": "Amman to Aqaba Red Sea Coast Day Tour",
+    "de": "Amman nach Aqaba Rotes Meer Tagestour",
+    "fr": "Excursion d'un Jour — Amman à Aqaba Mer Rouge",
+    "it": "Tour di una Giornata — Amman ad Aqaba Mar Rosso"
+  },
+  "subtitle": {
+    "en": "Private Scenic Drive to Jordan's Coastal Red Sea Riviera",
+    "de": "Private Landschaftsfahrt zu Jordaniens Küstenriviera am Roten Meer",
+    "fr": "Route panoramique privée vers la côte jordanienne de la Mer Rouge",
+    "it": "Viaggio panoramico privato verso la costa giordana del Mar Rosso"
+  },
+  "category": "Day Tour",
+  "storyCollection": "Coastal Story",
+  "durationDays": 1,
+  "durationNights": 0,
+  "priceMode": "FROM",
+  "bookingMode": "DIRECT_BOOKING",
+  "startingPriceUSD": 300,
+  "highlights": {
+    "en": [
+      "Direct private chauffeur transport from Amman to Aqaba",
+      "Explore Aqaba coastal promenade, bazaars & beach resorts",
+      "Optional Red Sea glass-bottom boat or snorkeling"
+    ],
+    "de": [
+      "Direkter Chauffeur-Transfer von Amman nach Aqaba",
+      "Erkundung der Küstenpromenade, Basare & Strandresorts in Aqaba",
+      "Optionale Fahrt im Glasbodenboot oder Schnorcheln im Roten Meer"
+    ],
+    "fr": [
+      "Transport privé avec chauffeur d'Amman à Aqaba",
+      "Promenade côtière, bazars et plages d'Aqaba",
+      "Bateau à fond de verre ou plongée optionnelle en Mer Rouge"
+    ],
+    "it": [
+      "Trasporto privato con autista da Amman ad Aqaba",
+      "Passeggiata sul lungomare, bazar e spiagge di Aqaba",
+      "Gita in barca con fondo di vetro o snorkeling opzionale"
+    ]
+  },
+  "route": [
+    "Amman",
+    "Desert Highway",
+    "Aqaba Red Sea"
+  ],
+  "inclusions": {
+    "en": [
+      "Private AC vehicle with English-speaking driver",
+      "Hotel pickup in Amman & drop-off in Aqaba or Amman",
+      "Bottled mineral water"
+    ],
+    "de": [
+      "Privates Klimafahrzeug mit englischsprachigem Fahrer",
+      "Hotelabholung in Amman & Ausstieg in Aqaba oder Amman",
+      "Mineralwasser"
+    ],
+    "fr": [
+      "Véhicule privé climatisé avec chauffeur anglophone",
+      "Prise en charge à Amman et retour à Aqaba ou Amman",
+      "Eau minérale en bouteille"
+    ],
+    "it": [
+      "Veicolo privato climatizzato con autista parlante inglese",
+      "Pick-up ad Amman e drop-off ad Aqaba o Amman",
+      "Acqua minerale in bottiglia"
+    ]
+  },
+  "exclusions": {
+    "en": [
+      "Red Sea boat rides & equipment rentals",
+      "Personal expenses & tips",
+      "Meals & drinks"
+    ],
+    "de": [
+      "Bootsfahrten & Ausrüstungsmiete am Roten Meer",
+      "Persönliche Ausgaben & Trinkgelder",
+      "Mahlzeiten & Getränke"
+    ],
+    "fr": [
+      "Promenades en bateau et location d'équipement",
+      "Dépenses personnelles et pourboires",
+      "Repas et boissons"
+    ],
+    "it": [
+      "Noleggio attrezzature e gite in barca",
+      "Spese personali e mance",
+      "Pasti e bevande"
+    ]
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "title": {
+        "en": "Amman → Desert Highway → Aqaba Coastal Riviera",
+        "de": "Amman → Desert Highway → Küstenriviera Aqaba",
+        "fr": "Amman → Autoroute du Désert → Riviera d'Aqaba",
+        "it": "Amman → Autostrada del Deserto → Riviera di Aqaba"
+      },
+      "description": {
+        "en": "Morning pickup in Amman. Travel south along the Desert Highway to Aqaba. Enjoy leisure time by the Red Sea beaches, bazaar markets, or seaside dining.",
+        "de": "Morgendliche Abholung in Amman. Fahrt gen Süden über den Desert Highway nach Aqaba. Zeit zur freien Verfügung an den Stränden des Roten Meeres, auf den Basaren oder in den Fischrestaurants.",
+        "fr": "Départ le matin d'Amman. Route vers le sud via l'autoroute du désert jusqu'à Aqaba. Temps libre sur les plages de la Mer Rouge, le marché et le port.",
+        "it": "Pick-up al mattino ad Amman. Viaggio verso sud lungo l'autostrada del deserto fino ad Aqaba. Tempo libero sulle spiagge del Mar Rosso e nel bazar."
+      },
+      "meals": "Water included",
+      "accommodation": "Drop-off at Aqaba Resort or Return to Amman"
+    }
+  ],
+  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Aqaba-beach-700x500.jpg",
+  "gallery": [
+    {
+      "id": "daq-1",
+      "url": "https://jordanstorytours.com/content/uploads/2021/01/Aqaba-beach-700x500.jpg",
+      "alt": {
+        "en": "Aqaba Red Sea beach resort",
+        "de": "Strandresort in Aqaba am Roten Meer",
+        "fr": "Plage de la Mer Rouge à Aqaba",
+        "it": "Spiaggia del Mar Rosso ad Aqaba"
+      },
+      "caption": {
+        "en": "Aqaba coastal waters",
+        "de": "Gewässer der Küste von Aqaba",
+        "fr": "Eaux côtières d'Aqaba",
+        "it": "Acque costiere di Aqaba"
+      },
+      "sortOrder": 1,
+      "rightsStatus": "LEGACY_SITE_ASSET"
+    }
+  ],
+  "faqs": [
+    {
+      "question": {
+        "en": "How long is the drive from Amman to Aqaba?",
+        "de": "Wie lange dauert die Fahrt von Amman nach Aqaba?",
+        "fr": "Combien de temps dure le trajet d'Amman à Aqaba ?",
+        "it": "Quanto dura il viaggio da Amman ad Aqaba?"
+      },
+      "answer": {
+        "en": "The drive takes approximately 3.5 to 4 hours via the Desert Highway.",
+        "de": "Die Fahrt dauert etwa 3,5 bis 4 Stunden über den Desert Highway.",
+        "fr": "Le trajet dure environ 3h30 à 4h via l'autoroute du désert.",
+        "it": "Il viaggio dura circa 3,5 - 4 ore lungo l'autostrada del deserto."
+      }
+    }
+  ]
+},
+  {
+  "id": "day-tour-jerash-ajloun-um-qais",
+  "slug": {
+    "en": "jerash-ajloun-umm-qais-day-tour",
+    "de": "jerash-ajloun-umm-qais-tagestour",
+    "fr": "excursion-gerasa-ajloun-umm-qais",
+    "it": "tour-jerash-ajloun-umm-qais"
+  },
+  "title": {
+    "en": "Jerash, Ajloun Castle & Umm Qais Day Excursion",
+    "de": "Jerash, Burg Ajloun & Umm Qais Tagesausflug",
+    "fr": "Excursion d'un Jour — Gérasa, Château d'Ajloun & Umm Qais",
+    "it": "Tour di una Giornata — Jerash, Castello di Ajloun e Umm Qais"
+  },
+  "subtitle": {
+    "en": "Northern Jordan Heritage Triangle: Greco-Roman Ruins & Saladin Fortress",
+    "de": "Nördliches Kulturdreieck: Römische Ruinen & Saladin-Festung",
+    "fr": "Triangle culturel du nord de la Jordanie : ruines gréco-romaines et forteresse de Saladin",
+    "it": "Triangolo culturale del nord della Giordania: rovine romano-greche e fortezza di Saladino"
+  },
+  "category": "Day Tour",
+  "storyCollection": "Historical Story",
+  "durationDays": 1,
+  "durationNights": 0,
+  "priceMode": "FROM",
+  "bookingMode": "DIRECT_BOOKING",
+  "startingPriceUSD": 140,
+  "highlights": {
+    "en": [
+      "Full exploration of ancient Greco-Roman Jerash Oval Plaza",
+      "Medieval Islamic hilltop Ajloun Castle built by Saladin's general",
+      "Umm Qais (Gadara) ruins overlooking Sea of Galilee & Golan Heights"
+    ],
+    "de": [
+      "Umfassende Erkundung der antiken Ovalen Plaza in Jerash",
+      "Mittelalterliche islamische Höhenburg Ajloun",
+      "Ruinen von Umm Qais (Gadara) mit Blick auf den See Genezareth"
+    ],
+    "fr": [
+      "Exploration de la Place Ovale antique de Gérasa",
+      "Château islamique médiéval d'Ajloun sur la colline",
+      "Ruines d'Umm Qais avec vue panoramique sur la mer de Galilée"
+    ],
+    "it": [
+      "Esplorazione dell'antica Piazza Ovale di Jerash",
+      "Castello islamico medievale di Ajloun sulla collina",
+      "Rovine di Umm Qais con vista panoramica sul Lago di Galilea"
+    ]
+  },
+  "route": [
+    "Amman",
+    "Jerash",
+    "Ajloun Castle",
+    "Umm Qais",
+    "Amman"
+  ],
+  "inclusions": {
+    "en": [
+      "Private AC transportation with fluent English-speaking driver",
+      "Hotel pickup and return in Amman",
+      "Bottled drinking water"
+    ],
+    "de": [
+      "Privater Transport im Klimafahrzeug mit englischsprachigem Fahrer",
+      "Hotelabholung und Rückfahrt in Amman",
+      "Trinkwasser in Flaschen"
+    ],
+    "fr": [
+      "Transport privé climatisé avec chauffeur anglophone",
+      "Prise en charge et retour à l'hôtel à Amman",
+      "Eau en bouteille"
+    ],
+    "it": [
+      "Trasporto privato climatizzato con autista parlante inglese",
+      "Pick-up e drop-off dall'hotel ad Amman",
+      "Acqua in bottiglia"
+    ]
+  },
+  "exclusions": {
+    "en": [
+      "Entrance tickets to sites (or Jordan Pass)",
+      "Local site guides",
+      "Personal expenses & meals"
+    ],
+    "de": [
+      "Eintrittskarten für Sehenswürdigkeiten (oder Jordan Pass)",
+      "Lokale Reiseleiter an den Stätten",
+      "Persönliche Ausgaben & Mahlzeiten"
+    ],
+    "fr": [
+      "Billets d'entrée sur les sites (ou Jordan Pass)",
+      "Guides locaux",
+      "Dépenses personnelles & repas"
+    ],
+    "it": [
+      "Biglietti d'ingresso ai siti (o Jordan Pass)",
+      "Guide locali",
+      "Spese personali e pasti"
+    ]
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "title": {
+        "en": "Amman → Jerash → Ajloun Castle → Umm Qais → Amman",
+        "de": "Amman → Jerash → Burg Ajloun → Umm Qais → Amman",
+        "fr": "Amman → Gérasa → Château d'Ajloun → Umm Qais → Amman",
+        "it": "Amman → Jerash → Castello di Ajloun → Umm Qais → Amman"
+      },
+      "description": {
+        "en": "Morning departure north to Jerash Roman city. Continue through pine forests to 12th-century Ajloun Castle. Drive to northernmost hilltop Umm Qais for panoramic views of Galilee before returning to Amman.",
+        "de": "Morgendliche Fahrt nördlich nach Jerash. Weiterfahrt durch Pinienwälder zur Festung Ajloun aus dem 12. Jahrhundert. Fahrt zum nördlichsten Hügel Umm Qais mit Blick auf den See Genezareth vor der Rückkehr.",
+        "fr": "Départ le matin vers le nord jusqu'à Gérasa. Poursuite à travers les forêts de pins vers le château d'Ajloun du XIIe siècle. Visite d'Umm Qais tout au nord avant de rentrer à Amman.",
+        "it": "Partenza al mattino verso nord per Jerash. Proseguimento tra i pini verso il castello di Ajloun del XII secolo. Visita di Umm Qais all'estremo nord prima di rientrare ad Amman."
+      },
+      "meals": "Water included",
+      "accommodation": "Return to Amman Hotel"
+    }
+  ],
+  "heroImage": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+  "gallery": [
+    {
+      "id": "dju-1",
+      "url": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+      "alt": {
+        "en": "Umm Qais Roman basalt ruins overlooking Galilee",
+        "de": "Römische Basaltruinen von Umm Qais mit Blick auf Genezareth",
+        "fr": "Ruines de basalte romain d'Umm Qais sur la Galilée",
+        "it": "Rovine romane di basalto di Umm Qais sul Lago di Galilea"
+      },
+      "caption": {
+        "en": "Umm Qais Gadara ruins",
+        "de": "Ruinen von Gadara in Umm Qais",
+        "fr": "Ruines de Gádara à Umm Qais",
+        "it": "Rovine di Gadara ad Umm Qais"
+      },
+      "sortOrder": 1,
+      "rightsStatus": "LEGACY_SITE_ASSET"
+    }
+  ],
+  "faqs": [
+    {
+      "question": {
+        "en": "Can all three sites be visited comfortably in one day?",
+        "de": "Kann man alle drei Stätten bequem an einem Tag besuchen?",
+        "fr": "Peut-on visiter les trois sites confortablement en une journée ?",
+        "it": "È possibile visitare i tre siti comodamente in un giorno?"
+      },
+      "answer": {
+        "en": "Yes, this 8-hour excursion covers Jerash, Ajloun Castle, and Umm Qais in a smooth northern circuit.",
+        "de": "Ja, dieser 8-Stunden-Ausflug deckt Jerash, Burg Ajloun und Umm Qais in einer flüssigen Nordroute ab.",
+        "fr": "Oui, cette excursion de 8 heures couvre Gérasa, Ajloun et Umm Qais dans un circuit fluide du nord.",
+        "it": "Sì, questa escursione di 8 ore copre Jerash, Ajloun e Umm Qais in un fluido circuito nord."
+      }
+    }
+  ]
+},
+  {
+  "id": "day-tour-madaba-nebo",
+  "slug": {
+    "en": "madaba-mount-nebo-half-day-tour",
+    "de": "madaba-berg-nebo-halbtagestour",
+    "fr": "excursion-madaba-mont-nebo",
+    "it": "tour-madaba-monte-nebo"
+  },
+  "title": {
+    "en": "Madaba & Mount Nebo Holy Heritage Day Tour",
+    "de": "Madaba & Berg Nebo Heilige Stätten Tagestour",
+    "fr": "Excursion d'un Jour — Madaba & Mont Nébo",
+    "it": "Tour di una Giornata — Madaba e Monte Nebo"
+  },
+  "subtitle": {
+    "en": "Discover the 6th-Century Mosaic Map & Moses Sanctuary Memorial",
+    "de": "Entdecken Sie die Mosaikkarte aus dem 6. Jahrhundert & die Moses-Gedenkstätte",
+    "fr": "Découvrez la carte en mosaïque du VIe siècle et le mémorial de Moïse",
+    "it": "Scopri la mappa in mosaico del VI secolo e il memoriale di Mosè"
+  },
+  "category": "Day Tour",
+  "storyCollection": "Biblical Story",
+  "durationDays": 1,
+  "durationNights": 0,
+  "priceMode": "FROM",
+  "bookingMode": "DIRECT_BOOKING",
+  "startingPriceUSD": 75,
+  "highlights": {
+    "en": [
+      "St. George Church in Madaba with famous 6th-century Jerusalem mosaic map",
+      "Mount Nebo sanctuary where Moses viewed the Promised Land",
+      "Panoramic views across the Jordan Valley, Dead Sea & West Bank"
+    ],
+    "de": [
+      "St.-Georgs-Kirche in Madaba mit der berühmten Jerusalem-Mosaikkarte",
+      "Berg Nebo Heiligtum, von dem Moses das Gelobte Land erblickte",
+      "Panoramablick über das Jordantal, das Tote Meer & Jericho"
+    ],
+    "fr": [
+      "Église Saint-Georges à Madaba et sa carte de Jérusalem en mosaïque du VIe siècle",
+      "Sanctuaire du Mont Nébo où Moïse contempla la Terre Promise",
+      "Vue panoramique sur la vallée du Jourdain, la Mer Morte & la Cisjordanie"
+    ],
+    "it": [
+      "Chiesa di San Giorgio a Madaba con la mappa di Gerusalemme in mosaico del VI secolo",
+      "Santuario del Monte Nebo da cui Mosè vide la Terra Promessa",
+      "Vista panoramica sulla Valle del Giordano, il Mar Morto e la Cisgiordania"
+    ]
+  },
+  "route": [
+    "Amman",
+    "Madaba",
+    "Mount Nebo",
+    "Amman"
+  ],
+  "inclusions": {
+    "en": [
+      "Private AC vehicle with English-speaking driver",
+      "Hotel pickup and return in Amman",
+      "Mineral water"
+    ],
+    "de": [
+      "Privatfahrzeug mit Klimaanlage und englischsprachigem Fahrer",
+      "Hotelabholung und Rückfahrt in Amman",
+      "Mineralwasser"
+    ],
+    "fr": [
+      "Véhicule privé climatisé avec chauffeur anglophone",
+      "Prise en charge et retour à l'hôtel à Amman",
+      "Eau minérale"
+    ],
+    "it": [
+      "Veicolo privato climatizzato con autista parlante inglese",
+      "Pick-up e drop-off dall'hotel ad Amman",
+      "Acqua minerale"
+    ]
+  },
+  "exclusions": {
+    "en": [
+      "Entrance fees to St. George Church and Mount Nebo",
+      "Personal expenses and tips",
+      "Meals"
+    ],
+    "de": [
+      "Eintrittsgelder St. Georgs-Kirche und Berg Nebo",
+      "Persönliche Ausgaben und Trinkgelder",
+      "Mahlzeiten"
+    ],
+    "fr": [
+      "Frais d'entrée à l'église Saint-Georges et au Mont Nébo",
+      "Dépenses personnelles et pourboires",
+      "Repas"
+    ],
+    "it": [
+      "Biglietti d'ingresso alla Chiesa di S. Giorgio e Monte Nebo",
+      "Spese personali e mance",
+      "Pasti"
+    ]
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "title": {
+        "en": "Amman → Madaba → Mount Nebo → Amman",
+        "de": "Amman → Madaba → Berg Nebo → Amman",
+        "fr": "Amman → Madaba → Mont Nébo → Amman",
+        "it": "Amman → Madaba → Monte Nebo → Amman"
+      },
+      "description": {
+        "en": "Drive south from Amman to Madaba to marvel at the 6th-century Byzantine mosaic map of Jerusalem in St. George Church. Continue to Mount Nebo sanctuary before returning to Amman.",
+        "de": "Fahrt von Amman nach Madaba zur Besichtigung der byzantinischen Mosaikkarte aus dem 6. Jahrhundert. Weiterfahrt zum Berg Nebo mit der Moses-Gedenkstätte vor der Rückkehr.",
+        "fr": "Route d'Amman vers Madaba pour admirer la carte en mosaïque de Jérusalem du VIe siècle. Continuation vers le sanctuaire du Mont Nébo puis retour à Amman.",
+        "it": "Guida da Amman a Madaba per ammirare la mappa in mosaico di Gerusalemme del VI secolo. Proseguimento verso il santuario del Monte Nebo prima del rientro ad Amman."
+      },
+      "meals": "Water included",
+      "accommodation": "Return to Amman Hotel"
+    }
+  ],
+  "heroImage": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+  "gallery": [
+    {
+      "id": "dmn-1",
+      "url": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+      "alt": {
+        "en": "Madaba mosaic map St George church",
+        "de": "Mosaikkarte in der St.-Georgs-Kirche Madaba",
+        "fr": "Carte en mosaïque de l'église Saint-Georges à Madaba",
+        "it": "Mappa in mosaico della chiesa di San Giorgio a Madaba"
+      },
+      "caption": {
+        "en": "6th-century Madaba mosaic map",
+        "de": "Mosaikkarte aus dem 6. Jahrhundert",
+        "fr": "Carte en mosaïque du VIe siècle",
+        "it": "Mappa in mosaico del VI secolo"
+      },
+      "sortOrder": 1,
+      "rightsStatus": "LEGACY_SITE_ASSET"
+    }
+  ],
+  "faqs": [
+    {
+      "question": {
+        "en": "Is this tour suitable for a half-day excursion?",
+        "de": "Ist dieser Ausflug als Halbtagestour geeignet?",
+        "fr": "Cette excursion convient-elle pour une demi-journée ?",
+        "it": "Questa escursione è adatta per una mezza giornata?"
+      },
+      "answer": {
+        "en": "Yes, Madaba and Mount Nebo are located just 35 km south of Amman, taking about 4 hours total.",
+        "de": "Ja, Madaba und der Berg Nebo liegen nur 35 km südlich von Amman und dauern insgesamt etwa 4 Stunden.",
+        "fr": "Oui, Madaba et le Mont Nébo ne se trouvent qu'à 35 km au sud d'Amman pour un circuit de 4 heures.",
+        "it": "Sì, Madaba e il Monte Nebo distano solo 35 km a sud di Amman per un totale di circa 4 ore."
+      }
+    }
+  ]
+},
+  {
+  "id": "day-tour-jordan-from-amman",
+  "slug": {
+    "en": "jordan-tours-from-amman-day-highlights",
+    "de": "jordanien-touren-ab-amman-tagestour",
+    "fr": "excursion-journee-jordanien-depuis-amman",
+    "it": "tour-giordania-da-amman-giornata"
+  },
+  "title": {
+    "en": "Jordan Custom Highlights Day Tour from Amman",
+    "de": "Jordanien Highlight-Tagestour ab Amman",
+    "fr": "Excursion Highlights Sur Mesure depuis Amman",
+    "it": "Tour Highlights su Misura da Amman"
+  },
+  "subtitle": {
+    "en": "Custom Chauffeur Day Tour Covering Amman Citadel, Roman Theatre & Surroundings",
+    "de": "Individuelle Chauffeur-Tagestour zu Ammans Zitadelle, Römerthermen & Umgebung",
+    "fr": "Circuit d'un jour sur mesure avec chauffeur couvrant la citadelle d'Amman et le théâtre romain",
+    "it": "Tour di una giornata con autista privato alla cittadella di Amman e al teatro romano"
+  },
+  "category": "Day Tour",
+  "storyCollection": "City Story",
+  "durationDays": 1,
+  "durationNights": 0,
+  "priceMode": "FROM",
+  "bookingMode": "DIRECT_BOOKING",
+  "startingPriceUSD": 100,
+  "highlights": {
+    "en": [
+      "Amman Citadel (Jebel Al-Qala'a) Temple of Hercules & Umayyad Palace",
+      "Roman Theatre of Amman and downtown traditional souk markets",
+      "Customizable itinerary tailored to your schedule"
+    ],
+    "de": [
+      "Zitadelle von Amman mit Herkules-Tempel & Umayyaden-Palast",
+      "Römisches Theater von Amman und traditionelle Souks der Altstadt",
+      "Individuell anpassbare Route je nach Ihren Wünschen"
+    ],
+    "fr": [
+      "Citadelle d'Amman (Temple d'Hercule et Palais Omeyyade)",
+      "Théâtre romain d'Amman et souks traditionnels du centre-ville",
+      "Itinéraire personnalisable selon vos envies"
+    ],
+    "it": [
+      "Cittadella di Amman (Tempio di Ercole e Palazzo Omayyade)",
+      "Teatro romano di Amman e bazar tradizionali del centro",
+      "Itinerario personalizzabile secondo le tue esigenze"
+    ]
+  },
+  "route": [
+    "Amman Citadel",
+    "Roman Theatre",
+    "Downtown Amman Souk"
+  ],
+  "inclusions": {
+    "en": [
+      "Private AC transportation with dedicated English-speaking driver",
+      "Hotel pickup and drop-off in Amman",
+      "Cold bottled drinking water"
+    ],
+    "de": [
+      "Privatfahrzeug mit Klimaanlage und englischsprachigem Chauffeur",
+      "Hotelabholung und Rückfahrt in Amman",
+      "Kaltes Mineralwasser"
+    ],
+    "fr": [
+      "Transport privé climatisé avec chauffeur anglophone",
+      "Prise en charge et retour à l'hôtel à Amman",
+      "Eau minérale fraîche"
+    ],
+    "it": [
+      "Trasporto privato climatizzato con autista parlante inglese",
+      "Pick-up e drop-off dall'hotel ad Amman",
+      "Acqua minerale fresca"
+    ]
+  },
+  "exclusions": {
+    "en": [
+      "Site entrance tickets (or Jordan Pass)",
+      "Personal purchases and tips",
+      "Meals"
+    ],
+    "de": [
+      "Eintrittskarten für Sehenswürdigkeiten (oder Jordan Pass)",
+      "Persönliche Einkäufe und Trinkgelder",
+      "Mahlzeiten"
+    ],
+    "fr": [
+      "Billets d'entrée sur les sites (ou Jordan Pass)",
+      "Achats personnels et pourboires",
+      "Repas"
+    ],
+    "it": [
+      "Biglietti d'ingresso ai siti (o Jordan Pass)",
+      "Acquisti personali e mance",
+      "Pasti"
+    ]
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "title": {
+        "en": "Amman City Highlights Tour",
+        "de": "Amman Stadt-Highlight-Tour",
+        "fr": "Tour des Incontournables d'Amman",
+        "it": "Tour dei Punti Salienti di Amman"
+      },
+      "description": {
+        "en": "Flexible city day tour visiting Amman Citadel atop Jebel Al-Qala'a, Roman Theatre, Jordan Museum, and colorful Al-Balad downtown souks.",
+        "de": "Flexibler Stadtausflug zur Zitadelle von Amman auf dem Jebel Al-Qala'a, zum Römischen Theater, Jordan-Museum und den Souks in der Altstadt Al-Balad.",
+        "fr": "Visite guidée sur mesure de la citadelle d'Amman au sommet du Jebel Al-Qala'a, du théâtre romain, du musée de Jordanie et des souks d'Al-Balad.",
+        "it": "Tour flessibile della città con visita alla cittadella sul Jebel Al-Qala'a, al teatro romano, al museo della Giordania e ai bazar del centro."
+      },
+      "meals": "Water included",
+      "accommodation": "Return to Amman Hotel"
+    }
+  ],
+  "heroImage": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+  "gallery": [
+    {
+      "id": "dam-1",
+      "url": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+      "alt": {
+        "en": "Amman Citadel Temple of Hercules pillars",
+        "de": "Säulen des Herkules-Tempels auf der Zitadelle von Amman",
+        "fr": "Colonnes du temple d'Hercule à la citadelle d'Amman",
+        "it": "Colonne del tempio di Ercole alla cittadella di Amman"
+      },
+      "caption": {
+        "en": "Amman Citadel ruins",
+        "de": "Ruinen der Zitadelle von Amman",
+        "fr": "Ruines de la citadelle d'Amman",
+        "it": "Rovine della cittadella di Amman"
+      },
+      "sortOrder": 1,
+      "rightsStatus": "LEGACY_SITE_ASSET"
+    }
+  ],
+  "faqs": [
+    {
+      "question": {
+        "en": "Can this tour be customized with other nearby attractions?",
+        "de": "Kann diese Tour mit anderen Sehenswürdigkeiten kombiniert werden?",
+        "fr": "Cette excursion peut-elle être personnalisée ?",
+        "it": "Questo tour può essere personalizzato?"
+      },
+      "answer": {
+        "en": "Yes, our private driver can customize your Amman day tour itinerary according to your schedule.",
+        "de": "Ja, unser privater Fahrer passt die Route in Amman flexibel an Ihre Wünsche an.",
+        "fr": "Oui, notre chauffeur privé adapte votre journée à Amman selon vos envies.",
+        "it": "Sì, il nostro autista privato adatta l'itinerario ad Amman alle tue esigenze."
+      }
+    }
+  ]
+}
 ];

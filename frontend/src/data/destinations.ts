@@ -515,4 +515,842 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg"
     ]
   }
+,
+  {
+  "id": "mount-nebo",
+  "slug": {
+    "en": "mount-nebo",
+    "de": "berg-nebo",
+    "fr": "mont-nebo",
+    "it": "monte-nebo"
+  },
+  "name": {
+    "en": "Mount Nebo Sanctuary",
+    "de": "Berg Nebo Heiligtum",
+    "fr": "Sanctuaire du Mont Nébo",
+    "it": "Santuario del Monte Nebo"
+  },
+  "tagline": {
+    "en": "Biblical Memorial Where Moses Contemplated the Promised Land",
+    "de": "Biblische Gedenkstätte, von der Moses das Gelobte Land erblickte",
+    "fr": "Mémorial biblique où Moïse contempla la Terre Promise",
+    "it": "Memoriale biblico dove Mosè contemplò la Terra Promessa"
+  },
+  "description": {
+    "en": "Rise 817 meters above sea level at Mount Nebo (Siyagha), the holy site where Prophet Moses stood before his death. Visit the Memorial Church housing 6th-century Byzantine mosaics and gaze across the Jordan Valley to Jericho and Jerusalem.",
+    "de": "Erheben Sie sich 817 Meter über den Meeresspiegel auf dem Berg Nebo (Siyagha), der heiligen Stätte, an der Moses vor seinem Tod stand. Besuchen Sie die Gedenkkirche mit byzantinischen Mosaiken aus dem 6. Jahrhundert.",
+    "fr": "S'élevant à 817 mètres d'altitude, le Mont Nébo (Siyagha) est le lieu sacré où le prophète Moïse contempla la Terre Promise. Admirez la basilique et ses mosaïques byzantines du VIe siècle.",
+    "it": "Situato a 817 metri sul livello del mare, il Monte Nebo (Siyagha) è il luogo sacro dove il profeta Mosè vide la Terra Promessa. Visita la chiesa memoriale con mosaici bizantini del VI secolo."
+  },
+  "highlights": {
+    "en": [
+      "Brazen Serpent Monument sculpture by Gian Paolo Fantoni",
+      "6th-century Byzantine mosaics in the Memorial Church of Moses",
+      "Panoramic outlook over the Jordan Valley, Dead Sea & West Bank"
+    ],
+    "de": [
+      "Skulptur des Ehernen Schlange-Denkmals von Gian Paolo Fantoni",
+      "Byzantinische Mosaike aus dem 6. Jahrhundert in der Moses-Gedenkkirche",
+      "Panoramablick über das Jordantal, das Tote Meer & Jericho"
+    ],
+    "fr": [
+      "Sculpture du serpent d'airain par Gian Paolo Fantoni",
+      "Mosaïques byzantines du VIe siècle dans le mémorial de Moïse",
+      "Vue panoramique sur la vallée du Jourdain, la Mer Morte & la Cisjordanie"
+    ],
+    "it": [
+      "Scultura del serpente di rame di Gian Paolo Fantoni",
+      "Mosaici bizantini del VI secolo nella chiesa memoriale di Mosè",
+      "Vista panoramica sulla Valle del Giordano, il Mar Morto e la Cisgiordania"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Visit early morning or late afternoon for clear atmospheric views of Jerusalem's towers.",
+      "Combine Mount Nebo with Madaba mosaic town just 15 minutes away."
+    ],
+    "de": [
+      "Besuchen Sie den Ort früh morgens für klare Sicht auf die Türme von Jerusalem.",
+      "Kombinieren Sie den Berg Nebo mit Madaba, das nur 15 Minuten entfernt liegt."
+    ],
+    "fr": [
+      "Visitez tôt le matin pour apercevoir au loin les clochers de Jérusalem.",
+      "Combinez le Mont Nébo avec Madaba situé à seulement 15 minutes."
+    ],
+    "it": [
+      "Visita al mattino presto per una vista limpida fino a Gerusalemme.",
+      "Combina il Monte Nebo con Madaba a soli 15 minuti di distanza."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "Year-Round (Best Oct-May)",
+    "de": "Ganzjährig (Beste Zeit Okt-Mai)",
+    "fr": "Toute l'année (Idéal Oct-Mai)",
+    "it": "Tutto l'anno (Ideale Ott-Mag)"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Can you see Jerusalem from Mount Nebo?",
+        "de": "Kann man Jerusalem vom Berg Nebo aus sehen?",
+        "fr": "Peut-on voir Jérusalem depuis le Mont Nébo ?",
+        "it": "Si può vedere Gerusalemme dal Monte Nebo?"
+      },
+      "answer": {
+        "en": "Yes, on clear days visitors can see the Jordan River valley, Jericho, the Dead Sea, and the distant hills of Jerusalem.",
+        "de": "Ja, an klaren Tagen sieht man das Jordantal, Jericho, das Tote Meer und die fernen Hügel von Jerusalem.",
+        "fr": "Oui, par temps clair, la vue s'étend sur la vallée du Jourdain, Jéricho, la Mer Morte et les collines de Jérusalem.",
+        "it": "Sì, nelle giornate limpide si vedono la valle del Giordano, Gerico, il Mar Morto e le colline di Gerusalemme."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg"
+  ]
+},
+  {
+  "id": "baptism-site",
+  "slug": {
+    "en": "baptism-site-bethany",
+    "de": "taufstelle-jordanien",
+    "fr": "site-du-bapteme-bethanie",
+    "it": "sito-del-battesimo-betania"
+  },
+  "name": {
+    "en": "Baptism Site (Al-Maghtas / Bethany Beyond the Jordan)",
+    "de": "Taufstelle Al-Maghtas (Bethanien)",
+    "fr": "Site du Baptême (Al-Maghtas)",
+    "it": "Sito del Battesimo (Al-Maghtas)"
+  },
+  "tagline": {
+    "en": "UNESCO World Heritage Location of Jesus' Baptism by John",
+    "de": "UNESCO-Weltkulturerbe der Taufe Jesu durch Johannes den Täufer",
+    "fr": "Site du patrimoine mondial UNESCO du baptême de Jésus par Jean",
+    "it": "Patrimonio Mondiale UNESCO del battesimo di Gesù da parte di Giovanni"
+  },
+  "description": {
+    "en": "Located on the eastern bank of the Jordan River, Al-Maghtas is venerated as the authentic location where John the Baptist baptized Jesus Christ. Explore Roman and Byzantine baptismal pools, ancient monastery ruins, and the peaceful Jordan River edge.",
+    "de": "Am ostufer des Jordans gelegen gilt Al-Maghtas als die authentische Taufstelle Jesu Christi durch Johannes den Täufer. Erkunden Sie römische und byzantinische Taufbecken.",
+    "fr": "Situé sur la rive orientale du Jourdain, Al-Maghtas est le lieu authentique du baptême de Jésus-Christ par Jean-Baptiste. Explorez les bassins de baptême romains et byzantins.",
+    "it": "Situato sulla sponda orientale del fiume Giordano, Al-Maghtas è il luogo autentico del battesimo di Gesù Cristo. Visita le vasche battesimali romane e bizantine."
+  },
+  "highlights": {
+    "en": [
+      "The Elijah's Hill (Tell al-Kharrar) hermitage site",
+      "Ancient Byzantine churches and baptismal pools along Wadi al-Kharrar",
+      "The edge of the sacred Jordan River opposite Jericho"
+    ],
+    "de": [
+      "Der Einsiedlerhügel Tell al-Kharrar (Himmel fahrt des Elias)",
+      "Byzantinische Kirchen und Taufbecken am Wadi al-Kharrar",
+      "Das heilige Ufer des Jordans gegenüber von Jericho"
+    ],
+    "fr": [
+      "La colline d'Élie (Tell al-Kharrar) et ses ermitages",
+      "Églises byzantines antiques et bassins de baptême",
+      "La rive du Jourdain en face de Jéricho"
+    ],
+    "it": [
+      "La collina di Elia (Tell al-Kharrar) e gli eremi",
+      "Chiese bizantine e vasche battesimali antiche",
+      "La riva del fiume Giordano di fronte a Gerico"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Wear modest clothing covering shoulders and knees out of respect for religious pilgrimage customs.",
+      "Combine Al-Maghtas with a Dead Sea float in the afternoon."
+    ],
+    "de": [
+      "Tragen Sie angemessene Kleidung (Schultern und Knie bedeckt) aus Respekt vor der religiösen Pilgerstätte.",
+      "Kombinieren Sie die Taufstelle mit einem Nachmittag am Toten Meer."
+    ],
+    "fr": [
+      "Portez des vêtements couvrants (épaules et genoux) par respect pour ce lieu de pèlerinage.",
+      "Associez le site du baptême à une baignade l'après-midi à la Mer Morte."
+    ],
+    "it": [
+      "Indossa abiti modesti per rispetto verso il luogo di pellegrinaggio.",
+      "Combina il sito del battesimo con il Mar Morto nel pomeriggio."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "October to April",
+    "de": "Oktober bis April",
+    "fr": "Octobre à Avril",
+    "it": "Ottobre ad Aprile"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Is Al-Maghtas recognized by major Christian churches?",
+        "de": "Wird Al-Maghtas von den christlichen Kirchen anerkannt?",
+        "fr": "Al-Maghtas est-il reconnu par les Églises chrétiennes ?",
+        "it": "Al-Maghtas è riconosciuto dalle Chiese cristiane?"
+      },
+      "answer": {
+        "en": "Yes, Al-Maghtas is recognized by Catholic, Orthodox, and Anglican church authorities and was visited by Popes John Paul II, Benedict XVI, and Francis.",
+        "de": "Ja, Al-Maghtas ist von der katholischen, orthodoxen und anglikanischen Kirche anerkannt und wurde von drei Päpsten besucht.",
+        "fr": "Oui, le site est reconnu par les autorités catholiques, orthodoxes et anglicanes, et a été visité par trois papes.",
+        "it": "Sì, Al-Maghtas è riconosciuto dalle autorità cattoliche, ortodosse e anglicane ed è stato visitato da tre Papi."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
+  ]
+},
+  {
+  "id": "ajloun-castle",
+  "slug": {
+    "en": "ajloun-castle",
+    "de": "burg-ajloun",
+    "fr": "chateau-d-ajloun",
+    "it": "castello-di-ajloun"
+  },
+  "name": {
+    "en": "Ajloun Castle (Qal'at Ar-Rabad)",
+    "de": "Burg Ajloun (Qal'at Ar-Rabad)",
+    "fr": "Château d'Ajloun",
+    "it": "Castello di Ajloun"
+  },
+  "tagline": {
+    "en": "12th-Century Islamic Hilltop Fortress Built by Saladin's General",
+    "de": "Islamische Höhenburg aus dem 12. Jahrhundert, erbaut von Saladins General",
+    "fr": "Forteresse islamique du XIIe siècle construite par le général de Saladin",
+    "it": "Fortezza islamica del XII secolo costruita dal generale di Saladino"
+  },
+  "description": {
+    "en": "Crown of the Ajloun pine-forested hills, Qal'at Ar-Rabad was constructed in 1184 AD to defend against Crusader expansion and safeguard iron mines. Explore towers, drawbridges, and vaulted halls overlooking the Jordan Rift Valley.",
+    "de": "Die Burg Ajloun krönt die kiefernbewachsenen Hügel Nordjordanien. Sie wurde 1184 erbaut, um die Handelswege gegen die Kreuzritter zu verteidigen.",
+    "fr": "Dominant les collines boisées d'Ajloun, le château a été édifié en 1184 pour se défendre contre les Croisés. Explorez ses tours, ses ponts-levis et ses salles voûtées.",
+    "it": "Situato sulle colline alberate di Ajloun, il castello fu eretto nel 1184 per difendere le vie commerciali dai Crociati."
+  },
+  "highlights": {
+    "en": [
+      "Intact 12th-century Ayyubid military architecture",
+      "Panoramic vistas of Galilee and northern pine forests",
+      "Ajloun Forest Reserve & Cable Car ride"
+    ],
+    "de": [
+      "Intakte ayyubidische Militärarchitektur aus dem 12. Jahrhundert",
+      "Panoramablick auf Galiläa und die nördlichen Kiefernwälder",
+      "Seilbahnfahrt über das Ajloun-Waldschutzgebiet"
+    ],
+    "fr": [
+      "Architecture militaire ayyoubide du XIIe siècle intacte",
+      "Vues panoramiques sur la Galilée et les forêts de pins",
+      "Téléphérique d'Ajloun sur la réserve naturelle"
+    ],
+    "it": [
+      "Architettura militare ayyubide del XII secolo intatta",
+      "Vista panoramica sulla Galilea e le pinete del nord",
+      "Funivia di Ajloun sulla riserva naturale"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Take the new Ajloun Cable Car for breathtaking aerial views of the castle and green valleys.",
+      "Pair Ajloun Castle with the Roman ruins of Jerash."
+    ],
+    "de": [
+      "Fahren Sie mit der neuen Ajloun-Seilbahn für atemberaubende Aussichten über das Tal.",
+      "Kombinieren Sie Burg Ajloun mit der Römerstadt Jerash."
+    ],
+    "fr": [
+      "Prenez le nouveau téléphérique d'Ajloun pour des vues imprenables sur le château.",
+      "Associez la visite d'Ajloun aux ruines romaines de Gérasa."
+    ],
+    "it": [
+      "Prendi la nuova funivia di Ajloun per viste spettacolari sul castello.",
+      "Combina il castello di Ajloun con le rovine romane di Jerash."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "Spring & Autumn",
+    "de": "Frühling & Herbst",
+    "fr": "Printemps & Automne",
+    "it": "Primavera e Autunno"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Why was Ajloun Castle built?",
+        "de": "Warum wurde die Burg Ajloun erbaut?",
+        "fr": "Pourquoi le château d'Ajloun a-t-il été construit ?",
+        "it": "Perché fu costruito il castello di Ajloun?"
+      },
+      "answer": {
+        "en": "It was built by Izz al-Din Usama, a nephew of Saladin, in 1184 AD to control the iron mines of Ajloun and prevent Crusader incursions.",
+        "de": "Sie wurde 1184 von Saladins Neffen erbaut, um die Eisenerzminen zu kontrollieren und Kreuzritter-Angriffe abzuwehren.",
+        "fr": "Il a été construit en 1184 par le neveu de Saladin pour contrôler les mines de fer et bloquer les Croisés.",
+        "it": "Fu costruito nel 1184 dal nipote di Saladino per controllare le miniere di ferro e bloccare i Crociati."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg"
+  ]
+},
+  {
+  "id": "al-karak-castle",
+  "slug": {
+    "en": "karak-castle",
+    "de": "burg-karak",
+    "fr": "chateau-de-kerak",
+    "it": "castello-di-kerak"
+  },
+  "name": {
+    "en": "Al-Karak Crusader Castle",
+    "de": "Kreuzritterburg Al-Karak",
+    "fr": "Château des Croisés de Kerak",
+    "it": "Castello dei Crociati di Kerak"
+  },
+  "tagline": {
+    "en": "Formidable Medieval Fortress along the Ancient King's Highway",
+    "de": "Imposante mittelalterliche Festung an der antiken Königsstraße",
+    "fr": "Imposante forteresse médiévale le long de la Route des Rois",
+    "it": "Imponente fortezza medievale lungo l'antica Strada dei Re"
+  },
+  "description": {
+    "en": "Perched 1,000 meters above sea level in southern Jordan, Karak Castle is a dark maze of stone vaulted halls, subterranean passageways, and battlements once commanded by Raynald of Châtillon.",
+    "de": "Auf 1.000 Metern Höhe thront die Festung Karak. Ein Labyrinth aus gewölbten Hallen, unterirdischen Gängen und Wehrmauern an der antiken Königsstraße.",
+    "fr": "Perché à 1 000 mètres d'altitude, le château de Kerak est un labyrinthe de salles voûtées, de souterrains et de remparts imposants.",
+    "it": "Arroccato a 1.000 metri d'altezza, il castello di Kerak è un labirinto di sale voltate, passaggi sotterranei e bastioni."
+  },
+  "highlights": {
+    "en": [
+      "Subterranean Crusader corridors and vaulted stone kitchens",
+      "Panoramic lookouts over the Dead Sea and King's Highway canyons",
+      "Karak Archaeological Museum inside the castle lower courtyard"
+    ],
+    "de": [
+      "Unterirdische Kreuzritter-Gänge und gewölbte Küchen",
+      "Panoramablick über das Tote Meer und die Schluchten der Königsstraße",
+      "Archäologisches Museum von Karak im unteren Burghof"
+    ],
+    "fr": [
+      "Galeries souterraines des Croisés et cuisines voûtées",
+      "Vues panoramiques sur la Mer Morte et les canyons",
+      "Musée archéologique de Kerak dans la cour inférieure"
+    ],
+    "it": [
+      "Gallerie sotterranee dei Crociati e cucine voltate",
+      "Viste panoramiche sul Mar Morto e sui canyon",
+      "Museo archeologico di Kerak nel cortile inferiore"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Bring a pocket flashlight or phone light to explore the deep subterranean dark corridors.",
+      "Stop at Karak during a road trip along the King's Highway between Amman and Petra."
+    ],
+    "de": [
+      "Bringen Sie eine Taschenlampe mit, um die dunklen unterirdischen Gänge zu erkunden.",
+      "Machen Sie Halt in Karak bei einer Fahrt auf der Königsstraße von Amman nach Petra."
+    ],
+    "fr": [
+      "Apportez une lampe de poche pour explorer les souterrains obscurs.",
+      "Faites étape à Kerak lors d'un trajet sur la Route des Rois entre Amman et Pétra."
+    ],
+    "it": [
+      "Porta una torcia elettrica per esplorare i corridoi sotterranei bui.",
+      "Fai una tappa a Kerak lungo la Strada dei Re tra Amman e Petra."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "Spring & Autumn",
+    "de": "Frühling & Herbst",
+    "fr": "Printemps & Automne",
+    "it": "Primavera e Autunno"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Where is Karak Castle located?",
+        "de": "Wo befindet sich die Burg Karak?",
+        "fr": "Où se trouve le château de Kerak ?",
+        "it": "Dove si trova il castello di Kerak?"
+      },
+      "answer": {
+        "en": "Karak Castle is located in the town of Al-Karak, 124 km south of Amman along the scenic King's Highway route to Petra.",
+        "de": "Die Burg liegt in Al-Karak, 124 km südlich von Amman an der Königsstraße nach Petra.",
+        "fr": "Le château se situe à Kerak, à 124 km au sud d'Amman sur la Route des Rois.",
+        "it": "Il castello si trova ad Al-Karak, 124 km a sud di Amman lungo la Strada dei Re."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
+  ]
+},
+  {
+  "id": "citadel",
+  "slug": {
+    "en": "amman-citadel",
+    "de": "zitadelle-amman",
+    "fr": "citadelle-d-amman",
+    "it": "cittadella-di-amman"
+  },
+  "name": {
+    "en": "Amman Citadel & Roman Theatre",
+    "de": "Zitadelle von Amman & Römisches Theater",
+    "fr": "Citadelle d'Amman & Théâtre Romain",
+    "it": "Cittadella di Amman e Teatro Romano"
+  },
+  "tagline": {
+    "en": "Ancient Acropolis of Philadelphia Spanning Bronze Age to Umayyad Caliphate",
+    "de": "Antike Akropolis von Philadelphia vom Bronzezeitalter bis zum Umayyaden-Kalifat",
+    "fr": "Acropole antique de Philadelphie couvrant l'âge du bronze et l'ère omeyyade",
+    "it": "Antica acropoli di Philadelphia dall'età del bronzo al califfato omayyade"
+  },
+  "description": {
+    "en": "Crown of Jebel Al-Qala'a hill, the Amman Citadel preserves 7,000 years of civilization. Stand beside the giant stone fingers of the Temple of Hercules, marvel at the Umayyad Palace dome, and descend to the 6,000-seat Roman Theatre.",
+    "de": "Auf dem Hügel Jebel Al-Qala'a bewahrt die Zitadelle von Amman 7.000 Jahre Geschichte. Stehen Sie vor den riesigen Fingern des Herkules-Tempels und dem Umayyaden-Palast.",
+    "fr": "Dominant la ville depuis la colline du Jebel Al-Qala'a, la citadelle retrace 7 000 ans d'histoire. Admirez le temple d'Hercule et le palais omeyyade.",
+    "it": "Sulla collina di Jebel Al-Qala'a, la cittadella conserva 7.000 anni di storia. Ammira il Tempio di Ercole e il Palazzo Omayyade."
+  },
+  "highlights": {
+    "en": [
+      "The massive pillars and Hand of Hercules at Temple of Hercules",
+      "Monumental 8th-century Umayyad Palace audience hall and dome",
+      "6,000-seat Roman Theatre restored in downtown Al-Balad"
+    ],
+    "de": [
+      "Imposante Säulen und Hand des Herkules am Herkules-Tempel",
+      "Umayyaden-Palast mit monumentaler Empfangshalle aus dem 8. Jahrhundert",
+      "Römisches Theater mit 6.000 Sitzplätzen im Stadtzentrum"
+    ],
+    "fr": [
+      "Colonnes imposantes et Main d'Hercule au temple d'Hercule",
+      "Palais Omeyyade du VIIIe siècle avec sa coupole",
+      "Théâtre romain de 6 000 places au centre-ville d'Al-Balad"
+    ],
+    "it": [
+      "Imponenti colonne e Mano di Ercole al Tempio di Ercole",
+      "Palazzo Omayyade dell'VIII secolo con la sua cupola",
+      "Teatro Romano da 6.000 posti nel centro storico"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Visit sunset at the Citadel for breathtaking views as the call to prayer echoes across Amman's hills.",
+      "Walk down from the Citadel to downtown Al-Balad for authentic falafel at Hashem."
+    ],
+    "de": [
+      "Genießen Sie den Sonnenuntergang auf der Zitadelle, wenn der Ruf des Muezzins über Ammans Hügel hallt.",
+      "Spazieren Sie hinunter in die Altstadt Al-Balad für beste Falafel."
+    ],
+    "fr": [
+      "Admirez le coucher du soleil depuis la citadelle avec la vue panoramique sur Amman.",
+      "Descendez à pied vers le centre-ville pour goûter aux falafels traditionnels."
+    ],
+    "it": [
+      "Goditi il tramonto dalla cittadella con vista panoramica sulle colline di Amman.",
+      "Scendi a piedi verso il centro per assaggiare i falafel tradizionali."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "Year-Round",
+    "de": "Ganzjährig",
+    "fr": "Toute l'année",
+    "it": "Tutto l'anno"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "How high is the Amman Citadel?",
+        "de": "Wie hoch liegt die Zitadelle von Amman?",
+        "fr": "À quelle hauteur se trouve la citadelle d'Amman ?",
+        "it": "Quanto è alta la cittadella di Amman?"
+      },
+      "answer": {
+        "en": "The Citadel sits atop Jebel Al-Qala'a, roughly 850 meters above sea level, providing 360-degree views of Amman's white-hued hills.",
+        "de": "Die Zitadelle liegt auf ca. 850 m Höhe und bietet einen 360-Grad-Blick über Ammans weiße Hügel.",
+        "fr": "La citadelle culmine à environ 850 mètres d'altitude sur le Jebel Al-Qala'a.",
+        "it": "La cittadella sorge a circa 850 metri d'altezza offrendo una vista a 360 gradi."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg"
+  ]
+},
+  {
+  "id": "dana-village",
+  "slug": {
+    "en": "dana-biosphere-reserve",
+    "de": "dana-biosphaerenreservat",
+    "fr": "reserve-de-dana",
+    "it": "riserva-di-dana"
+  },
+  "name": {
+    "en": "Dana Biosphere Reserve & Village",
+    "de": "Dana Biosphärenreservat & Dorf",
+    "fr": "Réserve de Biosphère de Dana",
+    "it": "Riserva della Biosfera di Dana"
+  },
+  "tagline": {
+    "en": "Jordan's Largest Nature Reserve & Stone Ecotourism Refuge",
+    "de": "Jordaniens größtes Naturschutzgebiet & Stein-Ökodorf",
+    "fr": "Plus grande réserve naturelle de Jordanie et éco-village historique",
+    "it": "La più grande riserva naturale della Giordania e villaggio in pietra"
+  },
+  "description": {
+    "en": "Spanning 320 square kilometers from 1,500m mountain peaks down to the desert lowlands of Wadi Araba, Dana is Jordan's ecological crown jewel. Explore 15th-century stone houses and hike dramatic sandstone canyons.",
+    "de": "Auf 320 Quadratkilometern erstreckt sich Dana von 1.500 m hohen Bergen bis in die Wüstenebene. Erkunden Sie 500 Jahre alte Steinhäuser.",
+    "fr": "S'étendant sur 320 km² depuis les sommets jusqu'à la dépression du Wadi Araba, Dana est un paradis écologique aux maisons en pierre du XVe siècle.",
+    "it": "Estesa su 320 km² dalle montagne fino al deserto del Wadi Araba, Dana è un paradiso ecologico con case in pietra del XV secolo."
+  },
+  "highlights": {
+    "en": [
+      "Dana-to-Feynan eco-hiking trail through dramatic sandstone gorges",
+      "Restored 15th-century Ottoman stone village of Dana",
+      "Home to 800 plant species, 215 bird species & Syrian serin"
+    ],
+    "de": [
+      "Wanderweg von Dana nach Feynan durch atemberaubende Sandsteinschluchten",
+      "Restauriertes osmanisches Steindorf Dana aus dem 15. Jahrhundert",
+      "Heimat von 800 Pflanzenarten und über 200 Vogelarten"
+    ],
+    "fr": [
+      "Randonnée éco-touristique de Dana à Feynan à travers les gorges",
+      "Village en pierre ottoman du XVe siècle restauré",
+      "Refuge de 800 espèces végétales et 215 espèces d'oiseaux"
+    ],
+    "it": [
+      "Trekking ecologico da Dana a Feynan tra le gole di arenaria",
+      "Villaggio ottomano in pietra del XV secolo restaurato",
+      "Casa di 800 specie vegetali e 215 specie di uccelli"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Stay overnight at a local Dana eco-lodge to stargaze free of light pollution.",
+      "Book a guided hike along the Wadi Dana trail."
+    ],
+    "de": [
+      "Übernachten Sie in einer Öko-Lodge in Dana für fantastischen Sternenhimmel.",
+      "Buchen Sie eine geführte Wanderung durch das Wadi Dana."
+    ],
+    "fr": [
+      "Passez la nuit dans un écolodge local pour admirer les étoiles sans pollution lumineuse.",
+      "Réservez une randonnée guidée dans le Wadi Dana."
+    ],
+    "it": [
+      "Pernotta in un eco-lodge a Dana per ammirare le stelle senza inquinamento luminoso.",
+      "Prenota una camminata guidata nel Wadi Dana."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "March to May & September to November",
+    "de": "März bis Mai & Sept bis Nov",
+    "fr": "Mars à Mai & Sept à Nov",
+    "it": "Da Marzo a Maggio & da Sept a Nov"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "How big is Dana Biosphere Reserve?",
+        "de": "Wie groß ist das Biosphärenreservat Dana?",
+        "fr": "Quelle est la superficie de la réserve de Dana ?",
+        "it": "Quanto è grande la riserva di Dana?"
+      },
+      "answer": {
+        "en": "Dana covers approximately 320 square kilometers of diverse ecosystems ranging from Mediterranean oak forests to desert dunes.",
+        "de": "Dana umfasst etwa 320 Quadratkilometer geschützter Ökosysteme von Eichenwäldern bis zu Wüstendünen.",
+        "fr": "Dana couvre environ 320 kilomètres carrés aux écosystèmes variés.",
+        "it": "Dana copre circa 320 chilometri quadrati con ecosistemi diversi."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
+  ]
+},
+  {
+  "id": "desert-castles",
+  "slug": {
+    "en": "desert-castles",
+    "de": "wuestenschloesser",
+    "fr": "chateaux-du-desert",
+    "it": "castelli-del-deserto"
+  },
+  "name": {
+    "en": "Eastern Desert Castles (Qusayr Amra, Kharana & Azraq)",
+    "de": "Östliche Wüstenschlösser",
+    "fr": "Châteaux du Désert d'Orient",
+    "it": "Castelli del Deserto Orientale"
+  },
+  "tagline": {
+    "en": "Umayyad Caliphate Hunting Lodges, Fortresses & Fresco Palaces",
+    "de": "Jagdschlösser, Festungen & Mosaikpaläste des Umayyaden-Kalifats",
+    "fr": "Pavillons de chasse omeyyades, forteresses et fresques uniques",
+    "it": "Residenze di caccia omayyade, fortezze e affreschi unici"
+  },
+  "description": {
+    "en": "Scattered across Jordan's eastern basalt desert, the Umayyad Desert Castles (7th-8th century AD) served as royal hunting retreats, caravan stops, and meeting halls. Highlights include UNESCO Qusayr Amra's wall frescoes and Azraq's basalt fort.",
+    "de": "Die Umayyaden-Wüstenschlösser aus dem 7.–8. Jahrhundert dienten als Jagdsitze und Karawansereien. Höhepunkte sind die UNESCO-Fresken von Qusayr Amra.",
+    "fr": "Dispersés dans le désert oriental, les châteaux omeyyades (VIIe-VIIIe siècle) étaient des pavillons de chasse et des étapes de caravanes.",
+    "it": "Dispersi nel deserto orientale, i castelli omayyadi servivano da residenze di caccia ed tappe per le carovane."
+  },
+  "highlights": {
+    "en": [
+      "UNESCO World Heritage Qusayr Amra bathhouse fresco paintings",
+      "Formidable square walls and courtyard of Qasr Kharana",
+      "Black basalt castle at Azraq Oasis used by Lawrence of Arabia"
+    ],
+    "de": [
+      "UNESCO-Weltkulturerbe Qusayr Amra mit antiken Wandgemälden",
+      "Imposante Festung Qasr Kharana mit Innenhof",
+      "Schwarze Basaltburg Azraq, genutzt von Lawrence von Arabien"
+    ],
+    "fr": [
+      "Fresques uniques du bain omeyyade de Qusayr Amra (UNESCO)",
+      "Forteresse carrée et cour intérieure de Qasr Kharana",
+      "Château en basalte noir d'Azraq fréquenté par Lawrence d'Arabie"
+    ],
+    "it": [
+      "Affreschi unici delle terme omayyadi di Qusayr Amra (UNESCO)",
+      "Fortezza quadrata e cortile interno di Qasr Kharana",
+      "Castello in basalto nero di Azraq frequentato da Lawrence d'Arabia"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Combine Kharana, Amra, and Azraq into a single 4-hour morning circuit from Amman.",
+      "Look for the Zodiac dome painting inside Qusayr Amra bathhouse."
+    ],
+    "de": [
+      "Kombinieren Sie Kharana, Amra und Azraq zu einer 4-Stunden-Tour ab Amman.",
+      "Achten Sie auf die Tierkreis-Kuppelmalerei in den Thermen von Qusayr Amra."
+    ],
+    "fr": [
+      "Combinez Kharana, Amra et Azraq en une excursion matinale de 4 heures.",
+      "Observez la coupole du Zodiaque peinte dans les bains de Qusayr Amra."
+    ],
+    "it": [
+      "Combina Kharana, Amra e Azraq in un'escursione di 4 ore da Amman.",
+      "Osserva la cupola dello zodiaco dipinta nelle terme di Qusayr Amra."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "October to April",
+    "de": "Oktober bis April",
+    "fr": "Octobre à Avril",
+    "it": "Ottobre ad Aprile"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Why is Qusayr Amra a UNESCO World Heritage site?",
+        "de": "Warum ist Qusayr Amra UNESCO-Weltkulturerbe?",
+        "fr": "Pourquoi Qusayr Amra est-il classé par l'UNESCO ?",
+        "it": "Perché Qusayr Amra è patrimonio UNESCO?"
+      },
+      "answer": {
+        "en": "Qusayr Amra was designated UNESCO World Heritage in 1985 due to its exceptionally rare 8th-century early Islamic wall frescoes portraying hunting scenes and astronomy.",
+        "de": "Es wurde 1985 ausgezeichnet wegen seiner seltenen Wandgemälde aus dem 8. Jahrhundert mit Jagdszenen und Astronomie.",
+        "fr": "Il est classé depuis 1985 pour ses fresques omeyyades exceptionnelles du VIIIe siècle.",
+        "it": "È patrimonio dal 1985 per i suoi affreschi omayyadi eccezionali dell'VIII secolo."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg"
+  ]
+},
+  {
+  "id": "umm-qais",
+  "slug": {
+    "en": "umm-qais-gadara",
+    "de": "umm-qais-gadara",
+    "fr": "umm-qais-gadara",
+    "it": "umm-qais-gadara"
+  },
+  "name": {
+    "en": "Umm Qais (Ancient Decapolis City of Gadara)",
+    "de": "Umm Qais (Antike Dekapolis-Stadt Gadara)",
+    "fr": "Umm Qais (Ancienne Cité de Gadara)",
+    "it": "Umm Qais (Antica Città di Gadara)"
+  },
+  "tagline": {
+    "en": "Black Basalt Roman Ruins Overlooking Sea of Galilee & Golan Heights",
+    "de": "Schwarze Basaltruinen mit Blick auf den See Genezareth & Golan-Höhen",
+    "fr": "Ruines de basalte noir surplombant le lac de Tibériade",
+    "it": "Rovine di basalto nero affacciate sul Lago di Galilea"
+  },
+  "description": {
+    "en": "Perched in Jordan's northwestern corner, Umm Qais (ancient Gadara) was a famous Decapolis city of poets and philosophers. Explore black basalt Roman theatres, colonnaded streets, and Ottoman village ruins overlooking Galilee.",
+    "de": "Im äußersten Nordwesten Jordaniens liegt Umm Qais (Gadara), eine berühmte Dekapolis-Stadt. Erkunden Sie Theater aus schwarzem Basalt.",
+    "fr": "Située à l'extrême nord-ouest, Umm Qais (l'antique Gadara) était une célèbre cité de la Décapole. Explorez ses théâtres en basalte noir.",
+    "it": "All'estremo nord-ovest, Umm Qais (l'antica Gadara) era una famosa città della Decapoli. Visita i suoi teatri in basalto nero."
+  },
+  "highlights": {
+    "en": [
+      "Black basalt Roman Theatre and vaulted basilica complex",
+      "Panoramic vistas of Sea of Galilee, Yarmouk River & Golan Heights",
+      "Ottoman village stone houses converted into cultural craft spaces"
+    ],
+    "de": [
+      "Römisches Theater aus schwarzem Basalt und Basilika-Komplex",
+      "Panoramablick auf den See Genezareth, Yarmouk-Fluss & Golan-Höhen",
+      "Osmanisches Steindorf mit Kunsthandwerkern"
+    ],
+    "fr": [
+      "Théâtre romain en basalte noir et complexe basilical",
+      "Vue panoramique sur le lac de Tibériade et le plateau du Golan",
+      "Village ottoman restauré"
+    ],
+    "it": [
+      "Teatro romano in basalto nero e complesso della basilica",
+      "Vista panoramica sul Lago di Galilea e sulle Alture del Golan",
+      "Villaggio ottomano restaurato"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Dine at the hilltop Resdays restaurant overlooking the Sea of Galilee for lunch.",
+      "Combine Umm Qais with Jerash and Ajloun Castle."
+    ],
+    "de": [
+      "Genießen Sie ein Mittagessen im Restaurant auf dem Hügel mit Blick auf den See Genezareth.",
+      "Kombinieren Sie Umm Qais mit Jerash und Burg Ajloun."
+    ],
+    "fr": [
+      "Déjeunez au restaurant panoramique offrant une vue magnifique sur le lac de Tibériade.",
+      "Associez Umm Qais à Gérasa et au château d'Ajloun."
+    ],
+    "it": [
+      "Pranza al ristorante panoramico con vista spettacolare sul Lago di Galilea.",
+      "Combina Umm Qais con Jerash e il castello di Ajloun."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "Spring (March to May)",
+    "de": "Frühling (März bis Mai)",
+    "fr": "Printemps (Mars à Mai)",
+    "it": "Primavera (Marzo a Maggio)"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "What was Umm Qais called in antiquity?",
+        "de": "Wie hieß Umm Qais in der Antike?",
+        "fr": "Comment s'appelait Umm Qais dans l'Antiquité ?",
+        "it": "Come si chiamava Umm Qais nell'antichità?"
+      },
+      "answer": {
+        "en": "In antiquity, Umm Qais was known as Gadara, a prominent Greco-Roman city of the Decapolis famous for its scholars and poets.",
+        "de": "In der Antike hieß Umm Qais Gadara, eine bedeutende griechisch-römische Dekapolis-Stadt.",
+        "fr": "Dans l'Antiquité, la cité s'appelait Gadara, célèbre ville de la Décapole.",
+        "it": "Nell'antichità la città si chiamava Gadara, importante centro della Decapoli."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg"
+  ]
+},
+  {
+  "id": "wadi-mujib",
+  "slug": {
+    "en": "wadi-mujib-canyon",
+    "de": "wadi-mujib-schlucht",
+    "fr": "wadi-mujib-canyon",
+    "it": "wadi-mujib-canyon"
+  },
+  "name": {
+    "en": "Wadi Mujib Canyon Reserve",
+    "de": "Wadi Mujib Schluchtenreservat",
+    "fr": "Réserve du Canyon du Wadi Mujib",
+    "it": "Riserva del Canyon del Wadi Mujib"
+  },
+  "tagline": {
+    "en": "The Grand Canyon of Jordan & Freshwater Adventure Trail",
+    "de": "Der Grand Canyon Jordaniens & Süßwasser-Abenteuerpfad",
+    "fr": "Le Grand Canyon de Jordanie et son parc aquatique naturel",
+    "it": "Il Grand Canyon della Giordania e riserva acquatica naturale"
+  },
+  "description": {
+    "en": "Entering the Dead Sea at 410 meters below sea level, Wadi Mujib is the lowest nature reserve on Earth. Hike and swim through towering red sandstone gorges, water cascades, and natural rock pools along the Siq Trail.",
+    "de": "Mit dem Eingang am Toten Meer auf 410 Metern unter dem Meeresspiegel ist Wadi Mujib das tiefstgelegene Naturschutzgebiet der Erde. Wandern und schwimmen Sie durch rote Schluchten.",
+    "fr": "Débouchant dans la Mer Morte à 410 mètres sous le niveau de la mer, le Wadi Mujib est la réserve la plus basse du monde. Randonnez et nagez entre les hautes falaises rouges.",
+    "it": "Con l'ingresso al Mar Morto a 410 metri sotto il livello del mare, il Wadi Mujib è la riserva naturale più bassa della Terra. Cammina e nuota tra le pareti rosse."
+  },
+  "highlights": {
+    "en": [
+      "The exciting wet Siq Trail water trek to a rushing waterfall",
+      "Towering red sandstone cliffs rising over 50 meters above the riverbed",
+      "Lowest nature reserve on planet Earth (-410m)"
+    ],
+    "de": [
+      "Der aufregende nass-feuchte Siq Trail-Wasserweg bis zum Wasserfall",
+      "Über 50 Meter hohe rote Sandsteinfelsen über dem Flussbett",
+      "Tiefstgelegenes Naturschutzgebiet der Erde (-410 m)"
+    ],
+    "fr": [
+      "Le parcours aquatique du Siq Trail jusqu'à la cascade",
+      "Falaises de grès rouge de plus de 50 mètres de haut",
+      "Réserve naturelle la plus basse du monde (-410 m)"
+    ],
+    "it": [
+      "L'emozionante percorso acquatico del Siq Trail fino alla cascata",
+      "Pareti di arenaria rossa alte oltre 50 metri",
+      "Riserva naturale più bassa del mondo (-410 m)"
+    ]
+  },
+  "insiderTips": {
+    "en": [
+      "Wadi Mujib wet trails are open seasonally from April 1 to October 31 weather permitting.",
+      "Wear quick-dry water shoes and bring a dry bag for phones/cameras."
+    ],
+    "de": [
+      "Die feuchten Wanderwege im Wadi Mujib sind saisonal von April bis Oktober geöffnet.",
+      "Tragen Sie Wasserschuhe und bringen Sie eine wasserdichte Tasche mit."
+    ],
+    "fr": [
+      "Les parcours aquatiques sont ouverts du 1er avril au 31 octobre selon la météo.",
+      "Portez des chaussures d'eau et prévoyez un sac étanche."
+    ],
+    "it": [
+      "I percorsi acquatici sono aperti dal 1° aprile al 31 ottobre tempo permettendo.",
+      "Indossa scarpe da scoglio e porta una sacca impermeabile."
+    ]
+  },
+  "bestTimeToVisit": {
+    "en": "April to October (Seasonal)",
+    "de": "April bis Oktober (Saisonal)",
+    "fr": "Avril à Octobre (Saisonnier)",
+    "it": "Aprile a Ottobre (Stagionale)"
+  },
+  "aeoFaqs": [
+    {
+      "question": {
+        "en": "Is Wadi Mujib open all year round?",
+        "de": "Ist Wadi Mujib das ganze Jahr über geöffnet?",
+        "fr": "Le Wadi Mujib est-il ouvert toute l'année ?",
+        "it": "Il Wadi Mujib è aperto tutto l'anno?"
+      },
+      "answer": {
+        "en": "No, the wet canyon trails are open seasonally from April 1 to October 31 due to winter flash flood safety risks.",
+        "de": "Nein, die feuchten Schlucht-Pfade sind wegen Hochwassergefahr im Winter nur von April bis Oktober geöffnet.",
+        "fr": "Non, les parcours aquatiques ne sont ouverts que du 1er avril au 31 octobre pour des raisons de sécurité.",
+        "it": "No, i percorsi acquatici sono aperti solo dal 1° aprile al 31 ottobre per motivi di sicurezza."
+      }
+    }
+  ],
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+  "gallery": [
+    "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
+  ]
+}
 ];
