@@ -117,10 +117,62 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg",
     gallery: [
-      { id: "bt1-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury Al-Khazneh facade", de: "Fassade des Schatzhauses Al-Khazneh in Petra" }, caption: { en: "Petra Rose City Treasury", de: "Das Schatzhaus von Petra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral floating", de: "Schwebendes Bad im salzreichen Toten Meer" }, caption: { en: "Floating at the Dead Sea", de: "Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt1-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Roman Forum & Colonnade", de: "Römisches Forum in Jerash" }, caption: { en: "Ancient Roman Jerash", de: "Römisches Jerash" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt1-4", url: "https://images.unsplash.com/photo-1579606032824-2c70034a7138?auto=format&fit=crop&w=1200&q=80", alt: { en: "Petra Monastery Ad-Deir facade", de: "Fassade des Klosters Ad-Deir in Petra" }, caption: { en: "High-resolution view of Petra Monastery", de: "Hochauflösende Ansicht des Klosters in Petra" }, sortOrder: 4, rightsStatus: "VERIFIED_OWNED" }
+
+  {
+    "id": "bt1-1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg",
+    "alt": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra",
+      "fr": "Le Trésor de Pétra",
+      "it": "Il Tesoro di Petra"
+    },
+    "caption": {
+      "en": "Petra Rose City Treasury",
+      "de": "Schatzhaus in Petra",
+      "fr": "Trésor de Pétra",
+      "it": "Tesoro di Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt1-2",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad",
+      "fr": "Baignade Mer Morte",
+      "it": "Bagno Mar Morto"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Schwebebad im Toten Meer",
+      "fr": "Baignade Mer Morte",
+      "it": "Bagno Mar Morto"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt1-3",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
+    "alt": {
+      "en": "Jerash Oval Plaza",
+      "de": "Jerash Ovale Plaza",
+      "fr": "Place Ovale Gérasa",
+      "it": "Piazza Ovale Jerash"
+    },
+    "caption": {
+      "en": "Jerash Roman Plaza",
+      "de": "Römischer Platz in Jerash",
+      "fr": "Place romaine Gérasa",
+      "it": "Piazza romana Jerash"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -206,9 +258,62 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg",
     gallery: [
-      { id: "bt2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea floating resort experience", de: "Baden im Toten Meer" }, caption: { en: "Dead Sea resort float", de: "Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt2-2", url: "https://jordanstorytours.com/content/uploads/2020/12/Petra-travel-e1608043798711-600x600.jpg", alt: { en: "Petra Rose City landscape", de: "Felsenstadt Petra" }, caption: { en: "Petra sandstone carvings", de: "Felsenstadt Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt2-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Roman Forum", de: "Forum in Jerash" }, caption: { en: "Jerash Forum", de: "Jerash Forum" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "bt2-1",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Shore",
+      "de": "Totes Meer Strand",
+      "fr": "Rive de la Mer Morte",
+      "it": "Riva del Mar Morto"
+    },
+    "caption": {
+      "en": "Dead Sea Salt Coast",
+      "de": "Salzküste Totes Meer",
+      "fr": "Côte salée Mer Morte",
+      "it": "Costa salina Mar Morto"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt2-2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Monastery",
+      "de": "Kloster Petra",
+      "fr": "Monastère de Pétra",
+      "it": "Monastero di Petra"
+    },
+    "caption": {
+      "en": "Petra Monastery View",
+      "de": "Aussicht Kloster Petra",
+      "fr": "Vue du monastère de Pétra",
+      "it": "Vista Monastero di Petra"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt2-3",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+    "alt": {
+      "en": "Amman Citadel",
+      "de": "Zitadelle Amman",
+      "fr": "Citadelle d'Amman",
+      "it": "Cittadella di Amman"
+    },
+    "caption": {
+      "en": "Amman Citadel Columns",
+      "de": "Säulen Zitadelle Amman",
+      "fr": "Colonnes Citadelle d'Amman",
+      "it": "Colonne Cittadella di Amman"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -281,9 +386,62 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
     gallery: [
-      { id: "bt3-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Jerash Greco-Roman Colonnade", de: "Römische Säulenstraße in Jerash" }, caption: { en: "Roman Jerash", de: "Jerash" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt3-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury", de: "Schatzhaus in Petra" }, caption: { en: "Petra Rose City", de: "Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt3-3", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea floating", de: "Baden im Toten Meer" }, caption: { en: "Dead Sea Float", de: "Bad im Toten Meer" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "bt3-1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
+    "alt": {
+      "en": "Jerash Columns",
+      "de": "Jerash Säulen",
+      "fr": "Colonnes Gérasa",
+      "it": "Colonne Jerash"
+    },
+    "caption": {
+      "en": "Greco-Roman Jerash Ruins",
+      "de": "Römische Ruinen Jerash",
+      "fr": "Ruines romaines Gérasa",
+      "it": "Rovine romane Jerash"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt3-2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+    "alt": {
+      "en": "Madaba Mosaic",
+      "de": "Mosaik Madaba",
+      "fr": "Mosaïque Madaba",
+      "it": "Mosaico Madaba"
+    },
+    "caption": {
+      "en": "Madaba Mosaic Map",
+      "de": "Mosaikkarte in Madaba",
+      "fr": "Carte en mosaïque",
+      "it": "Mappa in mosaico"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt3-3",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Camp",
+      "de": "Wadi Rum Camp",
+      "fr": "Camp Wadi Rum",
+      "it": "Campo Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Bedouin Camp",
+      "de": "Beduinen-Camp Wadi Rum",
+      "fr": "Camp bédouin Wadi Rum",
+      "it": "Campo beduino Wadi Rum"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -356,9 +514,62 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
     gallery: [
-      { id: "bt4-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum Bedouin desert camp", de: "Beduinencamp im Wadi Rum" }, caption: { en: "Wadi Rum Camp", de: "Wadi Rum Camp" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt4-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel-600x600.jpg", alt: { en: "Wadi Rum red dunes", de: "Rote Dünen im Wadi Rum" }, caption: { en: "Wadi Rum Red Dunes", de: "Wadi Rum Dünen" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "bt4-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury facade", de: "Fassade des Schatzhauses in Petra" }, caption: { en: "Petra Rose City", de: "Petra" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "bt4-1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Sands",
+      "de": "Wadi Rum Wüstensand",
+      "fr": "Sables du Wadi Rum",
+      "it": "Sabbie del Wadi Rum"
+    },
+    "caption": {
+      "en": "Red Sand Dunes Wadi Rum",
+      "de": "Rote Sanddünen Wadi Rum",
+      "fr": "Dunes rouges du Wadi Rum",
+      "it": "Dune rosse del Wadi Rum"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt4-2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg",
+    "alt": {
+      "en": "Petra Siq Canyon",
+      "de": "Petra Siq Schlucht",
+      "fr": "Canyon du Siq Pétra",
+      "it": "Canyon del Siq Petra"
+    },
+    "caption": {
+      "en": "Walking through Petra Siq",
+      "de": "Wanderung durch den Siq",
+      "fr": "Marche dans le Siq",
+      "it": "Camminata nel Siq"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "bt4-3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Sunset",
+      "de": "Sonnenuntergang Totes Meer",
+      "fr": "Coucher de soleil Mer Morte",
+      "it": "Tramonto Mar Morto"
+    },
+    "caption": {
+      "en": "Sunset over Dead Sea",
+      "de": "Sonnenuntergang am Toten Meer",
+      "fr": "Coucher de soleil sur la Mer Morte",
+      "it": "Tramonto sul Mar Morto"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -433,8 +644,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
     gallery: [
-      { id: "jc1-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg", alt: { en: "Petra Treasury Al-Khazneh facade", de: "Schatzhaus Al-Khazneh in Petra", fr: "Façade du Trésor Al-Khazneh à Pétra", it: "Facciata del Tesoro Al-Khazneh a Petra" }, caption: { en: "Petra Treasury entrance", de: "Eingang zum Schatzhaus Petra", fr: "Entrée du Trésor de Pétra", it: "Ingresso al Tesoro di Petra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "jc1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea floating experience", de: "Baden im Toten Meer", fr: "Baignade à la Mer Morte", it: "Esperienza al Mar Morto" }, caption: { en: "Dead Sea mineral waters", de: "Mineralreiches Wasser des Toten Meeres", fr: "Eaux minérales de la Mer Morte", it: "Acque minerali del Mar Morto" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "jordan-classic-1-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-classic-1-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-classic-1-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -510,9 +763,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg",
     gallery: [
-      { id: "jc2-1", url: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg", alt: { en: "Aqaba Red Sea coast", de: "Strand von Aqaba am Roten Meer" }, caption: { en: "Aqaba Red Sea Resort", de: "Aqaba am Roten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "jc2-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum camp stay", de: "Wadi Rum Beduinencamp" }, caption: { en: "Wadi Rum Camp", de: "Wadi Rum Camp" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "jc2-3", url: "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg", alt: { en: "Petra Rose City entrance", de: "Eingang zur Felsenstadt Petra" }, caption: { en: "Petra Rose City", de: "Petra" }, sortOrder: 3, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "jordan-classic-2-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-classic-2-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-classic-2-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -588,8 +882,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
     gallery: [
-      { id: "jl1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea luxury resort floating", de: "Luxuriöses Schwebebad im Toten Meer" }, caption: { en: "Luxury Dead Sea resort float", de: "Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "jl1-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Mövenpick Petra luxury location", de: "Luxuriöse Lage in Petra" }, caption: { en: "Petra Luxury Tour", de: "Petra Luxustour" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "jordan-luxury-1-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-1-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-1-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -664,8 +1000,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
     gallery: [
-      { id: "jl2-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum luxury desert camp", de: "Luxuriöses Wüstencamp im Wadi Rum" }, caption: { en: "Luxury Wadi Rum Camp", de: "Luxuscamp Wadi Rum" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "jl2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Kempinski Dead Sea luxury float", de: "Luxuriöses Bad im Toten Meer" }, caption: { en: "Kempinski Spa Float", de: "Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "jordan-luxury-2-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-2-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-2-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -727,7 +1105,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2017/08/Jordan-Aqaba-Tours-700x500.jpg",
     gallery: [
-      { id: "jl3-2", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum Martian camp", de: "Wadi Rum Luxus-Camp" }, caption: { en: "Wadi Rum Martian Dome", de: "Martian Dome" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "jordan-luxury-3-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-3-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "jordan-luxury-3-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -789,8 +1210,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
-      { id: "hl1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site of Jesus Christ", de: "Taufstelle Jesu Christi" }, caption: { en: "Jordan River Baptism Site", de: "Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "hl1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea float near Mount Nebo", de: "Totes Meer Schwebebad" }, caption: { en: "Dead Sea Float", de: "Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "holy-land-1-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-1-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-1-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -864,8 +1327,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
-      { id: "hl2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site Bethany Beyond the Jordan", de: "Taufstelle Bethanien am Jordan" }, caption: { en: "Jordan River Baptism Site", de: "Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "hl2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea mineral water", de: "Totes Meer Mineralwasser" }, caption: { en: "Dead Sea Float", de: "Bad im Toten Meer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "holy-land-2-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-2-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-2-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -927,8 +1432,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg",
     gallery: [
-      { id: "hl3-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea float near Lot's Cave", de: "Bad im Toten Meer" }, caption: { en: "Dead Sea float", de: "Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "hl3-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site am Jordan", de: "Taufstelle am Jordan" }, caption: { en: "Jordan River", de: "Jordan-Fluss" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "holy-land-3-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-3-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "holy-land-3-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -989,8 +1536,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg",
     gallery: [
-      { id: "it1-1", url: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg", alt: { en: "Islamic Heritage Dome of the Rock shrine", de: "Islamisches Erbe Felsendom Heiligtum" }, caption: { en: "Islamic & Historical Tours", de: "Islamische Touren" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "it1-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg", alt: { en: "Qasr Amra Desert Castle", de: "Wüstenschloss Qasr Amra" }, caption: { en: "UNESCO Desert Castle", de: "Wüstenschloss" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "islamic-tour-1-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "islamic-tour-1-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "islamic-tour-1-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1065,8 +1654,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg",
     gallery: [
-      { id: "ih1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg", alt: { en: "Qasr Amra Desert Castle panorama", de: "Panorama des Wüstenschlosses Qasr Amra" }, caption: { en: "Qasr Amra UNESCO Desert Castle", de: "Wüstenschloss Qasr Amra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "ih1-2", url: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg", alt: { en: "Dome of the Rock Islamic Heritage", de: "Felsendom Islamisches Erbe" }, caption: { en: "Islamic Shrines", de: "Islamische Heiligtümer" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "islamic-historical-tour-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "islamic-historical-tour-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "islamic-historical-tour-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1123,7 +1754,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
     gallery: [
-      { id: "dt1-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg", alt: { en: "Baptism Site of Jesus Christ", de: "Taufstelle Jesu Christi" }, caption: { en: "Jordan River Baptism Site", de: "Taufstelle am Jordan" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-baptism-deadsea-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-baptism-deadsea-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-baptism-deadsea-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1179,8 +1853,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
     gallery: [
-      { id: "dt2-1", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea water floating", de: "Baden im Toten Meer" }, caption: { en: "Dead Sea float", de: "Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "dt2-2", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea spa resort", de: "Totes Meer Spa Resort" }, caption: { en: "Dead Sea Resort", de: "Dead Sea Resort" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-deadsea-mujib-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-deadsea-mujib-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-deadsea-mujib-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1236,8 +1952,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
     gallery: [
-      { id: "dt3-1", url: "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg", alt: { en: "Wadi Rum desert camp safari", de: "Wadi Rum Beduinen-Safari" }, caption: { en: "Wadi Rum 4x4 Safari", de: "Wadi Rum Safari" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "dt3-2", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury", de: "Schatzhaus von Petra" }, caption: { en: "Petra Rose City", de: "Petra" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-petra-rum-express-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-petra-rum-express-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-petra-rum-express-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1293,7 +2051,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg",
     gallery: [
-      { id: "dt4-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg", alt: { en: "Hadrian Arch entry in Roman Jerash", de: "Hadrianstor im römischen Jerash" }, caption: { en: "Roman Jerash", de: "Römisches Jerash" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-jerash-ajloun-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-jerash-ajloun-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-jerash-ajloun-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1349,8 +2150,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg",
     gallery: [
-      { id: "dt5-1", url: "https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg", alt: { en: "Petra Treasury Al-Khazneh facade", de: "Fassade des Schatzhauses in Petra" }, caption: { en: "Petra Rose City Treasury", de: "Schatzhaus von Petra" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "dt5-2", url: "https://jordanstorytours.com/content/uploads/2020/12/Petra-travel-e1608043798711-600x600.jpg", alt: { en: "Petra sandstone valley", de: "Felsental in Petra" }, caption: { en: "Petra Valley", de: "Petra Tal" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-petra-express-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-petra-express-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-petra-express-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {
@@ -1406,8 +2249,50 @@ export const TOURS_DATA: Tour[] = [
     ],
     heroImage: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg",
     gallery: [
-      { id: "dt6-1", url: "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg", alt: { en: "Dead Sea floating", de: "Bad im Toten Meer" }, caption: { en: "Dead Sea resort float", de: "Bad im Toten Meer" }, sortOrder: 1, rightsStatus: "LEGACY_SITE_ASSET" },
-      { id: "dt6-2", url: "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg", alt: { en: "Dead Sea salt shore", de: "Salzstrand am Toten Meer" }, caption: { en: "Dead Sea Shore", de: "Totes Meer Strand" }, sortOrder: 2, rightsStatus: "LEGACY_SITE_ASSET" }
+
+  {
+    "id": "day-tour-madaba-nebo-deadsea-g1",
+    "url": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+    "alt": {
+      "en": "Petra Rose City",
+      "de": "Felsenstadt Petra"
+    },
+    "caption": {
+      "en": "Petra Treasury",
+      "de": "Schatzhaus Petra"
+    },
+    "sortOrder": 1,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-madaba-nebo-deadsea-g2",
+    "url": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg",
+    "alt": {
+      "en": "Wadi Rum Desert",
+      "de": "Wüste Wadi Rum"
+    },
+    "caption": {
+      "en": "Wadi Rum Camp",
+      "de": "Beduinen-Camp Wadi Rum"
+    },
+    "sortOrder": 2,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  },
+  {
+    "id": "day-tour-madaba-nebo-deadsea-g3",
+    "url": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+    "alt": {
+      "en": "Dead Sea Float",
+      "de": "Totes Meer Bad"
+    },
+    "caption": {
+      "en": "Dead Sea Resort Float",
+      "de": "Bad im Toten Meer"
+    },
+    "sortOrder": 3,
+    "rightsStatus": "LEGACY_SITE_ASSET"
+  }
+
     ],
     faqs: [
       {

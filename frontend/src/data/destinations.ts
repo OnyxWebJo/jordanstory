@@ -606,8 +606,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "/images/destinations/mount-nebo.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg"
-  ]
+      "/images/destinations/mount-nebo.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Mount-Nebo-Holy-Place.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg"
+    ]
 },
   {
   "id": "baptism-site",
@@ -699,8 +701,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "/images/destinations/baptism-site.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
-  ]
+      "/images/destinations/baptism-site.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
+    ]
 },
   {
   "id": "ajloun-castle",
@@ -792,8 +796,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "/images/destinations/ajloun-castle.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg"
-  ]
+      "/images/destinations/ajloun-castle.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg"
+    ]
 },
   {
   "id": "al-karak-castle",
@@ -885,8 +891,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
+    ]
 },
   {
   "id": "citadel",
@@ -978,8 +985,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2020/11/Amman-citadel-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Amman-1.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Amman-2-e1610268250604-300x217.jpg"
+    ]
 },
   {
   "id": "dana-village",
@@ -1071,8 +1080,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-capm-jordan-700x500.jpg"
+    ]
 },
   {
   "id": "desert-castles",
@@ -1164,8 +1174,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2020/12/Desert-Castles-Jordan.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Qusayr-Amra-panorama-700x500.jpg"
+    ]
 },
   {
   "id": "umm-qais",
@@ -1257,8 +1268,9 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2021/01/Umm-Qais-Jordan-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2020/11/Jerash-Tours-in-Jordan-e1605959035108-600x534.jpg"
+    ]
 },
   {
   "id": "wadi-mujib",
@@ -1350,7 +1362,8 @@ export const DESTINATIONS_FULL: DestinationData[] = [
   ],
   "image": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
   "gallery": [
-    "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
-  ]
+      "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+      "https://jordanstorytours.com/content/uploads/2021/01/Dead-Sea-3-e1610326117330-700x500.jpg"
+    ]
 }
 ];

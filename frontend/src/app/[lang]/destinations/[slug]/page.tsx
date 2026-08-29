@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { DestinationGallery } from '@/components/destinations/DestinationGallery';
 import { DESTINATIONS_FULL } from '@/data/destinations';
 import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import { notFound } from 'next/navigation';
@@ -175,6 +176,9 @@ export default async function LocalizedDestinationDetailPage({ params }: Props) 
                 </div>
               </div>
             </div>
+
+            {/* Destination Media Photo Gallery */}
+            <DestinationGallery gallery={dest.gallery} image={dest.image} name={name} />
 
             {/* Destination AEO FAQ Section */}
             {dest.aeoFaqs && dest.aeoFaqs.length > 0 && (
