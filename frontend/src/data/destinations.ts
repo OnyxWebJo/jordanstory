@@ -604,7 +604,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg",
+  "image": "/images/destinations/mount-nebo.jpg",
   "gallery": [
     "https://jordanstorytours.com/content/uploads/2020/12/Madaba-Jordan.jpg"
   ]
@@ -697,7 +697,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg",
+  "image": "/images/destinations/baptism-site.jpg",
   "gallery": [
     "https://jordanstorytours.com/content/uploads/2021/01/deadsea-1-700x500.jpg"
   ]
@@ -790,7 +790,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
+  "image": "/images/destinations/ajloun-castle.jpg",
   "gallery": [
     "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg"
   ]
@@ -883,7 +883,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+  "image": "https://jordanstorytours.com/content/uploads/2021/01/Jerash-Ajloun-700x500.jpg",
   "gallery": [
     "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
   ]
@@ -1069,7 +1069,7 @@ export const DESTINATIONS_FULL: DestinationData[] = [
       }
     }
   ],
-  "image": "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg",
+  "image": "https://jordanstorytours.com/content/uploads/2020/12/wadi-rum-travel.jpg",
   "gallery": [
     "https://jordanstorytours.com/content/uploads/2020/11/Jordan_Petra.jpg"
   ]
