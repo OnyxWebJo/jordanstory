@@ -390,9 +390,10 @@ export const DESTINATIONS_FULL: DestinationData[] = [
         }
       }
     ],
-    image: "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg",
+    image: "/images/destinations/amman-capital.jpg",
     gallery: [
-      "https://jordanstorytours.com/content/uploads/2017/01/dome-of-the-rock-jerusalem-tours-600x567.jpg"
+      "/images/destinations/amman-capital.jpg",
+      "/images/destinations/amman-city.jpg"
     ]
   },
   {
