@@ -228,9 +228,10 @@ export const ScrollWorldExperience: React.FC = () => {
     }
   };
 
-  // --- WebGL Ambient Volumetric Particles Effect (Mounted ONCE) ---
+  const videoRef = useRef<HTMLVideoElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
+  // --- WebGL Ambient Volumetric Particles Effect (Mounted ONCE) ---
   useEffect(() => {
     if (!canvasRef.current) return;
 
@@ -319,7 +320,6 @@ export const ScrollWorldExperience: React.FC = () => {
         if (mat) mat.dispose();
         if (renderer) {
           renderer.dispose();
-          renderer.forceContextLoss?.();
         }
       };
     } catch (e) {
@@ -352,6 +352,10 @@ export const ScrollWorldExperience: React.FC = () => {
 
       setScrollProgress(progress);
 
+      if (videoRef.current && videoRef.current.duration) {
+        videoRef.current.currentTime = progress * videoRef.current.duration;
+      }
+
       let foundIndex = 0;
       for (let i = 0; i < EXTRACTED_FRAMES.length; i++) {
         if (progress >= EXTRACTED_FRAMES[i].progressStart && progress <= EXTRACTED_FRAMES[i].progressEnd) {
@@ -378,11 +382,26 @@ export const ScrollWorldExperience: React.FC = () => {
       {/* Sticky Fullscreen Viewport */}
       <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center bg-[#1A1615] overflow-hidden">
         
+        {/* Layer 0: Direct Cinematic Background Video (with Frame Fallback) */}
+        <video
+          ref={videoRef}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/videos/scroll-world.mp4`}
+          muted
+          playsInline
+          autoPlay
+          loop
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-300 z-0"
+          style={{
+            filter: 'brightness(0.85) contrast(1.08) saturate(1.05)',
+            transform: `scale(${1.02 + scrollProgress * 0.04}) translate(${mousePos.x * 6}px, ${mousePos.y * 6}px)`
+          }}
+        />
+
         {/* Layer 1: High-Definition Extracted Frame Backgrounds */}
         {EXTRACTED_FRAMES.map((frame, index) => (
           <div
             key={frame.id}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-out pointer-events-none ${
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-out pointer-events-none z-5 ${
               index === activeFrameIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
