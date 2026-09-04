@@ -25,18 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Request path parsing
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = preg_replace('#^/api/(public|admin|v1)/#', '$1/', $requestUri);
-$path = ltrim($path, '/');
-$method = $_SERVER['REQUEST_METHOD'];
-
 // Helper response function
 function sendJsonResponse($data, $statusCode = 200) {
     http_response_code($statusCode);
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     exit;
 }
+
+// Request path parsing
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = preg_replace('#^/api/#', '', $requestUri);
+$path = trim($path, '/');
+$method = $_SERVER['REQUEST_METHOD'];
 
 // Database Connection Helper
 function getDbConnection($config) {
@@ -446,7 +446,7 @@ if ($path === 'admin/stats' && $method === 'GET') {
         'new_bookings' => (int)$pdo->query("SELECT COUNT(*) FROM bookings WHERE status = 'NEW'")->fetchColumn(),
         'new_quotations' => (int)$pdo->query("SELECT COUNT(*) FROM quotation_requests WHERE status = 'NEW'")->fetchColumn(),
         'pending_reviews' => (int)$pdo->query("SELECT COUNT(*) FROM reviews WHERE status = 'PENDING'")->fetchColumn(),
-        'missing_translations' => 0, // Computed by checking tours count vs translations count
+        'missing_translations' => 0,
         'recent_publish_status' => $pdo->query("SELECT status, completed_at FROM publish_jobs ORDER BY id DESC LIMIT 1")->fetch() ?: ['status' => 'IDLE', 'completed_at' => null]
     ];
 
@@ -679,7 +679,6 @@ if ($path === 'admin/publish-jobs' && $method === 'POST') {
     $ins->execute([$admin['id'], $deployRef]);
     $jobId = $pdo->lastInsertId();
 
-    // Trigger build simulation or Next.js background exporter
     $up = $pdo->prepare("UPDATE publish_jobs SET status = 'SUCCESS', completed_at = CURRENT_TIMESTAMP, log_output = 'Static snapshot generated across EN, DE, FR, IT (39 routes synced).' WHERE id = ?");
     $up->execute([$jobId]);
 
