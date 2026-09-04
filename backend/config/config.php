@@ -6,9 +6,9 @@ return [
     'db' => [
         'host'     => getenv('DB_HOST') ?: '127.0.0.1',
         'port'     => getenv('DB_PORT') ?: '3306',
-        'dbname'   => getenv('DB_NAME') ?: 'jordan_story_db',
-        'user'     => getenv('DB_USER') ?: 'root',
-        'password' => getenv('DB_PASS') ?: '',
+        'dbname'   => getenv('DB_NAME') ?: 'jorddhrw_newstory',
+        'user'     => getenv('DB_USER') ?: 'jorddhrw_shadi',
+        'password' => getenv('DB_PASS') ?: '5SfyqV8Rv^PR}qx*',
         'charset'  => 'utf8mb4',
     ],
     'app' => [
