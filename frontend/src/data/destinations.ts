@@ -1368,3 +1368,5 @@ export const DESTINATIONS_FULL: DestinationData[] = [
     ]
 }
 ];
+
+export const DESTINATIONS_DATA = DESTINATIONS_FULL;

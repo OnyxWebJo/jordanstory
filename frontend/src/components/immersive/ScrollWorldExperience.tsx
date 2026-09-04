@@ -236,6 +236,12 @@ export const ScrollWorldExperience: React.FC = () => {
     let frameId: number | null = null;
 
     try {
+      const glContext = canvasRef.current.getContext('webgl') || canvasRef.current.getContext('experimental-webgl');
+      if (!glContext) {
+        console.warn("WebGL not supported in current environment; particle fallback active.");
+        return;
+      }
+
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(0, 1.65, 5);

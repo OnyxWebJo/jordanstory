@@ -17,6 +17,7 @@ export interface ReviewRequest {
   submittedAt?: string;
   expiresAt: string;
   sentCount: number;
+  createdAt?: string;
 }
 
 export const INITIAL_COMPLETED_BOOKINGS: ReviewRequest[] = [

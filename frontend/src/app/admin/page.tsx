@@ -350,7 +350,7 @@ export default function AdminDashboardPage() {
     const quotationTours = toursList.filter(t => t.bookingMode === 'QUOTATION').length;
     const newBookings = bookingsList.filter(b => b.status === 'NEW').length;
     const newQuotations = quotationsList.filter(q => q.status === 'NEW').length;
-    const pendingReviews = submittedReviews.filter(r => r.moderationStatus === 'PENDING').length;
+    const pendingReviews = submittedReviews.filter(r => r.moderationStatus === 'PENDING_MODERATION').length;
     const aggregateRating = ReviewsStoreService.getCalculatedAggregateRating();
 
     return {
@@ -444,10 +444,14 @@ export default function AdminDashboardPage() {
       customerName: booking.customer,
       customerPhone: booking.phone,
       customerEmail: booking.email,
+      tourId: 'tour-custom',
       tourName: booking.tour,
-      locale: (booking.locale as ReviewLocale) || 'en',
       token,
+      locale: (booking.locale as ReviewLocale) || 'en',
       status: 'SENT',
+      sentAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 30 * 86400000).toISOString(),
+      sentCount: 1,
       createdAt: new Date().toISOString()
     };
     ReviewsStoreService.addRequest(newReq);
@@ -651,7 +655,7 @@ export default function AdminDashboardPage() {
                     </div>
                   ))}
 
-                  {submittedReviews.filter(r => r.moderationStatus === 'PENDING').map(r => (
+                  {submittedReviews.filter(r => r.moderationStatus === 'PENDING_MODERATION').map(r => (
                     <div key={r.id} className="p-4 rounded-xl bg-[#12161C] border border-white/10 flex items-center justify-between">
                       <div>
                         <span className="font-bold text-white block">{r.displayName} ({r.rating}★ Review)</span>
@@ -765,7 +769,7 @@ export default function AdminDashboardPage() {
                             <div className="text-[11px] text-[#C69C6D] font-mono">/tours/{tour.slug.en}</div>
                           </td>
                           <td className="p-4 font-mono text-gray-400">{tour.category}</td>
-                          <td className="p-4 font-mono">{tour.duration}</td>
+                          <td className="p-4 font-mono">{tour.duration || `${tour.durationDays} Days`}</td>
                           <td className="p-4">
                             <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-[#A85F43]/20 text-[#C69C6D] border border-[#A85F43]/30">
                               {tour.priceMode === 'QUOTATION' ? 'QUOTATION' : `$${tour.startingPriceUSD} USD (${tour.priceMode || 'FROM'})`}

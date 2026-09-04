@@ -45,6 +45,8 @@ export interface Tour {
     question: { en: string; de?: string; fr?: string; it?: string };
     answer: { en: string; de?: string; fr?: string; it?: string };
   }[];
+  isDraft?: boolean;
+  duration?: string;
 }
 
 

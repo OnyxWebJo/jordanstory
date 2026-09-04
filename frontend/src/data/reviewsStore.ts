@@ -156,6 +156,30 @@ export class ReviewsStoreService {
     return this.getRequests().find((r) => r.token === token);
   }
 
+  static addRequest(newReq: any): void {
+    const requests = this.getRequests();
+    const req: ReviewRequest = {
+      id: newReq.id || `req-${Date.now()}`,
+      bookingId: newReq.bookingId || 'JST-DIRECT',
+      customerName: newReq.customerName || 'Valued Guest',
+      customerPhone: newReq.customerPhone || '',
+      customerEmail: newReq.customerEmail || '',
+      tourId: newReq.tourId || 'tour-custom',
+      tourName: newReq.tourName || 'Jordan Private Tour',
+      token: newReq.token || `token-${Date.now()}`,
+      locale: newReq.locale || 'en',
+      status: newReq.status || 'SENT',
+      sentAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 30 * 86400000).toISOString(),
+      sentCount: 1,
+      createdAt: newReq.createdAt || new Date().toISOString()
+    };
+    requests.unshift(req);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(this.STORAGE_KEY_REQUESTS, JSON.stringify(requests));
+    }
+  }
+
   static markSent(requestId: string): ReviewRequest | undefined {
     const requests = this.getRequests();
     const target = requests.find((r) => r.id === requestId);
