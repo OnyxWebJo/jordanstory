@@ -4,7 +4,10 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
-$config = require __DIR__ . '/../../config/config.php';
+$configPath = file_exists(__DIR__ . '/../config/config.php')
+    ? __DIR__ . '/../config/config.php'
+    : (file_exists(__DIR__ . '/../../config/config.php') ? __DIR__ . '/../../config/config.php' : __DIR__ . '/config.php');
+$config = require $configPath;
 
 // Security Headers (Doc 07)
 header('X-Content-Type-Options: nosniff');
@@ -33,10 +36,17 @@ function sendJsonResponse($data, $statusCode = 200) {
 }
 
 // Request path parsing
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = preg_replace('#^/api/#', '', $requestUri);
+$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+if (strpos($requestUri, '/api/') !== false) {
+    $path = substr($requestUri, strpos($requestUri, '/api/') + 5);
+} elseif (preg_match('#/api$#', $requestUri)) {
+    $path = '';
+} else {
+    $path = trim($requestUri, '/');
+}
+$path = preg_replace('#^index\.php/?#', '', $path);
 $path = trim($path, '/');
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 // Database Connection Helper
 function getDbConnection($config) {
