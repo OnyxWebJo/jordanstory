@@ -25,7 +25,8 @@ export const TourPriceDisplay: React.FC<TourPriceDisplayProps> = ({
   useEffect(() => {
     if (tourSlug) {
       // Fetch dynamic live pricing endpoint if available (Doc 05 Section 4)
-      fetch(`/api/public/tours/${tourSlug}/pricing`)
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      fetch(`${basePath}/api/public/tours/${tourSlug}/pricing`)
         .then(res => res.json())
         .then(res => {
           if (res.success && res.data) {

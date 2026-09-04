@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
-const repo = "jordanstory";
-const basePath = isGithubActions ? `/${repo}` : "";
+const subfolder = process.env.SUBFOLDER || (isGithubActions ? "jordanstory" : "");
+const basePath = subfolder ? `/${subfolder.replace(/^\/+|\/+$/g, '')}` : "";
 
 const nextConfig: NextConfig = {
   output: "export",
   basePath: basePath,
-  assetPrefix: isGithubActions ? `/${repo}/` : "",
+  assetPrefix: basePath ? `${basePath}/` : undefined,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },

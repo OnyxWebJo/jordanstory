@@ -52,27 +52,38 @@ $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 function getDbConnection($config) {
     static $pdo = null;
     if ($pdo === null) {
-        try {
-            $dsn = sprintf(
-                "mysql:host=%s;port=%s;dbname=%s;charset=%s",
-                $config['db']['host'],
-                $config['db']['port'],
-                $config['db']['dbname'],
-                $config['db']['charset']
-            );
-            $pdo = new PDO($dsn, $config['db']['user'], $config['db']['password'], [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            ]);
-        } catch (PDOException $e) {
-            sendJsonResponse([
-                'success' => false,
-                'error' => [
-                    'code' => 'DATABASE_CONNECTION_ERROR',
-                    'message' => 'Unable to connect to database'
-                ]
-            ], 500);
+        $hostsToTry = array_unique([$config['db']['host'] ?? 'localhost', 'localhost', '127.0.0.1']);
+        $lastError = '';
+        foreach ($hostsToTry as $host) {
+            try {
+                $dsn = sprintf(
+                    "mysql:host=%s;port=%s;dbname=%s;charset=%s",
+                    $host,
+                    $config['db']['port'] ?? '3306',
+                    $config['db']['dbname'],
+                    $config['db']['charset'] ?? 'utf8mb4'
+                );
+                $pdo = new PDO($dsn, $config['db']['user'], $config['db']['password'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                ]);
+                return $pdo;
+            } catch (PDOException $e) {
+                $lastError = $e->getMessage();
+            }
         }
+
+        sendJsonResponse([
+            'success' => false,
+            'error' => [
+                'code' => 'DATABASE_CONNECTION_ERROR',
+                'message' => 'Unable to connect to database',
+                'details' => $lastError,
+                'db_name' => $config['db']['dbname'] ?? '',
+                'db_user' => $config['db']['user'] ?? '',
+                'hint' => 'Check in cPanel -> MySQL Databases: 1) Has the user been added to the database with ALL PRIVILEGES? 2) Is the password correct?'
+            ]
+        ], 500);
     }
     return $pdo;
 }
