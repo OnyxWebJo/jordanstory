@@ -228,21 +228,20 @@ export const ScrollWorldExperience: React.FC = () => {
     }
   };
 
-  // --- WebGL Ambient Volumetric Particles Effect ---
+  // --- WebGL Ambient Volumetric Particles Effect (Mounted ONCE) ---
+  const mousePosRef = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
     if (!canvasRef.current) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
     let frameId: number | null = null;
+    let scene: THREE.Scene | null = null;
+    let geom: THREE.BufferGeometry | null = null;
+    let mat: THREE.PointsMaterial | null = null;
 
     try {
-      const glContext = canvasRef.current.getContext('webgl') || canvasRef.current.getContext('experimental-webgl');
-      if (!glContext) {
-        console.warn("WebGL not supported in current environment; particle fallback active.");
-        return;
-      }
-
-      const scene = new THREE.Scene();
+      scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(0, 1.65, 5);
 
@@ -265,7 +264,7 @@ export const ScrollWorldExperience: React.FC = () => {
 
       // 3D Volumetric Dust Particles
       const particleCount = 1000;
-      const geom = new THREE.BufferGeometry();
+      geom = new THREE.BufferGeometry();
       const pos = new Float32Array(particleCount * 3);
 
       for (let i = 0; i < particleCount; i++) {
@@ -275,7 +274,7 @@ export const ScrollWorldExperience: React.FC = () => {
       }
 
       geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-      const mat = new THREE.PointsMaterial({
+      mat = new THREE.PointsMaterial({
         size: 0.12,
         color: 0xd8b98f,
         transparent: true,
@@ -288,15 +287,23 @@ export const ScrollWorldExperience: React.FC = () => {
       let targetCamX = 0;
       let targetCamY = 1.65;
 
+      const handleResize = () => {
+        if (!renderer) return;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+      window.addEventListener('resize', handleResize);
+
       const renderLoop = () => {
         frameId = requestAnimationFrame(renderLoop);
-        if (!renderer) return;
+        if (!renderer || !scene) return;
 
         particleSystem.rotation.y += 0.005;
 
-        // Mouse Parallax Interpolation
-        targetCamX += (mousePos.x * 0.5 - camera.position.x) * 0.05;
-        targetCamY += (1.65 - mousePos.y * 0.25 - camera.position.y) * 0.05;
+        // Mouse Parallax Interpolation from Ref
+        targetCamX += (mousePosRef.current.x * 0.5 - camera.position.x) * 0.05;
+        targetCamY += (1.65 - mousePosRef.current.y * 0.25 - camera.position.y) * 0.05;
 
         camera.position.x = targetCamX;
         camera.position.y = targetCamY;
@@ -304,23 +311,42 @@ export const ScrollWorldExperience: React.FC = () => {
         renderer.render(scene, camera);
       };
       renderLoop();
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        if (frameId !== null) cancelAnimationFrame(frameId);
+        if (geom) geom.dispose();
+        if (mat) mat.dispose();
+        if (renderer) {
+          renderer.dispose();
+          renderer.forceContextLoss?.();
+        }
+      };
     } catch (e) {
       console.warn("WebGL 3D particles fallback activated:", e);
     }
+  }, []);
 
+  // --- Mouse Movement & Parallax Tracking ---
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      mousePosRef.current = { x, y };
       setMousePos({ x, y });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    // Timeline & Scroll Progress Calculation
+  // --- Scroll Progress & Active Frame Tracking ---
+  useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const totalScrollable = containerRef.current.clientHeight - window.innerHeight;
+      if (totalScrollable <= 0) return;
       const currentScroll = -rect.top;
       const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
 
@@ -337,14 +363,9 @@ export const ScrollWorldExperience: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (frameId !== null) cancelAnimationFrame(frameId);
-      if (renderer) renderer.dispose();
-    };
-  }, [mousePos, activeFrameIndex]);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const currentFrame = EXTRACTED_FRAMES[activeFrameIndex];
   const copy = currentFrame.copy;
