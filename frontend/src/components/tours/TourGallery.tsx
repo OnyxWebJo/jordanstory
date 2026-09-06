@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TourGalleryItem } from '@/data/tours';
 import { Maximize2, X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { getAssetUrl } from '@/utils/assets';
 
 interface TourGalleryProps {
   gallery: TourGalleryItem[];
@@ -59,7 +60,7 @@ export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, to
             className="group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
           >
             <img
-              src={img.url}
+              src={getAssetUrl(img.url)}
               alt={getLocalized(img.alt) || tourTitle}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -114,7 +115,7 @@ export const TourGallery: React.FC<TourGalleryProps> = ({ gallery, heroImage, to
           <div className="max-w-5xl w-full flex flex-col items-center space-y-4">
             <div className="relative max-h-[75vh] w-full flex items-center justify-center overflow-hidden rounded-2xl border border-white/10">
               <img
-                src={images[lightboxIndex].url}
+                src={getAssetUrl(images[lightboxIndex].url)}
                 alt={getLocalized(images[lightboxIndex].alt) || tourTitle}
                 className="max-h-[75vh] w-auto max-w-full object-contain"
               />

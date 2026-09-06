@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { getAssetUrl } from '@/utils/assets';
 
 const STORIES = [
   {
@@ -105,7 +106,7 @@ export const StoryCollections: React.FC = () => {
               {/* Large Image Preview */}
               <div className="lg:col-span-8 h-72 sm:h-96 rounded-3xl overflow-hidden relative shadow-lg border border-gray-200">
                 <img
-                  src={story.image}
+                  src={getAssetUrl(story.image)}
                   alt={getLocalized(story.name)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />

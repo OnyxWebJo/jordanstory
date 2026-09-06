@@ -9,6 +9,7 @@ import { Clock, MapPin, CheckCircle2, XCircle, ShieldCheck, Star, HelpCircle, Ca
 import { buildLocaleMetadata, LOCALES } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
+import { getAssetUrl } from '@/utils/assets';
 import { TourGallery } from '@/components/tours/TourGallery';
 
 export function generateStaticParams() {
@@ -124,7 +125,7 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
         {/* Hero Section */}
         <section className="relative bg-[#151B23] text-[#F7F4EE] py-20 border-b border-[#A85F43]/30 overflow-hidden">
           <div className="absolute inset-0 opacity-40">
-            <img src={tour.heroImage} alt={title} className="w-full h-full object-cover" />
+            <img src={getAssetUrl(tour.heroImage)} alt={title} className="w-full h-full object-cover" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-[#151B23] via-[#151B23]/70 to-transparent" />
 

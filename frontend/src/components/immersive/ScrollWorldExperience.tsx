@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import Link from 'next/link';
 import { FastForward, ChevronRight, ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { getAssetUrl } from '@/utils/assets';
 
 interface SceneCopy {
   eyebrow?: Record<string, string>;
@@ -207,6 +208,94 @@ const EXTRACTED_FRAMES: InternalScene[] = [
   }
 ];
 
+const MOBILE_CHAPTERS = [
+  {
+    step: 1,
+    progressRange: [0, 0.16],
+    imageSrc: '/images/scroll-world-video/frame-01.jpg',
+    eyebrow: { en: 'YOUR JORDAN STORY', de: 'DEINE JORDANISCHE GESCHICHTE', fr: 'VOTRE HISTOIRE EN JORDANIE', it: 'LA TUA STORIA IN GIORDANIA' },
+    headline: { en: 'Every Journey Begins With a Story', de: 'Jede Reise beginnt mit einer Geschichte', fr: 'Chaque Voyage Commence Par Une Histoire', it: 'Ogni Viaggio Inizia Con Una Storia' },
+    description: { en: 'And yours begins here, in Jordan.', de: 'Und Ihre beginnt hier, in Jordanien.', fr: 'Et la vôtre commence ici, en Jordanie.', it: 'E la tua inizia qui, in Giordania.' },
+    ctaText: { en: 'Explore Packages →', de: 'Rundreisen Entdecken →', fr: 'Découvrir Nos Circuits →', it: 'Esplora i Tour →' },
+    ctaLink: '/tours'
+  },
+  {
+    step: 2,
+    progressRange: [0.16, 0.35],
+    imageSrc: '/images/scroll-world-video/frame-03.jpg',
+    eyebrow: { en: 'CHAPTER 01 · THE SIQ', de: 'KAPITEL 01 · DER SIQ', fr: 'CHAPITRE 01 · LE SIQ', it: 'CAPITOLO 01 · IL SIQ' },
+    headline: { en: 'Walk Through Time', de: 'Ein Spaziergang durch die Zeit', fr: 'Marchez À Travers Le Temps', it: 'Cammina Nel Tempo' },
+    description: {
+      en: 'Follow the ancient canyon path where towering sandstone walls slowly reveal one of the world’s greatest wonders.',
+      de: 'Folgen Sie dem antiken Pfad durch den Siq, wo riesige Felswände ein Weltwunder enthüllen.',
+      fr: 'Suivez le sentier antique du Siq, où d’imposantes falaises de grès révèlent une merveille du monde.',
+      it: 'Segui l’antico sentiero del Siq, dove le pareti d’arenaria rivelano una delle meraviglie del mondo.'
+    },
+    ctaText: { en: 'Discover Petra →', de: 'Petra Entdecken →', fr: 'Découvrir Pétra →', it: 'Scopri Petra →' },
+    ctaLink: '/destinations/petra'
+  },
+  {
+    step: 3,
+    progressRange: [0.35, 0.55],
+    imageSrc: '/images/scroll-world-video/frame-06.jpg',
+    eyebrow: { en: 'CHAPTER 01 · PETRA', de: 'KAPITEL 01 · PETRA', fr: 'CHAPITRE 01 · PÉTRA', it: 'CAPITOLO 01 · PETRA' },
+    headline: { en: 'Some Stories Are Worth the Journey', de: 'Manche Geschichten sind die Reise wert', fr: 'Certaines Histoires Méritent Le Voyage', it: 'Alcune Storie Meritano Il Viaggio' },
+    description: {
+      en: 'With every step, the canyon narrows, the desert light shifts, and the rose-red stone glows before your eyes.',
+      de: 'Mit jedem Schritt verengt sich die Schlucht, das Licht wechselt und die Felsenstadt leuchtet auf.',
+      fr: 'À chaque pas, le canyon se rétrécit, la lumière change et Pétra se rapproche.',
+      it: 'A ogni passo, il canyon si restringe, la luce cambia e la pietra rosa risplende.'
+    },
+    ctaText: { en: 'View Petra Tours →', de: 'Petra Rundreisen →', fr: 'Circuits Pétra →', it: 'Tour a Petra →' },
+    ctaLink: '/tours'
+  },
+  {
+    step: 4,
+    progressRange: [0.55, 0.75],
+    imageSrc: '/images/scroll-world-video/frame-08.jpg',
+    eyebrow: { en: 'WORLD WONDER', de: 'WELTWUNDER', fr: 'MERVEILLE DU MONDE', it: 'MERAVIGLIA DEL MONDO' },
+    headline: { en: 'Petra: The Rose City Revealed', de: 'Petra: Die Felsenstadt', fr: 'Pétra: La Cité Rose Révélée', it: 'Petra: La Città Rosa' },
+    description: {
+      en: 'Stand before the Treasury — a moment thousands of years in the making, tailored exclusively for private travelers.',
+      de: 'Treten Sie vor das Schatzhaus – ein magischer Moment der Geschichte, exklusiv für Privatreisende.',
+      fr: 'Contemplez le Trésor de Pétra — un chef-d’œuvre millénaire taillé dans la roche.',
+      it: 'Ammira il Tesoro — un momento scolpito nella storia, creato per viaggiatori privati.'
+    },
+    ctaText: { en: 'Explore Petra →', de: 'Petra Entdecken →', fr: 'Explorer Pétra →', it: 'Esplora Petra →' },
+    ctaLink: '/destinations/petra'
+  },
+  {
+    step: 5,
+    progressRange: [0.75, 0.90],
+    imageSrc: '/images/scroll-world-video/frame-10.jpg',
+    eyebrow: { en: 'CHAPTER 02 · WADI RUM', de: 'KAPITEL 02 · WADI RUM', fr: 'CHAPITRE 02 · WADI RUM', it: 'CAPITOLO 02 · WADI RUM' },
+    headline: { en: 'Where the Horizon Has No End', de: 'Wo der Horizont kein Ende kennt', fr: 'Là Où L’Horizon Est Sans Fin', it: 'Dove L’Orizzonte Non Ha Fine' },
+    description: {
+      en: 'Enter the vast silence of Wadi Rum — Martian red dunes, starry Bedouin nights, and luxury desert glamping.',
+      de: 'Betreten Sie die Stille der Wüste Wadi Rum – rote Sanddünen, Sternenhimmel und Luxus-Glamping.',
+      fr: 'Pénétrez dans le désert de Wadi Rum — dunes rouges, nuits étoilées et tentes bédouines de luxe.',
+      it: 'Entra nel silenzio del Wadi Rum — sabbia rossa, cieli stellati e glamping esclusivo.'
+    },
+    ctaText: { en: 'Explore Wadi Rum →', de: 'Wadi Rum Entdecken →', fr: 'Explorer Wadi Rum →', it: 'Esplora Wadi Rum →' },
+    ctaLink: '/destinations/wadi-rum'
+  },
+  {
+    step: 6,
+    progressRange: [0.90, 1.0],
+    imageSrc: '/images/scroll-world-video/frame-12.jpg',
+    eyebrow: { en: 'YOUR STORY. YOUR WAY.', de: 'DEINE GESCHICHTE. DEIN WEG.', fr: 'VOTRE HISTOIRE. VOTRE CHOIX.', it: 'LA TUA STORIA. A MODO TUO.' },
+    headline: { en: 'How Will Your Jordan Story Unfold?', de: 'Wie wird sich Ihre Jordanien-Geschichte entfalten?', fr: 'Comment S’Écrira Votre Histoire En Jordanie ?', it: 'Come Si Svolgerà La Tua Storia In Giordania?' },
+    description: {
+      en: 'From ancient cities to the Dead Sea and desert glamping, let our local Jordan experts craft your bespoke itinerary.',
+      de: 'Von antiken Städten bis zum Toten Meer – lassen Sie uns Ihre individuelle Traumreise gestalten.',
+      fr: 'Des cités antiques à la Mer Morte, réservez votre circuit privé sur mesure.',
+      it: 'Dalle città antiche al Mar Morto, prenota il tuo tour privato personalizzato.'
+    },
+    ctaText: { en: 'Book Private Tour →', de: 'Privattour Buchen →', fr: 'Réserver Votre Voyage →', it: 'Prenota Tour Privato →' },
+    ctaLink: '/booking'
+  }
+];
+
 export const ScrollWorldExperience: React.FC = () => {
   const { locale } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -215,9 +304,8 @@ export const ScrollWorldExperience: React.FC = () => {
   const [activeFrameIndex, setActiveFrameIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isMobileView, setIsMobileView] = useState(false);
-  const [mobileStep, setMobileStep] = useState(0);
-  const touchStartX = useRef<number | null>(null);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [mobileActiveStep, setMobileActiveStep] = useState(0);
 
   const getLocalized = (obj?: Record<string, string> | null) => {
     if (!obj) return '';
@@ -225,12 +313,12 @@ export const ScrollWorldExperience: React.FC = () => {
   };
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobileView(window.innerWidth < 768);
+    const checkViewport = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    return () => window.removeEventListener('resize', checkViewport);
   }, []);
 
   const handleSkipJourney = () => {
@@ -243,8 +331,9 @@ export const ScrollWorldExperience: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
+  // Desktop Three.js particles
   useEffect(() => {
-    if (isMobileView || !canvasRef.current) return;
+    if (isMobileOrTablet || !canvasRef.current) return;
     let renderer: THREE.WebGLRenderer | null = null;
     let frameId: number | null = null;
     let scene: THREE.Scene | null = null;
@@ -332,10 +421,10 @@ export const ScrollWorldExperience: React.FC = () => {
       };
     } catch {
     }
-  }, [isMobileView]);
+  }, [isMobileOrTablet]);
 
   useEffect(() => {
-    if (isMobileView) return;
+    if (isMobileOrTablet) return;
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -344,10 +433,10 @@ export const ScrollWorldExperience: React.FC = () => {
     };
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isMobileView]);
+  }, [isMobileOrTablet]);
 
+  // Unified Scroll listener that powers both desktop video/frames scrub and mobile/tablet scroll steps
   useEffect(() => {
-    if (isMobileView) return;
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -358,224 +447,145 @@ export const ScrollWorldExperience: React.FC = () => {
 
       setScrollProgress(progress);
 
-      if (videoRef.current && videoRef.current.duration) {
-        videoRef.current.currentTime = progress * videoRef.current.duration;
-      }
-
-      let foundIndex = 0;
-      for (let i = 0; i < EXTRACTED_FRAMES.length; i++) {
-        if (progress >= EXTRACTED_FRAMES[i].progressStart && progress <= EXTRACTED_FRAMES[i].progressEnd) {
-          foundIndex = i;
-          break;
+      if (isMobileOrTablet) {
+        // Mobile step calculation based on progress
+        let foundStep = 0;
+        for (let i = 0; i < MOBILE_CHAPTERS.length; i++) {
+          const [start, end] = MOBILE_CHAPTERS[i].progressRange;
+          if (progress >= start && (progress < end || i === MOBILE_CHAPTERS.length - 1)) {
+            foundStep = i;
+            break;
+          }
         }
+        setMobileActiveStep(foundStep);
+      } else {
+        // Desktop video scrub and frame calculation
+        if (videoRef.current && videoRef.current.duration) {
+          videoRef.current.currentTime = progress * videoRef.current.duration;
+        }
+
+        let foundIndex = 0;
+        for (let i = 0; i < EXTRACTED_FRAMES.length; i++) {
+          if (progress >= EXTRACTED_FRAMES[i].progressStart && progress <= EXTRACTED_FRAMES[i].progressEnd) {
+            foundIndex = i;
+            break;
+          }
+        }
+        setActiveFrameIndex(foundIndex);
       }
-      setActiveFrameIndex(foundIndex);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobileView]);
+  }, [isMobileOrTablet]);
 
   const currentFrame = EXTRACTED_FRAMES[activeFrameIndex];
   const copy = currentFrame.copy;
+  const currentMobileChapter = MOBILE_CHAPTERS[mobileActiveStep];
 
-  const MOBILE_CHAPTERS = [
-    {
-      step: 1,
-      imageSrc: '/images/scroll-world-video/frame-01.jpg',
-      eyebrow: { en: 'YOUR JORDAN STORY', de: 'DEINE JORDANISCHE GESCHICHTE', fr: 'VOTRE HISTOIRE EN JORDANIE', it: 'LA TUA STORIA IN GIORDANIA' },
-      headline: { en: 'Every Journey Begins With a Story', de: 'Jede Reise beginnt mit einer Geschichte', fr: 'Chaque Voyage Commence Par Une Histoire', it: 'Ogni Viaggio Inizia Con Una Storia' },
-      description: { en: 'And yours begins here, in Jordan.', de: 'Und Ihre beginnt hier, in Jordanien.', fr: 'Et la vôtre commence ici, en Jordanie.', it: 'E la tua inizia qui, in Giordania.' },
-      ctaText: { en: 'Explore Packages →', de: 'Rundreisen Entdecken →', fr: 'Découvrir Nos Circuits →', it: 'Esplora i Tour →' },
-      ctaLink: '/tours'
-    },
-    {
-      step: 2,
-      imageSrc: '/images/scroll-world-video/frame-03.jpg',
-      eyebrow: { en: 'CHAPTER 01 · THE SIQ', de: 'KAPITEL 01 · DER SIQ', fr: 'CHAPITRE 01 · LE SIQ', it: 'CAPITOLO 01 · IL SIQ' },
-      headline: { en: 'Walk Through Time', de: 'Ein Spaziergang durch die Zeit', fr: 'Marchez À Travers Le Temps', it: 'Cammina Nel Tempo' },
-      description: {
-        en: 'Follow the ancient canyon path where towering sandstone walls slowly reveal one of the world’s greatest wonders.',
-        de: 'Folgen Sie dem antiken Pfad durch den Siq, wo riesige Felswände ein Weltwunder enthüllen.',
-        fr: 'Suivez le sentier antique du Siq, où d’imposantes falaises de grès révèlent une merveille du monde.',
-        it: 'Segui l’antico sentiero del Siq, dove le pareti d’arenaria rivelano una delle meraviglie del mondo.'
-      },
-      ctaText: { en: 'Discover Petra →', de: 'Petra Entdecken →', fr: 'Découvrir Pétra →', it: 'Scopri Petra →' },
-      ctaLink: '/destinations/petra'
-    },
-    {
-      step: 3,
-      imageSrc: '/images/scroll-world-video/frame-06.jpg',
-      eyebrow: { en: 'CHAPTER 01 · PETRA', de: 'KAPITEL 01 · PETRA', fr: 'CHAPITRE 01 · PÉTRA', it: 'CAPITOLO 01 · PETRA' },
-      headline: { en: 'Some Stories Are Worth the Journey', de: 'Manche Geschichten sind die Reise wert', fr: 'Certaines Histoires Méritent Le Voyage', it: 'Alcune Storie Meritano Il Viaggio' },
-      description: {
-        en: 'With every step, the canyon narrows, the desert light shifts, and the rose-red stone glows before your eyes.',
-        de: 'Mit jedem Schritt verengt sich die Schlucht, das Licht wechselt und die Felsenstadt leuchtet auf.',
-        fr: 'À chaque pas, le canyon se rétrécit, la lumière change et Pétra se rapproche.',
-        it: 'A ogni passo, il canyon si restringe, la luce cambia e la pietra rosa risplende.'
-      },
-      ctaText: { en: 'View Petra Tours →', de: 'Petra Rundreisen →', fr: 'Circuits Pétra →', it: 'Tour a Petra →' },
-      ctaLink: '/tours'
-    },
-    {
-      step: 4,
-      imageSrc: '/images/scroll-world-video/frame-08.jpg',
-      eyebrow: { en: 'WORLD WONDER', de: 'WELTWUNDER', fr: 'MERVEILLE DU MONDE', it: 'MERAVIGLIA DEL MONDO' },
-      headline: { en: 'Petra: The Rose City Revealed', de: 'Petra: Die Felsenstadt', fr: 'Pétra: La Cité Rose Révélée', it: 'Petra: La Città Rosa' },
-      description: {
-        en: 'Stand before the Treasury — a moment thousands of years in the making, tailored exclusively for private travelers.',
-        de: 'Treten Sie vor das Schatzhaus – ein magischer Moment der Geschichte, exklusiv für Privatreisende.',
-        fr: 'Contemplez le Trésor de Pétra — un chef-d’œuvre millénaire taillé dans la roche.',
-        it: 'Ammira il Tesoro — un momento scolpito nella storia, creato per viaggiatori privati.'
-      },
-      ctaText: { en: 'Explore Petra →', de: 'Petra Entdecken →', fr: 'Explorer Pétra →', it: 'Esplora Petra →' },
-      ctaLink: '/destinations/petra'
-    },
-    {
-      step: 5,
-      imageSrc: '/images/scroll-world-video/frame-10.jpg',
-      eyebrow: { en: 'CHAPTER 02 · WADI RUM', de: 'KAPITEL 02 · WADI RUM', fr: 'CHAPITRE 02 · WADI RUM', it: 'CAPITOLO 02 · WADI RUM' },
-      headline: { en: 'Where the Horizon Has No End', de: 'Wo der Horizont kein Ende kennt', fr: 'Là Où L’Horizon Est Sans Fin', it: 'Dove L’Orizzonte Non Ha Fine' },
-      description: {
-        en: 'Enter the vast silence of Wadi Rum — Martian red dunes, starry Bedouin nights, and luxury desert glamping.',
-        de: 'Betreten Sie die Stille der Wüste Wadi Rum – rote Sanddünen, Sternenhimmel und Luxus-Glamping.',
-        fr: 'Pénétrez dans le désert de Wadi Rum — dunes rouges, nuits étoilées et tentes bédouines de luxe.',
-        it: 'Entra nel silenzio del Wadi Rum — sabbia rossa, cieli stellati e glamping esclusivo.'
-      },
-      ctaText: { en: 'Explore Wadi Rum →', de: 'Wadi Rum Entdecken →', fr: 'Explorer Wadi Rum →', it: 'Esplora Wadi Rum →' },
-      ctaLink: '/destinations/wadi-rum'
-    },
-    {
-      step: 6,
-      imageSrc: '/images/scroll-world-video/frame-12.jpg',
-      eyebrow: { en: 'YOUR STORY. YOUR WAY.', de: 'DEINE GESCHICHTE. DEIN WEG.', fr: 'VOTRE HISTOIRE. VOTRE CHOIX.', it: 'LA TUA STORIA. A MODO TUO.' },
-      headline: { en: 'How Will Your Jordan Story Unfold?', de: 'Wie wird sich Ihre Jordanien-Geschichte entfalten?', fr: 'Comment S’Écrira Votre Histoire En Jordanie ?', it: 'Come Si Svolgerà La Tua Storia In Giordania?' },
-      description: {
-        en: 'From ancient cities to the Dead Sea and desert glamping, let our local Jordan experts craft your bespoke itinerary.',
-        de: 'Von antiken Städten bis zum Toten Meer – lassen Sie uns Ihre individuelle Traumreise gestalten.',
-        fr: 'Des cités antiques à la Mer Morte, réservez votre circuit privé sur mesure.',
-        it: 'Dalle città antiche al Mar Morto, prenota il tuo tour privato personalizzato.'
-      },
-      ctaText: { en: 'Book Private Tour →', de: 'Privattour Buchen →', fr: 'Réserver Votre Voyage →', it: 'Prenota Tour Privato →' },
-      ctaLink: '/booking'
-    }
-  ];
-
-  const currentMobileChapter = MOBILE_CHAPTERS[mobileStep];
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 40) {
-      setMobileStep(prev => (prev < MOBILE_CHAPTERS.length - 1 ? prev + 1 : 0));
-    } else if (diff < -40) {
-      setMobileStep(prev => (prev > 0 ? prev - 1 : MOBILE_CHAPTERS.length - 1));
-    }
-    touchStartX.current = null;
-  };
-
-  if (isMobileView) {
+  // Mobile / Tablet View: Natural smooth scroll container with sticky viewport and cross-fading frames
+  if (isMobileOrTablet) {
     return (
-      <section 
-        className="relative min-h-[92vh] w-full flex flex-col justify-between bg-[#1A1615] overflow-hidden pt-24 pb-8 px-4 select-none"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+      <div 
+        ref={containerRef}
+        className="relative h-[380vh] bg-[#1A1615]"
       >
-        {MOBILE_CHAPTERS.map((chap, idx) => (
-          <div
-            key={chap.step}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out pointer-events-none ${
-              idx === mobileStep ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-            }`}
-            style={{
-              backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}${chap.imageSrc}')`,
-              filter: 'brightness(0.72) contrast(1.1) saturate(1.05)'
-            }}
-          />
-        ))}
+        <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-between bg-[#1A1615] overflow-hidden pt-24 pb-8 px-4">
+          {/* Background Cross-fading Video Frames */}
+          {MOBILE_CHAPTERS.map((chap, idx) => (
+            <div
+              key={chap.step}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out pointer-events-none ${
+                idx === mobileActiveStep ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+              }`}
+              style={{
+                backgroundImage: `url('${getAssetUrl(chap.imageSrc)}')`,
+                filter: 'brightness(0.72) contrast(1.1) saturate(1.05)'
+              }}
+            />
+          ))}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1615] via-[#1A1615]/40 to-[#1A1615]/75 pointer-events-none z-10" />
+          {/* Dark Contrast Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1615] via-[#1A1615]/40 to-[#1A1615]/75 pointer-events-none z-10" />
 
-        <div className="relative z-20 flex items-center justify-between gap-2 max-w-sm mx-auto w-full pt-2">
-          <div className="flex items-center gap-1.5 bg-[#1A1615]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
-            {MOBILE_CHAPTERS.map((chap, idx) => (
-              <button
-                key={chap.step}
-                type="button"
-                onClick={() => setMobileStep(idx)}
-                className={`w-7 h-7 rounded-full text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center ${
-                  idx === mobileStep
-                    ? 'bg-[#C69C6D] text-black shadow-lg scale-110'
-                    : 'text-white/60 hover:text-white bg-white/5'
-                }`}
-              >
-                {chap.step}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={handleSkipJourney}
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#1A1615]/80 border border-[#C69C6D]/40 text-[#C69C6D] text-[11px] font-mono backdrop-blur-md cursor-pointer"
-          >
-            <FastForward className="w-3 h-3" />
-            <span>{locale === 'de' ? 'Überspringen' : locale === 'fr' ? 'Passer' : locale === 'it' ? 'Salta' : 'Skip'}</span>
-          </button>
-        </div>
-
-        <div className="relative z-20 max-w-md mx-auto text-center space-y-3.5 my-auto px-2 animate-fade-in">
-          <span className="inline-block text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-bold bg-[#1A1615]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/15 shadow-md">
-            {getLocalized(currentMobileChapter.eyebrow)}
-          </span>
-
-          <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#F7F4EE] tracking-tight leading-tight drop-shadow-2xl">
-            {getLocalized(currentMobileChapter.headline)}
-          </h1>
-
-          <p className="text-xs sm:text-sm text-[#F7F4EE]/90 font-light leading-relaxed drop-shadow-md">
-            {getLocalized(currentMobileChapter.description)}
-          </p>
-
-          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href={`/${locale}${currentMobileChapter.ctaLink}`}
-              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs sm:text-sm shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2"
-            >
-              <span>{getLocalized(currentMobileChapter.ctaText)}</span>
-              <ChevronRight className="w-4 h-4" />
-            </Link>
+          {/* Mobile Top Controls: Chapter Step Dots & Skip Button */}
+          <div className="relative z-20 flex items-center justify-between gap-2 max-w-md mx-auto w-full pt-2 pointer-events-auto">
+            <div className="flex items-center gap-1.5 bg-[#1A1615]/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+              <span className="text-[10px] font-mono text-[#C69C6D] font-bold uppercase tracking-wider mr-1">
+                {mobileActiveStep + 1} / {MOBILE_CHAPTERS.length}
+              </span>
+              <div className="flex items-center gap-1">
+                {MOBILE_CHAPTERS.map((chap, idx) => (
+                  <div
+                    key={chap.step}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === mobileActiveStep
+                        ? 'w-5 bg-[#C69C6D]'
+                        : 'w-1.5 bg-white/30'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
 
             <button
               type="button"
-              onClick={() => setMobileStep(prev => (prev < MOBILE_CHAPTERS.length - 1 ? prev + 1 : 0))}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#C69C6D] font-mono text-xs transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+              onClick={handleSkipJourney}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#1A1615]/85 border border-[#C69C6D]/40 text-[#C69C6D] text-[11px] font-mono backdrop-blur-md cursor-pointer shadow-lg active:scale-95"
             >
-              <span>{locale === 'de' ? 'Nächstes Kapitel' : locale === 'fr' ? 'Chapitre Suivant' : locale === 'it' ? 'Prossimo Capitolo' : 'Next Story Frame'}</span>
-              <span>→</span>
+              <FastForward className="w-3 h-3" />
+              <span>{locale === 'de' ? 'Überspringen' : locale === 'fr' ? 'Passer' : locale === 'it' ? 'Salta' : 'Skip'}</span>
             </button>
           </div>
-        </div>
 
-        <div className="relative z-20 flex flex-col items-center justify-center gap-1.5 pt-2">
-          <button
-            type="button"
-            onClick={handleSkipJourney}
-            className="flex flex-col items-center gap-1 text-[11px] font-mono text-[#C69C6D]/80 hover:text-[#C69C6D] transition-colors cursor-pointer"
-          >
-            <span>{locale === 'de' ? 'Oder nach unten scrollen ↓' : locale === 'fr' ? 'Ou faites défiler ↓' : locale === 'it' ? 'Oppure scorri verso il basso ↓' : 'Or Scroll Down to Explore Tours ↓'}</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-          </button>
+          {/* Active Story Card with Chapter Copy */}
+          <div className="relative z-20 max-w-md mx-auto text-center space-y-3.5 my-auto px-2 animate-fade-in pointer-events-auto">
+            <span className="inline-block text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-bold bg-[#1A1615]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/15 shadow-md">
+              {getLocalized(currentMobileChapter.eyebrow)}
+            </span>
+
+            <h1 className="font-serif text-2xl sm:text-4xl font-extrabold text-[#F7F4EE] tracking-tight leading-tight drop-shadow-2xl">
+              {getLocalized(currentMobileChapter.headline)}
+            </h1>
+
+            <p className="text-xs sm:text-sm text-[#F7F4EE]/90 font-light leading-relaxed drop-shadow-md max-w-sm mx-auto">
+              {getLocalized(currentMobileChapter.description)}
+            </p>
+
+            <div className="pt-3 flex items-center justify-center gap-3">
+              <Link
+                href={`/${locale}${currentMobileChapter.ctaLink}`}
+                className="px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs sm:text-sm shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2"
+              >
+                <span>{getLocalized(currentMobileChapter.ctaText)}</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Bottom Scroll Prompt & Progress Bar */}
+          <div className="relative z-20 flex flex-col items-center justify-center gap-1.5 pt-2 pointer-events-none">
+            {scrollProgress < 0.15 ? (
+              <div className="flex flex-col items-center gap-1 text-[11px] font-mono text-[#C69C6D] animate-bounce">
+                <span>{locale === 'de' ? 'Nach unten scrollen ↓' : locale === 'fr' ? 'Faites défiler vers le bas ↓' : locale === 'it' ? 'Scorri verso il basso ↓' : 'Scroll down to explore story ↓'}</span>
+                <ArrowDown className="w-3.5 h-3.5" />
+              </div>
+            ) : (
+              <div className="w-32 h-1 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#A85F43] to-[#C69C6D] transition-all duration-150"
+                  style={{ width: `${scrollProgress * 100}%` }}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 
+  // Desktop Experience (Three.js Particles + Video/Frames Scrub 100% Intact)
   return (
     <div 
       ref={containerRef} 
@@ -584,7 +594,7 @@ export const ScrollWorldExperience: React.FC = () => {
       <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center bg-[#1A1615] overflow-hidden">
         <video
           ref={videoRef}
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/videos/scroll-world.mp4`}
+          src={getAssetUrl('/videos/scroll-world.mp4')}
           muted
           playsInline
           autoPlay
@@ -603,7 +613,7 @@ export const ScrollWorldExperience: React.FC = () => {
               index === activeFrameIndex ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}${frame.imageSrc}')`,
+              backgroundImage: `url('${getAssetUrl(frame.imageSrc)}')`,
               filter: 'brightness(0.85) contrast(1.08) saturate(1.05)',
               transform: `scale(${1.02 + scrollProgress * 0.04}) translate(${mousePos.x * 6}px, ${mousePos.y * 6}px)`
             }}
@@ -684,3 +694,4 @@ export const ScrollWorldExperience: React.FC = () => {
     </div>
   );
 };
+

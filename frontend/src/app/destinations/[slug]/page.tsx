@@ -6,6 +6,7 @@ import { TOURS_DATA, Tour } from '@/data/tours';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { MapPin, Calendar, Compass, ArrowRight, Check, Sparkles, Clock, Star } from 'lucide-react';
+import { getAssetUrl } from '@/utils/assets';
 
 interface DestinationPageProps {
   params: Promise<{ slug: string }>;
@@ -55,7 +56,7 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
       {/* Hero Banner Section */}
       <div className="relative h-[60vh] min-h-[450px] overflow-hidden bg-black">
         <img
-          src={dest.image}
+          src={getAssetUrl(dest.image)}
           alt={dest.name.en}
           className="w-full h-full object-cover opacity-70 scale-105"
         />
@@ -158,7 +159,7 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
             {dest.gallery.map((imgUrl, i) => (
               <div key={i} className="group relative h-64 rounded-3xl overflow-hidden shadow-md border border-gray-200">
                 <img
-                  src={imgUrl}
+                  src={getAssetUrl(imgUrl)}
                   alt={`${dest.name.en} gallery photo ${i + 1}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -197,7 +198,7 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
-                    src={tour.heroImage}
+                    src={getAssetUrl(tour.heroImage)}
                     alt={tour.title.en}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { TOURS_DATA, Tour, PriceMode, BookingMode } from '@/data/tours';
 import { DESTINATIONS_DATA, DestinationData } from '@/data/destinations';
+import { getAssetUrl } from '@/utils/assets';
 
 export interface Destination {
   id: string;
@@ -1236,7 +1237,7 @@ export default function AdminDashboardPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {destinationsList.map(dest => (
                 <div key={dest.id} className="rounded-3xl bg-[#1B1514] border border-white/10 overflow-hidden shadow-xl flex flex-col justify-between">
-                  <div className="h-44 bg-cover bg-center relative" style={{ backgroundImage: `url('${dest.heroImage || dest.image || '/images/hero-fallback.jpg'}')` }}>
+                  <div className="h-44 bg-cover bg-center relative" style={{ backgroundImage: `url('${getAssetUrl(dest.heroImage || dest.image || '/images/hero-fallback.jpg')}')` }}>
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1B1514] via-transparent to-black/40" />
                     <div className="absolute top-4 left-4">
                       <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono text-[#C69C6D] uppercase font-bold border border-white/10">

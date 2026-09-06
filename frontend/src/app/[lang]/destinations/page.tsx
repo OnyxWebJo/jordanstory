@@ -8,6 +8,7 @@ import { DESTINATIONS_FULL } from '@/data/destinations';
 import { buildLocaleMetadata, generateStaticLocaleParams } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
+import { getAssetUrl } from '@/utils/assets';
 
 export function generateStaticParams() {
   return generateStaticLocaleParams();
@@ -87,7 +88,7 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
               >
                 <div className="h-60 relative overflow-hidden">
                   <img 
-                    src={d.image} 
+                    src={getAssetUrl(d.image)} 
                     alt={name} 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                   />

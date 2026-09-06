@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 import { MapPin, ArrowRight, Sparkles, Calendar } from 'lucide-react';
 import { DESTINATIONS_FULL } from '@/data/destinations';
+import { getAssetUrl } from '@/utils/assets';
 
 export default function DestinationsPage() {
   return (
@@ -34,7 +35,7 @@ export default function DestinationsPage() {
             >
               <div className="h-60 relative overflow-hidden">
                 <img 
-                  src={d.image} 
+                  src={getAssetUrl(d.image)} 
                   alt={d.name.en} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 />

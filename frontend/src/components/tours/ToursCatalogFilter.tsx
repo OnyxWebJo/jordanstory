@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Tour, getTourPriceDisplay } from '@/data/tours';
 import { Clock, Star, ArrowRight, Search, Filter, RefreshCw, MapPin } from 'lucide-react';
-import { Locale } from '@/context/LanguageContext';
+import { Locale, useLanguage } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
+import { getAssetUrl } from '@/utils/assets';
 
 interface ToursCatalogFilterProps {
   tours: Tour[];
@@ -215,7 +216,7 @@ export const ToursCatalogFilter: React.FC<ToursCatalogFilterProps> = ({ tours, l
               >
                 <div className="relative h-60 overflow-hidden bg-gray-900">
                   <img
-                    src={tour.heroImage}
+                    src={getAssetUrl(tour.heroImage)}
                     alt={localizedTitle}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                   />

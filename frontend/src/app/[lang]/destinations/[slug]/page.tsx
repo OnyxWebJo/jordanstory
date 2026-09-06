@@ -11,6 +11,7 @@ import { MapPin, Clock, Calendar, CheckCircle2, Lightbulb, ArrowRight, Star } fr
 import { buildLocaleMetadata, LOCALES } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
+import { getAssetUrl } from '@/utils/assets';
 
 export function generateStaticParams() {
   const params: { lang: string; slug: string }[] = [];
@@ -99,7 +100,7 @@ export default async function LocalizedDestinationDetailPage({ params }: Props) 
         <section className="relative h-[65vh] bg-[#151B23] text-white flex items-end">
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src={dest.image}
+              src={getAssetUrl(dest.image)}
               alt={name}
               className="w-full h-full object-cover opacity-60"
             />

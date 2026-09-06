@@ -1,5 +1,5 @@
-:HL["/new/_next/static/chunks/27f7pzatoi-il.css","style"]
+:HL["/new/_next/static/chunks/0h7rjb54ui2lm.css","style"]
 :HL["/new/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/new/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["https://jordanstorytours.com/content/uploads/2021/01/Baptism-site-e1609688105341-700x500.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"lang","param":{"type":"d","key":"it","siblings":["admin","booking","destinations","review","tours"]},"prefetchHints":4192,"slots":{"children":{"name":"tours","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"baptism-site-dead-sea-day-tour","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"cFlJf5CDkkIsQ2EeCwhIx"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"lang","param":{"type":"d","key":"it","siblings":["admin","booking","destinations","review","tours"]},"prefetchHints":4192,"slots":{"children":{"name":"tours","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"baptism-site-dead-sea-day-tour","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"hC2b_YzEh8nGAmmvUcfsc"}

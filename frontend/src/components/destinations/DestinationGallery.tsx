@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Maximize2, X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { getAssetUrl } from '@/utils/assets';
 
 interface DestinationGalleryProps {
   gallery?: string[];
@@ -49,7 +50,7 @@ export const DestinationGallery: React.FC<DestinationGalleryProps> = ({ gallery,
             className="group relative h-48 rounded-2xl overflow-hidden cursor-pointer border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
           >
             <img
-              src={imgUrl}
+              src={getAssetUrl(imgUrl)}
               alt={`${name} Photo ${idx + 1}`}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -96,7 +97,7 @@ export const DestinationGallery: React.FC<DestinationGalleryProps> = ({ gallery,
           <div className="max-w-5xl w-full flex flex-col items-center space-y-4">
             <div className="relative max-h-[75vh] w-full flex items-center justify-center overflow-hidden rounded-2xl border border-white/10">
               <img
-                src={images[lightboxIndex]}
+                src={getAssetUrl(images[lightboxIndex])}
                 alt={`${name} Lightbox View ${lightboxIndex + 1}`}
                 className="max-h-[75vh] w-auto max-w-full object-contain"
               />

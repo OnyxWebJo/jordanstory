@@ -6,6 +6,7 @@ import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import { Clock, Star, ArrowRight, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCurrency } from '@/context/CurrencyContext';
+import { getAssetUrl } from '@/utils/assets';
 
 // Top 6 Curated Featured Tour IDs for the Homepage
 const FEATURED_HOMEPAGE_IDS = [
@@ -93,7 +94,7 @@ export const FeaturedTours: React.FC = () => {
               {/* Card Image Header */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={tour.heroImage}
+                  src={getAssetUrl(tour.heroImage)}
                   alt={getLocalized(tour.title)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
