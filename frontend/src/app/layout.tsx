@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   keywords: ["Jordan Story Tours", "Petra Private Tour", "Wadi Rum Desert Safari", "Dead Sea Tour", "Jordanien Reisen", "Petra Tour auf Deutsch"],
 };
 
+import Script from "next/script";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -27,6 +29,25 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-LS49VF4MNM"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-LS49VF4MNM');
+          `}
+        </Script>
+      </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <LanguageProvider>
           <CurrencyProvider>
