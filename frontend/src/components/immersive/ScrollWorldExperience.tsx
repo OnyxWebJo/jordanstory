@@ -215,11 +215,23 @@ export const ScrollWorldExperience: React.FC = () => {
   const [activeFrameIndex, setActiveFrameIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobileView, setIsMobileView] = useState(false);
+  const [mobileStep, setMobileStep] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   const getLocalized = (obj?: Record<string, string> | null) => {
     if (!obj) return '';
     return obj[locale] || obj.en || '';
   };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileView(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleSkipJourney = () => {
     const el = document.getElementById('story-collections');
@@ -231,10 +243,8 @@ export const ScrollWorldExperience: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
-  // --- WebGL Ambient Volumetric Particles Effect (Mounted ONCE) ---
   useEffect(() => {
-    if (!canvasRef.current) return;
-
+    if (isMobileView || !canvasRef.current) return;
     let renderer: THREE.WebGLRenderer | null = null;
     let frameId: number | null = null;
     let scene: THREE.Scene | null = null;
@@ -255,7 +265,6 @@ export const ScrollWorldExperience: React.FC = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Lighting System
       const ambientLight = new THREE.AmbientLight(0xc69c6d, 0.8);
       scene.add(ambientLight);
 
@@ -263,11 +272,9 @@ export const ScrollWorldExperience: React.FC = () => {
       sunLight.position.set(6, 14, 10);
       scene.add(sunLight);
 
-      // 3D Volumetric Dust Particles
       const particleCount = 1000;
       geom = new THREE.BufferGeometry();
       const pos = new Float32Array(particleCount * 3);
-
       for (let i = 0; i < particleCount; i++) {
         pos[i * 3] = (Math.random() - 0.5) * 35;
         pos[i * 3 + 1] = Math.random() * 15;
@@ -298,18 +305,21 @@ export const ScrollWorldExperience: React.FC = () => {
 
       const renderLoop = () => {
         frameId = requestAnimationFrame(renderLoop);
-        if (!renderer || !scene) return;
+        if (particleSystem) {
+          particleSystem.rotation.y += 0.0004;
+          particleSystem.rotation.x += 0.0002;
+        }
 
-        particleSystem.rotation.y += 0.005;
-
-        // Mouse Parallax Interpolation from Ref
-        targetCamX += (mousePosRef.current.x * 0.5 - camera.position.x) * 0.05;
-        targetCamY += (1.65 - mousePosRef.current.y * 0.25 - camera.position.y) * 0.05;
+        targetCamX += (mousePosRef.current.x * 0.8 - targetCamX) * 0.05;
+        targetCamY += (1.65 - mousePosRef.current.y * 0.5 - targetCamY) * 0.05;
 
         camera.position.x = targetCamX;
         camera.position.y = targetCamY;
+        camera.lookAt(0, 1.2, 0);
 
-        renderer.render(scene, camera);
+        if (renderer && scene) {
+          renderer.render(scene, camera);
+        }
       };
       renderLoop();
 
@@ -318,34 +328,30 @@ export const ScrollWorldExperience: React.FC = () => {
         if (frameId !== null) cancelAnimationFrame(frameId);
         if (geom) geom.dispose();
         if (mat) mat.dispose();
-        if (renderer) {
-          renderer.dispose();
-        }
+        if (renderer) renderer.dispose();
       };
-    } catch (e) {
-      console.warn("WebGL 3D particles fallback activated:", e);
+    } catch {
     }
-  }, []);
+  }, [isMobileView]);
 
-  // --- Mouse Movement & Parallax Tracking ---
   useEffect(() => {
+    if (isMobileView) return;
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      mousePosRef.current = { x, y };
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
       setMousePos({ x, y });
+      mousePosRef.current = { x, y };
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobileView]);
 
-  // --- Scroll Progress & Active Frame Tracking ---
   useEffect(() => {
+    if (isMobileView) return;
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const totalScrollable = containerRef.current.clientHeight - window.innerHeight;
+      const totalScrollable = containerRef.current.scrollHeight - window.innerHeight;
       if (totalScrollable <= 0) return;
       const currentScroll = -rect.top;
       const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
@@ -369,20 +375,213 @@ export const ScrollWorldExperience: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobileView]);
 
   const currentFrame = EXTRACTED_FRAMES[activeFrameIndex];
   const copy = currentFrame.copy;
+
+  const MOBILE_CHAPTERS = [
+    {
+      step: 1,
+      imageSrc: '/images/scroll-world-video/frame-01.jpg',
+      eyebrow: { en: 'YOUR JORDAN STORY', de: 'DEINE JORDANISCHE GESCHICHTE', fr: 'VOTRE HISTOIRE EN JORDANIE', it: 'LA TUA STORIA IN GIORDANIA' },
+      headline: { en: 'Every Journey Begins With a Story', de: 'Jede Reise beginnt mit einer Geschichte', fr: 'Chaque Voyage Commence Par Une Histoire', it: 'Ogni Viaggio Inizia Con Una Storia' },
+      description: { en: 'And yours begins here, in Jordan.', de: 'Und Ihre beginnt hier, in Jordanien.', fr: 'Et la vôtre commence ici, en Jordanie.', it: 'E la tua inizia qui, in Giordania.' },
+      ctaText: { en: 'Explore Packages →', de: 'Rundreisen Entdecken →', fr: 'Découvrir Nos Circuits →', it: 'Esplora i Tour →' },
+      ctaLink: '/tours'
+    },
+    {
+      step: 2,
+      imageSrc: '/images/scroll-world-video/frame-03.jpg',
+      eyebrow: { en: 'CHAPTER 01 · THE SIQ', de: 'KAPITEL 01 · DER SIQ', fr: 'CHAPITRE 01 · LE SIQ', it: 'CAPITOLO 01 · IL SIQ' },
+      headline: { en: 'Walk Through Time', de: 'Ein Spaziergang durch die Zeit', fr: 'Marchez À Travers Le Temps', it: 'Cammina Nel Tempo' },
+      description: {
+        en: 'Follow the ancient canyon path where towering sandstone walls slowly reveal one of the world’s greatest wonders.',
+        de: 'Folgen Sie dem antiken Pfad durch den Siq, wo riesige Felswände ein Weltwunder enthüllen.',
+        fr: 'Suivez le sentier antique du Siq, où d’imposantes falaises de grès révèlent une merveille du monde.',
+        it: 'Segui l’antico sentiero del Siq, dove le pareti d’arenaria rivelano una delle meraviglie del mondo.'
+      },
+      ctaText: { en: 'Discover Petra →', de: 'Petra Entdecken →', fr: 'Découvrir Pétra →', it: 'Scopri Petra →' },
+      ctaLink: '/destinations/petra'
+    },
+    {
+      step: 3,
+      imageSrc: '/images/scroll-world-video/frame-06.jpg',
+      eyebrow: { en: 'CHAPTER 01 · PETRA', de: 'KAPITEL 01 · PETRA', fr: 'CHAPITRE 01 · PÉTRA', it: 'CAPITOLO 01 · PETRA' },
+      headline: { en: 'Some Stories Are Worth the Journey', de: 'Manche Geschichten sind die Reise wert', fr: 'Certaines Histoires Méritent Le Voyage', it: 'Alcune Storie Meritano Il Viaggio' },
+      description: {
+        en: 'With every step, the canyon narrows, the desert light shifts, and the rose-red stone glows before your eyes.',
+        de: 'Mit jedem Schritt verengt sich die Schlucht, das Licht wechselt und die Felsenstadt leuchtet auf.',
+        fr: 'À chaque pas, le canyon se rétrécit, la lumière change et Pétra se rapproche.',
+        it: 'A ogni passo, il canyon si restringe, la luce cambia e la pietra rosa risplende.'
+      },
+      ctaText: { en: 'View Petra Tours →', de: 'Petra Rundreisen →', fr: 'Circuits Pétra →', it: 'Tour a Petra →' },
+      ctaLink: '/tours'
+    },
+    {
+      step: 4,
+      imageSrc: '/images/scroll-world-video/frame-08.jpg',
+      eyebrow: { en: 'WORLD WONDER', de: 'WELTWUNDER', fr: 'MERVEILLE DU MONDE', it: 'MERAVIGLIA DEL MONDO' },
+      headline: { en: 'Petra: The Rose City Revealed', de: 'Petra: Die Felsenstadt', fr: 'Pétra: La Cité Rose Révélée', it: 'Petra: La Città Rosa' },
+      description: {
+        en: 'Stand before the Treasury — a moment thousands of years in the making, tailored exclusively for private travelers.',
+        de: 'Treten Sie vor das Schatzhaus – ein magischer Moment der Geschichte, exklusiv für Privatreisende.',
+        fr: 'Contemplez le Trésor de Pétra — un chef-d’œuvre millénaire taillé dans la roche.',
+        it: 'Ammira il Tesoro — un momento scolpito nella storia, creato per viaggiatori privati.'
+      },
+      ctaText: { en: 'Explore Petra →', de: 'Petra Entdecken →', fr: 'Explorer Pétra →', it: 'Esplora Petra →' },
+      ctaLink: '/destinations/petra'
+    },
+    {
+      step: 5,
+      imageSrc: '/images/scroll-world-video/frame-10.jpg',
+      eyebrow: { en: 'CHAPTER 02 · WADI RUM', de: 'KAPITEL 02 · WADI RUM', fr: 'CHAPITRE 02 · WADI RUM', it: 'CAPITOLO 02 · WADI RUM' },
+      headline: { en: 'Where the Horizon Has No End', de: 'Wo der Horizont kein Ende kennt', fr: 'Là Où L’Horizon Est Sans Fin', it: 'Dove L’Orizzonte Non Ha Fine' },
+      description: {
+        en: 'Enter the vast silence of Wadi Rum — Martian red dunes, starry Bedouin nights, and luxury desert glamping.',
+        de: 'Betreten Sie die Stille der Wüste Wadi Rum – rote Sanddünen, Sternenhimmel und Luxus-Glamping.',
+        fr: 'Pénétrez dans le désert de Wadi Rum — dunes rouges, nuits étoilées et tentes bédouines de luxe.',
+        it: 'Entra nel silenzio del Wadi Rum — sabbia rossa, cieli stellati e glamping esclusivo.'
+      },
+      ctaText: { en: 'Explore Wadi Rum →', de: 'Wadi Rum Entdecken →', fr: 'Explorer Wadi Rum →', it: 'Esplora Wadi Rum →' },
+      ctaLink: '/destinations/wadi-rum'
+    },
+    {
+      step: 6,
+      imageSrc: '/images/scroll-world-video/frame-12.jpg',
+      eyebrow: { en: 'YOUR STORY. YOUR WAY.', de: 'DEINE GESCHICHTE. DEIN WEG.', fr: 'VOTRE HISTOIRE. VOTRE CHOIX.', it: 'LA TUA STORIA. A MODO TUO.' },
+      headline: { en: 'How Will Your Jordan Story Unfold?', de: 'Wie wird sich Ihre Jordanien-Geschichte entfalten?', fr: 'Comment S’Écrira Votre Histoire En Jordanie ?', it: 'Come Si Svolgerà La Tua Storia In Giordania?' },
+      description: {
+        en: 'From ancient cities to the Dead Sea and desert glamping, let our local Jordan experts craft your bespoke itinerary.',
+        de: 'Von antiken Städten bis zum Toten Meer – lassen Sie uns Ihre individuelle Traumreise gestalten.',
+        fr: 'Des cités antiques à la Mer Morte, réservez votre circuit privé sur mesure.',
+        it: 'Dalle città antiche al Mar Morto, prenota il tuo tour privato personalizzato.'
+      },
+      ctaText: { en: 'Book Private Tour →', de: 'Privattour Buchen →', fr: 'Réserver Votre Voyage →', it: 'Prenota Tour Privato →' },
+      ctaLink: '/booking'
+    }
+  ];
+
+  const currentMobileChapter = MOBILE_CHAPTERS[mobileStep];
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40) {
+      setMobileStep(prev => (prev < MOBILE_CHAPTERS.length - 1 ? prev + 1 : 0));
+    } else if (diff < -40) {
+      setMobileStep(prev => (prev > 0 ? prev - 1 : MOBILE_CHAPTERS.length - 1));
+    }
+    touchStartX.current = null;
+  };
+
+  if (isMobileView) {
+    return (
+      <section 
+        className="relative min-h-[92vh] w-full flex flex-col justify-between bg-[#1A1615] overflow-hidden pt-24 pb-8 px-4 select-none"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {MOBILE_CHAPTERS.map((chap, idx) => (
+          <div
+            key={chap.step}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out pointer-events-none ${
+              idx === mobileStep ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+            }`}
+            style={{
+              backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}${chap.imageSrc}')`,
+              filter: 'brightness(0.72) contrast(1.1) saturate(1.05)'
+            }}
+          />
+        ))}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1615] via-[#1A1615]/40 to-[#1A1615]/75 pointer-events-none z-10" />
+
+        <div className="relative z-20 flex items-center justify-between gap-2 max-w-sm mx-auto w-full pt-2">
+          <div className="flex items-center gap-1.5 bg-[#1A1615]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+            {MOBILE_CHAPTERS.map((chap, idx) => (
+              <button
+                key={chap.step}
+                type="button"
+                onClick={() => setMobileStep(idx)}
+                className={`w-7 h-7 rounded-full text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center ${
+                  idx === mobileStep
+                    ? 'bg-[#C69C6D] text-black shadow-lg scale-110'
+                    : 'text-white/60 hover:text-white bg-white/5'
+                }`}
+              >
+                {chap.step}
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleSkipJourney}
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#1A1615]/80 border border-[#C69C6D]/40 text-[#C69C6D] text-[11px] font-mono backdrop-blur-md cursor-pointer"
+          >
+            <FastForward className="w-3 h-3" />
+            <span>{locale === 'de' ? 'Überspringen' : locale === 'fr' ? 'Passer' : locale === 'it' ? 'Salta' : 'Skip'}</span>
+          </button>
+        </div>
+
+        <div className="relative z-20 max-w-md mx-auto text-center space-y-3.5 my-auto px-2 animate-fade-in">
+          <span className="inline-block text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-bold bg-[#1A1615]/85 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/15 shadow-md">
+            {getLocalized(currentMobileChapter.eyebrow)}
+          </span>
+
+          <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#F7F4EE] tracking-tight leading-tight drop-shadow-2xl">
+            {getLocalized(currentMobileChapter.headline)}
+          </h1>
+
+          <p className="text-xs sm:text-sm text-[#F7F4EE]/90 font-light leading-relaxed drop-shadow-md">
+            {getLocalized(currentMobileChapter.description)}
+          </p>
+
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href={`/${locale}${currentMobileChapter.ctaLink}`}
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-semibold text-xs sm:text-sm shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span>{getLocalized(currentMobileChapter.ctaText)}</span>
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMobileStep(prev => (prev < MOBILE_CHAPTERS.length - 1 ? prev + 1 : 0))}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#C69C6D] font-mono text-xs transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <span>{locale === 'de' ? 'Nächstes Kapitel' : locale === 'fr' ? 'Chapitre Suivant' : locale === 'it' ? 'Prossimo Capitolo' : 'Next Story Frame'}</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="relative z-20 flex flex-col items-center justify-center gap-1.5 pt-2">
+          <button
+            type="button"
+            onClick={handleSkipJourney}
+            className="flex flex-col items-center gap-1 text-[11px] font-mono text-[#C69C6D]/80 hover:text-[#C69C6D] transition-colors cursor-pointer"
+          >
+            <span>{locale === 'de' ? 'Oder nach unten scrollen ↓' : locale === 'fr' ? 'Ou faites défiler ↓' : locale === 'it' ? 'Oppure scorri verso il basso ↓' : 'Or Scroll Down to Explore Tours ↓'}</span>
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div 
       ref={containerRef} 
       className="relative h-[450vh] sm:h-[650vh] bg-[#1A1615]"
     >
-      {/* Sticky Fullscreen Viewport */}
       <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center bg-[#1A1615] overflow-hidden">
-        
-        {/* Layer 0: Direct Cinematic Background Video (with Frame Fallback) */}
         <video
           ref={videoRef}
           src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/videos/scroll-world.mp4`}
@@ -397,7 +596,6 @@ export const ScrollWorldExperience: React.FC = () => {
           }}
         />
 
-        {/* Layer 1: High-Definition Extracted Frame Backgrounds */}
         {EXTRACTED_FRAMES.map((frame, index) => (
           <div
             key={frame.id}
@@ -412,13 +610,10 @@ export const ScrollWorldExperience: React.FC = () => {
           />
         ))}
 
-        {/* Layer 2: Vignette Dark Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1615] via-transparent to-[#1A1615]/60 z-10 pointer-events-none" />
 
-        {/* Layer 3: 3D WebGL Volumetric Particles Canvas */}
         <canvas ref={canvasRef} className="absolute inset-0 z-15 pointer-events-none" />
 
-        {/* Skip Journey Button */}
         <button
           type="button"
           onClick={handleSkipJourney}
@@ -430,39 +625,32 @@ export const ScrollWorldExperience: React.FC = () => {
           </span>
         </button>
 
-        {/* Layer 4: Official Copy Overlay */}
         {copy && (
           <div className="relative z-20 max-w-3xl mx-auto px-6 text-center space-y-4 pointer-events-none animate-fade-in">
-            
-            {/* Chapter Eyebrow */}
             {copy.eyebrow && (
               <span className="inline-block text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold bg-[#1A1615]/70 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/10 shadow-lg">
                 {getLocalized(copy.eyebrow)}
               </span>
             )}
 
-            {/* Display Headline */}
             {copy.headline && (
               <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl font-extrabold text-[#F7F4EE] tracking-tight leading-tight drop-shadow-2xl">
                 {getLocalized(copy.headline)}
               </h1>
             )}
 
-            {/* Supporting Line */}
             {copy.supportingLine && (
               <p className="text-lg sm:text-2xl text-[#C69C6D] font-serif italic drop-shadow-md">
                 {getLocalized(copy.supportingLine)}
               </p>
             )}
 
-            {/* Description Paragraph */}
             {copy.description && (
               <p className="text-xs sm:text-base text-[#F7F4EE]/90 max-w-xl mx-auto font-light leading-relaxed drop-shadow-md">
                 {getLocalized(copy.description)}
               </p>
             )}
 
-            {/* CTA Button */}
             {copy.ctaText && (
               <div className="pt-4 flex justify-center pointer-events-auto">
                 <Link
@@ -474,11 +662,9 @@ export const ScrollWorldExperience: React.FC = () => {
                 </Link>
               </div>
             )}
-
           </div>
         )}
 
-        {/* Scroll Cue & Progress Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none">
           {scrollProgress < 0.08 && (
             <span className="text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-semibold">
@@ -494,7 +680,6 @@ export const ScrollWorldExperience: React.FC = () => {
             />
           </div>
         </div>
-
       </div>
     </div>
   );

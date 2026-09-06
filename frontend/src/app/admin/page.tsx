@@ -323,6 +323,49 @@ export default function AdminDashboardPage() {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [publishInProgress, setPublishInProgress] = useState(false);
 
+  // Initialize and persist state from localStorage
+  useEffect(() => {
+    try {
+      const savedTours = localStorage.getItem('jordan_admin_tours');
+      if (savedTours) setToursList(JSON.parse(savedTours));
+
+      const savedBookings = localStorage.getItem('jordan_admin_bookings');
+      if (savedBookings) setBookingsList(JSON.parse(savedBookings));
+
+      const savedQuotes = localStorage.getItem('jordan_admin_quotes');
+      if (savedQuotes) setQuotationsList(JSON.parse(savedQuotes));
+
+      const savedSettings = localStorage.getItem('jordan_admin_settings');
+      if (savedSettings) setSiteSettings(JSON.parse(savedSettings));
+
+      const savedLogs = localStorage.getItem('jordan_admin_logs');
+      if (savedLogs) setAuditLogs(JSON.parse(savedLogs));
+    } catch {
+      // Fallback gracefully
+    }
+  }, []);
+
+  // Save changes to localStorage
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_tours', JSON.stringify(toursList)); } catch {}
+  }, [toursList]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_bookings', JSON.stringify(bookingsList)); } catch {}
+  }, [bookingsList]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_quotes', JSON.stringify(quotationsList)); } catch {}
+  }, [quotationsList]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_settings', JSON.stringify(siteSettings)); } catch {}
+  }, [siteSettings]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_logs', JSON.stringify(auditLogs)); } catch {}
+  }, [auditLogs]);
+
   useEffect(() => {
     setReviewRequests(ReviewsStoreService.getRequests());
     setSubmittedReviews(ReviewsStoreService.getReviews());
