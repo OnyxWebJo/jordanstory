@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.*
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Release archives
+*.zip
+release_package/
+release_package_subfolder_new/
+
+# OS and logs
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Environment
+.env*.local
