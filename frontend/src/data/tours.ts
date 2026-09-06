@@ -52,18 +52,19 @@ export interface Tour {
 
 export function getTourPriceDisplay(tour: Tour, locale: string = 'en'): string {
   if (tour.priceMode === 'QUOTATION' || tour.startingPriceUSD === undefined || tour.startingPriceUSD === null) {
-    if (locale === 'de') return 'Preis anfragen';
-    if (locale === 'fr') return 'Demander un devis';
-    if (locale === 'it') return 'Richiedi un preventivo';
-    return 'Request a Quote';
+    if (locale === 'de') return 'Preis auf Anfrage';
+    if (locale === 'fr') return 'Sur demande';
+    if (locale === 'it') return 'Su richiesta';
+    return 'Price on Request';
   }
+  const perPerson = locale === 'de' ? ' / Person' : locale === 'fr' ? ' / pers.' : locale === 'it' ? ' / persona' : ' / person';
   if (tour.priceMode === 'FROM') {
-    if (locale === 'de') return `Ab ${tour.startingPriceUSD} USD`;
-    if (locale === 'fr') return `À partir de ${tour.startingPriceUSD} USD`;
-    if (locale === 'it') return `Da ${tour.startingPriceUSD} USD`;
-    return `From ${tour.startingPriceUSD} USD`;
+    if (locale === 'de') return `Ab ${tour.startingPriceUSD} USD${perPerson}`;
+    if (locale === 'fr') return `À partir de ${tour.startingPriceUSD} USD${perPerson}`;
+    if (locale === 'it') return `Da ${tour.startingPriceUSD} USD${perPerson}`;
+    return `From ${tour.startingPriceUSD} USD${perPerson}`;
   }
-  return `${tour.startingPriceUSD} USD`;
+  return `${tour.startingPriceUSD} USD${perPerson}`;
 }
 
 export function getTourCtaDisplay(tour: Tour, locale: string = 'en'): string {

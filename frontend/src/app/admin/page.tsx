@@ -171,6 +171,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<
     'dashboard' | 'tours' | 'categories' | 'destinations' | 'bookings' | 'quotations' | 'reviews' | 'reports' | 'media' | 'publish' | 'settings' | 'users' | 'audit'
   >('dashboard');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   // Toast Notification State
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' | 'error' } | null>(null);
@@ -520,6 +521,29 @@ export default function AdminDashboardPage() {
     });
   };
 
+  const handleDuplicateTour = (tour: Tour) => {
+    const dup: Tour = {
+      ...tour,
+      id: `${tour.id}-copy-${Date.now()}`,
+      slug: {
+        en: `${tour.slug.en}-copy`,
+        de: tour.slug.de ? `${tour.slug.de}-kopie` : undefined,
+        fr: tour.slug.fr ? `${tour.slug.fr}-copie` : undefined,
+        it: tour.slug.it ? `${tour.slug.it}-copia` : undefined
+      },
+      title: {
+        en: `${tour.title.en} (Copy)`,
+        de: tour.title.de ? `${tour.title.de} (Kopie)` : undefined,
+        fr: tour.title.fr ? `${tour.title.fr} (Copie)` : undefined,
+        it: tour.title.it ? `${tour.title.it} (Copia)` : undefined
+      },
+      isDraft: true
+    };
+    setToursList(prev => [dup, ...prev]);
+    addAuditLog('TOUR', dup.slug.en, 'DUPLICATE_TOUR', `Duplicated tour "${tour.title.en}" as draft.`);
+    showToast(`Duplicated "${tour.title.en}" as draft!`);
+  };
+
   const handleSaveTour = (updatedTour: Tour) => {
     if (isCreatingTour) {
       setToursList(prev => [updatedTour, ...prev]);
@@ -707,18 +731,39 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* Admin Sidebar */}
-      <aside className="w-full md:w-72 bg-[#1B1514] border-r border-[#A85F43]/30 p-6 flex flex-col justify-between shrink-0 shadow-2xl z-20">
+      {/* Mobile Header Bar */}
+      <div className="md:hidden bg-[#1B1514] border-b border-white/10 p-4 flex items-center justify-between sticky top-0 z-30 shadow-xl">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#8E442B] to-[#C69C6D] flex items-center justify-center text-white shadow-md">
+            <Compass className="w-5 h-5 shrink-0" />
+          </div>
+          <div>
+            <span className="font-serif font-bold text-base text-white block leading-tight">Jordan Story</span>
+            <span className="text-[10px] text-[#C69C6D] uppercase font-mono font-bold">{activeTab.toUpperCase()}</span>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setMobileNavOpen(!mobileNavOpen)}
+          className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono flex items-center gap-1.5 cursor-pointer border border-white/10"
+        >
+          <Layers className="w-3.5 h-3.5 text-[#C69C6D] shrink-0" />
+          <span>{mobileNavOpen ? 'Close Menu' : 'Modules'}</span>
+        </button>
+      </div>
+
+      {/* Admin Sidebar (Sticky Desktop, Collapsible Mobile) */}
+      <aside className={`w-full md:w-72 bg-[#1B1514] border-r border-[#A85F43]/30 p-6 flex-col justify-between shrink-0 shadow-2xl z-20 md:sticky md:top-0 md:h-screen md:overflow-y-auto ${mobileNavOpen ? 'flex' : 'hidden md:flex'}`}>
         <div className="space-y-6">
           {/* Brand Header */}
           <div className="flex items-center gap-3 pb-4 border-b border-white/10">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#8E442B] to-[#C69C6D] flex items-center justify-center shadow-lg text-white">
-              <Compass className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#8E442B] to-[#C69C6D] flex items-center justify-center shadow-lg text-white shrink-0">
+              <Compass className="w-5 h-5 shrink-0" />
             </div>
             <div>
               <span className="font-serif font-bold text-lg block leading-tight text-white">Jordan Story</span>
               <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
                 <span className="text-[10px] text-[#C69C6D] tracking-widest uppercase font-mono font-bold">Admin Console</span>
               </div>
             </div>
@@ -746,20 +791,23 @@ export default function AdminDashboardPage() {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id as any)}
+                  onClick={() => {
+                    setActiveTab(item.id as any);
+                    setMobileNavOpen(false);
+                  }}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all cursor-pointer ${
                     isActive
                       ? 'bg-[#A85F43] text-white shadow-lg font-semibold'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#C69C6D]'}`} />
-                    <span>{item.label}</span>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-[#C69C6D]'}`} />
+                    <span className="truncate">{item.label}</span>
                   </div>
                   {item.badge && (
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold shrink-0 ml-2 ${
                         isActive
                           ? 'bg-black/30 text-white'
                           : typeof item.badge === 'string' && item.badge.includes('new')
@@ -1016,13 +1064,13 @@ export default function AdminDashboardPage() {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
                     <tr>
-                      <th className="p-4">Tour / Package</th>
-                      <th className="p-4">Category</th>
-                      <th className="p-4">Duration</th>
-                      <th className="p-4">Price USD</th>
-                      <th className="p-4">Sales Mode</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Actions</th>
+                      <th className="p-4 whitespace-nowrap">Tour / Package</th>
+                      <th className="p-4 whitespace-nowrap">Category</th>
+                      <th className="p-4 whitespace-nowrap">Duration</th>
+                      <th className="p-4 whitespace-nowrap">Price ($ USD / person)</th>
+                      <th className="p-4 whitespace-nowrap">Sales Mode</th>
+                      <th className="p-4 whitespace-nowrap">Status</th>
+                      <th className="p-4 text-right whitespace-nowrap">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 text-gray-300">
@@ -1038,47 +1086,58 @@ export default function AdminDashboardPage() {
                             <div className="font-bold text-white text-sm">{tour.title.en}</div>
                             <div className="text-[11px] text-[#C69C6D] font-mono">/tours/{tour.slug.en}</div>
                           </td>
-                          <td className="p-4 font-mono text-gray-400">{tour.category}</td>
-                          <td className="p-4 font-mono">{tour.duration || `${tour.durationDays} Days`}</td>
-                          <td className="p-4">
+                          <td className="p-4 font-mono text-gray-400 whitespace-nowrap">{tour.category}</td>
+                          <td className="p-4 font-mono whitespace-nowrap">{tour.duration || `${tour.durationDays} Days`}</td>
+                          <td className="p-4 whitespace-nowrap">
                             <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-[#A85F43]/20 text-[#C69C6D] border border-[#A85F43]/30">
-                              {tour.priceMode === 'QUOTATION' ? 'QUOTATION' : `$${tour.startingPriceUSD} USD (${tour.priceMode || 'FROM'})`}
+                              {tour.priceMode === 'QUOTATION' ? 'QUOTATION' : `$${tour.startingPriceUSD} USD / person (${tour.priceMode || 'FROM'})`}
                             </span>
                           </td>
-                          <td className="p-4 font-mono text-[11px]">
+                          <td className="p-4 font-mono text-[11px] whitespace-nowrap">
                             {tour.bookingMode === 'QUOTATION' ? (
                               <span className="text-amber-400">Custom Quote</span>
                             ) : (
                               <span className="text-emerald-400">Direct Booking</span>
                             )}
                           </td>
-                          <td className="p-4">
+                          <td className="p-4 whitespace-nowrap">
                             <button
                               onClick={() => handleToggleTourPublish(tour)}
                               className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold transition-all cursor-pointer ${
                                 !tour.isDraft
-                                  ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50 hover:bg-emerald-800/40'
-                                  : 'bg-amber-900/40 text-amber-400 border border-amber-700/50 hover:bg-amber-800/40'
+                                   ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50 hover:bg-emerald-800/40'
+                                   : 'bg-amber-900/40 text-amber-400 border border-amber-700/50 hover:bg-amber-800/40'
                               }`}
                             >
                               {!tour.isDraft ? '✓ PUBLISHED' : '○ DRAFT'}
                             </button>
                           </td>
-                          <td className="p-4 text-right space-x-2">
-                            <button
-                              onClick={() => setSelectedTourForEdit(tour)}
-                              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1"
-                            >
-                              <Edit3 className="w-3.5 h-3.5" />
-                              <span>Edit</span>
-                            </button>
+                          <td className="p-4 text-right whitespace-nowrap">
+                            <div className="flex items-center justify-end gap-1.5 shrink-0">
+                              <button
+                                onClick={() => setSelectedTourForEdit(tour)}
+                                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1.5 shrink-0"
+                              >
+                                <Edit3 className="w-3.5 h-3.5 shrink-0" />
+                                <span>Edit</span>
+                              </button>
 
-                            <button
-                              onClick={() => handleDeleteTour(tour)}
-                              className="px-2.5 py-1.5 rounded-lg bg-rose-900/20 hover:bg-rose-900/40 text-rose-400 border border-rose-700/30 transition-all cursor-pointer"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
+                              <button
+                                onClick={() => handleDuplicateTour(tour)}
+                                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 border border-white/10 transition-all cursor-pointer inline-flex items-center justify-center shrink-0"
+                                title="Duplicate Tour"
+                              >
+                                <Copy className="w-3.5 h-3.5 shrink-0" />
+                              </button>
+
+                              <button
+                                onClick={() => handleDeleteTour(tour)}
+                                className="p-1.5 rounded-lg bg-rose-900/20 hover:bg-rose-900/40 text-rose-400 border border-rose-700/30 transition-all cursor-pointer inline-flex items-center justify-center shrink-0"
+                                title="Delete Tour"
+                              >
+                                <Trash2 className="w-3.5 h-3.5 shrink-0" />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -1201,19 +1260,21 @@ export default function AdminDashboardPage() {
                     </div>
 
                     <div className="pt-4 border-t border-white/10 flex justify-between items-center text-xs">
-                      <span className="text-[11px] text-gray-500 font-mono">/destinations/{dest.slug.en}</span>
-                      <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-gray-500 font-mono">/destinations/{dest.slug?.en || dest.id}</span>
+                      <div className="flex items-center gap-1.5 shrink-0">
                         <button
                           onClick={() => setSelectedDestinationForEdit(dest)}
-                          className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono cursor-pointer inline-flex items-center gap-1.5 shrink-0"
                         >
-                          Edit
+                          <Edit3 className="w-3.5 h-3.5 shrink-0" />
+                          <span>Edit</span>
                         </button>
                         <button
                           onClick={() => handleDeleteDestination(dest)}
-                          className="p-1.5 rounded-lg bg-rose-900/20 text-rose-400 border border-rose-700/30 cursor-pointer"
+                          className="p-1.5 rounded-lg bg-rose-900/20 hover:bg-rose-900/40 text-rose-400 border border-rose-700/30 cursor-pointer inline-flex items-center justify-center shrink-0"
+                          title="Delete Destination"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Trash2 className="w-3.5 h-3.5 shrink-0" />
                         </button>
                       </div>
                     </div>
@@ -1251,20 +1312,20 @@ export default function AdminDashboardPage() {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
                     <tr>
-                      <th className="p-4">Reference</th>
-                      <th className="p-4">Lead Traveler</th>
-                      <th className="p-4">Tour Package</th>
-                      <th className="p-4">Travel Date</th>
-                      <th className="p-4">Guests</th>
-                      <th className="p-4">Price Snapshot</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Actions & Voucher</th>
+                      <th className="p-4 whitespace-nowrap">Reference</th>
+                      <th className="p-4 whitespace-nowrap">Lead Traveler</th>
+                      <th className="p-4 whitespace-nowrap">Tour Package</th>
+                      <th className="p-4 whitespace-nowrap">Travel Date</th>
+                      <th className="p-4 whitespace-nowrap">Guests</th>
+                      <th className="p-4 whitespace-nowrap">Price Snapshot (/ person)</th>
+                      <th className="p-4 whitespace-nowrap">Status</th>
+                      <th className="p-4 text-right whitespace-nowrap">Actions & Voucher</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 text-gray-300">
                     {bookingsList.map(booking => (
                       <tr key={booking.id} className="hover:bg-white/5 transition-colors">
-                        <td className="p-4 font-mono text-[#C69C6D] font-bold">{booking.ref}</td>
+                        <td className="p-4 font-mono text-[#C69C6D] font-bold whitespace-nowrap">{booking.ref}</td>
                         <td className="p-4">
                           <div className="font-bold text-white">{booking.customer}</div>
                           <div className="text-[11px] text-gray-400">{booking.email}</div>
@@ -1274,10 +1335,12 @@ export default function AdminDashboardPage() {
                           <span className="font-bold text-white block">{booking.tour}</span>
                           <span className="text-[10px] text-gray-400 font-mono uppercase">Lang: {booking.locale}</span>
                         </td>
-                        <td className="p-4 font-mono">{booking.date}</td>
-                        <td className="p-4 font-mono">{booking.adults} Adults {booking.children > 0 && `/ ${booking.children} Kids`}</td>
-                        <td className="p-4 font-mono font-bold text-emerald-400">${booking.priceSnapshot} {booking.currency}</td>
-                        <td className="p-4">
+                        <td className="p-4 font-mono whitespace-nowrap">{booking.date}</td>
+                        <td className="p-4 font-mono whitespace-nowrap">{booking.adults} Adults {booking.children > 0 && `/ ${booking.children} Kids`}</td>
+                        <td className="p-4 font-mono font-bold text-emerald-400 whitespace-nowrap">
+                          ${booking.priceSnapshot} {booking.currency} <span className="text-[10px] text-gray-400 font-normal">/ person</span>
+                        </td>
+                        <td className="p-4 whitespace-nowrap">
                           <select
                             value={booking.status}
                             onChange={(e) => handleUpdateBookingStatus(booking.id, e.target.value as any)}
@@ -1291,32 +1354,35 @@ export default function AdminDashboardPage() {
                             <option value="REFUNDED">REFUNDED</option>
                           </select>
                         </td>
-                        <td className="p-4 text-right space-x-2">
-                          <button
-                            onClick={() => setSelectedBookingForVoucher(booking)}
-                            className="px-3 py-1.5 rounded-lg bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
-                          >
-                            <Printer className="w-3.5 h-3.5" />
-                            <span>Voucher</span>
-                          </button>
+                        <td className="p-4 text-right whitespace-nowrap">
+                          <div className="flex items-center justify-end gap-1.5 shrink-0">
+                            <button
+                              onClick={() => setSelectedBookingForVoucher(booking)}
+                              className="px-3 py-1.5 rounded-lg bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1.5 shrink-0"
+                            >
+                              <Printer className="w-3.5 h-3.5 shrink-0" />
+                              <span>Voucher</span>
+                            </button>
 
-                          <button
-                            onClick={() => {
-                              const msg = `Hello ${booking.customer}, greetings from Jordan Story Tours! We are pleased to confirm your private tour: ${booking.tour} starting on ${booking.date} (Booking Ref: ${booking.ref}). Our operations chauffeur will meet you at the airport/hotel. Feel free to message us here anytime!`;
-                              handleOpenWhatsApp(booking.phone, msg);
-                            }}
-                            className="px-2.5 py-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 text-xs font-mono cursor-pointer inline-flex items-center gap-1"
-                          >
-                            <PhoneCall className="w-3.5 h-3.5" />
-                            <span>WhatsApp</span>
-                          </button>
+                            <button
+                              onClick={() => {
+                                const msg = `Hello ${booking.customer}, greetings from Jordan Story Tours! We are pleased to confirm your private tour: ${booking.tour} starting on ${booking.date} (Booking Ref: ${booking.ref}). Rate: $${booking.priceSnapshot} USD per person. Our chauffeur will meet you at the airport/hotel.`;
+                                handleOpenWhatsApp(booking.phone, msg);
+                              }}
+                              className="px-2.5 py-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 text-xs font-mono cursor-pointer inline-flex items-center gap-1.5 shrink-0"
+                            >
+                              <PhoneCall className="w-3.5 h-3.5 shrink-0" />
+                              <span>WhatsApp</span>
+                            </button>
 
-                          <button
-                            onClick={() => setSelectedBookingForEdit(booking)}
-                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer"
-                          >
-                            <Edit3 className="w-3.5 h-3.5" />
-                          </button>
+                            <button
+                              onClick={() => setSelectedBookingForEdit(booking)}
+                              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer inline-flex items-center justify-center shrink-0"
+                              title="Edit Booking"
+                            >
+                              <Edit3 className="w-3.5 h-3.5 shrink-0" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -1352,20 +1418,20 @@ export default function AdminDashboardPage() {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
                     <tr>
-                      <th className="p-4">Reference</th>
-                      <th className="p-4">Traveler</th>
-                      <th className="p-4">Requested Itinerary</th>
-                      <th className="p-4">Dates</th>
-                      <th className="p-4">Guests & Hotels</th>
-                      <th className="p-4">Quoted Amount</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Actions</th>
+                      <th className="p-4 whitespace-nowrap">Reference</th>
+                      <th className="p-4 whitespace-nowrap">Traveler</th>
+                      <th className="p-4 whitespace-nowrap">Requested Itinerary</th>
+                      <th className="p-4 whitespace-nowrap">Dates</th>
+                      <th className="p-4 whitespace-nowrap">Guests & Hotels</th>
+                      <th className="p-4 whitespace-nowrap">Quoted Rate (/ person)</th>
+                      <th className="p-4 whitespace-nowrap">Status</th>
+                      <th className="p-4 text-right whitespace-nowrap">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 text-gray-300">
                     {quotationsList.map(quote => (
                       <tr key={quote.id} className="hover:bg-white/5 transition-colors">
-                        <td className="p-4 font-mono text-[#C69C6D] font-bold">{quote.ref}</td>
+                        <td className="p-4 font-mono text-[#C69C6D] font-bold whitespace-nowrap">{quote.ref}</td>
                         <td className="p-4">
                           <div className="font-bold text-white">{quote.customer}</div>
                           <div className="text-[11px] text-gray-400">{quote.email}</div>
@@ -1375,15 +1441,15 @@ export default function AdminDashboardPage() {
                           <span className="font-bold text-white block">{quote.tour}</span>
                           <span className="text-[10px] text-[#C69C6D] font-mono">Special: {quote.specialRequests || 'Standard VIP'}</span>
                         </td>
-                        <td className="p-4 font-mono">{quote.arrivalDate}</td>
-                        <td className="p-4">
+                        <td className="p-4 font-mono whitespace-nowrap">{quote.arrivalDate}</td>
+                        <td className="p-4 whitespace-nowrap">
                           <span className="block font-mono">{quote.adults} Adults {quote.children > 0 && `/ ${quote.children} Kids`}</span>
                           <span className="text-[10px] text-gray-400 font-mono">{quote.hotelPreference || '4-Star Boutique'}</span>
                         </td>
-                        <td className="p-4 font-mono font-bold text-amber-400">
-                          {quote.quotedPrice ? `$${quote.quotedPrice} ${quote.quotedCurrency}` : 'Pending Quote'}
+                        <td className="p-4 font-mono font-bold text-amber-400 whitespace-nowrap">
+                          {quote.quotedPrice ? `$${quote.quotedPrice} ${quote.quotedCurrency} / person` : 'Pending Quote'}
                         </td>
-                        <td className="p-4">
+                        <td className="p-4 whitespace-nowrap">
                           <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
                             quote.status === 'NEW' ? 'bg-amber-900/40 text-amber-400 border border-amber-700/50' :
                             quote.status === 'QUOTED' ? 'bg-blue-900/40 text-blue-400 border border-blue-700/50' :
@@ -1393,41 +1459,45 @@ export default function AdminDashboardPage() {
                             {quote.status}
                           </span>
                         </td>
-                        <td className="p-4 text-right space-x-2">
-                          <button
-                            onClick={() => setSelectedQuoteForEdit(quote)}
-                            className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
-                          >
-                            <DollarSign className="w-3.5 h-3.5" />
-                            <span>Quote</span>
-                          </button>
-
-                          {quote.status !== 'CONVERTED_TO_BOOKING' && (
+                        <td className="p-4 text-right whitespace-nowrap">
+                          <div className="flex items-center justify-end gap-1.5 shrink-0">
                             <button
-                              onClick={() => handleConvertQuoteToBooking(quote)}
-                              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
+                              onClick={() => setSelectedQuoteForEdit(quote)}
+                              className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1.5 shrink-0"
                             >
-                              <Check className="w-3.5 h-3.5" />
-                              <span>Convert</span>
+                              <DollarSign className="w-3.5 h-3.5 shrink-0" />
+                              <span>Quote</span>
                             </button>
-                          )}
 
-                          <button
-                            onClick={() => {
-                              const msg = `Dear ${quote.customer}, thank you for contacting Jordan Story Tours! We have prepared your custom itinerary quote for: ${quote.tour} at $${quote.quotedPrice || 'On Request'} USD. You can review your private journey details here: https://jordanstorytours.com/booking. Let us know if you would like any customizations!`;
-                              handleOpenWhatsApp(quote.phone, msg);
-                            }}
-                            className="p-1.5 rounded-lg bg-emerald-700/30 text-emerald-400 border border-emerald-600/40 cursor-pointer"
-                          >
-                            <PhoneCall className="w-3.5 h-3.5" />
-                          </button>
+                            {quote.status !== 'CONVERTED_TO_BOOKING' && (
+                              <button
+                                onClick={() => handleConvertQuoteToBooking(quote)}
+                                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1.5 shrink-0"
+                              >
+                                <Check className="w-3.5 h-3.5 shrink-0" />
+                                <span>Convert</span>
+                              </button>
+                            )}
 
-                          <button
-                            onClick={() => setSelectedQuoteForInvoice(quote)}
-                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer"
-                          >
-                            <Printer className="w-3.5 h-3.5" />
-                          </button>
+                            <button
+                              onClick={() => setSelectedQuoteForInvoice(quote)}
+                              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer inline-flex items-center justify-center shrink-0"
+                              title="Print Quote Proposal"
+                            >
+                              <Printer className="w-3.5 h-3.5 shrink-0" />
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                const msg = `Dear ${quote.customer}, thank you for contacting Jordan Story Tours! We have prepared your custom itinerary quote for: ${quote.tour} at $${quote.quotedPrice || 'On Request'} USD per person. You can review details here: https://jordanstorytours.com/booking.`;
+                                handleOpenWhatsApp(quote.phone, msg);
+                              }}
+                              className="p-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 cursor-pointer inline-flex items-center justify-center shrink-0"
+                              title="Send WhatsApp Quote"
+                            >
+                              <PhoneCall className="w-3.5 h-3.5 shrink-0" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -2133,7 +2203,7 @@ function TourEditModal({ tour, isCreating, onClose, onSave }: { tour: Tour | nul
             </div>
 
             <div>
-              <label className="text-gray-400 font-mono block mb-1">STARTING PRICE ($ USD)</label>
+              <label className="text-gray-400 font-mono block mb-1">BASE PRICE PER PERSON ($ USD)</label>
               <input
                 type="number"
                 value={form.startingPriceUSD || 0}
@@ -2378,7 +2448,7 @@ function BookingEditModal({ booking, onClose, onSave }: { booking: BookingRecord
               />
             </div>
             <div>
-              <label className="text-gray-400 font-mono block mb-1">PRICE SNAPSHOT ($ USD)</label>
+              <label className="text-gray-400 font-mono block mb-1">PRICE SNAPSHOT PER PERSON ($ USD)</label>
               <input
                 type="number"
                 value={form.priceSnapshot}
@@ -2447,7 +2517,7 @@ function QuotationEditModal({ quote, onClose, onSave, onConvert }: { quote: Quot
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-gray-400 font-mono block mb-1">QUOTED PRICE ($ USD)</label>
+              <label className="text-gray-400 font-mono block mb-1">QUOTED PRICE PER PERSON ($ USD)</label>
               <input
                 type="number"
                 value={form.quotedPrice || 0}
@@ -2803,11 +2873,14 @@ function VoucherInvoiceModal({ booking, settings, onClose }: { booking: BookingR
         {/* Pricing Breakdown */}
         <div className="p-5 rounded-2xl bg-[#A85F43]/20 border border-[#A85F43]/40 flex justify-between items-center">
           <div>
-            <span className="text-xs text-gray-300 font-mono block">CONFIRMED TOTAL AMOUNT</span>
-            <span className="font-serif text-2xl font-extrabold text-[#C69C6D]">${booking.priceSnapshot} {booking.currency}</span>
+            <span className="text-xs text-gray-300 font-mono block">RATE PER PERSON: ${booking.priceSnapshot} {booking.currency}</span>
+            <span className="font-serif text-2xl font-extrabold text-[#C69C6D]">
+              Total: ${booking.priceSnapshot * (booking.adults || 1)} {booking.currency}
+            </span>
+            <span className="text-[10px] text-gray-400 font-mono block">({booking.adults} Adults × ${booking.priceSnapshot} USD)</span>
           </div>
-          <div className="text-right text-[11px] text-gray-300">
-            <span>Includes private climate-controlled vehicle, professional driver/chauffeur, accommodations & tourist taxes.</span>
+          <div className="text-right text-[11px] text-gray-300 max-w-xs">
+            <span>Includes private AC vehicle transfers, licensed chauffeur, hotel accommodations & tourism taxes.</span>
           </div>
         </div>
 

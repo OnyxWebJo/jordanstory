@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Tour, getTourPriceDisplay } from '@/data/tours';
-import { Clock, Star, ArrowRight, Search, Filter, RefreshCw } from 'lucide-react';
+import { Clock, Star, ArrowRight, Search, Filter, RefreshCw, MapPin } from 'lucide-react';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
 
@@ -12,10 +13,33 @@ interface ToursCatalogFilterProps {
   locale: Locale;
 }
 
+const normalizeCategory = (cat: string | null): string => {
+  if (!cat) return 'ALL';
+  const c = cat.trim().toLowerCase();
+  if (c === 'all' || c === 'alle' || c === 'tous' || c === 'tutti') return 'ALL';
+  if (c === 'luxury' || c === 'luxus' || c === 'luxe' || c === 'lusso') return 'Luxury';
+  if (c === 'classical' || c === 'classic' || c === 'klassisch' || c === 'classique' || c === 'classico' || c === 'ancient') return 'Classical';
+  if (c === 'day tour' || c === 'day-tour' || c === 'daytour' || c === 'day' || c === 'tagesausflüge' || c === 'excursions' || c === 'excursion') return 'Day Tour';
+  if (c === 'budget' || c === 'komfort' || c === 'economique' || c === 'comfort') return 'Budget';
+  if (c === 'holy land' || c === 'holyland' || c === 'holy-land' || c === 'biblical' || c === 'biblisch' || c === 'sacred' || c === 'terre sainte' || c === 'terra santa') return 'Holy Land';
+  if (c === 'islamic' || c === 'islamische geschichte' || c === 'histoire islamique' || c === 'storia islamica' || c === 'heritage') return 'Islamic';
+  if (c === 'desert' || c === 'wüste' || c === 'désert' || c === 'deserto') return 'Classical';
+  return 'ALL';
+};
+
 export const ToursCatalogFilter: React.FC<ToursCatalogFilterProps> = ({ tours, locale }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams ? searchParams.get('category') : null;
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => normalizeCategory(categoryParam));
   const [selectedDuration, setSelectedDuration] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(normalizeCategory(categoryParam));
+    }
+  }, [categoryParam]);
 
   // Localized Labels Dictionary
   const labels = {
@@ -35,7 +59,8 @@ export const ToursCatalogFilter: React.FC<ToursCatalogFilterProps> = ({ tours, l
     searchPlaceholder: { en: 'Search tours, Petra, Dead Sea, Aqaba...', de: 'Reisen suchen, Petra, Totes Meer...', fr: 'Rechercher circuits, Pétra...', it: 'Cerca tour, Petra, Mar Morto...' },
     resultsCount: { en: 'Programs Available', de: 'Angebote Verfügbar', fr: 'Programmes Disponibles', it: 'Programmi Disponibili' },
     resetFilters: { en: 'Reset Filters', de: 'Filter Zurücksetzen', fr: 'Réinitialiser', it: 'Reimposta' },
-    noResults: { en: 'No tours match your current filter selection.', de: 'Keine Rundreisen entsprechen Ihren Suchkriterien.', fr: 'Aucun circuit ne correspond à vos critères.', it: 'Nessun tour corrisponde ai criteri selezionati.' }
+    noResults: { en: 'No tours match your current filter selection.', de: 'Keine Rundreisen entsprechen Ihren Suchkriterien.', fr: 'Aucun circuit ne correspond à vos critères.', it: 'Nessun tour corrisponde ai criteri selezionati.' },
+    perPerson: { en: 'per person', de: 'pro Person', fr: 'par personne', it: 'a persona' }
   };
 
   const categories = [

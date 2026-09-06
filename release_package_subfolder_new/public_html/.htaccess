@@ -1,41 +1,22 @@
-# Jordan Story Tours - Subfolder (/new/) Apache Configuration
-Options -Indexes +FollowSymLinks
-DirectoryIndex index.html index.php
+RewriteEngine On
+RewriteBase /new/
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /new/
+# Allow existing files and directories directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-  # Pass Authorization Header for Bearer JWT Tokens
-  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# Route /api/* directly to backend router
+RewriteRule ^api(/.*)?$ backend/public/router.php [L,QSA]
+RewriteRule ^backend/public/api(/.*)?$ backend/public/router.php [L,QSA]
 
-  # Handle PHP API Requests directly
-  RewriteRule ^api/(.*)$ backend/public/api/index.php [QSA,L]
-  RewriteRule ^backend/public/api/(.*)$ backend/public/api/index.php [QSA,L]
+# Try exact html file
+RewriteCond %{DOCUMENT_ROOT}/new/$1.html -f
+RewriteRule ^(.*)$ $1.html [L]
 
-  # Direct file or directory exists -> Serve directly
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+# Try directory index.html
+RewriteCond %{DOCUMENT_ROOT}/new/$1/index.html -f
+RewriteRule ^(.*)$ $1/index.html [L]
 
-  # HTML route resolution (e.g. /new/admin -> admin.html)
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.*)$ $1.html [L]
-
-  # Directory fallback (e.g. /new/admin/ -> admin/index.html or admin.html)
-  RewriteCond %{DOCUMENT_ROOT}/new/$1/index.html -f
-  RewriteRule ^(.*)/$ $1/index.html [L]
-
-  # Single Page / Fallback route
-  RewriteRule ^index\.html$ - [L]
-</IfModule>
-
-# Security Headers & CORS
-<IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "*"
-  Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-  Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-</IfModule>
+# Fallback to index.html for clientside routes
+RewriteRule ^.*$ index.html [L]

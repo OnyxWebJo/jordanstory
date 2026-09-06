@@ -77,7 +77,9 @@ export default async function LocalizedToursPage({ params }: Props) {
 
         {/* Tours Catalog Filter & Grid Container */}
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ToursCatalogFilter tours={TOURS_DATA} locale={locale} />
+          <React.Suspense fallback={<div className="p-12 text-center text-gray-500 font-mono text-sm">Loading tours catalog...</div>}>
+            <ToursCatalogFilter tours={TOURS_DATA} locale={locale} />
+          </React.Suspense>
         </section>
       </main>
 
