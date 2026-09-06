@@ -1,0 +1,30 @@
+DirectoryIndex en.html index.html index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. Direct API requests to api/index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+    RewriteRule ^api$ api/index.php [QSA,L]
+
+    # 2. Allow existing files and folders directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 3. Serve root / or empty request directly as en.html
+    RewriteRule ^$ en.html [L]
+
+    # 4. Serve corresponding .html for clean URLs (e.g. en/tours -> en/tours.html, admin -> admin.html)
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+
+    # 5. Fallback for nested directory index.html (e.g. en -> en/index.html)
+    RewriteCond %{REQUEST_FILENAME}/index.html -f
+    RewriteRule ^(.*)$ $1/index.html [L]
+
+    # 6. Fallback 404
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ 404.html [L]
+</IfModule>

@@ -1,0 +1,27 @@
+<?php
+// Jordan Story Tours — PHP API Configuration
+// Compliant with Specifications 03, 04, 05, 06, 07, 08
+
+return [
+    'db' => [
+        'host'     => getenv('DB_HOST') ?: 'localhost',
+        'port'     => getenv('DB_PORT') ?: '3306',
+        'dbname'   => getenv('DB_NAME') ?: 'jorddhrw_newstory',
+        'user'     => getenv('DB_USER') ?: 'jorddhrw_shadi',
+        'password' => getenv('DB_PASS') ?: '5SfyqV8Rv^PR}qx*',
+        'charset'  => 'utf8mb4',
+    ],
+    'app' => [
+        'name'            => 'Jordan Story Tours API',
+        'env'             => getenv('APP_ENV') ?: 'development',
+        'allowed_origins' => explode(',', getenv('ALLOWED_ORIGINS') ?: 'http://localhost:3000,http://localhost:3001,https://jordanstorytours.com'),
+        'jwt_secret'      => getenv('JWT_SECRET') ?: 'jordan-story-secret-key-change-in-production-2026',
+        'admin_email'     => getenv('ADMIN_EMAIL') ?: 'info@jordanstorytours.com',
+        'token_expiry'    => 86400 * 7, // 7 days
+    ],
+    'security' => [
+        'rate_limit_requests' => 120, // max 120 requests per minute
+        'rate_limit_window'   => 60,
+        'require_https'       => getenv('APP_ENV') === 'production',
+    ]
+];
