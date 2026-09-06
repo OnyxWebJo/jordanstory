@@ -1,5 +1,5 @@
-:HL["/new/_next/static/chunks/0p5zn_hycpala.css","style"]
+:HL["/new/_next/static/chunks/0c7fr1vmrr6wl.css","style"]
 :HL["/new/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/new/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["https://jordanstorytours.com/content/uploads/2020/11/Petra-Jordan-tours-700x500.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"lang","param":{"type":"d","key":"en","siblings":["admin","booking","destinations","review","tours"]},"prefetchHints":4192,"slots":{"children":{"name":"tours","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"circuit-budget-1-petra-mer-morte-jerash","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"Bhsb3l6NooGRg1HJegwZN"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"lang","param":{"type":"d","key":"en","siblings":["admin","booking","destinations","review","tours"]},"prefetchHints":4192,"slots":{"children":{"name":"tours","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"circuit-budget-1-petra-mer-morte-jerash","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"wVcr3QIRUl1SDIK_dJHzN"}

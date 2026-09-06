@@ -1,41 +1,41 @@
-DirectoryIndex en.html index.html index.php
+# Jordan Story Tours - Subfolder (/new/) Apache Configuration
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.html index.php
 
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+  RewriteEngine On
+  RewriteBase /new/
 
-    # 1. Direct API requests to api/index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^api/(.*)$ api/index.php [QSA,L]
-    RewriteRule ^api$ api/index.php [QSA,L]
+  # Pass Authorization Header for Bearer JWT Tokens
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # 2. Allow existing files and folders directly
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
+  # Handle PHP API Requests directly
+  RewriteRule ^api/(.*)$ backend/public/api/index.php [QSA,L]
+  RewriteRule ^backend/public/api/(.*)$ backend/public/api/index.php [QSA,L]
 
-    # 3. Serve root / or empty request directly as en.html
-    RewriteRule ^$ en.html [L]
+  # Direct file or directory exists -> Serve directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-    # 4. Serve corresponding .html for clean URLs (e.g. en/tours -> en/tours.html, admin -> admin.html)
-    RewriteCond %{REQUEST_FILENAME}.html -f
-    RewriteRule ^(.*)$ $1.html [L]
+  # HTML route resolution (e.g. /new/admin -> admin.html)
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
 
-    # 5. Fallback for nested directory index.html (e.g. en -> en/index.html)
-    RewriteCond %{REQUEST_FILENAME}/index.html -f
-    RewriteRule ^(.*)$ $1/index.html [L]
+  # Directory fallback (e.g. /new/admin/ -> admin/index.html or admin.html)
+  RewriteCond %{DOCUMENT_ROOT}/new/$1/index.html -f
+  RewriteRule ^(.*)/$ $1/index.html [L]
 
-    # 6. Fallback 404
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ 404.html [L]
+  # Single Page / Fallback route
+  RewriteRule ^index\.html$ - [L]
 </IfModule>
 
+# Security Headers & CORS
 <IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-XSS-Protection "1; mode=block"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-</IfModule>
-
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

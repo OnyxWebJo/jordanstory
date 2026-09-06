@@ -1,8 +1,23 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { TOURS_DATA, Tour } from '@/data/tours';
-import { DESTINATIONS_DATA } from '@/data/destinations';
+import { TOURS_DATA, Tour, PriceMode, BookingMode } from '@/data/tours';
+import { DESTINATIONS_DATA, DestinationData } from '@/data/destinations';
+
+export interface Destination {
+  id: string;
+  slug: { en: string; de: string; fr: string; it: string };
+  title?: { en: string; de?: string; fr?: string; it?: string };
+  name?: { en: string; de?: string; fr?: string; it?: string };
+  subtitle?: { en?: string; de?: string; fr?: string; it?: string };
+  tagline?: { en?: string; de?: string; fr?: string; it?: string };
+  description: { en: string; de?: string; fr?: string; it?: string };
+  highlights: { en: string[]; de?: string[]; fr?: string[]; it?: string[] };
+  heroImage?: string;
+  image?: string;
+  region?: string;
+}
+
 import {
   LayoutDashboard,
   Compass,
@@ -37,13 +52,17 @@ import {
   Layers,
   PhoneCall,
   Check,
-  CheckSquare
+  CheckSquare,
+  Download,
+  ExternalLink,
+  Copy,
+  ChevronDown
 } from 'lucide-react';
 
 import { ReviewsStoreService, ReviewRequest, UserSubmittedReview, WHATSAPP_TEMPLATES, ReviewLocale } from '@/data/reviewsStore';
 
 // ============================================================================
-// TYPE DEFINITIONS (Matching Specifications 03, 04, 06, 07)
+// TYPE DEFINITIONS
 // ============================================================================
 
 export type AdminRole = 'SUPER_ADMIN' | 'ADMIN' | 'CONTENT_EDITOR' | 'BOOKING_MANAGER' | 'REVIEW_MODERATOR';
@@ -129,19 +148,44 @@ export interface SiteSettingsState {
   requireReviewModeration: boolean;
 }
 
+export interface TourCategoryItem {
+  id: string;
+  name: string;
+  description: string;
+  slug: string;
+  toursCount: number;
+}
+
+export interface MediaAssetItem {
+  id: string;
+  title: string;
+  url: string;
+  category: string;
+  altEn: string;
+  altDe: string;
+  uploadedAt: string;
+}
+
 export default function AdminDashboardPage() {
-  // Navigation
+  // Navigation Tabs
   const [activeTab, setActiveTab] = useState<
-    'dashboard' | 'tours' | 'categories' | 'destinations' | 'bookings' | 'quotations' | 'reviews' | 'media' | 'publish' | 'settings' | 'users' | 'audit'
+    'dashboard' | 'tours' | 'categories' | 'destinations' | 'bookings' | 'quotations' | 'reviews' | 'reports' | 'media' | 'publish' | 'settings' | 'users' | 'audit'
   >('dashboard');
+
+  // Toast Notification State
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' | 'error' } | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'info' | 'error' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3500);
+  };
 
   // Search & Filter State
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [priceModeFilter, setPriceModeFilter] = useState('all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
 
-  // Current Logged-in Admin (Default SUPER_ADMIN)
+  // Current Logged-in Admin
   const [currentAdmin, setCurrentAdmin] = useState<{ name: string; email: string; role: AdminRole }>({
     name: 'Jordan Story Owner',
     email: 'admin@jordanstorytours.com',
@@ -150,6 +194,16 @@ export default function AdminDashboardPage() {
 
   // Data Stores
   const [toursList, setToursList] = useState<Tour[]>(TOURS_DATA);
+  const [destinationsList, setDestinationsList] = useState<Destination[]>(DESTINATIONS_DATA);
+  
+  const [categoriesList, setCategoriesList] = useState<TourCategoryItem[]>([
+    { id: 'cat-1', name: 'Classical Tours', slug: 'classical', description: 'Iconic historical routes through Petra, Jerash, and Amman.', toursCount: 6 },
+    { id: 'cat-2', name: 'Luxury & Wellness', slug: 'luxury', description: '5-star boutique hotels, Dead Sea spa, and VIP Bedouin desert glamping.', toursCount: 4 },
+    { id: 'cat-3', name: 'Budget & Cultural', slug: 'budget', description: 'Affordable authentic private exploration across Jordan.', toursCount: 5 },
+    { id: 'cat-4', name: 'Biblical & Holy Land', slug: 'biblical', description: 'Sacred pilgrimage routes: Mount Nebo, Bethany Beyond the Jordan, and Madaba.', toursCount: 3 },
+    { id: 'cat-5', name: 'Day Safaris & Excursions', slug: 'day-safaris', description: 'Single-day excursions from Amman and Aqaba.', toursCount: 5 }
+  ]);
+
   const [bookingsList, setBookingsList] = useState<BookingRecord[]>([
     {
       id: 'BK-89021',
@@ -169,6 +223,7 @@ export default function AdminDashboardPage() {
       priceUnit: 'PER_PERSON',
       specialRequests: 'Vegetarian meals preferred.',
       assignedAdmin: 'Jordan Story Owner',
+      internalNotes: 'VIP client from London.',
       createdAt: '2026-09-01 14:20'
     },
     {
@@ -189,6 +244,7 @@ export default function AdminDashboardPage() {
       priceUnit: 'PER_PERSON',
       specialRequests: 'German speaking guide if available.',
       assignedAdmin: 'Jordan Story Owner',
+      internalNotes: 'Deposit received via wire transfer.',
       createdAt: '2026-08-30 09:12'
     },
     {
@@ -257,6 +313,12 @@ export default function AdminDashboardPage() {
     }
   ]);
 
+  const [mediaList, setMediaList] = useState<MediaAssetItem[]>([
+    { id: 'med-1', title: 'Petra Treasury Morning Glow', url: '/images/scroll-world-video/frame-08.jpg', category: 'Petra', altEn: 'Petra Treasury facade in sunlight', altDe: 'Das Schatzhaus von Petra im Sonnenlicht', uploadedAt: '2026-09-01' },
+    { id: 'med-2', title: 'Wadi Rum Martian Desert', url: '/images/scroll-world-video/frame-10.jpg', category: 'Wadi Rum', altEn: 'Red sand dunes of Wadi Rum desert', altDe: 'Rote Sanddünen im Wadi Rum', uploadedAt: '2026-09-01' },
+    { id: 'med-3', title: 'Siq Canyon Narrow Walk', url: '/images/scroll-world-video/frame-03.jpg', category: 'Petra', altEn: 'The Siq canyon entrance to Petra', altDe: 'Der Siq Schluchtweg nach Petra', uploadedAt: '2026-09-01' }
+  ]);
+
   const [auditLogs, setAuditLogs] = useState<AuditLogItem[]>([
     {
       id: 'AUD-901',
@@ -265,7 +327,7 @@ export default function AdminDashboardPage() {
       entityType: 'PUBLISHING',
       entityId: 'STATIC-SNAPSHOT',
       action: 'TRIGGER_STATIC_REBUILD',
-      details: 'Rebuilt edge static export across EN, DE, FR, IT (39 routes).',
+      details: 'Rebuilt edge static export across EN, DE, FR, IT (642 routes).',
       timestamp: '2026-09-02 14:15:00'
     },
     {
@@ -286,7 +348,7 @@ export default function AdminDashboardPage() {
       ref: 'DEP-20260902-1415',
       requestedBy: 'Jordan Story Owner',
       status: 'SUCCESS',
-      pagesCount: 39,
+      pagesCount: 642,
       timestamp: '2026-09-02 14:15 UTC'
     }
   ]);
@@ -305,11 +367,19 @@ export default function AdminDashboardPage() {
     requireReviewModeration: true
   });
 
-  // Modals & Active Drawers
+  // Modals State
   const [selectedTourForEdit, setSelectedTourForEdit] = useState<Tour | null>(null);
-  const [selectedTourForMedia, setSelectedTourForMedia] = useState<Tour | null>(null);
+  const [isCreatingTour, setIsCreatingTour] = useState(false);
+  const [selectedDestinationForEdit, setSelectedDestinationForEdit] = useState<Destination | null>(null);
+  const [isCreatingDestination, setIsCreatingDestination] = useState(false);
   const [selectedBookingForVoucher, setSelectedBookingForVoucher] = useState<BookingRecord | null>(null);
+  const [selectedBookingForEdit, setSelectedBookingForEdit] = useState<BookingRecord | null>(null);
   const [selectedQuoteForEdit, setSelectedQuoteForEdit] = useState<QuotationRecord | null>(null);
+  const [selectedQuoteForInvoice, setSelectedQuoteForInvoice] = useState<QuotationRecord | null>(null);
+  const [isCreatingReviewToken, setIsCreatingReviewToken] = useState(false);
+  const [isCreatingMedia, setIsCreatingMedia] = useState(false);
+  const [isCreatingCategory, setIsCreatingCategory] = useState(false);
+
   const [securityModalAction, setSecurityModalAction] = useState<{
     title: string;
     description: string;
@@ -320,14 +390,19 @@ export default function AdminDashboardPage() {
   // Reviews Data
   const [reviewRequests, setReviewRequests] = useState<ReviewRequest[]>([]);
   const [submittedReviews, setSubmittedReviews] = useState<UserSubmittedReview[]>([]);
-  const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [publishInProgress, setPublishInProgress] = useState(false);
 
-  // Initialize and persist state from localStorage
+  // Initialize and persist state with localStorage
   useEffect(() => {
     try {
       const savedTours = localStorage.getItem('jordan_admin_tours');
       if (savedTours) setToursList(JSON.parse(savedTours));
+
+      const savedDests = localStorage.getItem('jordan_admin_dests');
+      if (savedDests) setDestinationsList(JSON.parse(savedDests));
+
+      const savedCats = localStorage.getItem('jordan_admin_cats');
+      if (savedCats) setCategoriesList(JSON.parse(savedCats));
 
       const savedBookings = localStorage.getItem('jordan_admin_bookings');
       if (savedBookings) setBookingsList(JSON.parse(savedBookings));
@@ -341,14 +416,22 @@ export default function AdminDashboardPage() {
       const savedLogs = localStorage.getItem('jordan_admin_logs');
       if (savedLogs) setAuditLogs(JSON.parse(savedLogs));
     } catch {
-      // Fallback gracefully
+      // Fallback
     }
   }, []);
 
-  // Save changes to localStorage
+  // Save changes automatically
   useEffect(() => {
     try { localStorage.setItem('jordan_admin_tours', JSON.stringify(toursList)); } catch {}
   }, [toursList]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_dests', JSON.stringify(destinationsList)); } catch {}
+  }, [destinationsList]);
+
+  useEffect(() => {
+    try { localStorage.setItem('jordan_admin_cats', JSON.stringify(categoriesList)); } catch {}
+  }, [categoriesList]);
 
   useEffect(() => {
     try { localStorage.setItem('jordan_admin_bookings', JSON.stringify(bookingsList)); } catch {}
@@ -386,70 +469,117 @@ export default function AdminDashboardPage() {
     setAuditLogs(prev => [newLog, ...prev]);
   };
 
-  // Operational KPI Metrics (Doc 03 Section 2)
+  // Operational KPI Metrics
   const metrics = useMemo(() => {
     const publishedTours = toursList.filter(t => !t.isDraft).length;
     const draftTours = toursList.filter(t => t.isDraft).length;
     const quotationTours = toursList.filter(t => t.bookingMode === 'QUOTATION').length;
     const newBookings = bookingsList.filter(b => b.status === 'NEW').length;
+    const confirmedBookings = bookingsList.filter(b => b.status === 'CONFIRMED' || b.status === 'COMPLETED').length;
     const newQuotations = quotationsList.filter(q => q.status === 'NEW').length;
     const pendingReviews = submittedReviews.filter(r => r.moderationStatus === 'PENDING_MODERATION').length;
     const aggregateRating = ReviewsStoreService.getCalculatedAggregateRating();
+
+    const totalRevenue = bookingsList
+      .filter(b => b.status === 'CONFIRMED' || b.status === 'COMPLETED')
+      .reduce((sum, b) => sum + (b.priceSnapshot || 0), 0);
 
     return {
       publishedTours,
       draftTours,
       quotationTours,
       newBookings,
+      confirmedBookings,
       newQuotations,
       pendingReviews,
-      totalConfirmedRevenue: bookingsList
-        .filter(b => b.status === 'CONFIRMED' || b.status === 'COMPLETED')
-        .reduce((sum, b) => sum + b.priceSnapshot, 0),
+      totalRevenue,
       aggregateRating
     };
   }, [toursList, bookingsList, quotationsList, submittedReviews]);
 
-  // Tour Status Toggles
-  const handleTourPublishToggle = (tour: Tour) => {
-    const isPublishing = tour.isDraft;
-    const actionLabel = isPublishing ? 'Publish Tour' : 'Unpublish Tour';
+  // Tour Handlers
+  const handleToggleTourPublish = (tour: Tour) => {
+    const newDraftState = !tour.isDraft;
+    const action = newDraftState ? 'UNPUBLISHED' : 'PUBLISHED';
+    setToursList(prev => prev.map(t => (t.id === tour.id ? { ...t, isDraft: newDraftState } : t)));
+    addAuditLog('TOUR', tour.slug.en, newDraftState ? 'UNPUBLISH_TOUR' : 'PUBLISH_TOUR', `Status changed to ${action}.`);
+    showToast(`Tour "${tour.title.en}" marked as ${action}!`);
+  };
 
+  const handleDeleteTour = (tour: Tour) => {
     setSecurityModalAction({
-      title: `${actionLabel}: "${tour.title.en}"`,
-      description: isPublishing
-        ? 'Publishing will mark this package active and make it eligible for static export across EN, DE, FR, IT.'
-        : 'Unpublishing will withdraw this tour from the public catalog and sitemap.',
-      confirmText: actionLabel,
+      title: `Delete Tour: "${tour.title.en}"`,
+      description: 'Are you sure you want to permanently delete this tour package? This will remove all associated itinerary records.',
+      confirmText: 'Delete Tour',
       onConfirm: () => {
-        const updated = toursList.map(t => (t.id === tour.id ? { ...t, isDraft: !t.isDraft } : t));
-        setToursList(updated);
-        addAuditLog('TOUR', tour.slug.en, isPublishing ? 'PUBLISH_TOUR' : 'UNPUBLISH_TOUR', `Status changed to ${isPublishing ? 'PUBLISHED' : 'DRAFT'}.`);
+        setToursList(prev => prev.filter(t => t.id !== tour.id));
+        addAuditLog('TOUR', tour.slug.en, 'DELETE_TOUR', `Permanently deleted tour package.`);
         setSecurityModalAction(null);
+        showToast(`Tour "${tour.title.en}" has been deleted.`, 'info');
       }
     });
   };
 
-  // Static Publishing Handler (Doc 05)
-  const handleTriggerStaticPublish = () => {
-    setPublishInProgress(true);
-    addAuditLog('PUBLISHING', 'STATIC_SNAPSHOT', 'TRIGGER_BUILD', 'Triggered static export deployment pipeline.');
-
-    setTimeout(() => {
-      const newJob: PublishJob = {
-        id: 'JOB-' + Date.now(),
-        ref: 'DEP-' + new Date().toISOString().replace(/[-:T.]/g, '').substring(0, 14),
-        requestedBy: currentAdmin.name,
-        status: 'SUCCESS',
-        pagesCount: 39,
-        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC'
-      };
-      setPublishJobs(prev => [newJob, ...prev]);
-      setPublishInProgress(false);
-    }, 1500);
+  const handleSaveTour = (updatedTour: Tour) => {
+    if (isCreatingTour) {
+      setToursList(prev => [updatedTour, ...prev]);
+      addAuditLog('TOUR', updatedTour.slug.en, 'CREATE_TOUR', `Created new tour package.`);
+      setIsCreatingTour(false);
+      showToast(`Created new tour "${updatedTour.title.en}"!`);
+    } else {
+      setToursList(prev => prev.map(t => (t.id === updatedTour.id ? updatedTour : t)));
+      addAuditLog('TOUR', updatedTour.slug.en, 'UPDATE_TOUR', `Updated tour details, pricing, and itinerary.`);
+      setSelectedTourForEdit(null);
+      showToast(`Saved changes to "${updatedTour.title.en}"!`);
+    }
   };
 
-  // Convert Quotation to Booking (Doc 06 Section 6)
+  // Destination Handlers
+  const handleSaveDestination = (dest: Destination) => {
+    const destName = dest.title?.en || dest.name?.en || dest.id;
+    if (isCreatingDestination) {
+      setDestinationsList(prev => [dest, ...prev]);
+      addAuditLog('DESTINATION', dest.slug?.en || dest.id, 'CREATE_DESTINATION', `Created new destination "${destName}".`);
+      setIsCreatingDestination(false);
+      showToast(`Added destination "${destName}"!`);
+    } else {
+      setDestinationsList(prev => prev.map(d => (d.id === dest.id ? dest : d)));
+      addAuditLog('DESTINATION', dest.slug?.en || dest.id, 'UPDATE_DESTINATION', `Updated destination details.`);
+      setSelectedDestinationForEdit(null);
+      showToast(`Saved destination "${destName}"!`);
+    }
+  };
+
+  const handleDeleteDestination = (dest: Destination) => {
+    const destName = dest.title?.en || dest.name?.en || dest.id;
+    setSecurityModalAction({
+      title: `Delete Destination: "${destName}"`,
+      description: 'Are you sure you want to delete this destination? This cannot be undone.',
+      confirmText: 'Delete Destination',
+      onConfirm: () => {
+        setDestinationsList(prev => prev.filter(d => d.id !== dest.id));
+        addAuditLog('DESTINATION', dest.slug?.en || dest.id, 'DELETE_DESTINATION', `Deleted destination.`);
+        setSecurityModalAction(null);
+        showToast(`Destination "${destName}" deleted.`, 'info');
+      }
+    });
+  };
+
+  // Booking Handlers
+  const handleUpdateBookingStatus = (bookingId: string, newStatus: BookingRecord['status']) => {
+    setBookingsList(prev => prev.map(b => (b.id === bookingId ? { ...b, status: newStatus } : b)));
+    addAuditLog('BOOKING', bookingId, 'UPDATE_STATUS', `Updated booking status to ${newStatus}.`);
+    showToast(`Booking ${bookingId} marked as ${newStatus}!`);
+  };
+
+  const handleSaveBooking = (updated: BookingRecord) => {
+    setBookingsList(prev => prev.map(b => (b.id === updated.id ? updated : b)));
+    addAuditLog('BOOKING', updated.ref, 'UPDATE_BOOKING_DETAILS', `Updated passenger and note details.`);
+    setSelectedBookingForEdit(null);
+    showToast(`Booking ${updated.ref} updated successfully!`);
+  };
+
+  // Quotation Handlers
   const handleConvertQuoteToBooking = (quote: QuotationRecord) => {
     const newBooking: BookingRecord = {
       id: 'BK-' + Math.floor(10000 + Math.random() * 90000),
@@ -476,34 +606,107 @@ export default function AdminDashboardPage() {
     setBookingsList(prev => [newBooking, ...prev]);
     setQuotationsList(prev => prev.map(q => (q.id === quote.id ? { ...q, status: 'CONVERTED_TO_BOOKING' } : q)));
     addAuditLog('QUOTATION', quote.ref, 'CONVERT_TO_BOOKING', `Converted to Confirmed Booking (${newBooking.ref}) at $${newBooking.priceSnapshot} USD.`);
+    showToast(`Quotation ${quote.ref} converted to Confirmed Booking (${newBooking.ref})!`);
   };
 
-  // Review Request Dispatcher
-  const handleSendReviewRequest = (booking: BookingRecord) => {
-    const token = 'rev_' + Math.random().toString(36).substring(2, 10);
+  const handleSaveQuotation = (updated: QuotationRecord) => {
+    setQuotationsList(prev => prev.map(q => (q.id === updated.id ? updated : q)));
+    addAuditLog('QUOTATION', updated.ref, 'UPDATE_QUOTATION', `Updated quote price to $${updated.quotedPrice || 0} USD, status ${updated.status}.`);
+    setSelectedQuoteForEdit(null);
+    showToast(`Quotation ${updated.ref} saved!`);
+  };
+
+  // Review Handlers
+  const handleModerateReview = (reviewId: string, approve: boolean) => {
+    const status = approve ? 'APPROVED' : 'REJECTED';
+    ReviewsStoreService.moderateReview(reviewId, status as any);
+    setSubmittedReviews(ReviewsStoreService.getReviews());
+    addAuditLog('REVIEW', reviewId, approve ? 'APPROVE_REVIEW' : 'REJECT_REVIEW', `Review moderated as ${status} by ${currentAdmin.name}.`);
+    showToast(`Review has been ${status.toLowerCase()}!`);
+  };
+
+  const handleCreateReviewToken = (customerName: string, email: string, phone: string, tourName: string, lang: ReviewLocale) => {
+    const token = 'jst_rev_' + Math.random().toString(36).substring(2, 11);
     const newReq: ReviewRequest = {
       id: 'req_' + Date.now(),
-      bookingId: booking.ref,
-      customerName: booking.customer,
-      customerPhone: booking.phone,
-      customerEmail: booking.email,
+      bookingId: 'BK-DIR-' + Math.floor(1000 + Math.random() * 9000),
+      customerName,
+      customerPhone: phone,
+      customerEmail: email,
       tourId: 'tour-custom',
-      tourName: booking.tour,
+      tourName,
       token,
-      locale: (booking.locale as ReviewLocale) || 'en',
+      locale: lang,
       status: 'SENT',
       sentAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + 30 * 86400000).toISOString(),
+      expiresAt: new Date(Date.now() + 90 * 86400000).toISOString(),
       sentCount: 1,
       createdAt: new Date().toISOString()
     };
     ReviewsStoreService.addRequest(newReq);
     setReviewRequests(ReviewsStoreService.getRequests());
-    addAuditLog('REVIEW', booking.ref, 'DISPATCH_REVIEW_REQUEST', `Generated review token (${token}) for ${booking.customer}.`);
+    addAuditLog('REVIEW', token, 'DISPATCH_REVIEW_TOKEN', `Created review token for ${customerName}.`);
+    setIsCreatingReviewToken(false);
+    showToast(`Review link token created: ${token}!`);
+  };
+
+  // WhatsApp Message Generator
+  const handleOpenWhatsApp = (phone: string, text: string) => {
+    const cleanPhone = phone.replace(/[^0-9+]/g, '');
+    const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    showToast('Opening WhatsApp with pre-filled message...');
+  };
+
+  // CSV Export Report Generator
+  const handleExportCSV = () => {
+    const headers = ['Type', 'Reference', 'Customer', 'Email', 'Phone', 'Tour', 'Date', 'Passengers', 'Status', 'Amount_USD'];
+    const rows: string[][] = [
+      ...bookingsList.map(b => ['BOOKING', b.ref, b.customer, b.email, b.phone, b.tour, b.date, String(b.adults + b.children), b.status, String(b.priceSnapshot)]),
+      ...quotationsList.map(q => ['QUOTATION', q.ref, q.customer, q.email, q.phone, q.tour, q.arrivalDate, String(q.adults + q.children), q.status, String(q.quotedPrice || 0)])
+    ];
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.map(i => `"${(i || '').replace(/"/g, '""')}"`).join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `jordan_story_report_${new Date().toISOString().substring(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Operations CSV Report exported successfully!');
+  };
+
+  // Static Publishing Handler
+  const handleTriggerStaticPublish = () => {
+    setPublishInProgress(true);
+    addAuditLog('PUBLISHING', 'STATIC_SNAPSHOT', 'TRIGGER_BUILD', 'Triggered static export deployment pipeline.');
+
+    setTimeout(() => {
+      const newJob: PublishJob = {
+        id: 'JOB-' + Date.now(),
+        ref: 'DEP-' + new Date().toISOString().replace(/[-:T.]/g, '').substring(0, 14),
+        requestedBy: currentAdmin.name,
+        status: 'SUCCESS',
+        pagesCount: 642,
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16) + ' UTC'
+      };
+      setPublishJobs(prev => [newJob, ...prev]);
+      setPublishInProgress(false);
+      showToast('Static edge snapshot published across 642 pages!');
+    }, 1500);
   };
 
   return (
     <div className="min-h-screen bg-[#12161C] text-[#F5EFE6] flex flex-col md:flex-row font-sans selection:bg-[#A85F43] selection:text-white">
+      {/* Real-Time Toast Notification Banner */}
+      {toast && (
+        <div className="fixed top-6 right-6 z-[100] flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#1B1514] border border-[#C69C6D] text-[#F5EFE6] shadow-2xl backdrop-blur-xl animate-bounce">
+          <CheckCircle className="w-5 h-5 text-emerald-400" />
+          <span className="text-xs font-medium font-mono">{toast.message}</span>
+        </div>
+      )}
+
       {/* Admin Sidebar */}
       <aside className="w-full md:w-72 bg-[#1B1514] border-r border-[#A85F43]/30 p-6 flex flex-col justify-between shrink-0 shadow-2xl z-20">
         <div className="space-y-6">
@@ -521,17 +724,18 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* Nav Links (12 Modules) */}
+          {/* Navigation Links (13 Modules) */}
           <nav className="space-y-1 text-xs font-medium">
             {[
-              { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, badge: null },
+              { id: 'dashboard', label: 'Overview & KPIs', icon: LayoutDashboard, badge: null },
               { id: 'tours', label: 'Tours & Pricing', icon: Compass, badge: toursList.length },
-              { id: 'categories', label: 'Tour Categories', icon: Layers, badge: 5 },
-              { id: 'destinations', label: 'Destinations', icon: MapPin, badge: DESTINATIONS_DATA.length },
-              { id: 'bookings', label: 'Bookings', icon: Calendar, badge: metrics.newBookings ? `${metrics.newBookings} new` : null },
-              { id: 'quotations', label: 'Quotations', icon: DollarSign, badge: metrics.newQuotations ? `${metrics.newQuotations} new` : null },
-              { id: 'reviews', label: 'Reviews (00E)', icon: MessageSquare, badge: metrics.pendingReviews ? `${metrics.pendingReviews} pending` : null },
-              { id: 'media', label: 'Media Library (00D)', icon: ImageIcon, badge: null },
+              { id: 'categories', label: 'Tour Categories', icon: Layers, badge: categoriesList.length },
+              { id: 'destinations', label: 'Destinations', icon: MapPin, badge: destinationsList.length },
+              { id: 'bookings', label: 'Bookings & Vouchers', icon: Calendar, badge: metrics.newBookings ? `${metrics.newBookings} new` : null },
+              { id: 'quotations', label: 'Custom Quotations', icon: DollarSign, badge: metrics.newQuotations ? `${metrics.newQuotations} new` : null },
+              { id: 'reviews', label: 'Reviews Moderation', icon: MessageSquare, badge: metrics.pendingReviews ? `${metrics.pendingReviews} pending` : null },
+              { id: 'reports', label: 'Reports & Invoicing', icon: FileText, badge: null },
+              { id: 'media', label: 'Media Library', icon: ImageIcon, badge: mediaList.length },
               { id: 'publish', label: 'Static Publishing', icon: RefreshCw, badge: null },
               { id: 'settings', label: 'Site Settings', icon: Settings, badge: null },
               { id: 'users', label: 'Users & Roles', icon: Users, badge: null },
@@ -586,7 +790,7 @@ export default function AdminDashboardPage() {
 
           <a href="/" className="flex items-center justify-center gap-2 text-xs text-gray-400 hover:text-[#C69C6D] py-2 transition-colors">
             <LogOut className="w-3.5 h-3.5" />
-            <span>Return to Public Site</span>
+            <span>Return to Public Website</span>
           </a>
         </div>
       </aside>
@@ -595,7 +799,7 @@ export default function AdminDashboardPage() {
       <main className="flex-1 p-6 md:p-10 space-y-8 overflow-y-auto max-h-screen">
         
         {/* ==================================================================== */}
-        {/* MODULE 1: DASHBOARD OVERVIEW (Doc 03 Section 2) */}
+        {/* TAB 1: DASHBOARD OVERVIEW */}
         {/* ==================================================================== */}
         {activeTab === 'dashboard' && (
           <div className="space-y-8">
@@ -603,68 +807,78 @@ export default function AdminDashboardPage() {
               <div>
                 <h1 className="font-serif text-3xl font-bold text-white">Operations & Executive Dashboard</h1>
                 <p className="text-xs sm:text-sm text-gray-400 mt-1">
-                  Real-time visibility into tour inventory, customer bookings, custom quote requests, and static snapshot deployments.
+                  Real-time control over tour packages, direct bookings, customized quotes, review tokens, and static publishing.
                 </p>
               </div>
 
-              <button
-                onClick={handleTriggerStaticPublish}
-                disabled={publishInProgress}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-all cursor-pointer disabled:opacity-50"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${publishInProgress ? 'animate-spin' : ''}`} />
-                <span>{publishInProgress ? 'Rebuilding Snapshot...' : 'Publish Live Snapshot'}</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleExportCSV}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#C69C6D] text-xs font-mono transition-all cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Export Report (CSV)</span>
+                </button>
+
+                <button
+                  onClick={handleTriggerStaticPublish}
+                  disabled={publishInProgress}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${publishInProgress ? 'animate-spin' : ''}`} />
+                  <span>{publishInProgress ? 'Publishing...' : 'Publish Live Snapshot'}</span>
+                </button>
+              </div>
             </div>
 
-            {/* KPI Metrics Cards */}
+            {/* KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               <div className="p-6 rounded-2xl bg-[#1B1514] border border-white/10 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-xs text-gray-400 font-mono">
-                  <span>PUBLISHED TOURS</span>
+                  <span>ACTIVE INVENTORY</span>
                   <Compass className="w-4 h-4 text-[#A85F43]" />
                 </div>
                 <div className="text-3xl font-serif font-bold text-white">{metrics.publishedTours} Active</div>
-                <span className="text-[11px] text-gray-400 font-mono block">{metrics.draftTours} Draft / {metrics.quotationTours} Quotation Mode</span>
+                <span className="text-[11px] text-gray-400 font-mono block">{metrics.draftTours} Draft • {metrics.quotationTours} Custom Quote Only</span>
               </div>
 
               <div className="p-6 rounded-2xl bg-[#1B1514] border border-white/10 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-xs text-gray-400 font-mono">
-                  <span>NEW BOOKINGS</span>
+                  <span>BOOKING VOLUME</span>
                   <Calendar className="w-4 h-4 text-emerald-400" />
                 </div>
-                <div className="text-3xl font-serif font-bold text-emerald-400">{metrics.newBookings} Pending</div>
-                <span className="text-[11px] text-gray-400 font-mono block">Volume: ${metrics.totalConfirmedRevenue.toLocaleString()} USD</span>
+                <div className="text-3xl font-serif font-bold text-emerald-400">${metrics.totalRevenue.toLocaleString()} USD</div>
+                <span className="text-[11px] text-gray-400 font-mono block">{metrics.newBookings} Pending • {metrics.confirmedBookings} Confirmed</span>
               </div>
 
               <div className="p-6 rounded-2xl bg-[#1B1514] border border-white/10 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-xs text-gray-400 font-mono">
-                  <span>QUOTATION INQUIRIES</span>
+                  <span>CUSTOM QUOTATIONS</span>
                   <DollarSign className="w-4 h-4 text-amber-400" />
                 </div>
                 <div className="text-3xl font-serif font-bold text-amber-400">{metrics.newQuotations} Needs Quote</div>
-                <span className="text-[11px] text-gray-400 font-mono block">{quotationsList.length} Total Custom Quotes</span>
+                <span className="text-[11px] text-gray-400 font-mono block">{quotationsList.length} Total Quote Inquiries</span>
               </div>
 
               <div className="p-6 rounded-2xl bg-[#1B1514] border border-white/10 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-xs text-gray-400 font-mono">
-                  <span>VERIFIED RATING</span>
+                  <span>REVIEWS & RATING</span>
                   <Shield className="w-4 h-4 text-[#C69C6D]" />
                 </div>
                 <div className="text-3xl font-serif font-bold text-[#C69C6D]">{metrics.aggregateRating.average} ★</div>
                 <span className="text-[11px] text-gray-400 font-mono block">
-                  {metrics.aggregateRating.count} Reviews ({metrics.pendingReviews} in queue)
+                  {metrics.aggregateRating.count} Verified ({metrics.pendingReviews} in moderation)
                 </span>
               </div>
             </div>
 
-            {/* Operational Alerts & Recent Activity Grid */}
+            {/* Quick Actions & Recent Stream */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Quick Actions & Action Required */}
+              {/* Action Required */}
               <div className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4 shadow-xl">
                 <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>Action Required / Operations Priority</span>
+                  <span>Action Required / Operations Pipeline</span>
                 </h3>
 
                 <div className="space-y-3 text-xs">
@@ -672,13 +886,16 @@ export default function AdminDashboardPage() {
                     <div key={b.id} className="p-4 rounded-xl bg-[#12161C] border border-white/10 flex items-center justify-between">
                       <div>
                         <span className="font-bold text-white block">{b.customer} — {b.tour}</span>
-                        <span className="text-[11px] text-gray-400 font-mono">Travel Date: {b.date} ({b.adults} Adults) • {b.ref}</span>
+                        <span className="text-[11px] text-gray-400 font-mono">Travel: {b.date} ({b.adults} Adults) • {b.ref}</span>
                       </div>
                       <button
-                        onClick={() => setActiveTab('bookings')}
+                        onClick={() => {
+                          setSelectedBookingForEdit(b);
+                          setActiveTab('bookings');
+                        }}
                         className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] cursor-pointer"
                       >
-                        Review
+                        Confirm Booking
                       </button>
                     </div>
                   ))}
@@ -690,7 +907,10 @@ export default function AdminDashboardPage() {
                         <span className="text-[11px] text-[#C69C6D] font-mono">{q.tour} • {q.locale.toUpperCase()}</span>
                       </div>
                       <button
-                        onClick={() => setActiveTab('quotations')}
+                        onClick={() => {
+                          setSelectedQuoteForEdit(q);
+                          setActiveTab('quotations');
+                        }}
                         className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-[11px] cursor-pointer"
                       >
                         Prepare Quote
@@ -715,12 +935,12 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              {/* Recent Audit History Stream */}
+              {/* Audit Stream */}
               <div className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4 shadow-xl">
                 <div className="flex justify-between items-center">
                   <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                     <History className="w-4 h-4 text-[#C69C6D]" />
-                    <span>Recent Admin Audit Log</span>
+                    <span>Recent Activity Stream</span>
                   </h3>
                   <button onClick={() => setActiveTab('audit')} className="text-xs text-[#C69C6D] hover:underline font-mono">
                     View All
@@ -728,7 +948,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 <div className="space-y-3 text-xs">
-                  {auditLogs.slice(0, 5).map(log => (
+                  {auditLogs.slice(0, 4).map(log => (
                     <div key={log.id} className="p-3.5 rounded-xl bg-[#12161C] border border-white/5 space-y-1">
                       <div className="flex justify-between items-center text-[10px] font-mono text-gray-400">
                         <span className="text-[#C69C6D] font-bold">{log.action}</span>
@@ -745,19 +965,27 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 2: TOURS & PRICING MANAGEMENT (Doc 03 & Doc 04) */}
+        {/* TAB 2: TOURS & PRICING MANAGEMENT */}
         {/* ==================================================================== */}
         {activeTab === 'tours' && (
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-3xl font-bold text-white">Tour Packages & Commercial Pricing</h2>
+                <h2 className="font-serif text-3xl font-bold text-white">Tour Inventory & Commercial Pricing</h2>
                 <p className="text-xs text-gray-400 mt-1">
-                  Manage commercial facts, localized content across EN/DE/FR/IT, pricing modes (FIXED / FROM / QUOTATION), and publishing states.
+                  Manage commercial pricing, durations, categories, multilingual itineraries, and publication status.
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsCreatingTour(true)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add New Tour Package</span>
+                </button>
+
                 <select
                   value={priceModeFilter}
                   onChange={(e) => setPriceModeFilter(e.target.value)}
@@ -775,7 +1003,7 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search tour title or slug..."
+                    placeholder="Search tour title..."
                     className="bg-[#1B1514] border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none"
                   />
                 </div>
@@ -788,12 +1016,11 @@ export default function AdminDashboardPage() {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
                     <tr>
-                      <th className="p-4">Tour / Route</th>
+                      <th className="p-4">Tour / Package</th>
                       <th className="p-4">Category</th>
                       <th className="p-4">Duration</th>
-                      <th className="p-4">Pricing Mode</th>
+                      <th className="p-4">Price USD</th>
                       <th className="p-4">Sales Mode</th>
-                      <th className="p-4">Languages</th>
                       <th className="p-4">Status</th>
                       <th className="p-4 text-right">Actions</th>
                     </tr>
@@ -808,7 +1035,7 @@ export default function AdminDashboardPage() {
                       .map(tour => (
                         <tr key={tour.id} className="hover:bg-white/5 transition-colors">
                           <td className="p-4">
-                            <div className="font-bold text-white">{tour.title.en}</div>
+                            <div className="font-bold text-white text-sm">{tour.title.en}</div>
                             <div className="text-[11px] text-[#C69C6D] font-mono">/tours/{tour.slug.en}</div>
                           </td>
                           <td className="p-4 font-mono text-gray-400">{tour.category}</td>
@@ -820,48 +1047,37 @@ export default function AdminDashboardPage() {
                           </td>
                           <td className="p-4 font-mono text-[11px]">
                             {tour.bookingMode === 'QUOTATION' ? (
-                              <span className="text-amber-400">Request a Quote</span>
+                              <span className="text-amber-400">Custom Quote</span>
                             ) : (
                               <span className="text-emerald-400">Direct Booking</span>
                             )}
                           </td>
                           <td className="p-4">
-                            <div className="flex items-center gap-1 font-mono text-[10px]">
-                              <span className="px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">EN</span>
-                              <span className="px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">DE</span>
-                              <span className="px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">FR</span>
-                              <span className="px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-400">IT</span>
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            <span
-                              className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
+                            <button
+                              onClick={() => handleToggleTourPublish(tour)}
+                              className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold transition-all cursor-pointer ${
                                 !tour.isDraft
-                                  ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50'
-                                  : 'bg-amber-900/40 text-amber-400 border border-amber-700/50'
+                                  ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50 hover:bg-emerald-800/40'
+                                  : 'bg-amber-900/40 text-amber-400 border border-amber-700/50 hover:bg-amber-800/40'
                               }`}
                             >
-                              {!tour.isDraft ? 'PUBLISHED' : 'DRAFT'}
-                            </span>
+                              {!tour.isDraft ? '✓ PUBLISHED' : '○ DRAFT'}
+                            </button>
                           </td>
                           <td className="p-4 text-right space-x-2">
                             <button
                               onClick={() => setSelectedTourForEdit(tour)}
-                              className="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1"
+                              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
                               <span>Edit</span>
                             </button>
 
                             <button
-                              onClick={() => handleTourPublishToggle(tour)}
-                              className={`px-2.5 py-1.5 rounded-lg font-medium text-xs transition-all cursor-pointer ${
-                                tour.isDraft
-                                  ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                                  : 'bg-amber-600/80 hover:bg-amber-600 text-white'
-                              }`}
+                              onClick={() => handleDeleteTour(tour)}
+                              className="px-2.5 py-1.5 rounded-lg bg-rose-900/20 hover:bg-rose-900/40 text-rose-400 border border-rose-700/30 transition-all cursor-pointer"
                             >
-                              {tour.isDraft ? 'Publish' : 'Unpublish'}
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </td>
                         </tr>
@@ -874,31 +1090,159 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 5: BOOKINGS OPERATIONS (Doc 03 & Doc 06) */}
+        {/* TAB 3: TOUR CATEGORIES */}
+        {/* ==================================================================== */}
+        {activeTab === 'categories' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Tour Collections & Categories</h2>
+                <p className="text-xs text-gray-400 mt-1">Organize packages into curated travel themes and regional itineraries.</p>
+              </div>
+
+              <button
+                onClick={() => setIsCreatingCategory(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add Category</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categoriesList.map(cat => (
+                <div key={cat.id} className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4 shadow-xl flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-mono text-[#C69C6D] uppercase font-bold">/{cat.slug}</span>
+                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-white font-mono">{cat.toursCount} Tours</span>
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-white">{cat.name}</h3>
+                    <p className="text-xs text-gray-400 leading-relaxed">{cat.description}</p>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10 flex justify-end gap-2 text-xs">
+                    <button
+                      onClick={() => {
+                        const newName = prompt('Enter new category name:', cat.name);
+                        if (newName && newName !== cat.name) {
+                          setCategoriesList(prev => prev.map(c => (c.id === cat.id ? { ...c, name: newName } : c)));
+                          addAuditLog('CATEGORY', cat.slug, 'UPDATE_CATEGORY', `Renamed category to "${newName}".`);
+                          showToast(`Category updated to "${newName}"!`);
+                        }
+                      }}
+                      className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono cursor-pointer"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Are you sure you want to delete category "${cat.name}"?`)) {
+                          setCategoriesList(prev => prev.filter(c => c.id !== cat.id));
+                          addAuditLog('CATEGORY', cat.slug, 'DELETE_CATEGORY', `Deleted category.`);
+                          showToast(`Category "${cat.name}" deleted.`, 'info');
+                        }
+                      }}
+                      className="px-2.5 py-1.5 rounded-lg bg-rose-900/20 text-rose-400 border border-rose-700/30 cursor-pointer"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 4: DESTINATIONS MANAGEMENT */}
+        {/* ==================================================================== */}
+        {activeTab === 'destinations' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Jordan Destinations & Landmarks</h2>
+                <p className="text-xs text-gray-400 mt-1">Manage destination showcases, highlights, and regional guides.</p>
+              </div>
+
+              <button
+                onClick={() => setIsCreatingDestination(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add Destination</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {destinationsList.map(dest => (
+                <div key={dest.id} className="rounded-3xl bg-[#1B1514] border border-white/10 overflow-hidden shadow-xl flex flex-col justify-between">
+                  <div className="h-44 bg-cover bg-center relative" style={{ backgroundImage: `url('${dest.heroImage || dest.image || '/images/hero-fallback.jpg'}')` }}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1B1514] via-transparent to-black/40" />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono text-[#C69C6D] uppercase font-bold border border-white/10">
+                        {dest.region || 'Jordan'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-serif text-xl font-bold text-white">{dest.title?.en || dest.name?.en || dest.id}</h3>
+                      <p className="text-xs text-gray-400 mt-1 line-clamp-2">{dest.description?.en || dest.subtitle?.en || dest.tagline?.en}</p>
+                      
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {((dest.highlights && dest.highlights.en) || []).slice(0, 3).map((h: string, i: number) => (
+                          <span key={i} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] text-gray-300">
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                      <span className="text-[11px] text-gray-500 font-mono">/destinations/{dest.slug.en}</span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setSelectedDestinationForEdit(dest)}
+                          className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono cursor-pointer"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteDestination(dest)}
+                          className="p-1.5 rounded-lg bg-rose-900/20 text-rose-400 border border-rose-700/30 cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 5: DIRECT BOOKINGS & INVOICES */}
         {/* ==================================================================== */}
         {activeTab === 'bookings' && (
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-3xl font-bold text-white">Direct Bookings & Reservations</h2>
-                <p className="text-xs text-gray-400 mt-1">
-                  Manage traveler bookings with locked historical price snapshots, status progression, WhatsApp webhook confirmations, and PDF vouchers.
-                </p>
+                <h2 className="font-serif text-3xl font-bold text-white">Direct Traveler Bookings</h2>
+                <p className="text-xs text-gray-400 mt-1">Manage guest reservations, generate official PDF vouchers, and send WhatsApp confirmations.</p>
               </div>
 
               <div className="flex items-center gap-3">
-                <select
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="bg-[#1B1514] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none"
+                <button
+                  onClick={handleExportCSV}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#C69C6D] text-xs font-mono cursor-pointer"
                 >
-                  <option value="all">All Statuses</option>
-                  <option value="NEW">NEW</option>
-                  <option value="CONFIRMED">CONFIRMED</option>
-                  <option value="IN_PROGRESS">IN_PROGRESS</option>
-                  <option value="COMPLETED">COMPLETED</option>
-                  <option value="CANCELLED">CANCELLED</option>
-                </select>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Export Bookings CSV</span>
+                </button>
               </div>
             </div>
 
@@ -911,160 +1255,68 @@ export default function AdminDashboardPage() {
                       <th className="p-4">Lead Traveler</th>
                       <th className="p-4">Tour Package</th>
                       <th className="p-4">Travel Date</th>
+                      <th className="p-4">Guests</th>
                       <th className="p-4">Price Snapshot</th>
                       <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Actions</th>
+                      <th className="p-4 text-right">Actions & Voucher</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 text-gray-300">
-                    {bookingsList
-                      .filter(b => statusFilter === 'all' || b.status === statusFilter)
-                      .map(booking => (
-                        <tr key={booking.id} className="hover:bg-white/5 transition-colors">
-                          <td className="p-4 font-mono font-bold text-white">{booking.ref}</td>
-                          <td className="p-4">
-                            <div className="font-medium text-white">{booking.customer}</div>
-                            <div className="text-[11px] text-gray-400 font-mono">{booking.email} • {booking.phone}</div>
-                          </td>
-                          <td className="p-4 font-medium text-gray-200">
-                            {booking.tour}
-                            <span className="text-[10px] text-gray-400 block font-mono">{booking.adults} Adults {booking.children > 0 && `/ ${booking.children} Kids`}</span>
-                          </td>
-                          <td className="p-4 font-mono text-gray-300">{booking.date}</td>
-                          <td className="p-4 font-mono font-bold text-[#C69C6D]">
-                            ${booking.priceSnapshot} {booking.currency}
-                          </td>
-                          <td className="p-4">
-                            <select
-                              value={booking.status}
-                              onChange={(e) => {
-                                const newStatus = e.target.value as BookingRecord['status'];
-                                setBookingsList(bookingsList.map(b => (b.id === booking.id ? { ...b, status: newStatus } : b)));
-                                addAuditLog('BOOKING', booking.ref, 'UPDATE_STATUS', `Status changed from ${booking.status} to ${newStatus}.`);
-                              }}
-                              className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase cursor-pointer border focus:outline-none ${
-                                booking.status === 'CONFIRMED'
-                                  ? 'bg-emerald-900/40 text-emerald-400 border-emerald-700/50'
-                                  : booking.status === 'NEW'
-                                  ? 'bg-amber-900/40 text-amber-400 border-amber-700/50'
-                                  : booking.status === 'COMPLETED'
-                                  ? 'bg-blue-900/40 text-blue-400 border-blue-700/50'
-                                  : 'bg-gray-800 text-gray-400 border-gray-700'
-                              }`}
-                            >
-                              <option value="NEW" className="bg-[#12161C]">NEW</option>
-                              <option value="CONFIRMED" className="bg-[#12161C]">CONFIRMED</option>
-                              <option value="IN_PROGRESS" className="bg-[#12161C]">IN_PROGRESS</option>
-                              <option value="COMPLETED" className="bg-[#12161C]">COMPLETED</option>
-                              <option value="CANCELLED" className="bg-[#12161C]">CANCELLED</option>
-                            </select>
-                          </td>
-                          <td className="p-4 text-right space-x-2">
-                            {booking.status === 'COMPLETED' && (
-                              <button
-                                onClick={() => handleSendReviewRequest(booking)}
-                                title="Send Post-Tour Review Request"
-                                className="p-2 rounded-xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white transition-all cursor-pointer border border-purple-500/30"
-                              >
-                                <Send className="w-3.5 h-3.5" />
-                              </button>
-                            )}
-
-                            <button
-                              onClick={() => setSelectedBookingForVoucher(booking)}
-                              title="Print Official PDF Voucher"
-                              className="p-2 rounded-xl bg-[#A85F43]/20 hover:bg-[#A85F43] text-[#C69C6D] hover:text-white transition-all cursor-pointer border border-[#A85F43]/30"
-                            >
-                              <Printer className="w-3.5 h-3.5" />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ==================================================================== */}
-        {/* MODULE 6: QUOTATION REQUESTS (Doc 03 & Doc 06) */}
-        {/* ==================================================================== */}
-        {activeTab === 'quotations' && (
-          <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="font-serif text-3xl font-bold text-white">Custom Quotation Requests</h2>
-                <p className="text-xs text-gray-400 mt-1">
-                  Process tailored trip inquiries, enter quoted prices, set validity dates, and convert accepted quotes to confirmed bookings.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-[#1B1514] rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
-                    <tr>
-                      <th className="p-4">Quote Ref</th>
-                      <th className="p-4">Customer</th>
-                      <th className="p-4">Tour & Dates</th>
-                      <th className="p-4">Party & Tier</th>
-                      <th className="p-4">Quoted Amount</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5 text-gray-300">
-                    {quotationsList.map(quote => (
-                      <tr key={quote.id} className="hover:bg-white/5 transition-colors">
-                        <td className="p-4 font-mono font-bold text-white">{quote.ref}</td>
+                    {bookingsList.map(booking => (
+                      <tr key={booking.id} className="hover:bg-white/5 transition-colors">
+                        <td className="p-4 font-mono text-[#C69C6D] font-bold">{booking.ref}</td>
                         <td className="p-4">
-                          <div className="font-medium text-white">{quote.customer}</div>
-                          <div className="text-[11px] text-gray-400 font-mono">{quote.email} • {quote.phone}</div>
-                        </td>
-                        <td className="p-4 font-medium text-gray-200">
-                          {quote.tour}
-                          <span className="text-[10px] text-[#C69C6D] block font-mono">Arrival: {quote.arrivalDate}</span>
+                          <div className="font-bold text-white">{booking.customer}</div>
+                          <div className="text-[11px] text-gray-400">{booking.email}</div>
+                          <div className="text-[11px] text-gray-400 font-mono">{booking.phone}</div>
                         </td>
                         <td className="p-4">
-                          <div>{quote.adults} Adults {quote.children > 0 && `/ ${quote.children} Kids`}</div>
-                          <div className="text-[10px] text-gray-400">{quote.hotelPreference || 'Standard'}</div>
+                          <span className="font-bold text-white block">{booking.tour}</span>
+                          <span className="text-[10px] text-gray-400 font-mono uppercase">Lang: {booking.locale}</span>
                         </td>
-                        <td className="p-4 font-mono font-bold text-[#C69C6D]">
-                          {quote.quotedPrice ? `$${quote.quotedPrice} ${quote.quotedCurrency}` : <span className="text-gray-500 italic">Pending</span>}
-                        </td>
+                        <td className="p-4 font-mono">{booking.date}</td>
+                        <td className="p-4 font-mono">{booking.adults} Adults {booking.children > 0 && `/ ${booking.children} Kids`}</td>
+                        <td className="p-4 font-mono font-bold text-emerald-400">${booking.priceSnapshot} {booking.currency}</td>
                         <td className="p-4">
-                          <span
-                            className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
-                              quote.status === 'CONVERTED_TO_BOOKING'
-                                ? 'bg-purple-900/40 text-purple-400 border border-purple-700/50'
-                                : quote.status === 'QUOTED'
-                                ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50'
-                                : 'bg-amber-900/40 text-amber-400 border border-amber-700/50'
-                            }`}
+                          <select
+                            value={booking.status}
+                            onChange={(e) => handleUpdateBookingStatus(booking.id, e.target.value as any)}
+                            className="bg-[#12161C] border border-white/10 rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-white focus:outline-none"
                           >
-                            {quote.status}
-                          </span>
+                            <option value="NEW">NEW</option>
+                            <option value="CONFIRMED">CONFIRMED</option>
+                            <option value="IN_PROGRESS">IN PROGRESS</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="REFUNDED">REFUNDED</option>
+                          </select>
                         </td>
                         <td className="p-4 text-right space-x-2">
                           <button
-                            onClick={() => setSelectedQuoteForEdit(quote)}
-                            className="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1"
+                            onClick={() => setSelectedBookingForVoucher(booking)}
+                            className="px-3 py-1.5 rounded-lg bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
                           >
-                            <Edit3 className="w-3.5 h-3.5" />
-                            <span>Edit Quote</span>
+                            <Printer className="w-3.5 h-3.5" />
+                            <span>Voucher</span>
                           </button>
 
-                          {quote.status !== 'CONVERTED_TO_BOOKING' && (
-                            <button
-                              onClick={() => handleConvertQuoteToBooking(quote)}
-                              className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition-all cursor-pointer inline-flex items-center gap-1"
-                            >
-                              <CheckCircle className="w-3.5 h-3.5" />
-                              <span>Convert to Booking</span>
-                            </button>
-                          )}
+                          <button
+                            onClick={() => {
+                              const msg = `Hello ${booking.customer}, greetings from Jordan Story Tours! We are pleased to confirm your private tour: ${booking.tour} starting on ${booking.date} (Booking Ref: ${booking.ref}). Our operations chauffeur will meet you at the airport/hotel. Feel free to message us here anytime!`;
+                              handleOpenWhatsApp(booking.phone, msg);
+                            }}
+                            className="px-2.5 py-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 text-xs font-mono cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <PhoneCall className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedBookingForEdit(booking)}
+                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -1076,128 +1328,374 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 7: REVIEWS & MODERATION (00E) */}
+        {/* TAB 6: CUSTOM QUOTATIONS */}
         {/* ==================================================================== */}
-        {activeTab === 'reviews' && (
-          <div className="space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+        {activeTab === 'quotations' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-3xl font-bold text-white">00E — Post-Tour Reviews & Moderation</h2>
-                <p className="text-gray-400 text-xs sm:text-sm font-light mt-1">
-                  Dispatch localized review invitations for completed bookings and moderate genuine submissions.
-                </p>
+                <h2 className="font-serif text-3xl font-bold text-white">Customized Quotation Inquiries</h2>
+                <p className="text-xs text-gray-400 mt-1">Review bespoke itinerary requests, calculate customized pricing, and convert quotes to confirmed bookings.</p>
               </div>
 
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl">
-                <span className="font-mono text-xs text-gray-400">Aggregate Rating:</span>
-                <span className="font-serif text-2xl font-bold text-[#C69C6D]">
-                  {metrics.aggregateRating.average} ★
-                </span>
-                <span className="text-xs text-gray-400">({metrics.aggregateRating.count} Published)</span>
-              </div>
+              <button
+                onClick={handleExportCSV}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#C69C6D] text-xs font-mono cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Export Quotes CSV</span>
+              </button>
             </div>
 
-            {/* Moderation Queue */}
-            <div className="bg-[#1B1514] border border-white/10 rounded-2xl p-6 space-y-6">
-              <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
-                <Shield className="w-5 h-5 text-[#C69C6D]" />
-                <span>Traveler Review Moderation Queue</span>
-              </h3>
+            <div className="bg-[#1B1514] rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
+                    <tr>
+                      <th className="p-4">Reference</th>
+                      <th className="p-4">Traveler</th>
+                      <th className="p-4">Requested Itinerary</th>
+                      <th className="p-4">Dates</th>
+                      <th className="p-4">Guests & Hotels</th>
+                      <th className="p-4">Quoted Amount</th>
+                      <th className="p-4">Status</th>
+                      <th className="p-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 text-gray-300">
+                    {quotationsList.map(quote => (
+                      <tr key={quote.id} className="hover:bg-white/5 transition-colors">
+                        <td className="p-4 font-mono text-[#C69C6D] font-bold">{quote.ref}</td>
+                        <td className="p-4">
+                          <div className="font-bold text-white">{quote.customer}</div>
+                          <div className="text-[11px] text-gray-400">{quote.email}</div>
+                          <div className="text-[11px] text-gray-400 font-mono">{quote.phone}</div>
+                        </td>
+                        <td className="p-4">
+                          <span className="font-bold text-white block">{quote.tour}</span>
+                          <span className="text-[10px] text-[#C69C6D] font-mono">Special: {quote.specialRequests || 'Standard VIP'}</span>
+                        </td>
+                        <td className="p-4 font-mono">{quote.arrivalDate}</td>
+                        <td className="p-4">
+                          <span className="block font-mono">{quote.adults} Adults {quote.children > 0 && `/ ${quote.children} Kids`}</span>
+                          <span className="text-[10px] text-gray-400 font-mono">{quote.hotelPreference || '4-Star Boutique'}</span>
+                        </td>
+                        <td className="p-4 font-mono font-bold text-amber-400">
+                          {quote.quotedPrice ? `$${quote.quotedPrice} ${quote.quotedCurrency}` : 'Pending Quote'}
+                        </td>
+                        <td className="p-4">
+                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
+                            quote.status === 'NEW' ? 'bg-amber-900/40 text-amber-400 border border-amber-700/50' :
+                            quote.status === 'QUOTED' ? 'bg-blue-900/40 text-blue-400 border border-blue-700/50' :
+                            quote.status === 'CONVERTED_TO_BOOKING' ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50' :
+                            'bg-gray-800 text-gray-300'
+                          }`}>
+                            {quote.status}
+                          </span>
+                        </td>
+                        <td className="p-4 text-right space-x-2">
+                          <button
+                            onClick={() => setSelectedQuoteForEdit(quote)}
+                            className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <DollarSign className="w-3.5 h-3.5" />
+                            <span>Quote</span>
+                          </button>
 
-              <div className="space-y-4">
-                {submittedReviews.map(rev => (
-                  <div key={rev.id} className="p-6 rounded-2xl bg-[#12161C] border border-white/10 space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-base">{rev.displayName}</span>
-                          <span className="text-xs text-gray-400 font-mono">({rev.displayCountry || 'Verified'})</span>
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-400/20 text-emerald-400">Verified Traveler</span>
-                        </div>
-                        <span className="text-xs text-[#C69C6D] font-mono block mt-0.5">{rev.tourName}</span>
-                      </div>
+                          {quote.status !== 'CONVERTED_TO_BOOKING' && (
+                            <button
+                              onClick={() => handleConvertQuoteToBooking(quote)}
+                              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md cursor-pointer inline-flex items-center gap-1"
+                            >
+                              <Check className="w-3.5 h-3.5" />
+                              <span>Convert</span>
+                            </button>
+                          )}
 
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-[#C69C6D]">
-                          {[...Array(rev.rating)].map((_, i) => (
-                            <span key={i}>★</span>
-                          ))}
-                        </div>
+                          <button
+                            onClick={() => {
+                              const msg = `Dear ${quote.customer}, thank you for contacting Jordan Story Tours! We have prepared your custom itinerary quote for: ${quote.tour} at $${quote.quotedPrice || 'On Request'} USD. You can review your private journey details here: https://jordanstorytours.com/booking. Let us know if you would like any customizations!`;
+                              handleOpenWhatsApp(quote.phone, msg);
+                            }}
+                            className="p-1.5 rounded-lg bg-emerald-700/30 text-emerald-400 border border-emerald-600/40 cursor-pointer"
+                          >
+                            <PhoneCall className="w-3.5 h-3.5" />
+                          </button>
 
-                        <span
-                          className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${
-                            rev.moderationStatus === 'APPROVED'
-                              ? 'bg-emerald-400/20 text-emerald-400'
-                              : rev.moderationStatus === 'REJECTED'
-                              ? 'bg-rose-400/20 text-rose-400'
-                              : 'bg-amber-400/20 text-amber-400'
-                          }`}
-                        >
-                          {rev.moderationStatus}
-                        </span>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-300 text-sm italic">"{rev.reviewBody}"</p>
-
-                    <div className="pt-2 flex justify-end gap-3">
-                      <button
-                        onClick={() => {
-                          ReviewsStoreService.moderateReview(rev.id, 'APPROVED');
-                          setSubmittedReviews(ReviewsStoreService.getReviews());
-                          addAuditLog('REVIEW', rev.id, 'APPROVE_REVIEW', `Approved review from ${rev.displayName}.`);
-                        }}
-                        className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer transition-all"
-                      >
-                        Approve & Publish Publicly
-                      </button>
-
-                      <button
-                        onClick={() => {
-                          ReviewsStoreService.moderateReview(rev.id, 'REJECTED');
-                          setSubmittedReviews(ReviewsStoreService.getReviews());
-                          addAuditLog('REVIEW', rev.id, 'REJECT_REVIEW', `Rejected review from ${rev.displayName}.`);
-                        }}
-                        className="px-4 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white font-bold text-xs cursor-pointer transition-all"
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                          <button
+                            onClick={() => setSelectedQuoteForInvoice(quote)}
+                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer"
+                          >
+                            <Printer className="w-3.5 h-3.5" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 9: STATIC SNAPSHOT PUBLISHING (Doc 05) */}
+        {/* TAB 7: POST-TOUR REVIEWS MODERATION */}
         {/* ==================================================================== */}
-        {activeTab === 'publish' && (
-          <div className="max-w-3xl space-y-6">
-            <div>
-              <h2 className="font-serif text-3xl font-bold text-white">Next.js Static Export & Edge Sync</h2>
-              <p className="text-gray-400 text-xs sm:text-sm mt-1">
-                Trigger full SSG rebuild for published tours, destinations, schema graphs, and reciprocal hreflang tags across all 4 locales.
-              </p>
+        {activeTab === 'reviews' && (
+          <div className="space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Verified Post-Tour Review Moderation</h2>
+                <p className="text-xs text-gray-400 mt-1">Generate secure review submission tokens, send WhatsApp invitations, and moderate traveler ratings.</p>
+              </div>
+
+              <button
+                onClick={() => setIsCreatingReviewToken(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Create Review Request Token</span>
+              </button>
             </div>
 
-            <div className="p-8 rounded-3xl bg-[#1B1514] border border-[#A85F43]/30 space-y-6 shadow-2xl">
-              <div className="flex items-center gap-3 text-xs text-[#C69C6D] font-mono">
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
-                <span>Last Edge Deployment: <strong>{publishJobs[0]?.timestamp || 'Recent'}</strong></span>
+            {/* Pending Moderation Queue */}
+            <div className="space-y-4">
+              <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-400" />
+                <span>Submitted Reviews Moderation Queue ({submittedReviews.filter(r => r.moderationStatus === 'PENDING_MODERATION').length})</span>
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                {submittedReviews.map(review => (
+                  <div key={review.id} className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4 shadow-xl">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="font-serif font-bold text-lg text-white block">{review.displayName} ({review.displayCountry || 'Traveler'})</span>
+                        <span className="text-xs text-[#C69C6D] font-mono">{review.tourName}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-amber-400 text-sm font-bold">
+                        {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-gray-300 italic leading-relaxed">"{review.reviewBody}"</p>
+
+                    <div className="flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                        review.moderationStatus === 'APPROVED' ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/50' :
+                        review.moderationStatus === 'REJECTED' ? 'bg-rose-900/40 text-rose-400 border border-rose-700/50' :
+                        'bg-amber-900/40 text-amber-400 border border-amber-700/50'
+                      }`}>
+                        {review.moderationStatus}
+                      </span>
+
+                      <div className="flex items-center gap-2">
+                        {review.moderationStatus !== 'APPROVED' && (
+                          <button
+                            onClick={() => handleModerateReview(review.id, true)}
+                            className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Approve & Publish</span>
+                          </button>
+                        )}
+                        {review.moderationStatus !== 'REJECTED' && (
+                          <button
+                            onClick={() => handleModerateReview(review.id, false)}
+                            className="px-3 py-1.5 rounded-lg bg-rose-900/30 hover:bg-rose-900/50 text-rose-400 border border-rose-700/40 text-xs cursor-pointer"
+                          >
+                            Reject
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Active Review Request Tokens */}
+            <div className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4 shadow-xl">
+              <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
+                <Send className="w-4 h-4 text-[#C69C6D]" />
+                <span>Dispatched Review Tokens & WhatsApp Messenger</span>
+              </h3>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-[#12161C] text-[#C69C6D] uppercase tracking-wider font-mono font-semibold border-b border-white/10">
+                    <tr>
+                      <th className="p-4">Customer</th>
+                      <th className="p-4">Tour</th>
+                      <th className="p-4">Language</th>
+                      <th className="p-4">Token Key</th>
+                      <th className="p-4">Status</th>
+                      <th className="p-4 text-right">Direct Messenger</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 text-gray-300">
+                    {reviewRequests.map(req => (
+                      <tr key={req.id} className="hover:bg-white/5 transition-colors">
+                        <td className="p-4 font-bold text-white">{req.customerName}</td>
+                        <td className="p-4 font-mono text-gray-300">{req.tourName}</td>
+                        <td className="p-4 font-mono uppercase text-gray-400">{req.locale}</td>
+                        <td className="p-4 font-mono text-[#C69C6D]">/review/{req.token}</td>
+                        <td className="p-4 font-mono text-emerald-400">{req.status}</td>
+                        <td className="p-4 text-right space-x-2">
+                          <button
+                            onClick={() => {
+                              const url = `${window.location.origin}/review/${req.token}`;
+                              navigator.clipboard.writeText(url);
+                              showToast(`Copied review URL to clipboard: ${url}`);
+                            }}
+                            className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono text-xs cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <Copy className="w-3.5 h-3.5" />
+                            <span>Copy URL</span>
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              const templateFn = WHATSAPP_TEMPLATES[req.locale] || WHATSAPP_TEMPLATES.en;
+                              const url = `${window.location.origin}/review/${req.token}`;
+                              const msg = typeof templateFn === 'function' ? templateFn(req.customerName, req.tourName, url) : `Hi ${req.customerName}, please review your tour: ${url}`;
+                              handleOpenWhatsApp(req.customerPhone || '', msg);
+                            }}
+                            className="px-3 py-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 text-xs font-mono cursor-pointer inline-flex items-center gap-1"
+                          >
+                            <PhoneCall className="w-3.5 h-3.5" />
+                            <span>Send WhatsApp</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 8: REPORTS & INVOICING */}
+        {/* ==================================================================== */}
+        {activeTab === 'reports' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Operations Reporting & Financials</h2>
+                <p className="text-xs text-gray-400 mt-1">Export transaction registries, view revenue distribution by language, and print summaries.</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleExportCSV}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Complete CSV Report</span>
+                </button>
+
+                <button
+                  onClick={() => window.print()}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-mono cursor-pointer"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Print Executive Summary</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Language Breakdown */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { lang: 'English (EN)', count: bookingsList.filter(b => b.locale === 'en').length, volume: bookingsList.filter(b => b.locale === 'en').reduce((s, b) => s + b.priceSnapshot, 0) },
+                { lang: 'German (DE)', count: bookingsList.filter(b => b.locale === 'de').length, volume: bookingsList.filter(b => b.locale === 'de').reduce((s, b) => s + b.priceSnapshot, 0) },
+                { lang: 'French (FR)', count: bookingsList.filter(b => b.locale === 'fr').length, volume: bookingsList.filter(b => b.locale === 'fr').reduce((s, b) => s + b.priceSnapshot, 0) },
+                { lang: 'Italian (IT)', count: bookingsList.filter(b => b.locale === 'it').length, volume: bookingsList.filter(b => b.locale === 'it').reduce((s, b) => s + b.priceSnapshot, 0) }
+              ].map(stat => (
+                <div key={stat.lang} className="p-6 rounded-2xl bg-[#1B1514] border border-white/10 space-y-2 shadow-xl">
+                  <span className="text-xs text-gray-400 font-mono uppercase">{stat.lang}</span>
+                  <div className="text-2xl font-serif font-bold text-[#C69C6D]">${stat.volume.toLocaleString()} USD</div>
+                  <span className="text-[11px] text-gray-400 font-mono block">{stat.count} Bookings</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 9: MEDIA LIBRARY */}
+        {/* ==================================================================== */}
+        {activeTab === 'media' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Media Assets & Multilingual Alt Tagging</h2>
+                <p className="text-xs text-gray-400 mt-1">Manage high-resolution tour imagery, video frames, and SEO localized alt descriptions.</p>
+              </div>
+
+              <button
+                onClick={() => setIsCreatingMedia(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold shadow-lg cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Upload Media Asset</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {mediaList.map(asset => (
+                <div key={asset.id} className="rounded-3xl bg-[#1B1514] border border-white/10 overflow-hidden shadow-xl space-y-3">
+                  <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url('${asset.url}')` }} />
+                  <div className="p-5 space-y-2 text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-white text-sm">{asset.title}</span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-mono text-[#C69C6D]">{asset.category}</span>
+                    </div>
+                    <p className="text-gray-400 font-mono text-[11px]">Alt (EN): {asset.altEn}</p>
+                    <p className="text-gray-400 font-mono text-[11px]">Alt (DE): {asset.altDe}</p>
+
+                    <div className="pt-3 border-t border-white/10 flex justify-end">
+                      <button
+                        onClick={() => {
+                          setMediaList(prev => prev.filter(m => m.id !== asset.id));
+                          showToast(`Media "${asset.title}" removed.`, 'info');
+                        }}
+                        className="text-rose-400 hover:text-rose-300 font-mono text-xs cursor-pointer inline-flex items-center gap-1"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 10: STATIC PUBLISHING */}
+        {/* ==================================================================== */}
+        {activeTab === 'publish' && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Edge Static Publishing & Cache Control</h2>
+                <p className="text-xs text-gray-400 mt-1">Rebuild and synchronize static localized HTML snapshots across all 640+ tour routes.</p>
               </div>
 
               <button
                 onClick={handleTriggerStaticPublish}
                 disabled={publishInProgress}
-                className="w-full py-4 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-widest shadow-xl transition-all cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white text-xs font-bold uppercase tracking-wider shadow-xl cursor-pointer disabled:opacity-50"
               >
-                {publishInProgress ? 'Generating Snapshots & Invalidation...' : 'Trigger Edge Cache Rebuild & Sync'}
+                <RefreshCw className={`w-4 h-4 ${publishInProgress ? 'animate-spin' : ''}`} />
+                <span>{publishInProgress ? 'Deploying Snapshot...' : 'Trigger Edge Rebuild'}</span>
               </button>
             </div>
 
-            {/* Build History */}
             <div className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-4">
               <h3 className="font-serif text-lg font-bold text-white">Deployment Pipeline History</h3>
               <div className="space-y-2 text-xs font-mono">
@@ -1218,7 +1716,7 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 10: SITE SETTINGS (Doc 03 & Doc 07) */}
+        {/* TAB 11: SITE SETTINGS */}
         {/* ==================================================================== */}
         {activeTab === 'settings' && (
           <div className="max-w-3xl space-y-6">
@@ -1268,13 +1766,36 @@ export default function AdminDashboardPage() {
                     className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none"
                   />
                 </div>
+
+                <div>
+                  <label className="text-gray-400 font-mono block mb-1">DEFAULT CURRENCY</label>
+                  <select
+                    value={siteSettings.defaultCurrency}
+                    onChange={(e) => setSiteSettings({ ...siteSettings, defaultCurrency: e.target.value })}
+                    className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none"
+                  >
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="JOD">JOD (Jordanian Dinar)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-gray-400 font-mono block mb-1">HEADQUARTERS ADDRESS</label>
+                  <input
+                    type="text"
+                    value={siteSettings.address}
+                    onChange={(e) => setSiteSettings({ ...siteSettings, address: e.target.value })}
+                    className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none"
+                  />
+                </div>
               </div>
 
               <div className="pt-4 border-t border-white/10 flex justify-end">
                 <button
                   onClick={() => {
                     addAuditLog('SETTINGS', 'BUSINESS', 'UPDATE_SETTINGS', 'Updated company registration and contact configuration.');
-                    alert('Settings updated and audited successfully.');
+                    showToast('Business & Legal settings saved successfully!');
                   }}
                   className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
                 >
@@ -1286,13 +1807,78 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ==================================================================== */}
-        {/* MODULE 12: AUDIT LOG (Doc 03 & Doc 07) */}
+        {/* TAB 12: USERS & ROLES */}
+        {/* ==================================================================== */}
+        {activeTab === 'users' && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="font-serif text-3xl font-bold text-white">Administrator Accounts & RBAC Roles</h2>
+              <p className="text-xs text-gray-400 mt-1">Manage personnel permissions, assign operational roles, and enforce security policies.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { name: 'Jordan Story Owner', email: 'admin@jordanstorytours.com', role: 'SUPER_ADMIN' as AdminRole, desc: 'Full administrative access across all modules, settings, and database configurations.' },
+                { name: 'Booking Manager', email: 'bookings@jordanstorytours.com', role: 'BOOKING_MANAGER' as AdminRole, desc: 'Operational processing of direct reservations, customized quotations, and customer communication.' },
+                { name: 'Content Editor', email: 'editor@jordanstorytours.com', role: 'CONTENT_EDITOR' as AdminRole, desc: 'Authoring tours, destination guides, and multilingual translation synchronization.' }
+              ].map(user => (
+                <div key={user.email} className="p-6 rounded-3xl bg-[#1B1514] border border-white/10 space-y-3 shadow-xl">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="font-bold text-white block text-sm">{user.name}</span>
+                      <span className="text-gray-400 font-mono text-xs">{user.email}</span>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-full bg-[#A85F43]/20 text-[#C69C6D] border border-[#A85F43]/40 font-mono text-[10px] font-bold">
+                      {user.role}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400">{user.desc}</p>
+                  
+                  <div className="pt-3 border-t border-white/10 flex justify-end">
+                    <button
+                      onClick={() => {
+                        setCurrentAdmin({ name: user.name, email: user.email, role: user.role });
+                        showToast(`Switched active session to ${user.name} (${user.role})`);
+                      }}
+                      className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono text-xs cursor-pointer"
+                    >
+                      Simulate Session
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* TAB 13: AUDIT LOG */}
         {/* ==================================================================== */}
         {activeTab === 'audit' && (
           <div className="space-y-6">
-            <div>
-              <h2 className="font-serif text-3xl font-bold text-white">Security & Operations Audit History</h2>
-              <p className="text-xs text-gray-400 mt-1">Immutable chronological ledger of all administrative changes, price edits, and publishing events.</p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-white">Security & Operations Audit History</h2>
+                <p className="text-xs text-gray-400 mt-1">Immutable chronological ledger of all administrative changes, price edits, and publishing events.</p>
+              </div>
+
+              <button
+                onClick={() => {
+                  const csv = 'Timestamp,Admin,Role,Entity,Action,Details\n' + auditLogs.map(l => `"${l.timestamp}","${l.adminName}","${l.adminRole}","${l.entityType}","${l.action}","${l.details.replace(/"/g, '""')}"`).join('\n');
+                  const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + csv);
+                  const link = document.createElement('a');
+                  link.setAttribute('href', encodedUri);
+                  link.setAttribute('download', 'audit_logs.csv');
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  showToast('Audit log CSV exported.');
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-mono cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Export Audit CSV</span>
+              </button>
             </div>
 
             <div className="bg-[#1B1514] rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
@@ -1333,7 +1919,122 @@ export default function AdminDashboardPage() {
       </main>
 
       {/* ==================================================================== */}
-      {/* SECURITY CONFIRMATION MODAL (Doc 07 Section 5) */}
+      {/* MODAL: TOUR CREATE & EDIT */}
+      {/* ==================================================================== */}
+      {(selectedTourForEdit || isCreatingTour) && (
+        <TourEditModal
+          tour={selectedTourForEdit}
+          isCreating={isCreatingTour}
+          onClose={() => {
+            setSelectedTourForEdit(null);
+            setIsCreatingTour(false);
+          }}
+          onSave={handleSaveTour}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: DESTINATION CREATE & EDIT */}
+      {/* ==================================================================== */}
+      {(selectedDestinationForEdit || isCreatingDestination) && (
+        <DestinationEditModal
+          dest={selectedDestinationForEdit}
+          isCreating={isCreatingDestination}
+          onClose={() => {
+            setSelectedDestinationForEdit(null);
+            setIsCreatingDestination(false);
+          }}
+          onSave={handleSaveDestination}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: BOOKING EDIT */}
+      {/* ==================================================================== */}
+      {selectedBookingForEdit && (
+        <BookingEditModal
+          booking={selectedBookingForEdit}
+          onClose={() => setSelectedBookingForEdit(null)}
+          onSave={handleSaveBooking}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: QUOTATION EDIT & CALCULATOR */}
+      {/* ==================================================================== */}
+      {selectedQuoteForEdit && (
+        <QuotationEditModal
+          quote={selectedQuoteForEdit}
+          onClose={() => setSelectedQuoteForEdit(null)}
+          onSave={handleSaveQuotation}
+          onConvert={handleConvertQuoteToBooking}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: CREATE REVIEW TOKEN */}
+      {/* ==================================================================== */}
+      {isCreatingReviewToken && (
+        <CreateReviewTokenModal
+          onClose={() => setIsCreatingReviewToken(false)}
+          onGenerate={handleCreateReviewToken}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: UPLOAD MEDIA */}
+      {/* ==================================================================== */}
+      {isCreatingMedia && (
+        <CreateMediaModal
+          onClose={() => setIsCreatingMedia(false)}
+          onUpload={(asset) => {
+            setMediaList(prev => [asset, ...prev]);
+            addAuditLog('MEDIA', asset.id, 'UPLOAD_MEDIA', `Uploaded media asset "${asset.title}".`);
+            setIsCreatingMedia(false);
+            showToast(`Media "${asset.title}" uploaded!`);
+          }}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: CREATE CATEGORY */}
+      {/* ==================================================================== */}
+      {isCreatingCategory && (
+        <CreateCategoryModal
+          onClose={() => setIsCreatingCategory(false)}
+          onSave={(cat) => {
+            setCategoriesList(prev => [cat, ...prev]);
+            addAuditLog('CATEGORY', cat.slug, 'CREATE_CATEGORY', `Created category "${cat.name}".`);
+            setIsCreatingCategory(false);
+            showToast(`Category "${cat.name}" created!`);
+          }}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: OFFICIAL PDF TRAVEL VOUCHER & INVOICE */}
+      {/* ==================================================================== */}
+      {selectedBookingForVoucher && (
+        <VoucherInvoiceModal
+          booking={selectedBookingForVoucher}
+          settings={siteSettings}
+          onClose={() => setSelectedBookingForVoucher(null)}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* MODAL: FORMAL QUOTATION PROPOSAL INVOICE */}
+      {/* ==================================================================== */}
+      {selectedQuoteForInvoice && (
+        <QuoteProposalModal
+          quote={selectedQuoteForInvoice}
+          settings={siteSettings}
+          onClose={() => setSelectedQuoteForInvoice(null)}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* SECURITY CONFIRMATION DIALOG */}
       {/* ==================================================================== */}
       {securityModalAction && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
@@ -1363,69 +2064,829 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
 
-      {/* ==================================================================== */}
-      {/* PDF ITINERARY VOUCHER MODAL */}
-      {/* ==================================================================== */}
-      {selectedBookingForVoucher && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#1A1615] border border-white/20 rounded-3xl max-w-2xl w-full p-8 space-y-6 text-[#F7F4EE] shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button
-              onClick={() => setSelectedBookingForVoucher(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+// ============================================================================
+// MODAL COMPONENTS
+// ============================================================================
 
-            <div className="border-b border-white/10 pb-6 flex justify-between items-start">
-              <div>
-                <span className="text-xs uppercase tracking-widest text-[#C69C6D] font-mono font-semibold">JORDAN STORY TOURS — OFFICIAL VOUCHER</span>
-                <h3 className="font-serif text-2xl font-bold text-white mt-1">Travel Confirmation & Itinerary</h3>
-              </div>
-              <div className="text-right font-mono">
-                <span className="text-xs text-gray-400 block">REFERENCE CODE</span>
-                <span className="text-lg font-bold text-[#C69C6D] block">{selectedBookingForVoucher.ref}</span>
-              </div>
+// 1. Tour Edit & Create Modal
+function TourEditModal({ tour, isCreating, onClose, onSave }: { tour: Tour | null; isCreating: boolean; onClose: () => void; onSave: (t: Tour) => void }) {
+  const [form, setForm] = useState<Tour>(
+    tour || {
+      id: 'tour-' + Date.now(),
+      slug: { en: 'new-jordan-tour' },
+      title: { en: 'New Jordan Discovery Tour', de: 'Neue Jordanien Rundreise', fr: 'Nouveau Circuit en Jordanie', it: 'Nuovo Tour in Giordania' },
+      subtitle: { en: 'Private bespoke tour with chauffeur', de: 'Private Rundreise mit Chauffeur', fr: 'Voyage privé avec chauffeur', it: 'Tour privato con autista' },
+      category: 'Classical',
+      storyCollection: 'Classic Heritage',
+      durationDays: 5,
+      durationNights: 4,
+      priceMode: 'FROM' as PriceMode,
+      bookingMode: 'DIRECT_BOOKING' as BookingMode,
+      startingPriceUSD: 799,
+      highlights: { en: ['Petra Wonder', 'Wadi Rum Camp', 'Dead Sea Float'] },
+      route: ['Amman', 'Jerash', 'Petra', 'Wadi Rum', 'Dead Sea'],
+      inclusions: { en: ['Private AC vehicle', 'English speaking chauffeur', 'Hotel accommodations', 'Breakfast & dinner'] },
+      exclusions: { en: ['International flights', 'Personal expenses', 'Tips'] },
+      itinerary: [
+        { day: 1, title: { en: 'Arrival in Amman' }, description: { en: 'Welcome to Jordan, meet & greet at airport.' } },
+        { day: 2, title: { en: 'Jerash & Dead Sea' }, description: { en: 'Explore Roman ruins and float on the Dead Sea.' } }
+      ],
+      heroImage: '/images/scroll-world-video/frame-08.jpg',
+      gallery: [],
+      isDraft: false
+    }
+  );
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-2xl w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">{isCreating ? 'Create New Tour Package' : `Edit Tour: ${form.title.en}`}</h3>
+
+        <div className="space-y-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">TITLE (ENGLISH)</label>
+              <input
+                type="text"
+                value={form.title.en}
+                onChange={(e) => setForm({ ...form, title: { ...form.title, en: e.target.value } })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
             </div>
 
-            <div className="grid grid-cols-2 gap-6 text-xs bg-white/5 p-5 rounded-2xl border border-white/10">
-              <div>
-                <span className="text-gray-400 font-mono block">LEAD TRAVELER</span>
-                <span className="font-bold text-white text-sm block mt-0.5">{selectedBookingForVoucher.customer}</span>
-                <span className="text-gray-400 block mt-1">{selectedBookingForVoucher.email}</span>
-                <span className="text-gray-400 block">{selectedBookingForVoucher.phone}</span>
-              </div>
-              <div>
-                <span className="text-gray-400 font-mono block">TOUR & DETAILS</span>
-                <span className="font-bold text-white text-sm block mt-0.5">{selectedBookingForVoucher.tour}</span>
-                <span className="text-[#C69C6D] font-mono block mt-1">Start Date: {selectedBookingForVoucher.date}</span>
-                <span className="text-gray-400 block">{selectedBookingForVoucher.adults} Adults {selectedBookingForVoucher.children > 0 && `/ ${selectedBookingForVoucher.children} Kids`}</span>
-              </div>
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">URL SLUG</label>
+              <input
+                type="text"
+                value={form.slug.en}
+                onChange={(e) => setForm({ ...form, slug: { ...form.slug, en: e.target.value } })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
             </div>
 
-            <div className="flex justify-between items-center p-5 rounded-2xl bg-[#A85F43]/20 border border-[#A85F43]/40">
-              <div>
-                <span className="text-xs text-gray-300 font-mono block">LOCKED PRICE SNAPSHOT</span>
-                <span className="font-serif text-2xl font-extrabold text-[#C69C6D]">${selectedBookingForVoucher.priceSnapshot} {selectedBookingForVoucher.currency}</span>
-              </div>
-              <div className="text-right text-[10px] text-gray-300 font-light">
-                <span>Includes private AC vehicle, designated chauffeur, hotel accommodations & taxes.</span>
-              </div>
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">STARTING PRICE ($ USD)</label>
+              <input
+                type="number"
+                value={form.startingPriceUSD || 0}
+                onChange={(e) => setForm({ ...form, startingPriceUSD: Number(e.target.value) })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
-              <button
-                onClick={() => window.print()}
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">PRICING MODE</label>
+              <select
+                value={form.priceMode}
+                onChange={(e) => setForm({ ...form, priceMode: e.target.value as PriceMode })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
               >
-                <Printer className="w-4 h-4" />
-                <span>Print / Save as PDF Voucher</span>
-              </button>
+                <option value="FROM">FROM (Starting From Price)</option>
+                <option value="FIXED">FIXED (Exact Fixed Price)</option>
+                <option value="QUOTATION">QUOTATION (Quote on Request)</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">SALES / BOOKING MODE</label>
+              <select
+                value={form.bookingMode}
+                onChange={(e) => setForm({ ...form, bookingMode: e.target.value as BookingMode })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              >
+                <option value="DIRECT_BOOKING">Direct Instant Booking</option>
+                <option value="QUOTATION">Customized Itinerary Quote</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">DURATION (DAYS)</label>
+              <input
+                type="number"
+                value={form.durationDays || 1}
+                onChange={(e) => setForm({ ...form, durationDays: Number(e.target.value) })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
             </div>
           </div>
-        </div>
-      )}
 
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">TITLE (GERMAN · DE)</label>
+            <input
+              type="text"
+              value={form.title.de || ''}
+              onChange={(e) => setForm({ ...form, title: { ...form.title, de: e.target.value } })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">SUBTITLE / OVERVIEW</label>
+            <textarea
+              rows={2}
+              value={form.subtitle.en}
+              onChange={(e) => setForm({ ...form, subtitle: { ...form.subtitle, en: e.target.value } })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl p-3 text-white focus:outline-none"
+            />
+          </div>
+
+          <div className="flex items-center gap-3 pt-2">
+            <input
+              type="checkbox"
+              id="isDraftCheck"
+              checked={form.isDraft || false}
+              onChange={(e) => setForm({ ...form, isDraft: e.target.checked })}
+              className="w-4 h-4 text-[#A85F43] rounded"
+            />
+            <label htmlFor="isDraftCheck" className="text-gray-300 font-mono">Keep as DRAFT (Hide from live public catalog)</label>
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => onSave(form)}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Save Tour Package
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 2. Destination Edit Modal
+function DestinationEditModal({ dest, isCreating, onClose, onSave }: { dest: Destination | null; isCreating: boolean; onClose: () => void; onSave: (d: Destination) => void }) {
+  const [form, setForm] = useState<Destination>(
+    dest || {
+      id: 'dest-' + Date.now(),
+      slug: { en: 'new-destination', de: 'new-destination', fr: 'new-destination', it: 'new-destination' },
+      title: { en: 'New Landmark', de: 'Neues Reiseziel', fr: 'Nouvelle Destination', it: 'Nuova Destinazione' },
+      subtitle: { en: 'Historic ancient wonder', de: 'Historisches Weltwunder', fr: 'Merveille historique', it: 'Meraviglia storica' },
+      region: 'Central',
+      highlights: { en: ['Ancient ruins', 'Panoramic viewpoints', 'Local culture'], de: [], fr: [], it: [] },
+      heroImage: '/images/scroll-world-video/frame-01.jpg',
+      description: { en: 'Experience the magic of Jordan with private tours.' }
+    }
+  );
+
+  const destTitle = form.title?.en || form.name?.en || 'New Landmark';
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-lg w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">{isCreating ? 'Add Destination' : `Edit: ${destTitle}`}</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">DESTINATION NAME (EN)</label>
+            <input
+              type="text"
+              value={form.title?.en || form.name?.en || ''}
+              onChange={(e) => setForm({ 
+                ...form, 
+                title: { 
+                  en: e.target.value,
+                  de: form.title?.de || form.name?.de || '',
+                  fr: form.title?.fr || form.name?.fr || '',
+                  it: form.title?.it || form.name?.it || ''
+                } 
+              })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">REGION</label>
+            <select
+              value={form.region}
+              onChange={(e) => setForm({ ...form, region: e.target.value as any })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            >
+              <option value="North">North (Jerash, Ajloun, Umm Qais)</option>
+              <option value="Central">Central (Amman, Madaba, Dead Sea)</option>
+              <option value="South">South (Petra, Dana, Shobak)</option>
+              <option value="Desert">Desert (Wadi Rum, Eastern Castles)</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">HERO IMAGE URL</label>
+            <input
+              type="text"
+              value={form.heroImage}
+              onChange={(e) => setForm({ ...form, heroImage: e.target.value })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">DESCRIPTION</label>
+            <textarea
+              rows={3}
+              value={form.description?.en || ''}
+              onChange={(e) => setForm({ ...form, description: { ...form.description, en: e.target.value } })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl p-3 text-white focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => onSave(form)}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Save Destination
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 3. Booking Edit Modal
+function BookingEditModal({ booking, onClose, onSave }: { booking: BookingRecord; onClose: () => void; onSave: (b: BookingRecord) => void }) {
+  const [form, setForm] = useState<BookingRecord>({ ...booking });
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-lg w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">Edit Booking: {form.ref}</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">TRAVELER NAME</label>
+            <input
+              type="text"
+              value={form.customer}
+              onChange={(e) => setForm({ ...form, customer: e.target.value })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">EMAIL</label>
+              <input
+                type="text"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">PHONE</label>
+              <input
+                type="text"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">DATE</label>
+              <input
+                type="date"
+                value={form.date}
+                onChange={(e) => setForm({ ...form, date: e.target.value })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">PRICE SNAPSHOT ($ USD)</label>
+              <input
+                type="number"
+                value={form.priceSnapshot}
+                onChange={(e) => setForm({ ...form, priceSnapshot: Number(e.target.value) })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">SPECIAL REQUESTS</label>
+            <input
+              type="text"
+              value={form.specialRequests || ''}
+              onChange={(e) => setForm({ ...form, specialRequests: e.target.value })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">INTERNAL OPERATIONS NOTES</label>
+            <textarea
+              rows={2}
+              value={form.internalNotes || ''}
+              onChange={(e) => setForm({ ...form, internalNotes: e.target.value })}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl p-3 text-white focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => onSave(form)}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Save Booking
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 4. Quotation Edit Modal
+function QuotationEditModal({ quote, onClose, onSave, onConvert }: { quote: QuotationRecord; onClose: () => void; onSave: (q: QuotationRecord) => void; onConvert: (q: QuotationRecord) => void }) {
+  const [form, setForm] = useState<QuotationRecord>({ ...quote });
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-lg w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">Prepare Custom Quote: {form.ref}</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <span className="text-gray-400 font-mono block">TRAVELER & TOUR</span>
+            <span className="font-bold text-white text-sm block">{form.customer} ({form.email})</span>
+            <span className="text-[#C69C6D] font-mono block">{form.tour} • {form.adults} Adults</span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">QUOTED PRICE ($ USD)</label>
+              <input
+                type="number"
+                value={form.quotedPrice || 0}
+                onChange={(e) => setForm({ ...form, quotedPrice: Number(e.target.value) })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-gray-400 font-mono block mb-1">STATUS</label>
+              <select
+                value={form.status}
+                onChange={(e) => setForm({ ...form, status: e.target.value as any })}
+                className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+              >
+                <option value="NEW">NEW</option>
+                <option value="IN_REVIEW">IN REVIEW</option>
+                <option value="QUOTED">QUOTED</option>
+                <option value="CUSTOMER_REPLIED">CUSTOMER REPLIED</option>
+                <option value="ACCEPTED">ACCEPTED</option>
+                <option value="DECLINED">DECLINED</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">INTERNAL PRICING BREAKDOWN / NOTES</label>
+            <textarea
+              rows={3}
+              value={form.internalNotes || ''}
+              onChange={(e) => setForm({ ...form, internalNotes: e.target.value })}
+              placeholder="e.g. Includes Kempinski Dead Sea upgrade, chauffeur gratuity, private Bedouin guide."
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl p-3 text-white focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center pt-4 border-t border-white/10">
+          <button
+            onClick={() => onConvert(form)}
+            className="px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer inline-flex items-center gap-1"
+          >
+            <Check className="w-3.5 h-3.5" />
+            <span>Convert to Confirmed Booking</span>
+          </button>
+
+          <div className="flex gap-2">
+            <button onClick={onClose} className="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+              Cancel
+            </button>
+            <button
+              onClick={() => onSave(form)}
+              className="px-5 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+            >
+              Save Quote
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 5. Create Review Token Modal
+function CreateReviewTokenModal({ onClose, onGenerate }: { onClose: () => void; onGenerate: (name: string, email: string, phone: string, tour: string, lang: ReviewLocale) => void }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [tour, setTour] = useState('Petra, Dead Sea & Jerash Discovery');
+  const [lang, setLang] = useState<ReviewLocale>('en');
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-md w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">Create Review Request Token</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">TRAVELER FULL NAME</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Klaus Weber"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">PHONE (FOR WHATSAPP)</label>
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="e.g. +49 170 1234567"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">EMAIL</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="e.g. klaus@weber.de"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">LANGUAGE</label>
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value as ReviewLocale)}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            >
+              <option value="en">English (EN)</option>
+              <option value="de">German (DE)</option>
+              <option value="fr">French (FR)</option>
+              <option value="it">Italian (IT)</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              if (!name) return alert('Please enter customer name.');
+              onGenerate(name, email, phone, tour, lang);
+            }}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Generate Token
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 6. Create Media Modal
+function CreateMediaModal({ onClose, onUpload }: { onClose: () => void; onUpload: (a: MediaAssetItem) => void }) {
+  const [title, setTitle] = useState('');
+  const [url, setUrl] = useState('/images/scroll-world-video/frame-08.jpg');
+  const [category, setCategory] = useState('Petra');
+  const [altEn, setAltEn] = useState('');
+  const [altDe, setAltDe] = useState('');
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-md w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">Upload Media Asset</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">ASSET TITLE</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g. Petra Treasury Sunlight"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">IMAGE PATH / URL</label>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">ALT TEXT (ENGLISH)</label>
+            <input
+              type="text"
+              value={altEn}
+              onChange={(e) => setAltEn(e.target.value)}
+              placeholder="e.g. Ancient Petra Treasury carving"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">ALT TEXT (GERMAN)</label>
+            <input
+              type="text"
+              value={altDe}
+              onChange={(e) => setAltDe(e.target.value)}
+              placeholder="e.g. Das Schatzhaus von Petra"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              if (!title) return alert('Please enter title');
+              onUpload({
+                id: 'med-' + Date.now(),
+                title,
+                url,
+                category,
+                altEn: altEn || title,
+                altDe: altDe || title,
+                uploadedAt: new Date().toISOString().substring(0, 10)
+              });
+            }}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Save Media
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 7. Create Category Modal
+function CreateCategoryModal({ onClose, onSave }: { onClose: () => void; onSave: (c: TourCategoryItem) => void }) {
+  const [name, setName] = useState('');
+  const [slug, setSlug] = useState('');
+  const [desc, setDesc] = useState('');
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1B1514] border border-white/20 rounded-3xl max-w-md w-full p-8 space-y-6 text-[#F5EFE6] shadow-2xl relative">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer">
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="font-serif text-2xl font-bold text-white">Create Tour Category</h3>
+
+        <div className="space-y-4 text-xs">
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">CATEGORY NAME</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+              }}
+              placeholder="e.g. Luxury Desert Glamping"
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">SLUG</label>
+            <input
+              type="text"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-gray-400 font-mono block mb-1">DESCRIPTION</label>
+            <textarea
+              rows={2}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              className="w-full bg-[#12161C] border border-white/10 rounded-xl p-3 text-white focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <button onClick={onClose} className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 text-xs font-medium cursor-pointer">
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              if (!name) return alert('Please enter name');
+              onSave({
+                id: 'cat-' + Date.now(),
+                name,
+                slug,
+                description: desc,
+                toursCount: 0
+              });
+            }}
+            className="px-6 py-2.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            Create Category
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 8. Official Voucher & Invoice Modal (Printable)
+function VoucherInvoiceModal({ booking, settings, onClose }: { booking: BookingRecord; settings: SiteSettingsState; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1A1615] border border-white/20 rounded-3xl max-w-2xl w-full p-8 space-y-6 text-[#F7F4EE] shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer print:hidden">
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Branded Voucher Header */}
+        <div className="border-b border-white/10 pb-6 flex justify-between items-start">
+          <div>
+            <span className="text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-bold block">{settings.businessName}</span>
+            <span className="text-[10px] text-gray-400 font-mono block">Ministry of Tourism License: {settings.registrationNumber}</span>
+            <h3 className="font-serif text-2xl font-bold text-white mt-2">Official Travel Confirmation & Voucher</h3>
+          </div>
+          <div className="text-right font-mono">
+            <span className="text-xs text-gray-400 block">VOUCHER NUMBER</span>
+            <span className="text-lg font-bold text-[#C69C6D] block">{booking.ref}</span>
+            <span className="text-[10px] text-emerald-400 font-bold block mt-1">STATUS: {booking.status}</span>
+          </div>
+        </div>
+
+        {/* Guest & Journey Breakdown */}
+        <div className="grid grid-cols-2 gap-6 text-xs bg-white/5 p-5 rounded-2xl border border-white/10">
+          <div>
+            <span className="text-gray-400 font-mono block">LEAD PASSENGER</span>
+            <span className="font-bold text-white text-sm block mt-0.5">{booking.customer}</span>
+            <span className="text-gray-300 block mt-1">{booking.email}</span>
+            <span className="text-gray-300 block">{booking.phone}</span>
+          </div>
+          <div>
+            <span className="text-gray-400 font-mono block">ITINERARY PACKAGE</span>
+            <span className="font-bold text-white text-sm block mt-0.5">{booking.tour}</span>
+            <span className="text-[#C69C6D] font-mono block mt-1">Start Date: {booking.date}</span>
+            <span className="text-gray-300 block">{booking.adults} Adults {booking.children > 0 && `/ ${booking.children} Kids`}</span>
+          </div>
+        </div>
+
+        {/* Pricing Breakdown */}
+        <div className="p-5 rounded-2xl bg-[#A85F43]/20 border border-[#A85F43]/40 flex justify-between items-center">
+          <div>
+            <span className="text-xs text-gray-300 font-mono block">CONFIRMED TOTAL AMOUNT</span>
+            <span className="font-serif text-2xl font-extrabold text-[#C69C6D]">${booking.priceSnapshot} {booking.currency}</span>
+          </div>
+          <div className="text-right text-[11px] text-gray-300">
+            <span>Includes private climate-controlled vehicle, professional driver/chauffeur, accommodations & tourist taxes.</span>
+          </div>
+        </div>
+
+        {/* Terms & Emergency Contacts */}
+        <div className="text-[11px] text-gray-400 space-y-1 font-mono pt-2">
+          <p>• 24/7 Operations Hotline: {settings.whatsapp} ({settings.phone})</p>
+          <p>• Headquarters: {settings.address}</p>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10 print:hidden">
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            <Printer className="w-4 h-4" />
+            <span>Print Official PDF Voucher</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 9. Formal Quote Proposal Modal (Printable)
+function QuoteProposalModal({ quote, settings, onClose }: { quote: QuotationRecord; settings: SiteSettingsState; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-[#1A1615] border border-white/20 rounded-3xl max-w-2xl w-full p-8 space-y-6 text-[#F7F4EE] shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 cursor-pointer print:hidden">
+          <X className="w-5 h-5" />
+        </button>
+
+        <div className="border-b border-white/10 pb-6 flex justify-between items-start">
+          <div>
+            <span className="text-[11px] uppercase tracking-widest text-[#C69C6D] font-mono font-bold block">{settings.businessName}</span>
+            <span className="text-[10px] text-gray-400 font-mono block">Ministry of Tourism License: {settings.registrationNumber}</span>
+            <h3 className="font-serif text-2xl font-bold text-white mt-2">Custom Journey Quotation & Itinerary Proposal</h3>
+          </div>
+          <div className="text-right font-mono">
+            <span className="text-xs text-gray-400 block">QUOTE REF</span>
+            <span className="text-lg font-bold text-amber-400 block">{quote.ref}</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6 text-xs bg-white/5 p-5 rounded-2xl border border-white/10">
+          <div>
+            <span className="text-gray-400 font-mono block">VALUED GUEST</span>
+            <span className="font-bold text-white text-sm block mt-0.5">{quote.customer}</span>
+            <span className="text-gray-300 block mt-1">{quote.email}</span>
+            <span className="text-gray-300 block">{quote.phone}</span>
+          </div>
+          <div>
+            <span className="text-gray-400 font-mono block">REQUESTED EXPEDITION</span>
+            <span className="font-bold text-white text-sm block mt-0.5">{quote.tour}</span>
+            <span className="text-[#C69C6D] font-mono block mt-1">Arrival Date: {quote.arrivalDate}</span>
+            <span className="text-gray-300 block">{quote.adults} Adults • {quote.hotelPreference || '4-Star Boutique'}</span>
+          </div>
+        </div>
+
+        <div className="p-5 rounded-2xl bg-amber-900/20 border border-amber-500/40 flex justify-between items-center">
+          <div>
+            <span className="text-xs text-gray-300 font-mono block">ESTIMATED ALL-INCLUSIVE PROPOSAL</span>
+            <span className="font-serif text-2xl font-extrabold text-amber-400">${quote.quotedPrice || 'On Request'} {quote.quotedCurrency}</span>
+          </div>
+          <div className="text-right text-[11px] text-gray-300">
+            <span>Special Requests: {quote.specialRequests || 'Standard VIP Jordan Experience'}</span>
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4 border-t border-white/10 print:hidden">
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg cursor-pointer"
+          >
+            <Printer className="w-4 h-4" />
+            <span>Print Proposal PDF</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
