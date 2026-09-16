@@ -6,6 +6,7 @@ const basePath = subfolder ? `/${subfolder.replace(/^\/+|\/+$/g, '')}` : "";
 
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   basePath: basePath,
   assetPrefix: basePath ? `${basePath}/` : undefined,
   env: {
