@@ -177,34 +177,25 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
             </Link>
           </div>
 
-          {/* Mobile Language Switcher & Hamburger */}
-          <div className="flex items-center gap-2 md:hidden relative z-50">
-            <button
-              type="button"
-              aria-label="Change Language"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
+          {/* Mobile Language Quick Switcher & Hamburger Button */}
+          <div className="flex items-center gap-2 md:hidden">
+            <Link
+              href={getSwitchedPath(locale === 'en' ? 'de' : locale === 'de' ? 'fr' : locale === 'fr' ? 'it' : 'en')}
+              onClick={() => {
                 const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
-                const target = next[locale] || 'en';
-                setLocale(target);
-                window.location.href = getSwitchedPath(target);
+                setLocale(next[locale] || 'en');
               }}
-              className="px-2.5 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md cursor-pointer min-h-[42px] min-w-[42px] flex items-center justify-center active:scale-95 touch-manipulation select-none"
+              className="px-3 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md flex items-center justify-center min-h-[40px] cursor-pointer"
             >
               {locale.toUpperCase()} 🌐
-            </button>
+            </Link>
 
             <button
               type="button"
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle Navigation Menu"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsMobileMenuOpen(prev => !prev);
-              }}
-              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] active:scale-90 transition-all cursor-pointer relative shadow-lg touch-manipulation select-none"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] transition-all cursor-pointer shadow-lg"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6 text-[#C69C6D]" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
@@ -212,28 +203,42 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
         </div>
       </header>
 
-      {/* Mobile Glass Drawer Backdrop & Container */}
+      {/* Mobile Glass Drawer Navigation */}
       {isMobileMenuOpen && (
-        <div 
-          className="md:hidden fixed inset-0 z-[999999] flex flex-col justify-start items-center p-3 pt-20"
-        >
+        <div className="md:hidden fixed inset-0 z-[100000] flex flex-col justify-start">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300 z-0"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Drawer Menu Panel */}
           <div 
-            className="relative z-10 w-full max-w-lg max-h-[82vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5 transition-all"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 mx-3 mt-20 max-h-[82vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5"
           >
-            <div className="space-y-1">
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="flex flex-col">
+                <span className="font-serif font-bold text-base text-[#F7F4EE] tracking-tight">JORDAN STORY</span>
+                <span className="text-[9px] font-mono text-[#C69C6D] uppercase tracking-widest">TRAVEL & TOURISM</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 text-[#C69C6D]" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="space-y-1">
               <Link 
                 href={`/${locale}/tours`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
+                className="block py-3 px-3 text-base font-semibold rounded-xl hover:bg-white/5 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer border-b border-white/5"
               >
                 {locale === 'de' ? 'Rundreisen & Pakete' : locale === 'fr' ? 'Nos Circuits' : locale === 'it' ? 'I Nostri Tour' : 'Tour Packages'}
               </Link>
@@ -241,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/destinations`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
+                className="block py-3 px-3 text-base font-semibold rounded-xl hover:bg-white/5 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer border-b border-white/5"
               >
                 {locale === 'de' ? 'Reiseziele in Jordanien' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations'}
               </Link>
@@ -249,22 +254,51 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/booking`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer touch-manipulation"
+                className="block py-3 px-3 text-base font-semibold rounded-xl hover:bg-white/5 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer border-b border-white/5"
               >
                 {locale === 'de' ? 'Individuelle Reise Buchen' : locale === 'fr' ? 'Réserver Sur Mesure' : locale === 'it' ? 'Prenota Su Misura' : 'Book Custom Private Tour'}
               </Link>
+            </nav>
+
+            {/* Mobile Language Selection Grid (4 Locales) */}
+            <div className="pt-2 border-t border-white/10">
+              <span className="text-xs text-white/70 font-mono block mb-2.5">Language / Sprache / Langue / Lingua:</span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { code: 'en', label: 'English 🇬🇧' },
+                  { code: 'de', label: 'Deutsch 🇩🇪' },
+                  { code: 'fr', label: 'Français 🇫🇷' },
+                  { code: 'it', label: 'Italiano 🇮🇹' }
+                ].map(({ code, label }) => (
+                  <Link
+                    key={code}
+                    href={getSwitchedPath(code)}
+                    onClick={() => {
+                      setLocale(code as 'en' | 'de' | 'fr' | 'it');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`py-2.5 px-2 text-center text-xs font-mono font-bold rounded-xl transition-all cursor-pointer ${
+                      locale === code 
+                        ? 'bg-[#A85F43] text-white shadow-lg border border-[#C69C6D]/40' 
+                        : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/10'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Mobile Currency Switcher */}
-            <div className="pt-2 flex items-center justify-between border-t border-white/10">
+            <div className="pt-2 border-t border-white/10 flex items-center justify-between">
               <span className="text-xs text-white/70 font-mono">Currency:</span>
-              <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/15 text-xs font-mono">
+              <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-xl border border-white/15">
                 {(['USD', 'EUR', 'JOD'] as Currency[]).map((c) => (
                   <button
                     key={c}
                     type="button"
                     onClick={() => setCurrency(c)}
-                    className={`px-2.5 py-1 rounded cursor-pointer font-bold touch-manipulation ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold cursor-pointer transition-all ${
                       currency === c ? 'bg-[#C69C6D] text-black shadow-md' : 'text-white/70 hover:text-white'
                     }`}
                   >
@@ -274,34 +308,12 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               </div>
             </div>
 
-            {/* Mobile Language Selection List */}
-            <div className="pt-2 flex items-center justify-between border-t border-white/10">
-              <span className="text-xs text-white/70 font-mono">Language:</span>
-              <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/15 text-xs font-mono">
-                {(['en', 'de', 'fr', 'it'] as const).map((lang) => (
-                  <Link
-                    key={lang}
-                    href={getSwitchedPath(lang)}
-                    onClick={() => {
-                      setLocale(lang);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className={`px-2.5 py-1 rounded uppercase font-bold cursor-pointer touch-manipulation ${
-                      locale === lang ? 'bg-[#A85F43] text-white shadow-md' : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    {lang}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
             {/* Quick Direct WhatsApp / Call Support */}
-            <div className="pt-4">
+            <div className="pt-3">
               <Link
                 href={`/${locale}/booking`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer active:scale-95 transition-all touch-manipulation"
+                className="w-full py-3.5 rounded-2xl bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer active:scale-95 transition-all"
               >
                 {locale === 'de' ? 'Jetzt Privatreise Buchen' : locale === 'fr' ? 'Réserver Un Voyage' : locale === 'it' ? 'Prenota Ora' : 'Book Your Tour Now'}
               </Link>
