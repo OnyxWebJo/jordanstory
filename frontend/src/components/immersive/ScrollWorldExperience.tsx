@@ -338,9 +338,22 @@ export const ScrollWorldExperience: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
+function isWebGLAvailable(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const canvas = document.createElement('canvas');
+    return Boolean(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch {
+    return false;
+  }
+}
+
   // Desktop Three.js particles
   useEffect(() => {
-    if (isMobileOrTablet || !canvasRef.current) return;
+    if (isMobileOrTablet || !canvasRef.current || !isWebGLAvailable()) return;
     let renderer: THREE.WebGLRenderer | null = null;
     let frameId: number | null = null;
     let scene: THREE.Scene | null = null;
