@@ -63,10 +63,21 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMenu = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setIsMobileMenuOpen(prev => !prev);
+  };
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[999] py-3 sm:py-4 px-3 sm:px-8 pointer-events-auto">
+      <header 
+        style={{ zIndex: 99999, pointerEvents: 'auto' }}
+        className="fixed top-0 left-0 right-0 py-3 sm:py-4 px-3 sm:px-8"
+      >
         <div 
+          style={{ pointerEvents: 'auto' }}
           className={`max-w-7xl mx-auto rounded-full transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border ${
             isScrolled 
               ? 'bg-[#1A1615]/95 backdrop-blur-2xl border-white/15 shadow-2xl text-[#F7F4EE]'
@@ -74,7 +85,11 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           }`}
         >
           {/* Brand Logo & Ministry Badge */}
-          <Link href={`/${locale}`} className="flex items-center gap-2.5 sm:gap-3 group touch-manipulation cursor-pointer">
+          <Link 
+            href={`/${locale}`} 
+            style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+            className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer"
+          >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#A85F43] flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0">
               <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-[#F7F4EE]" />
             </div>
@@ -166,13 +181,14 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           <div className="flex items-center gap-2 md:hidden">
             <button
               type="button"
+              style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
               onClick={() => {
                 const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
                 const target = next[locale] || 'en';
                 setLocale(target);
                 window.location.href = getSwitchedPath(target);
               }}
-              className="px-2.5 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md cursor-pointer touch-manipulation min-h-[40px] flex items-center justify-center active:scale-95"
+              className="px-2.5 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md cursor-pointer min-h-[40px] flex items-center justify-center active:scale-95"
             >
               {locale.toUpperCase()} 🌐
             </button>
@@ -181,8 +197,9 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               type="button"
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle Navigation Menu"
-              onClick={() => setIsMobileMenuOpen(prev => !prev)}
-              className="p-2 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] active:scale-90 transition-all cursor-pointer relative z-[1002] shadow-lg touch-manipulation"
+              style={{ zIndex: 999999, pointerEvents: 'auto', touchAction: 'manipulation' }}
+              onClick={toggleMenu}
+              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] active:scale-90 transition-all cursor-pointer relative shadow-lg"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6 text-[#C69C6D]" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
@@ -192,21 +209,29 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
 
       {/* Mobile Glass Drawer Backdrop & Container */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-[1000] pointer-events-auto">
+        <div 
+          style={{ zIndex: 999999, pointerEvents: 'auto' }}
+          className="md:hidden fixed inset-0"
+        >
           {/* Backdrop */}
           <div 
+            style={{ pointerEvents: 'auto' }}
             className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Drawer Menu Panel */}
-          <div className="fixed top-18 inset-x-3 max-h-[82vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5 z-[1001] transition-all touch-manipulation">
+          <div 
+            style={{ pointerEvents: 'auto', touchAction: 'pan-y' }}
+            className="fixed top-20 inset-x-3 max-h-[80vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5 transition-all"
+          >
             <div className="space-y-1">
               <Link 
                 href={`/${locale}/tours`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer"
               >
                 {locale === 'de' ? 'Rundreisen & Pakete' : locale === 'fr' ? 'Nos Circuits' : locale === 'it' ? 'I Nostri Tour' : 'Tour Packages'}
               </Link>
@@ -214,7 +239,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/destinations`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer"
               >
                 {locale === 'de' ? 'Reiseziele in Jordanien' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations'}
               </Link>
@@ -222,7 +248,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/booking`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer touch-manipulation"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer"
               >
                 {locale === 'de' ? 'Individuelle Reise Buchen' : locale === 'fr' ? 'Réserver Sur Mesure' : locale === 'it' ? 'Prenota Su Misura' : 'Book Custom Private Tour'}
               </Link>
@@ -237,7 +264,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
                     key={c}
                     type="button"
                     onClick={() => setCurrency(c)}
-                    className={`px-2.5 py-1 rounded cursor-pointer font-bold touch-manipulation ${
+                    style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                    className={`px-2.5 py-1 rounded cursor-pointer font-bold ${
                       currency === c ? 'bg-[#C69C6D] text-black shadow-md' : 'text-white/70 hover:text-white'
                     }`}
                   >
@@ -259,7 +287,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
                       setLocale(lang);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={`px-2.5 py-1 rounded uppercase font-bold cursor-pointer touch-manipulation ${
+                    style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                    className={`px-2.5 py-1 rounded uppercase font-bold cursor-pointer ${
                       locale === lang ? 'bg-[#A85F43] text-white shadow-md' : 'text-white/70 hover:text-white'
                     }`}
                   >
@@ -274,7 +303,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link
                 href={`/${locale}/booking`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full py-3.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer touch-manipulation active:scale-95 transition-all"
+                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
+                className="w-full py-3.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer active:scale-95 transition-all"
               >
                 {locale === 'de' ? 'Jetzt Privatreise Buchen' : locale === 'fr' ? 'Réserver Un Voyage' : locale === 'it' ? 'Prenota Ora' : 'Book Your Tour Now'}
               </Link>

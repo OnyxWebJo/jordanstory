@@ -19,8 +19,7 @@
     color: var(--foreground);
     font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
-    touch-action: pan-y;
-    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Cinematic Editorial Headlines */
