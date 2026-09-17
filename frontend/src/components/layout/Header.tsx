@@ -97,8 +97,8 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <span className="font-serif font-bold text-sm sm:text-lg tracking-tight leading-none text-[#F7F4EE]">
                 JORDAN STORY
               </span>
-              <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#C69C6D] uppercase">
-                TOURS & TRAVEL
+              <span className="text-[8px] sm:text-[9.5px] font-mono tracking-wider sm:tracking-widest text-[#C69C6D] uppercase whitespace-nowrap">
+                TRAVEL & TOURISM
               </span>
             </div>
           </Link>

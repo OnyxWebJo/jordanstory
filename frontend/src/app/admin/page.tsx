@@ -356,7 +356,7 @@ export default function AdminDashboardPage() {
   ]);
 
   const [siteSettings, setSiteSettings] = useState<SiteSettingsState>({
-    businessName: 'Jordan Story Tours & Travel Agency',
+    businessName: 'Jordan Story Travel & Tourism',
     registrationNumber: 'JO-MOTA-2026-9941',
     address: 'King Hussein Street, Amman 11118, Hashemite Kingdom of Jordan',
     phone: '+962 7 9000 1234',
@@ -1367,7 +1367,7 @@ export default function AdminDashboardPage() {
 
                             <button
                               onClick={() => {
-                                const msg = `Hello ${booking.customer}, greetings from Jordan Story Tours! We are pleased to confirm your private tour: ${booking.tour} starting on ${booking.date} (Booking Ref: ${booking.ref}). Rate: $${booking.priceSnapshot} USD per person. Our chauffeur will meet you at the airport/hotel.`;
+                                const msg = `Hello ${booking.customer}, greetings from Jordan Story Travel & Tourism! We are pleased to confirm your private tour: ${booking.tour} starting on ${booking.date} (Booking Ref: ${booking.ref}). Rate: $${booking.priceSnapshot} USD per person. Our chauffeur will meet you at the airport/hotel.`;
                                 handleOpenWhatsApp(booking.phone, msg);
                               }}
                               className="px-2.5 py-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 text-xs font-mono cursor-pointer inline-flex items-center gap-1.5 shrink-0"
@@ -1490,7 +1490,7 @@ export default function AdminDashboardPage() {
 
                             <button
                               onClick={() => {
-                                const msg = `Dear ${quote.customer}, thank you for contacting Jordan Story Tours! We have prepared your custom itinerary quote for: ${quote.tour} at $${quote.quotedPrice || 'On Request'} USD per person. You can review details here: https://jordanstorytours.com/booking.`;
+                                const msg = `Dear ${quote.customer}, thank you for contacting Jordan Story Travel & Tourism! We have prepared your custom itinerary quote for: ${quote.tour} at $${quote.quotedPrice || 'On Request'} USD per person. You can review details here: https://jordanstorytours.com/booking.`;
                                 handleOpenWhatsApp(quote.phone, msg);
                               }}
                               className="p-1.5 rounded-lg bg-emerald-700/30 hover:bg-emerald-700/50 text-emerald-400 border border-emerald-600/40 cursor-pointer inline-flex items-center justify-center shrink-0"

@@ -19,8 +19,8 @@ export interface BusinessRecord {
 }
 
 export const CANONICAL_BUSINESS_RECORD: BusinessRecord = {
-  brandName: 'Jordan Story Tours',
-  legalName: 'Jordan Story Tours & Travel Ltd.',
+  brandName: 'Jordan Story Travel & Tourism',
+  legalName: 'Jordan Story Travel & Tourism Ltd.',
   registrationNumber: '100933491',
   phone: '+962 6 552 2667',
   whatsapp: '+962 79 660 0360',

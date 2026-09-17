@@ -34,7 +34,7 @@ export const WHATSAPP_TEMPLATES: Record<ReviewLocale, (name: string, tourName: s
   en: (name, tourName, reviewUrl) => 
 `Hi ${name},
 
-Thank you for travelling with Jordan Story Tours on ${tourName}.
+Thank you for travelling with Jordan Story Travel & Tourism on ${tourName}.
 
 We hope your journey through Jordan became a story worth remembering.
 
@@ -48,7 +48,7 @@ Thank you for being part of the Jordan Story.`,
   de: (name, tourName, reviewUrl) => 
 `Hallo ${name},
 
-vielen Dank, dass Sie ${tourName} mit Jordan Story Tours erlebt haben.
+vielen Dank, dass Sie ${tourName} mit Jordan Story Travel & Tourism erlebt haben.
 
 Wir hoffen, dass Ihre Reise durch Jordanien zu einer Geschichte geworden ist, an die Sie sich gerne erinnern.
 
@@ -62,7 +62,7 @@ Vielen Dank, dass Sie Teil der Jordan Story waren.`,
   fr: (name, tourName, reviewUrl) => 
 `Bonjour ${name},
 
-Merci d'avoir voyagé avec Jordan Story Tours lors de ${tourName}.
+Merci d'avoir voyagé avec Jordan Story Travel & Tourism lors de ${tourName}.
 
 Nous espérons que votre voyage en Jordanie est devenu une histoire que vous garderez longtemps en mémoire.
 
@@ -76,7 +76,7 @@ Merci d'avoir fait partie de la Jordan Story.`,
   it: (name, tourName, reviewUrl) => 
 `Ciao ${name},
 
-grazie per aver viaggiato con Jordan Story Tours durante ${tourName}.
+grazie per aver viaggiato con Jordan Story Travel & Tourism durante ${tourName}.
 
 Speriamo che il tuo viaggio in Giordania sia diventato una storia da ricordare.
 

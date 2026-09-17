@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subtitle = getLocalizedText(tour.subtitle, validLocale);
 
   return buildLocaleMetadata({
-    title: `${title} — Jordan Story Tours`,
+    title: `${title} — Jordan Story Travel & Tourism`,
     description: subtitle,
     path: `/tours/${slug}`,
     locale: validLocale,
@@ -71,7 +71,7 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
     'image': tour.heroImage,
     'brand': {
       '@type': 'Brand',
-      'name': 'Jordan Story Tours',
+      'name': 'Jordan Story Travel & Tourism',
     },
   };
 

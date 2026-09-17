@@ -92,7 +92,7 @@ function BookingWizardContent() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Jordan Story Tours! I submitted a booking request (${submittedRef}) for ${getLocalized(selectedTour.title)} on ${travelDate} for ${adults} Adults. Please send my quote.`
+    `Hello Jordan Story Travel & Tourism! I submitted a booking request (${submittedRef}) for ${getLocalized(selectedTour.title)} on ${travelDate} for ${adults} Adults. Please send my quote.`
   );
 
   // Put selected tour first in the available tours list

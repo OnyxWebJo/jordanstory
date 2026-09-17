@@ -30,7 +30,7 @@ export default function RootPage() {
         animation: 'spin 0.8s linear infinite'
       }} />
       <p style={{ marginTop: '16px', fontSize: '15px', color: '#9ca3af' }}>
-        Entering Jordan Story Tours... (<a href={`${basePath}/en`} style={{ color: '#d97706', textDecoration: 'underline' }}>Click here if not redirected</a>)
+        Entering Jordan Story Travel & Tourism... (<a href={`${basePath}/en`} style={{ color: '#d97706', textDecoration: 'underline' }}>Click here if not redirected</a>)
       </p>
       <style dangerouslySetInnerHTML={{ __html: '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }' }} />
     </div>

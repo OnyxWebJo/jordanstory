@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jordan Story Tours — Official Private Jordan Tour Operator | Deutsche Touren",
+  title: "Jordan Story Travel & Tourism — Official Private Jordan Tour Operator | Deutsche Touren",
   description: "Experience Jordan through cinematic private tours to Petra, Wadi Rum Martian desert camps, the Dead Sea, Jerash, and holy sites. Licensed Jordan Ministry of Tourism operator.",
-  keywords: ["Jordan Story Tours", "Petra Private Tour", "Wadi Rum Desert Safari", "Dead Sea Tour", "Jordanien Reisen", "Petra Tour auf Deutsch"],
+  keywords: ["Jordan Story Travel & Tourism", "Jordan Story Tours", "Petra Private Tour", "Wadi Rum Desert Safari", "Dead Sea Tour", "Jordanien Reisen", "Petra Tour auf Deutsch"],
 };
 
 import Script from "next/script";

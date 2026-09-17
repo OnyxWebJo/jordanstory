@@ -47,7 +47,7 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
     })),
     provider: {
       '@type': 'TravelAgency',
-      name: 'Jordan Story Tours',
+      name: 'Jordan Story Travel & Tourism',
       url: 'https://jordanstorytours.com',
       telephone: '+962790000000',
     },
@@ -231,7 +231,7 @@ export default async function TourDetailPage({ params }: TourDetailProps) {
                 <div className="p-5 rounded-2xl bg-[#F4EFE7]/50 border border-gray-200/60 space-y-2">
                   <h3 className="font-bold text-sm text-[#302A27]">Is entry visa assistance provided?</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Yes! Jordan Story Tours assists with free visa procurement for eligible nationalities upon airport arrival.
+                    Yes! Jordan Story Travel & Tourism assists with free visa procurement for eligible nationalities upon airport arrival.
                   </p>
                 </div>
               </div>

@@ -25,10 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const validLocale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
 
   const titles: Record<Locale, string> = {
-    en: 'Jordan Story Tours — Official Private Jordan Tour Operator',
-    de: 'Jordan Story Tours — Offizieller Veranstalter für Private Jordanien Reisen',
-    fr: 'Jordan Story Tours — Circuit Privé en Jordanie & Voyages Sur Mesure',
-    it: 'Jordan Story Tours — Tour Privati in Giordania su Misura',
+    en: 'Jordan Story Travel & Tourism — Official Private Jordan Tour Operator',
+    de: 'Jordan Story Travel & Tourism — Offizieller Veranstalter für Private Jordanien Reisen',
+    fr: 'Jordan Story Travel & Tourism — Circuit Privé en Jordanie & Voyages Sur Mesure',
+    it: 'Jordan Story Travel & Tourism — Tour Privati in Giordania su Misura',
   };
 
   const descriptions: Record<Locale, string> = {
@@ -54,7 +54,7 @@ export default async function LocalizedHomePage({ params }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
-    'name': 'Jordan Story Tours',
+    'name': 'Jordan Story Travel & Tourism',
     'url': `https://jordanstorytours.com/${locale}`,
     'telephone': '+962-790000000',
     'address': {

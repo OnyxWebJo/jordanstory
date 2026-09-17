@@ -15,7 +15,7 @@ export function buildLocaleMetadata({ title, description, path, locale }: SeoPar
   const canonicalUrl = `${SITE_URL}/${locale}${cleanPath === '/' ? '' : cleanPath}`;
 
   return {
-    title: `${title} | Jordan Story Tours`,
+    title: `${title} | Jordan Story Travel & Tourism`,
     description,
     metadataBase: new URL(SITE_URL),
     alternates: {
@@ -29,16 +29,16 @@ export function buildLocaleMetadata({ title, description, path, locale }: SeoPar
       },
     },
     openGraph: {
-      title: `${title} | Jordan Story Tours`,
+      title: `${title} | Jordan Story Travel & Tourism`,
       description,
       url: canonicalUrl,
-      siteName: 'Jordan Story Tours',
+      siteName: 'Jordan Story Travel & Tourism',
       locale: locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : locale === 'it' ? 'it_IT' : 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} | Jordan Story Tours`,
+      title: `${title} | Jordan Story Travel & Tourism`,
       description,
     },
   };

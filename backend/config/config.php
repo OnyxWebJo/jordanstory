@@ -12,7 +12,7 @@ return [
         'charset'  => 'utf8mb4',
     ],
     'app' => [
-        'name'            => 'Jordan Story Tours API',
+        'name'            => 'Jordan Story Travel & Tourism API',
         'env'             => getenv('APP_ENV') ?: 'development',
         'allowed_origins' => explode(',', getenv('ALLOWED_ORIGINS') ?: 'http://localhost:3000,http://localhost:3001,https://jordanstorytours.com'),
         'jwt_secret'      => getenv('JWT_SECRET') ?: 'jordan-story-secret-key-change-in-production-2026',

@@ -85,7 +85,7 @@ export const Testimonials: React.FC = () => {
               {locale === 'de' ? 'VERTRAUEN & QUALITÄTSGARANTIE' : locale === 'fr' ? 'CONFIANCE & GARANTIE DE QUALITÉ' : locale === 'it' ? 'FIDUCIA E GARANZIA DI QUALITÀ' : 'TRUST & SERVICE GUARANTEE'}
             </span>
             <h2 className="font-serif text-4xl sm:text-5xl font-extrabold tracking-tight text-[#F7F4EE]">
-              {locale === 'de' ? 'Warum Jordan Story Tours' : locale === 'fr' ? 'Pourquoi Jordan Story Tours' : locale === 'it' ? 'Perché Scegliere Jordan Story Tours' : 'Why Travel With Jordan Story'}
+              {locale === 'de' ? 'Warum Jordan Story Travel & Tourism' : locale === 'fr' ? 'Pourquoi Jordan Story Travel & Tourism' : locale === 'it' ? 'Perché Scegliere Jordan Story Travel & Tourism' : 'Why Travel With Jordan Story'}
             </h2>
             <p className="text-gray-400 text-sm sm:text-base font-light">
               {locale === 'de'

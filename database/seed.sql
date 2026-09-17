@@ -22,7 +22,7 @@ ON DUPLICATE KEY UPDATE role_id=VALUES(role_id);
 
 -- 3. Site Settings (Doc 03 & Doc 07)
 INSERT INTO site_settings (setting_key, setting_value, setting_group, description, updated_by) VALUES
-('business_name', 'Jordan Story Tours & Travel Agency', 'BUSINESS', 'Official registered trade name', 1),
+('business_name', 'Jordan Story Travel & Tourism', 'BUSINESS', 'Official registered trade name', 1),
 ('business_registration', 'JO-MOTA-2026-9941', 'BUSINESS', 'Ministry of Tourism & Antiquities license registration', 1),
 ('headquarters_address', 'King Hussein Street, Amman 11118, Hashemite Kingdom of Jordan', 'BUSINESS', 'Physical office headquarters', 1),
 ('primary_phone', '+962 7 9000 1234', 'CONTACT', 'Primary commercial phone line', 1),
