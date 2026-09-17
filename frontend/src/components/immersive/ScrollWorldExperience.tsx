@@ -321,10 +321,17 @@ export const ScrollWorldExperience: React.FC = () => {
     return () => window.removeEventListener('resize', checkViewport);
   }, []);
 
-  const handleSkipJourney = () => {
+  const handleSkipJourney = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const el = document.getElementById('story-collections');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (containerRef.current) {
+      const top = containerRef.current.offsetTop + containerRef.current.offsetHeight;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 

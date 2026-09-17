@@ -57,7 +57,7 @@ export const StoryCollections: React.FC = () => {
   const { locale, getLocalized } = useLanguage();
 
   return (
-    <section className="py-24 bg-[#F7F4EE] text-[#1A1615]">
+    <section id="story-collections" className="py-24 bg-[#F7F4EE] text-[#1A1615] scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Approved Editorial Section Header (`00A.md` Section 7) */}

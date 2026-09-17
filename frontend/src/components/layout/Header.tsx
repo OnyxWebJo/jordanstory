@@ -178,17 +178,19 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
           </div>
 
           {/* Mobile Language Switcher & Hamburger */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 md:hidden relative z-50">
             <button
               type="button"
-              style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-              onClick={() => {
+              aria-label="Change Language"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const next: Record<string, 'en' | 'de' | 'fr' | 'it'> = { en: 'de', de: 'fr', fr: 'it', it: 'en' };
                 const target = next[locale] || 'en';
                 setLocale(target);
                 window.location.href = getSwitchedPath(target);
               }}
-              className="px-2.5 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md cursor-pointer min-h-[40px] flex items-center justify-center active:scale-95"
+              className="px-2.5 py-1.5 rounded-full bg-[#A85F43] border border-white/20 text-xs font-mono text-white font-bold uppercase shadow-md cursor-pointer min-h-[42px] min-w-[42px] flex items-center justify-center active:scale-95 touch-manipulation select-none"
             >
               {locale.toUpperCase()} 🌐
             </button>
@@ -197,9 +199,12 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               type="button"
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle Navigation Menu"
-              style={{ zIndex: 999999, pointerEvents: 'auto', touchAction: 'manipulation' }}
-              onClick={toggleMenu}
-              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] active:scale-90 transition-all cursor-pointer relative shadow-lg"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsMobileMenuOpen(prev => !prev);
+              }}
+              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white flex items-center justify-center min-w-[44px] min-h-[44px] active:scale-90 transition-all cursor-pointer relative shadow-lg touch-manipulation select-none"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6 text-[#C69C6D]" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
@@ -210,28 +215,25 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
       {/* Mobile Glass Drawer Backdrop & Container */}
       {isMobileMenuOpen && (
         <div 
-          style={{ zIndex: 999999, pointerEvents: 'auto' }}
-          className="md:hidden fixed inset-0"
+          className="md:hidden fixed inset-0 z-[999999] flex flex-col justify-start items-center p-3 pt-20"
         >
           {/* Backdrop */}
           <div 
-            style={{ pointerEvents: 'auto' }}
-            className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity duration-300"
+            className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300 z-0"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Drawer Menu Panel */}
           <div 
-            style={{ pointerEvents: 'auto', touchAction: 'pan-y' }}
-            className="fixed top-20 inset-x-3 max-h-[80vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5 transition-all"
+            className="relative z-10 w-full max-w-lg max-h-[82vh] overflow-y-auto p-6 rounded-3xl bg-[#1A1615] border border-white/20 shadow-2xl text-[#F7F4EE] space-y-5 transition-all"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="space-y-1">
               <Link 
                 href={`/${locale}/tours`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer"
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
               >
                 {locale === 'de' ? 'Rundreisen & Pakete' : locale === 'fr' ? 'Nos Circuits' : locale === 'it' ? 'I Nostri Tour' : 'Tour Packages'}
               </Link>
@@ -239,8 +241,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/destinations`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer"
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#F7F4EE] hover:text-[#C69C6D] active:text-[#C69C6D] transition-colors cursor-pointer touch-manipulation"
               >
                 {locale === 'de' ? 'Reiseziele in Jordanien' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations'}
               </Link>
@@ -248,8 +249,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link 
                 href={`/${locale}/booking`} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer"
+                className="block py-3.5 px-2 text-base font-semibold border-b border-white/10 text-[#C69C6D] hover:text-white active:text-white transition-colors cursor-pointer touch-manipulation"
               >
                 {locale === 'de' ? 'Individuelle Reise Buchen' : locale === 'fr' ? 'Réserver Sur Mesure' : locale === 'it' ? 'Prenota Su Misura' : 'Book Custom Private Tour'}
               </Link>
@@ -264,8 +264,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
                     key={c}
                     type="button"
                     onClick={() => setCurrency(c)}
-                    style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                    className={`px-2.5 py-1 rounded cursor-pointer font-bold ${
+                    className={`px-2.5 py-1 rounded cursor-pointer font-bold touch-manipulation ${
                       currency === c ? 'bg-[#C69C6D] text-black shadow-md' : 'text-white/70 hover:text-white'
                     }`}
                   >
@@ -287,8 +286,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
                       setLocale(lang);
                       setIsMobileMenuOpen(false);
                     }}
-                    style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                    className={`px-2.5 py-1 rounded uppercase font-bold cursor-pointer ${
+                    className={`px-2.5 py-1 rounded uppercase font-bold cursor-pointer touch-manipulation ${
                       locale === lang ? 'bg-[#A85F43] text-white shadow-md' : 'text-white/70 hover:text-white'
                     }`}
                   >
@@ -303,8 +301,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLocale }) => {
               <Link
                 href={`/${locale}/booking`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
-                className="w-full py-3.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer active:scale-95 transition-all"
+                className="w-full py-3.5 rounded-full bg-[#A85F43] hover:bg-[#D97757] text-white font-bold text-xs uppercase tracking-wider text-center block shadow-xl cursor-pointer active:scale-95 transition-all touch-manipulation"
               >
                 {locale === 'de' ? 'Jetzt Privatreise Buchen' : locale === 'fr' ? 'Réserver Un Voyage' : locale === 'it' ? 'Prenota Ora' : 'Book Your Tour Now'}
               </Link>
