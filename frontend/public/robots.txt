@@ -1,0 +1,36 @@
+# Robots.txt for Jordan Story Travel & Tourism
+# Official Website: https://jordanstorytours.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /review/
+
+# Generative Engine Optimization (GEO) — Allowed AI and LLM Search Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap Index Declaration
+Sitemap: https://jordanstorytours.com/sitemap.xml
