@@ -8,7 +8,7 @@ import { TOURS_DATA, getTourPriceDisplay } from '@/data/tours';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MapPin, Clock, Calendar, CheckCircle2, Lightbulb, ArrowRight, Star } from 'lucide-react';
-import { buildLocaleMetadata, LOCALES } from '@/data/seoHelper';
+import { buildLocaleMetadata, LOCALES, buildTouristDestinationSchema, buildBreadcrumbSchema, buildFaqPageSchema } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
 import { getAssetUrl } from '@/utils/assets';
@@ -43,8 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildLocaleMetadata({
     title: `${name} — Travel Guide (2026)`,
     description: tagline,
-    path: `/destinations/${slug}`,
+    path: `/destinations/${slug}/`,
     locale: validLocale,
+    image: dest.image,
   });
 }
 
@@ -70,29 +71,37 @@ export default async function LocalizedDestinationDetailPage({ params }: Props) 
       tour.itinerary.some((day) => day.title.en.toLowerCase().includes(searchTerm) || day.description.en.toLowerCase().includes(searchTerm));
   });
 
-  // TouristAttraction JSON-LD Schema
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TouristAttraction',
-    'name': name,
-    'description': tagline,
-    'image': dest.image,
-    'location': {
-      '@type': 'Place',
-      'name': name,
-      'address': {
-        '@type': 'PostalAddress',
-        'addressCountry': 'JO',
-      },
-    },
-  };
+  // Rich Multi-Entity Schemas for Destination Guide
+  const destinationSchema = buildTouristDestinationSchema(dest, locale);
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: `/${locale}/` },
+    { name: locale === 'de' ? 'Reiseziele' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations', url: `/${locale}/destinations/` },
+    { name: name, url: `/${locale}/destinations/${slug}/` },
+  ]);
+
+  const destFaqs = (dest.aeoFaqs || []).map((faq) => ({
+    question: faq.question[locale] || faq.question.en,
+    answer: faq.answer[locale] || faq.answer.en,
+  }));
+
+  const faqSchema = buildFaqPageSchema(destFaqs);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F4EE]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(destinationSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <Header currentLocale={locale} />
 
       <main className="flex-1">

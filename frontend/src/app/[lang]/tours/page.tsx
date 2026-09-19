@@ -4,12 +4,8 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { TOURS_DATA } from '@/data/tours';
 import { ToursCatalogFilter } from '@/components/tours/ToursCatalogFilter';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Clock, Star, MapPin, Search } from 'lucide-react';
-import { buildLocaleMetadata, generateStaticLocaleParams } from '@/data/seoHelper';
+import { buildLocaleMetadata, generateStaticLocaleParams, buildBreadcrumbSchema } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
-import { getLocalizedText } from '@/utils/getLocalizedServer';
 
 export function generateStaticParams() {
   return generateStaticLocaleParams();
@@ -40,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildLocaleMetadata({
     title: titles[validLocale],
     description: descriptions[validLocale],
-    path: '/tours',
+    path: '/tours/',
     locale: validLocale,
   });
 }
@@ -49,8 +45,34 @@ export default async function LocalizedToursPage({ params }: Props) {
   const { lang } = await params;
   const locale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: `/${locale}/` },
+    { name: locale === 'de' ? 'Rundreisen' : locale === 'fr' ? 'Circuits' : locale === 'it' ? 'Tour' : 'Tour Packages', url: `/${locale}/tours/` },
+  ]);
+
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': locale === 'de' ? 'Jordanien Private Rundreisen' : locale === 'fr' ? 'Circuits Privés en Jordanie' : locale === 'it' ? 'Tour Privati in Giordania' : 'Jordan Private Tours Catalog',
+    'numberOfItems': TOURS_DATA.length,
+    'itemListElement': TOURS_DATA.map((t, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'name': t.title[locale] || t.title.en,
+      'url': `https://jordanstorytours.com/${locale}/tours/${t.slug[locale] || t.slug.en}/`,
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F4EFE7]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <Header currentLocale={locale} />
 
       <main className="flex-1">

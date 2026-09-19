@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 import { MapPin, ArrowRight, Calendar } from 'lucide-react';
 import { DESTINATIONS_FULL } from '@/data/destinations';
-import { buildLocaleMetadata, generateStaticLocaleParams } from '@/data/seoHelper';
+import { buildLocaleMetadata, generateStaticLocaleParams, buildBreadcrumbSchema } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
 import { getAssetUrl } from '@/utils/assets';
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildLocaleMetadata({
     title: titles[validLocale],
     description: descriptions[validLocale],
-    path: '/destinations',
+    path: '/destinations/',
     locale: validLocale,
   });
 }
@@ -48,8 +48,34 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
   const { lang } = await params;
   const locale = (['en', 'de', 'fr', 'it'].includes(lang) ? lang : 'en') as Locale;
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: `/${locale}/` },
+    { name: locale === 'de' ? 'Reiseziele' : locale === 'fr' ? 'Destinations' : locale === 'it' ? 'Destinazioni' : 'Destinations', url: `/${locale}/destinations/` },
+  ]);
+
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': locale === 'de' ? 'Jordanien Reiseziele' : locale === 'fr' ? 'Destinations en Jordanie' : locale === 'it' ? 'Destinazioni in Giordania' : 'Jordan Destinations Hub',
+    'numberOfItems': DESTINATIONS_FULL.length,
+    'itemListElement': DESTINATIONS_FULL.map((d, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'name': d.name[locale] || d.name.en,
+      'url': `https://jordanstorytours.com/${locale}/destinations/${d.slug[locale] || d.slug.en}/`,
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F4EE] text-[#1A1615]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <Header currentLocale={locale} />
 
       <main className="flex-1">
@@ -79,7 +105,7 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
           {DESTINATIONS_FULL.map((d) => {
             const name = getLocalizedText(d.name, locale);
             const tagline = getLocalizedText(d.tagline, locale);
-            const slug = d.slug.en; // fallback canonical slug
+            const slug = d.slug[locale] || d.slug.en;
 
             return (
               <div 
@@ -93,42 +119,33 @@ export default async function LocalizedDestinationsPage({ params }: Props) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-[#1A1615]/70 backdrop-blur-md text-[#D8B98F] shadow-lg">
-                      Jordan Landmark
-                    </span>
-                  </div>
+                  <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium bg-black/60 text-white backdrop-blur-md border border-white/20">
+                    <MapPin className="w-3.5 h-3.5 text-[#A85F43]" />
+                    <span>Jordan</span>
+                  </span>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-xs text-[#A85F43] font-semibold font-mono">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{name.split('—')[0]}</span>
-                    </div>
-
+                <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
+                  <div className="space-y-3">
                     <h2 className="font-serif text-2xl font-bold text-[#1A1615] group-hover:text-[#A85F43] transition-colors">
                       {name}
                     </h2>
-
-                    <p className="text-gray-600 text-xs sm:text-sm font-light line-clamp-2 leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed font-light line-clamp-2">
                       {tagline}
                     </p>
                   </div>
 
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-gray-500 flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#C69C6D]" />
-                      <span>{getLocalizedText(d.bestTimeToVisit, locale).split('(')[0]}</span>
-                    </span>
-
-                    <Link
-                      href={`/${locale}/destinations/${slug}`}
-                      className="px-4 py-2 rounded-full bg-[#1A1615] hover:bg-[#A85F43] text-white text-xs font-semibold transition-all shadow-md group-hover:shadow-xl flex items-center gap-1.5"
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono">
+                      <Calendar className="w-3.5 h-3.5 text-[#A85F43]" />
+                      <span>{getLocalizedText(d.bestTimeToVisit, locale)}</span>
+                    </div>
+                    <Link 
+                      href={`/${locale}/destinations/${slug}/`}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#A85F43] group-hover:text-[#D97757] transition-colors"
                     >
-                      <span>{locale === 'de' ? 'Reiseführer' : locale === 'fr' ? 'Guide Complet' : locale === 'it' ? 'Guida Completa' : 'Full Guide'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>{locale === 'de' ? 'Reiseführer' : locale === 'fr' ? 'Explorer' : locale === 'it' ? 'Esplora' : 'Explore Guide'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>

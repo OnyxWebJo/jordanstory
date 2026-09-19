@@ -6,7 +6,7 @@ import { TOURS_DATA, getTourPriceDisplay, getTourCtaDisplay } from '@/data/tours
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Clock, MapPin, CheckCircle2, XCircle, ShieldCheck, Star, HelpCircle, Calendar } from 'lucide-react';
-import { buildLocaleMetadata, LOCALES } from '@/data/seoHelper';
+import { buildLocaleMetadata, LOCALES, buildTouristTripSchema, buildBreadcrumbSchema, buildFaqPageSchema } from '@/data/seoHelper';
 import { Locale } from '@/context/LanguageContext';
 import { getLocalizedText } from '@/utils/getLocalizedServer';
 import { getAssetUrl } from '@/utils/assets';
@@ -40,10 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subtitle = getLocalizedText(tour.subtitle, validLocale);
 
   return buildLocaleMetadata({
-    title: `${title} — Jordan Story Travel & Tourism`,
+    title: title,
     description: subtitle,
-    path: `/tours/${slug}`,
+    path: `/tours/${slug}/`,
     locale: validLocale,
+    image: tour.heroImage,
   });
 }
 
@@ -62,62 +63,67 @@ export default async function LocalizedTourDetailPage({ params }: Props) {
   const inclusionsList = getLocalizedText(tour.inclusions, locale) || [];
   const exclusionsList = getLocalizedText(tour.exclusions, locale) || [];
 
-  // Product & Tour JSON-LD Schema
-  const jsonLd: any = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    'name': title,
-    'description': subtitle,
-    'image': tour.heroImage,
-    'brand': {
-      '@type': 'Brand',
-      'name': 'Jordan Story Travel & Tourism',
+  // Rich Multi-Entity Schemas for Tour Details
+  const tripSchema = buildTouristTripSchema(tour, locale);
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: `/${locale}/` },
+    { name: locale === 'de' ? 'Rundreisen' : locale === 'fr' ? 'Circuits' : locale === 'it' ? 'Tour' : 'Tours', url: `/${locale}/tours/` },
+    { name: title, url: `/${locale}/tours/${slug}/` },
+  ]);
+
+  const tourFaqs = [
+    {
+      question: locale === 'de'
+        ? `Was ist im Paket ${title} enthalten?`
+        : locale === 'fr'
+        ? `Qu'est-ce qui est inclus dans le circuit ${title}?`
+        : locale === 'it'
+        ? `Cosa è incluso nel pacchetto ${title}?`
+        : `What is included in the ${title}?`,
+      answer: locale === 'de'
+        ? `Diese private Rundreise beinhaltet einen eigenen klimatisierten Wagen mit Chauffeur, ${tour.durationNights} Übernachtungen, tägliches Frühstück und Unterstützung bei den Visumformalitäten.`
+        : locale === 'fr'
+        ? `Ce circuit privé comprend les transferts privés en véhicule climatisé avec chauffeur dédié, ${tour.durationNights} nuits d'hébergement, le petit-déjeuner quotidien et l'assistance visa.`
+        : locale === 'it'
+        ? `Questo tour privato include trasferimenti esclusivi in auto climatizzata con autista privato, ${tour.durationNights} notti di alloggio, colazione giornaliera e assistenza visti.`
+        : `This private tour includes dedicated door-to-door transfers with a licensed driver, ${tour.durationNights} nights accommodation, daily breakfast, and entry visa assistance.`,
     },
-  };
+    {
+      question: locale === 'de'
+        ? `Kann die Route für ${title} individuell angepasst werden?`
+        : locale === 'fr'
+        ? `Peut-on personnaliser l'itinéraire de ${title}?`
+        : locale === 'it'
+        ? `È possibile personalizzare l'itinerario di ${title}?`
+        : `Can I customize the itinerary for ${title}?`,
+      answer: locale === 'de'
+        ? 'Ja! Alle privaten Rundreisen von Jordan Story können flexibel an Ihre Flugzeiten, Zusatznächte in Petra oder Wadi Rum und Hotelkategorien angepasst werden.'
+        : locale === 'fr'
+        ? 'Absolument! Tous nos circuits privés peuvent être adaptés avec des nuits supplémentaires à Pétra ou Wadi Rum, surclassements d\'hôtels ou demandes spéciales.'
+        : locale === 'it'
+        ? 'Certamente! Tutti i tour privati di Jordan Story possono essere personalizzati con notti extra a Petra o Wadi Rum, upgrade alberghieri e richieste su misura.'
+        : 'Yes! All Jordan Story private itineraries can be tailored with additional nights in Petra or Wadi Rum Martian dome camps, hotel upgrades, or specific sightseeing requests.',
+    },
+  ];
 
-  if (tour.startingPriceUSD && tour.priceMode !== 'QUOTATION') {
-    jsonLd.offers = {
-      '@type': 'Offer',
-      'priceCurrency': 'USD',
-      'price': tour.startingPriceUSD,
-      'availability': 'https://schema.org/InStock',
-      'url': `https://jordanstorytours.com/${locale}/tours/${slug}`,
-    };
-  }
-
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': [
-      {
-        '@type': 'Question',
-        'name': `What is included in the ${title}?`,
-        'acceptedAnswer': {
-          '@type': 'Answer',
-          'text': `This tour package includes private transfers with an English-speaking driver, ${tour.durationNights} nights accommodation, daily breakfast, and entry visa assistance.`,
-        },
-      },
-      {
-        '@type': 'Question',
-        'name': `Can I customize the itinerary for ${title}?`,
-        'acceptedAnswer': {
-          '@type': 'Answer',
-          'text': 'Yes! All Jordan Story private tours can be customized with extra nights in Petra or Wadi Rum, upgraded hotel tiers, or special requests.',
-        },
-      },
-    ],
-  };
+  const faqSchema = buildFaqPageSchema(tourFaqs);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F4EE]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(tripSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <Header currentLocale={locale} />
 
